@@ -1,14 +1,9 @@
 import { MaskedLines, Reveal, RevealItem } from "./motion-kit";
-import { Portrait } from "./Portrait";
 
 export function MichaelIntro() {
   return (
     <section className="section michael-section">
       <div className="container michael-grid">
-        <Reveal className="michael-portrait" y={16}>
-          <Portrait priority={false} alt="Michael, GrowthGains life coach" />
-        </Reveal>
-
         <div className="michael-copy">
           <MaskedLines className="display" lines={["Start with who", "you are becoming."]} />
           <Reveal className="michael-copy-stack" stagger={0.08}>
