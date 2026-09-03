@@ -7,9 +7,12 @@ import {
   useTransform,
   type MotionValue,
 } from "motion/react";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import styles from "./FrameworkJourney.module.css";
 import navStyles from "./FrameworkJourneyNav.module.css";
+import sessionStyles from "./FrameworkJourneySession.module.css";
+
+const SESSION_KEY = "growthgains:approach-complete";
 
 const items = [
   {
@@ -194,17 +197,78 @@ function PhaseNavigator({ active, onSelect }: { active: number; onSelect: (index
   );
 }
 
+function JourneyIntro() {
+  return (
+    <div className="container">
+      <div className={styles.intro}>
+        <div>
+          <div className="eyebrow" style={{ color: "#9fc8ff" }}>The GrowthGains approach</div>
+          <h2 className="display">Clarity is not a lightning bolt. It is built through better questions.</h2>
+        </div>
+        <p className="body-lg">
+          This is not a rigid clinical protocol or a promise that change follows four perfect steps.
+          Move through it slowly and notice which phase sounds most like the season you are in now.
+        </p>
+      </div>
+    </div>
+  );
+}
+
+function CompactJourney({ onReplay }: { onReplay: () => void }) {
+  return (
+    <div className={`container ${sessionStyles.compactWrap}`}>
+      <div className={sessionStyles.sessionNotice}>
+        <div>
+          <span>Already explored this session</span>
+          <p>You have moved through the full Approach journey already. Here is the map without making you scroll through it again.</p>
+        </div>
+        <button type="button" onClick={onReplay}>Replay the full journey</button>
+      </div>
+
+      <div className={sessionStyles.compactGrid}>
+        {items.map((item, index) => (
+          <article key={item.phase} className={sessionStyles.compactPhase}>
+            <div className={sessionStyles.compactIndex}>0{index + 1}</div>
+            <div>
+              <span>{item.phase}</span>
+              <h3>{item.title}</h3>
+              <p>{item.summary}</p>
+            </div>
+          </article>
+        ))}
+      </div>
+    </div>
+  );
+}
+
 export function FrameworkJourney() {
   const trackRef = useRef<HTMLDivElement>(null);
   const [activePhase, setActivePhase] = useState(0);
+  const [sessionMode, setSessionMode] = useState<"checking" | "full" | "compact">("checking");
   const { scrollYProgress } = useScroll({
     target: trackRef,
     offset: ["start start", "end end"],
   });
 
+  useEffect(() => {
+    try {
+      setSessionMode(sessionStorage.getItem(SESSION_KEY) === "1" ? "compact" : "full");
+    } catch {
+      setSessionMode("full");
+    }
+  }, []);
+
   useMotionValueEvent(scrollYProgress, "change", (value) => {
     const next = Math.min(items.length - 1, Math.floor(value * items.length));
     setActivePhase(next);
+
+    if (sessionMode === "full" && value >= 0.96) {
+      try {
+        sessionStorage.setItem(SESSION_KEY, "1");
+      } catch {
+        // Storage can be unavailable in strict privacy modes; the journey still works normally.
+      }
+    }
   });
 
   const jumpToPhase = (index: number) => {
@@ -222,26 +286,33 @@ export function FrameworkJourney() {
     });
   };
 
+  const replayJourney = () => {
+    setSessionMode("full");
+    window.requestAnimationFrame(() => {
+      window.requestAnimationFrame(() => {
+        trackRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+      });
+    });
+  };
+
+  const trackHidden = sessionMode !== "full";
+
   return (
     <section className={`framework ${styles.frameworkStory}`}>
       <div className={styles.ambientLines} aria-hidden="true">
         <i /><i /><i /><i /><i />
       </div>
 
-      <div className="container">
-        <div className={styles.intro}>
-          <div>
-            <div className="eyebrow" style={{ color: "#9fc8ff" }}>The GrowthGains approach</div>
-            <h2 className="display">Clarity is not a lightning bolt. It is built through better questions.</h2>
-          </div>
-          <p className="body-lg">
-            This is not a rigid clinical protocol or a promise that change follows four perfect steps.
-            Move through it slowly and notice which phase sounds most like the season you are in now.
-          </p>
-        </div>
-      </div>
+      <JourneyIntro />
 
-      <div ref={trackRef} className={`${styles.track} ${navStyles.readableTrack}`}>
+      {sessionMode === "checking" && <div className={sessionStyles.pending} aria-hidden="true" />}
+      {sessionMode === "compact" && <CompactJourney onReplay={replayJourney} />}
+
+      <div
+        ref={trackRef}
+        className={`${styles.track} ${navStyles.readableTrack} ${trackHidden ? sessionStyles.trackInactive : ""}`}
+        aria-hidden={trackHidden ? true : undefined}
+      >
         <div className={`${styles.stage} ${navStyles.readableStage}`}>
           <div className={styles.rail} aria-hidden="true">
             <div className={styles.railBase} />
