@@ -54,9 +54,7 @@ function Panel({
         ) : (
           <Reveal className={styles.clinicalCallout}>
             <span>Choose clinical care instead when</span>
-            <p>
-              Symptoms, safety, trauma, diagnosis or mental-health treatment are the primary concern.
-            </p>
+            <p>Symptoms, safety, trauma, diagnosis or mental-health treatment are the primary concern.</p>
           </Reveal>
         )}
       </div>
@@ -91,11 +89,11 @@ export function CompareSection() {
       <div className={styles.intro}>
         <div>
           <span className={styles.introEyebrow}>Confirming your fit</span>
-          <h2>If you are here for a life transition, coaching may already be the lane you are looking for.</h2>
+          <h2>If this is a life transition, coaching may be the right lane.</h2>
         </div>
         <p>
-          This section is less about convincing you to choose coaching and more about making sure the fit is honest.
-          If your need is non-clinical and centered on identity, direction, change and forward movement, GrowthGains was built for that work.
+          If you are functioning day to day and looking for identity, direction and forward movement—not
+          clinical treatment—GrowthGains is built for that kind of work.
         </p>
       </div>
 
@@ -104,7 +102,7 @@ export function CompareSection() {
           kind="coaching"
           eyebrow="GrowthGains coaching"
           heading="Coaching"
-          fitLine="Use coaching when the question is: How do I understand this season, reconnect with myself and choose what comes next?"
+          fitLine="A place to understand this season, reconnect with yourself and choose what comes next."
           rows={coaching}
         />
 
@@ -114,15 +112,13 @@ export function CompareSection() {
           kind="clinical"
           eyebrow="Licensed clinical care"
           heading="Counseling / Therapy"
-          fitLine="Use therapy when the question includes: Do I need assessment, treatment or clinical mental-health support?"
+          fitLine="The better lane when assessment, treatment or clinical mental-health support is the primary need."
           rows={clinical}
         />
       </div>
 
       <div className={styles.note}>
-        <span>
-          GrowthGains coaching is not psychotherapy and does not diagnose or treat mental-health disorders.
-        </span>
+        <span>GrowthGains coaching is not psychotherapy and does not diagnose or treat mental-health disorders.</span>
         <Link href="/coaching-vs-counseling">See the full scope & fit guide →</Link>
       </div>
     </section>
