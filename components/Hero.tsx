@@ -37,7 +37,12 @@ export function Hero() {
             Coaching for the space between who you were and what comes next.
           </Reveal>
           <Reveal className="hero-actions" delay={0.6}>
-            <Link className="button" href="/consultation">Book a free consultation</Link>
+            <Link
+              className="button"
+              href="/book?utm_source=growthgains&utm_medium=website&utm_campaign=consultation&utm_content=homepage-hero"
+            >
+              Book a free consultation
+            </Link>
             <Link className="button secondary" href="/contact">Contact</Link>
           </Reveal>
         </div>

@@ -1,5 +1,5 @@
-import Link from "next/link";
-import { PageHero } from "@/components/PageHero";
-import { site } from "@/lib/site";
-export const metadata={title:"Free Consultation"};
-export default function Consultation(){return <main><PageHero eyebrow="Free consultation" title="Let’s see if this is the right fit." lead="A first conversation to talk about what you are navigating, what you want from coaching and whether GrowthGains makes sense for the next step."/><section className="section page-body"><div className="container"><div className="feature-lines" style={{marginTop:0,marginBottom:55}}><div className="feature-line"><span className="n">01</span><div><h3>Tell Michael what you are navigating.</h3><p>You do not need a polished explanation. Bring the real version.</p></div></div><div className="feature-line"><span className="n">02</span><div><h3>Talk about where you feel stuck.</h3><p>The goal is to understand the transition and the kind of support you are looking for.</p></div></div><div className="feature-line"><span className="n">03</span><div><h3>Decide whether coaching fits.</h3><p>No public pricing and no pressure to force a fit before the conversation happens.</p></div></div></div><div className="calendar-box">{site.calendarUrl?<iframe src={site.calendarUrl} title="Book a GrowthGains consultation"/>:<div className="calendar-fallback"><div><div className="eyebrow">Calendar connection</div><h3>The scheduling experience is built and ready for Michael&apos;s live calendar link.</h3><p className="body-md">Until that link is connected, you can send Michael the same consultation request directly and he can follow up with scheduling.</p><Link className="button" href="/contact">Request a consultation →</Link></div></div>}</div></div></section></main>}
+import { permanentRedirect } from "next/navigation";
+
+export default function Consultation() {
+  permanentRedirect("/book");
+}

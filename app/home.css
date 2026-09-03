@@ -1,0 +1,219 @@
+/* Homepage-only composition pass. The hero remains visually unchanged. */
+
+/* 1 — recognition beat */
+.situation {
+  background: #0F1A1E;
+  color: #E9ECEB;
+  padding: clamp(5rem, 9vw, 8rem) 0;
+}
+.situation .situation-stack {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: clamp(1.25rem, 2.5vw, 2rem);
+}
+.situation .display {
+  max-width: 22ch;
+  white-space: normal;
+}
+.situation .situation-copy {
+  max-width: 52ch;
+  margin: 0;
+  color: rgba(233, 236, 235, 0.72);
+}
+
+/* 2 — Michael / credibility */
+.michael-section {
+  background: #E9ECEB;
+}
+.michael-section .michael-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 0.4fr) minmax(0, 1fr);
+  gap: clamp(2rem, 5vw, 4rem);
+  align-items: center;
+}
+.michael-section .michael-portrait {
+  position: relative;
+  aspect-ratio: 4 / 5;
+  overflow: hidden;
+  border-radius: 12px;
+  min-width: 0;
+}
+.michael-section .michael-portrait [data-portrait] {
+  object-position: center 27%;
+}
+.michael-section .michael-copy {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  max-width: 780px;
+}
+.michael-section .michael-copy > .display {
+  max-width: 18ch;
+  white-space: normal;
+}
+.michael-section .michael-copy-stack {
+  margin-top: clamp(1.5rem, 3vw, 2.5rem);
+}
+.michael-section .michael-copy-stack .body-lg {
+  max-width: 58ch;
+  margin: 0;
+}
+.michael-section .credential-block {
+  margin-top: clamp(1.5rem, 3vw, 2.25rem);
+  padding-top: clamp(1rem, 2vw, 1.5rem);
+  border-top: 1px solid rgba(15, 26, 30, 0.18);
+}
+.michael-section .credential-label {
+  display: block;
+  margin-bottom: 0.55rem;
+  color: #5C6A6D;
+  font-size: var(--step-small);
+  font-weight: 760;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+.michael-section .michael-credential {
+  margin: 0;
+  color: #0F1A1E;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: var(--step-h3);
+  font-weight: 400;
+  letter-spacing: -0.02em;
+}
+
+/* 3 — process grid */
+.sequence {
+  background: #0F1A1E;
+  color: #E9ECEB;
+}
+.sequence .display {
+  color: #E9ECEB;
+}
+.sequence .sequence-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1px;
+  margin-top: clamp(2rem, 4vw, 3.25rem);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  background: rgba(255, 255, 255, 0.14);
+}
+.sequence .sequence-grid .sequence-step {
+  display: block;
+  padding: clamp(1.5rem, 3vw, 2.5rem);
+  border: 0;
+  background: #0F1A1E;
+}
+.sequence .sequence-step .n {
+  display: block;
+  margin-bottom: clamp(1.75rem, 3vw, 2.5rem);
+  color: #2A89FF;
+  font-size: var(--step-small);
+  letter-spacing: 0.12em;
+}
+.sequence .sequence-step h3 {
+  margin: 0 0 0.8rem;
+  color: #E9ECEB;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: var(--step-h3);
+  font-weight: 400;
+  letter-spacing: -0.02em;
+}
+.sequence .sequence-step p {
+  max-width: 38ch;
+  margin: 0;
+  color: rgba(233, 236, 235, 0.68);
+  font-size: var(--step-body);
+  line-height: 1.6;
+}
+
+/* 4 — coaching / counseling */
+.split-compare {
+  align-items: stretch;
+}
+.split-compare .compare-side {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  align-self: stretch;
+}
+.split-compare .compare-side.coaching {
+  background: #1B5CFF;
+  color: #fff;
+}
+.split-compare .compare-side.counseling {
+  background: #E4E8E8;
+  color: #0F1A1E;
+}
+.split-compare .compare-side ul {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+.split-compare .compare-side li {
+  display: flex;
+  flex: 1;
+  align-items: center;
+  opacity: 1;
+}
+.split-compare .compare-side.coaching ul,
+.split-compare .compare-side.coaching li {
+  border-color: rgba(255, 255, 255, 0.42);
+}
+.split-compare .compare-side.counseling ul,
+.split-compare .compare-side.counseling li {
+  border-color: rgba(15, 26, 30, 0.28);
+}
+
+/* 5 — final conversion band */
+.final-cta {
+  background: #1B5CFF;
+  color: #fff;
+}
+.final-cta p {
+  color: rgba(255, 255, 255, 0.82);
+}
+.final-cta .cta-primary {
+  background: #fff;
+  color: #0F1A1E;
+}
+.final-cta .cta-primary::before {
+  background: #0F1A1E;
+}
+.final-cta .cta-primary:hover {
+  color: #fff;
+}
+.final-cta .button.secondary {
+  color: #fff;
+  border-color: rgba(255, 255, 255, 0.5);
+}
+
+@media (max-width: 1020px) {
+  .michael-section .michael-grid {
+    grid-template-columns: 1fr;
+    gap: clamp(2rem, 6vw, 3.5rem);
+  }
+  .michael-section .michael-portrait {
+    width: min(64vw, 430px);
+  }
+}
+
+@media (max-width: 680px) {
+  .michael-section .michael-portrait {
+    width: min(82vw, 400px);
+  }
+  .sequence .sequence-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* motion-kit still reads useReducedMotion in ParallaxMedia/MagneticButton.
+   These selectors make the server/client style difference visually inert at
+   first paint, matching the reveal-path CSS fix already in globals.css. */
+@media (prefers-reduced-motion: reduce) {
+  .hero-portrait > div,
+  .final-cta .cta-primary {
+    transform: none !important;
+  }
+}

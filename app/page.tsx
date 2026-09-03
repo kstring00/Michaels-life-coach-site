@@ -1,3 +1,4 @@
+import "./home.css";
 import { Hero } from "@/components/Hero";
 import { Situation } from "@/components/Situation";
 import { MichaelIntro } from "@/components/MichaelIntro";
