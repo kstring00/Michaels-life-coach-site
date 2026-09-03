@@ -1,10 +1,11 @@
 import Link from "next/link";
 import { Portrait } from "./Portrait";
+import { Marquee } from "./Marquee";
 import FlowField from "./FlowField";
 import { MaskedLines, ParallaxMedia, Reveal } from "./motion-kit";
 
 /* module scope: a fresh array each render would retrigger FlowField's effect */
-const FIELD = ["#12181A", "#26383F", "#171F22"];
+const FIELD = ["#0A121E", "#123A57", "#0E2233"];
 const GLYPHS: [string, string, string] = ["|", "=", "+"];
 
 export function Hero() {
@@ -15,12 +16,15 @@ export function Hero() {
         gradient={FIELD}
         glyphs={GLYPHS}
         color="193,209,207"
-        alpha={0.38}
+        alpha={0.28}
+        peak={0.85}
         spacing={22}
         radius={220}
         swirl={0.7}
       />
       <div className="hero-scrim" aria-hidden="true" />
+
+      {/* the content band: one rectangle, both columns start and end on its edges */}
       <div className="container hero-grid">
         <div className="hero-copy">
           <MaskedLines
@@ -37,14 +41,14 @@ export function Hero() {
             <Link className="button secondary" href="/contact">Contact</Link>
           </Reveal>
         </div>
-        <div className="hero-portrait-wrap">
-          <div className="threshold-frame" />
-          {/* the only parallax on the page */}
-          <ParallaxMedia className="hero-threshold" range={60}>
-            <div className="hero-media"><Portrait /></div>
-          </ParallaxMedia>
-        </div>
+
+        {/* the only parallax on the page */}
+        <ParallaxMedia className="hero-portrait" range={40}>
+          <div className="hero-media"><Portrait /></div>
+        </ParallaxMedia>
       </div>
+
+      <Marquee />
     </section>
   );
 }

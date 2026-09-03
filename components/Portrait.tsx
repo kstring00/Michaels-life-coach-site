@@ -4,18 +4,22 @@ import portrait from "@/public/michael.webp";
 /**
  * The container sets the shape; the image fills it. A replacement portrait at
  * any aspect ratio drops in without touching layout.
+ *
+ * object-position lives in globals.css (keyed off data-portrait) so the hero
+ * can reframe the crop per breakpoint without a second component.
  */
 export function Portrait({ className = "", alt = "Michael, GrowthGains life coach" }: { className?: string; alt?: string }) {
   return (
     <Image
       className={className}
+      data-portrait=""
       src={portrait}
       alt={alt}
       fill
       priority
-      sizes="(max-width: 680px) 100vw, (max-width: 1020px) 88vw, 45vw"
+      sizes="(max-width: 768px) 100vw, 42vw"
       placeholder="blur"
-      style={{ objectFit: "cover", objectPosition: "center 27%" }}
+      style={{ objectFit: "cover" }}
     />
   );
 }
