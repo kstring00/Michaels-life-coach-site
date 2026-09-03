@@ -1,8 +1,119 @@
 import Link from "next/link";
-import { PageHero } from "@/components/PageHero";
 import { FinalCTA } from "@/components/FinalCTA";
-import { site } from "@/lib/site";
 import { Portrait } from "@/components/Portrait";
+import { site } from "@/lib/site";
+import styles from "./about.module.css";
 
-export const metadata={title:"About Michael"};
-export default function About(){return <main><PageHero eyebrow="About Michael" title="Know who is walking with you." lead="GrowthGains centers the human part of transition: identity, direction, values and the space where the old answer no longer fits."/><section className="section page-body"><div className="container editorial-grid"><div><div style={{position:"relative",aspectRatio:"4/5",overflow:"hidden"}}><Portrait alt="Michael, GrowthGains coach" /></div></div><div className="prose"><div className="eyebrow">From Michael</div><blockquote>“{site.statement}”</blockquote><p>That statement is the center of GrowthGains. The work is not about rushing someone into a replacement identity or prescribing a version of success that looks good from the outside.</p><p>It is about creating a structured place to examine what changed, what still belongs to you, what no longer does and what deliberate movement could look like from here.</p><p>GrowthGains is especially suited to moments when a person is functioning, making decisions and moving through life—but the old internal map no longer matches the territory.</p><div className="feature-lines"><div className="feature-line"><span className="n">01</span><div><h3>Identity before performance</h3><p>The question is not only “What should I do next?” but also “Who am I becoming as I decide?”</p></div></div><div className="feature-line"><span className="n">02</span><div><h3>Clarity without pretending</h3><p>Good coaching does not require certainty on day one. It helps you think more clearly while certainty is still forming.</p></div></div><div className="feature-line"><span className="n">03</span><div><h3>Movement with ownership</h3><p>Michael does not decide your next chapter for you. The work is designed to help you make choices you can actually own.</p></div></div></div><div style={{marginTop:35}}><Link className="button" href="/approach">See the approach →</Link></div></div></div></section><FinalCTA/></main>}
+export const metadata = { title: "About Michael" };
+
+const interview = [
+  {
+    question: "What is GrowthGains really about?",
+    answer: site.statement,
+  },
+  {
+    question: "What happens when the old role no longer fits?",
+    answer:
+      "The work creates a structured place to examine what changed, what still belongs to you, what no longer does and what deliberate movement could look like from here.",
+  },
+  {
+    question: "What is Michael's role in the room?",
+    answer:
+      "Michael does not decide your next chapter for you. Coaching is designed to help you slow the situation down, see it more clearly and make choices you can actually own.",
+  },
+] as const;
+
+const principles = [
+  {
+    title: "Identity before performance",
+    copy: "The question is not only ‘What should I do next?’ but also ‘Who am I becoming as I decide?’",
+  },
+  {
+    title: "Clarity without pretending",
+    copy: "Good coaching does not require certainty on day one. It gives uncertainty somewhere useful to go.",
+  },
+  {
+    title: "Movement with ownership",
+    copy: "The goal is not a prescribed answer. It is a next step that still feels like yours when the conversation ends.",
+  },
+] as const;
+
+export default function About() {
+  return (
+    <main className={styles.about}>
+      <section className={styles.hero}>
+        <div className={`container ${styles.heroInner}`}>
+          <div className={styles.heroMeta}>
+            <span>About Michael</span>
+            <span>Identity &amp; life transitions</span>
+          </div>
+
+          <h1>Know who is walking with you.</h1>
+          <p className={styles.heroLead}>
+            GrowthGains centers the human part of transition: identity, direction, values and the
+            space where the old answer no longer fits.
+          </p>
+
+          <div className={styles.profileStrip}>
+            <div className={styles.portraitStamp}>
+              <Portrait alt="Michael, GrowthGains coach" />
+            </div>
+            <div>
+              <span className={styles.profileName}>Michael</span>
+              <span className={styles.profileRole}>Certified life coach · GrowthGains</span>
+            </div>
+            <Link className={styles.textLink} href="/approach">
+              See the approach →
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      <section className={styles.interview}>
+        <div className="container">
+          <div className={styles.interviewIntro}>
+            <span className={styles.interviewEyebrow}>In Michael&apos;s words</span>
+            <h2>Less biography. More of how he actually thinks about the work.</h2>
+          </div>
+
+          <div className={styles.qaList}>
+            {interview.map((item, index) => (
+              <article className={styles.qa} key={item.question}>
+                <span className={styles.qaNumber}>0{index + 1}</span>
+                <h3>{item.question}</h3>
+                <p>{item.answer}</p>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className={styles.principles}>
+        <div className="container">
+          <div className={styles.principlesHead}>
+            <span>The posture behind the process</span>
+            <h2>Coaching should make your own thinking more visible to you.</h2>
+          </div>
+
+          <div className={styles.principleGrid}>
+            {principles.map((item, index) => (
+              <article className={styles.principle} key={item.title}>
+                <span className={styles.principleNumber}>0{index + 1}</span>
+                <h3>{item.title}</h3>
+                <p>{item.copy}</p>
+              </article>
+            ))}
+          </div>
+
+          <div className={styles.principleAction}>
+            <Link className="button" href="/book?utm_source=growthgains&utm_medium=website&utm_campaign=consultation&utm_content=about">
+              Book a free consultation
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      <FinalCTA />
+    </main>
+  );
+}
