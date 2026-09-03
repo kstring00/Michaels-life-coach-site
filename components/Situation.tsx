@@ -14,12 +14,65 @@ const leafShapes = {
 } as const;
 
 const leaves = [
-  { shape: "a", transform: "translate(302 422) rotate(-55) scale(.70)", target: "#74806A", mobileOptional: false },
-  { shape: "b", transform: "translate(302 422) rotate(-34) scale(.78)", target: "#9A7B46", mobileOptional: true },
-  { shape: "c", transform: "translate(302 422) rotate(-12) scale(.86)", target: "#87503E", mobileOptional: false },
-  { shape: "a", transform: "translate(302 422) rotate(12) scale(.94)", target: "#6A343B", mobileOptional: true },
-  { shape: "b", transform: "translate(302 422) rotate(36) scale(1.02)", target: "#1B5CFF", mobileOptional: false },
+  {
+    shape: "a",
+    transform: "translate(302 422) rotate(-55) scale(.70)",
+    target: "#74806A",
+    mobileOptional: false,
+    label: ["Career", "change"],
+    labelRotation: 35,
+  },
+  {
+    shape: "b",
+    transform: "translate(302 422) rotate(-34) scale(.78)",
+    target: "#9A7B46",
+    mobileOptional: true,
+    label: ["Divorce"],
+    labelRotation: 24,
+  },
+  {
+    shape: "c",
+    transform: "translate(302 422) rotate(-12) scale(.86)",
+    target: "#87503E",
+    mobileOptional: false,
+    label: ["Empty", "nest"],
+    labelRotation: 12,
+  },
+  {
+    shape: "a",
+    transform: "translate(302 422) rotate(12) scale(.94)",
+    target: "#6A343B",
+    mobileOptional: true,
+    label: ["New", "marriage"],
+    labelRotation: -12,
+  },
+  {
+    shape: "b",
+    transform: "translate(302 422) rotate(36) scale(1.02)",
+    target: "#1B5CFF",
+    mobileOptional: false,
+    label: ["Next", "chapter"],
+    labelRotation: -26,
+  },
 ] as const;
+
+function LeafLabel({ leaf }: { leaf: (typeof leaves)[number] }) {
+  return (
+    <text
+      className={styles.leafLabel}
+      x="0"
+      y="-194"
+      textAnchor="middle"
+      transform={`rotate(${leaf.labelRotation} 0 -194)`}
+    >
+      {leaf.label.map((line, index) => (
+        <tspan key={line} x="0" dy={index === 0 ? 0 : 24}>
+          {line}
+        </tspan>
+      ))}
+    </text>
+  );
+}
 
 function StaticLeafFan() {
   return (
@@ -38,6 +91,7 @@ function StaticLeafFan() {
         >
           <path className={styles.stem} d="M0 0 L0 -92" />
           <path d={leafShapes[leaf.shape]} fill={leaf.target} />
+          <LeafLabel leaf={leaf} />
         </g>
       ))}
     </svg>
@@ -63,6 +117,7 @@ function AnimatedLeaf({
     >
       <path className={styles.stem} d="M0 0 L0 -92" />
       <motion.path d={leafShapes[leaf.shape]} style={{ fill }} />
+      <LeafLabel leaf={leaf} />
     </g>
   );
 }
