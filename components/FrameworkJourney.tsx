@@ -143,10 +143,14 @@ export function FrameworkJourney() {
 
   return (
     <section className={`framework ${styles.frameworkStory}`}>
+      <div className={styles.ambientLines} aria-hidden="true">
+        <i /><i /><i /><i /><i />
+      </div>
+
       <div className="container">
         <div className={styles.intro}>
           <div>
-            <div className="eyebrow" style={{ color: "#75b7ff" }}>The GrowthGains approach</div>
+            <div className="eyebrow" style={{ color: "#9fc8ff" }}>The GrowthGains approach</div>
             <h2 className="display">Clarity is not a lightning bolt. It is built through better questions.</h2>
           </div>
           <p className="body-lg">
