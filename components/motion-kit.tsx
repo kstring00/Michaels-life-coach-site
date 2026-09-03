@@ -12,6 +12,15 @@
  *   - slow durations (0.7-0.9s) for display type
  *   - transform + opacity only
  *   - prefers-reduced-motion collapses everything to a static render
+ *
+ * Reduced motion is handled in CSS, not by branching on useReducedMotion().
+ * That hook reads `prefersReducedMotion.current`, which is null during server
+ * render, into a useState that never resubscribes. Under SSR the server emits
+ * the animated branch (opacity:0 inline) and the client's first render returns
+ * the static branch, so React hydrates a tree mismatch, keeps the server's
+ * inline style, and the content stays invisible forever. Entry animations are
+ * therefore always rendered and neutralised by the [data-mk="reveal"] rule in
+ * globals.css, which the browser resolves at first paint with no JS involved.
  */
 
 import {
@@ -73,21 +82,8 @@ export function MaskedLines({
   delay?: number;
   immediate?: boolean;
 }) {
-  const reduce = useReducedMotion();
   // indexing motion by tag name exceeds TS union depth; the tag is validated by callers
   const MotionTag: any = motion[Tag as keyof typeof motion] ?? motion.h2;
-
-  if (reduce) {
-    return (
-      <Tag className={className}>
-        {lines.map((l, i) => (
-          <span key={i} style={{ display: "block" }}>
-            {l}
-          </span>
-        ))}
-      </Tag>
-    );
-  }
 
   const trigger = immediate
     ? { animate: "show" as const }
@@ -115,6 +111,7 @@ export function MaskedLines({
           }}
         >
           <motion.span
+            data-mk="reveal"
             style={{ display: "block", willChange: "transform" }}
             variants={{
               hidden: { y: "110%" },
@@ -153,11 +150,8 @@ export function Reveal({
   stagger?: number;
   as?: any;
 }) {
-  const reduce = useReducedMotion();
   // indexing motion by tag name exceeds TS union depth; the tag is validated by callers
   const MotionTag: any = motion[Tag as keyof typeof motion] ?? motion.div;
-
-  if (reduce) return <Tag className={className}>{children}</Tag>;
 
   if (stagger) {
     return (
@@ -179,6 +173,7 @@ export function Reveal({
   return (
     <MotionTag
       className={className}
+      data-mk="reveal"
       initial={{ opacity: 0, y }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={viewport}
@@ -201,14 +196,13 @@ export function RevealItem({
   y?: number;
   as?: any;
 }) {
-  const reduce = useReducedMotion();
   // indexing motion by tag name exceeds TS union depth; the tag is validated by callers
   const MotionTag: any = motion[Tag as keyof typeof motion] ?? motion.div;
-  if (reduce) return <Tag className={className}>{children}</Tag>;
 
   return (
     <MotionTag
       className={className}
+      data-mk="reveal"
       variants={{
         hidden: { opacity: 0, y },
         show: { opacity: 1, y: 0, transition: { duration: dur.body, ease: ease.out } },

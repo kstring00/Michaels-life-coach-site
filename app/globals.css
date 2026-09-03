@@ -35,3 +35,8 @@
 .final-cta .cta-primary:before{background:var(--ink)}
 .final-cta .cta-primary:hover{color:#fff}
 .cta-buttons{display:flex;gap:12px;flex-wrap:wrap;align-items:center}
+/* Reduced motion: neutralise the kit's entry animations in CSS rather than by
+   branching in React. Resolved by the browser at first paint, so it holds
+   through SSR and hydration, before any JS runs. !important is required to
+   outrank motion's inline styles. */
+@media(prefers-reduced-motion:reduce){[data-mk="reveal"]{opacity:1!important;transform:none!important;animation:none!important}}
