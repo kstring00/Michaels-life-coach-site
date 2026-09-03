@@ -1,13 +1,26 @@
 import Link from "next/link";
-import { Contours } from "./Contours";
 import { Portrait } from "./Portrait";
+import FlowField from "./FlowField";
 import { MaskedLines, ParallaxMedia, Reveal } from "./motion-kit";
+
+/* module scope: a fresh array each render would retrigger FlowField's effect */
+const FIELD = ["#12181A", "#26383F", "#171F22"];
+const GLYPHS: [string, string, string] = ["|", "=", "+"];
 
 export function Hero() {
   return (
     <section className="hero">
-      <Contours />
-      <div className="glow-orbit" />
+      <FlowField
+        className="hero-field"
+        gradient={FIELD}
+        glyphs={GLYPHS}
+        color="193,209,207"
+        alpha={0.38}
+        spacing={22}
+        radius={220}
+        swirl={0.7}
+      />
+      <div className="hero-scrim" aria-hidden="true" />
       <div className="container hero-grid">
         <div className="hero-copy">
           <MaskedLines

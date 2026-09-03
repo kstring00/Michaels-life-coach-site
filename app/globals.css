@@ -40,3 +40,8 @@
    through SSR and hydration, before any JS runs. !important is required to
    outrank motion's inline styles. */
 @media(prefers-reduced-motion:reduce){[data-mk="reveal"]{opacity:1!important;transform:none!important;animation:none!important}}
+/* --- hero flow field --- */
+.hero-field{position:absolute;inset:0;width:100%;height:100%;display:block;z-index:0}
+/* keeps the headline off the busiest part of the field without dimming the whole canvas */
+.hero-scrim{position:absolute;inset:0;z-index:1;pointer-events:none;background:linear-gradient(100deg,rgba(18,24,26,.92) 0%,rgba(18,24,26,.72) 34%,rgba(18,24,26,0) 62%)}
+.hero-grid{position:relative;z-index:2}
