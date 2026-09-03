@@ -1,0 +1,192 @@
+.readableTrack {
+  height: 620svh;
+}
+
+.readPrompt {
+  margin: 1.15rem 0 0 auto;
+  max-width: 36ch;
+  color: rgba(180, 211, 225, 0.7);
+  font-size: 0.76rem;
+  font-weight: 650;
+  line-height: 1.55;
+  letter-spacing: 0.035em;
+}
+
+.fitDetail {
+  position: relative;
+  padding-top: 1.35rem;
+}
+
+.fitDetail::before {
+  content: "";
+  position: absolute;
+  left: -1rem;
+  top: 1.15rem;
+  bottom: 1.15rem;
+  width: 2px;
+  border-radius: 999px;
+  background: linear-gradient(180deg, #82C5FF, rgba(84, 191, 198, 0.22));
+  box-shadow: 0 0 18px rgba(62, 151, 255, 0.26);
+}
+
+.fitCopy {
+  color: rgba(247, 251, 250, 0.9) !important;
+  font-size: 1rem !important;
+  line-height: 1.65 !important;
+}
+
+.phaseNavigator {
+  position: absolute;
+  z-index: 12;
+  left: 50%;
+  bottom: clamp(3.9rem, 7vh, 5.6rem);
+  transform: translateX(-50%);
+  width: min(720px, calc(100% - 48px));
+  padding: 0.7rem 0.85rem 0.8rem;
+  border: 1px solid rgba(191, 220, 230, 0.16);
+  border-radius: 22px;
+  background:
+    radial-gradient(circle, rgba(128, 184, 224, 0.11) 1px, transparent 1.15px) 0 0 / 12px 12px,
+    rgba(11, 25, 33, 0.78);
+  box-shadow:
+    0 22px 60px rgba(3, 11, 16, 0.32),
+    inset 0 1px 0 rgba(255, 255, 255, 0.045);
+  backdrop-filter: blur(20px) saturate(1.08);
+}
+
+.navLabel {
+  margin: 0 0 0.55rem 0.45rem;
+  color: rgba(222, 237, 239, 0.42);
+  font-size: 0.58rem;
+  font-weight: 760;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.phaseNavigator ul {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 0.45rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.phaseNavigator li {
+  min-width: 0;
+}
+
+.phaseNavigator button {
+  position: relative;
+  isolation: isolate;
+  width: 100%;
+  min-height: 50px;
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  align-items: center;
+  gap: 0.65rem;
+  padding: 0.5rem 0.75rem;
+  overflow: visible;
+  border: 0;
+  border-radius: 15px;
+  background: transparent;
+  color: rgba(227, 239, 240, 0.58);
+  text-align: left;
+  transition: color 180ms ease, background 180ms ease;
+}
+
+.phaseNavigator button:hover {
+  color: #fff;
+  background: rgba(131, 191, 255, 0.06);
+}
+
+.phaseNavigator button:focus-visible {
+  outline: 2px solid #82C5FF;
+  outline-offset: 3px;
+}
+
+.phaseNavigator .selected {
+  color: #fff;
+}
+
+.selectionHalo {
+  position: absolute;
+  z-index: -1;
+  inset: 0;
+  border: 1px solid rgba(148, 206, 255, 0.35);
+  border-radius: 15px;
+  background:
+    radial-gradient(circle at 22% 50%, rgba(105, 188, 255, 0.19), transparent 36%),
+    linear-gradient(135deg, rgba(68, 139, 255, 0.13), rgba(72, 192, 199, 0.07));
+  box-shadow:
+    0 0 0 1px rgba(133, 199, 255, 0.04),
+    0 8px 26px rgba(30, 109, 223, 0.12),
+    inset 0 0 24px rgba(92, 171, 255, 0.04);
+}
+
+.phaseNumber {
+  display: grid;
+  width: 30px;
+  height: 30px;
+  place-items: center;
+  border: 1px solid rgba(166, 205, 221, 0.2);
+  border-radius: 50%;
+  color: #91C8FF;
+  font-size: 0.62rem;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+}
+
+.selected .phaseNumber {
+  border-color: rgba(142, 203, 255, 0.68);
+  background: rgba(30, 104, 213, 0.24);
+  box-shadow: 0 0 18px rgba(67, 151, 255, 0.18);
+}
+
+.phaseName {
+  overflow: hidden;
+  font-size: 0.7rem;
+  font-weight: 760;
+  letter-spacing: 0.08em;
+  text-overflow: ellipsis;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+@media (max-width: 980px) {
+  .phaseNavigator {
+    width: min(650px, calc(100% - 32px));
+  }
+
+  .phaseName {
+    font-size: 0.62rem;
+  }
+}
+
+@media (max-width: 760px) {
+  .readableTrack {
+    height: auto;
+  }
+
+  .readPrompt {
+    margin-left: 0;
+  }
+
+  .fitDetail::before {
+    display: none;
+  }
+
+  .phaseNavigator {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .readableTrack {
+    height: auto;
+  }
+
+  .phaseNavigator {
+    display: none;
+  }
+}
