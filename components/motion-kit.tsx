@@ -74,7 +74,8 @@ export function MaskedLines({
   immediate?: boolean;
 }) {
   const reduce = useReducedMotion();
-  const MotionTag = motion[Tag as keyof typeof motion] ?? motion.h2;
+  // indexing motion by tag name exceeds TS union depth; the tag is validated by callers
+  const MotionTag: any = motion[Tag as keyof typeof motion] ?? motion.h2;
 
   if (reduce) {
     return (
@@ -153,7 +154,8 @@ export function Reveal({
   as?: any;
 }) {
   const reduce = useReducedMotion();
-  const MotionTag = motion[Tag as keyof typeof motion] ?? motion.div;
+  // indexing motion by tag name exceeds TS union depth; the tag is validated by callers
+  const MotionTag: any = motion[Tag as keyof typeof motion] ?? motion.div;
 
   if (reduce) return <Tag className={className}>{children}</Tag>;
 
@@ -200,7 +202,8 @@ export function RevealItem({
   as?: any;
 }) {
   const reduce = useReducedMotion();
-  const MotionTag = motion[Tag as keyof typeof motion] ?? motion.div;
+  // indexing motion by tag name exceeds TS union depth; the tag is validated by callers
+  const MotionTag: any = motion[Tag as keyof typeof motion] ?? motion.div;
   if (reduce) return <Tag className={className}>{children}</Tag>;
 
   return (
