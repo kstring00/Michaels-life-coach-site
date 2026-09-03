@@ -1,125 +1,118 @@
 import Link from "next/link";
-import { MaskedLines, Reveal, RevealItem } from "./motion-kit";
+import { Reveal, RevealItem } from "./motion-kit";
 import styles from "./CompareSection.module.css";
 
-const coaching = [
-  ["Primary focus", "Identity, direction, decisions and forward movement"],
-  ["Best fit", "You are functioning day to day but feel stuck, unclear or in transition"],
-  ["The work", "Questions, reflection, goals, choices and accountability"],
-  ["Provider", "A certified life coach focused on identity and life transitions"],
+const outcomes = [
+  {
+    index: "01",
+    label: "Clarity",
+    copy: "Name what changed and what still matters now.",
+  },
+  {
+    index: "02",
+    label: "Direction",
+    copy: "Sort through choices without rushing the next chapter.",
+  },
+  {
+    index: "03",
+    label: "Momentum",
+    copy: "Turn reflection into practical next steps you choose.",
+  },
+  {
+    index: "04",
+    label: "Ownership",
+    copy: "Make decisions from your values, not only the role you left.",
+  },
 ] as const;
 
-const clinical = [
-  ["Primary focus", "Mental-health symptoms, healing, assessment and treatment"],
-  ["Best fit", "You need clinical support, diagnosis, trauma care or symptom treatment"],
-  ["The work", "Therapeutic assessment and interventions within a clinical scope"],
-  ["Provider", "An appropriately licensed mental-health professional"],
+const clinicalSignals = [
+  "Mental-health symptoms are interfering with day-to-day functioning.",
+  "Trauma, safety, diagnosis or treatment is the primary concern.",
+  "You are looking for psychotherapy or licensed clinical mental-health care.",
 ] as const;
-
-function Panel({
-  kind,
-  eyebrow,
-  heading,
-  fitLine,
-  rows,
-}: {
-  kind: "coaching" | "clinical";
-  eyebrow: string;
-  heading: string;
-  fitLine: string;
-  rows: readonly (readonly [string, string])[];
-}) {
-  const coachingPanel = kind === "coaching";
-
-  return (
-    <div className={`${styles.panel} ${coachingPanel ? styles.coaching : styles.clinical}`}>
-      <div className={styles.panelTop}>
-        <div className={styles.kickerRow}>
-          <span className={styles.index}>{coachingPanel ? "01" : "02"}</span>
-          <span className={styles.eyebrow}>{eyebrow}</span>
-          {coachingPanel && <span className={styles.recommended}>Likely fit for this site</span>}
-        </div>
-
-        <MaskedLines as="h2" className={`display ${styles.heading}`} lines={[heading]} />
-        <Reveal as="p" className={styles.fitLine}>{fitLine}</Reveal>
-
-        {coachingPanel ? (
-          <Reveal className={styles.confirmation}>
-            <span className={styles.confirmationLabel}>Coaching probably fits if</span>
-            <p>
-              You are not looking for diagnosis or treatment. You are trying to understand a major
-              life transition, reconnect with who you are, and make thoughtful decisions about what comes next.
-            </p>
-          </Reveal>
-        ) : (
-          <Reveal className={styles.clinicalCallout}>
-            <span>Choose clinical care instead when</span>
-            <p>Symptoms, safety, trauma, diagnosis or mental-health treatment are the primary concern.</p>
-          </Reveal>
-        )}
-      </div>
-
-      <Reveal className={styles.rows} stagger={0.07}>
-        {rows.map(([label, value]) => (
-          <RevealItem className={styles.row} key={label}>
-            <span>{label}</span>
-            <strong>{value}</strong>
-          </RevealItem>
-        ))}
-      </Reveal>
-
-      {coachingPanel && (
-        <Reveal className={styles.coachingAction}>
-          <div>
-            <span>Built for this kind of transition</span>
-            <strong>GrowthGains centers on the space between who you were and what comes next.</strong>
-          </div>
-          <Link className={styles.primaryAction} href="/book">
-            Talk with Michael <span aria-hidden="true">→</span>
-          </Link>
-        </Reveal>
-      )}
-    </div>
-  );
-}
 
 export function CompareSection() {
   return (
-    <section className={styles.section} aria-label="Coaching versus counseling">
+    <section className={styles.section} aria-labelledby="coaching-fit-heading">
       <div className={styles.intro}>
-        <div>
-          <span className={styles.introEyebrow}>Confirming your fit</span>
-          <h2>If this is a life transition, coaching may be the right lane.</h2>
-        </div>
+        <span className={styles.introEyebrow}>Confirm you are in the right place</span>
+        <h2 id="coaching-fit-heading">Is coaching the right kind of support for you?</h2>
         <p>
-          If you are functioning day to day and looking for identity, direction and forward movement—not
-          clinical treatment—GrowthGains is built for that kind of work.
+          If you are navigating a non-clinical life transition and asking what comes next,
+          GrowthGains was built around that kind of conversation.
         </p>
       </div>
 
-      <div className={styles.panels}>
-        <Panel
-          kind="coaching"
-          eyebrow="GrowthGains coaching"
-          heading="Coaching"
-          fitLine="A place to understand this season, reconnect with yourself and choose what comes next."
-          rows={coaching}
-        />
+      <div className={styles.contentGrid}>
+        <Reveal className={styles.coachingPanel}>
+          <div className={styles.brandRow}>
+            <span className={styles.brandMark} aria-hidden="true">G</span>
+            <span>GrowthGains coaching</span>
+          </div>
 
-        <div className={styles.vs} aria-hidden="true">OR</div>
+          <div className={styles.coachingIntro}>
+            <h3>For life transitions and what comes next.</h3>
+            <p>
+              Coaching with Michael creates space to understand the season you are in,
+              reconnect with what matters to you and decide how you want to move forward.
+            </p>
+          </div>
 
-        <Panel
-          kind="clinical"
-          eyebrow="Licensed clinical care"
-          heading="Counseling / Therapy"
-          fitLine="The better lane when assessment, treatment or clinical mental-health support is the primary need."
-          rows={clinical}
-        />
+          <Reveal className={styles.outcomes} stagger={0.07}>
+            {outcomes.map((item) => (
+              <RevealItem className={styles.outcome} key={item.label}>
+                <span className={styles.outcomeIndex}>{item.index}</span>
+                <strong>{item.label}</strong>
+                <p>{item.copy}</p>
+              </RevealItem>
+            ))}
+          </Reveal>
+
+          <div className={styles.coachingBottom}>
+            <div className={styles.credential}>
+              <span className={styles.credentialIcon} aria-hidden="true">✓</span>
+              <div>
+                <strong>Certified life coach</strong>
+                <p>Focused on identity, life transitions and forward movement.</p>
+              </div>
+            </div>
+
+            <div className={styles.actionWrap}>
+              <Link className={styles.primaryAction} href="/book">
+                Book a free consultation <span aria-hidden="true">→</span>
+              </Link>
+              <span className={styles.actionNote}>No pressure. Just a conversation.</span>
+            </div>
+          </div>
+        </Reveal>
+
+        <Reveal className={styles.clinicalPanel}>
+          <div className={styles.clinicalLabel}>
+            <span className={styles.clinicalIcon} aria-hidden="true">◇</span>
+            <span>Clinical care</span>
+          </div>
+
+          <h3>A different kind of support may fit better if:</h3>
+
+          <ul className={styles.clinicalList}>
+            {clinicalSignals.map((signal) => (
+              <li key={signal}>{signal}</li>
+            ))}
+          </ul>
+
+          <div className={styles.clinicalAside}>
+            <p>
+              You deserve the right kind of care. If clinical support is what you need,
+              connecting with an appropriately licensed mental-health professional is the better next step.
+            </p>
+            <Link href="/coaching-vs-counseling">Read the full coaching vs. counseling guide →</Link>
+          </div>
+        </Reveal>
       </div>
 
       <div className={styles.note}>
         <span>GrowthGains coaching is not psychotherapy and does not diagnose or treat mental-health disorders.</span>
-        <Link href="/coaching-vs-counseling">See the full scope & fit guide →</Link>
+        <Link href="/coaching-vs-counseling">See the full scope &amp; fit guide →</Link>
       </div>
     </section>
   );
