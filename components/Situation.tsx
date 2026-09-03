@@ -52,8 +52,8 @@ function AnimatedLeaf({
   progress: ReturnType<typeof useScroll>["scrollYProgress"];
 }) {
   const leaf = leaves[index];
-  const start = index === leaves.length - 1 ? 0.5 : index * 0.11;
-  const end = index === leaves.length - 1 ? 0.98 : start + 0.45;
+  const start = index === leaves.length - 1 ? 0.44 : index * 0.11;
+  const end = index === leaves.length - 1 ? 0.89 : start + 0.45;
   const fill = useTransform(progress, [start, end], [START_GREEN, leaf.target], { clamp: true });
 
   return (
