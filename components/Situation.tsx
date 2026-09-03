@@ -164,7 +164,7 @@ function AnimatedLeaf({
     [startY, startY * 0.8, startY * 0.53, startY * 0.23, 0],
     { clamp: true },
   );
-  const rotate = useTransform(progress, points, leaf.rotations, { clamp: true });
+  const rotate = useTransform(progress, points, [...leaf.rotations], { clamp: true });
   const fill = useTransform(
     progress,
     points,
