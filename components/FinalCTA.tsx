@@ -10,7 +10,7 @@ export function FinalCTA() {
         <Reveal className="cta-row" delay={0.1}>
           <p className="body-lg">Start with a conversation about what you are navigating and whether coaching fits. No public pricing.</p>
           <div className="cta-buttons">
-            <ConsultButton className="cta-primary" />
+            <ConsultButton className="cta-primary" source="final-cta" />
             <Link className="button secondary" href="/contact">Contact</Link>
           </div>
         </Reveal>

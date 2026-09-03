@@ -8,7 +8,15 @@ import portrait from "@/public/michael.webp";
  * object-position lives in globals.css (keyed off data-portrait) so the hero
  * can reframe the crop per breakpoint without a second component.
  */
-export function Portrait({ className = "", alt = "Michael, GrowthGains life coach" }: { className?: string; alt?: string }) {
+export function Portrait({
+  className = "",
+  alt = "Michael, GrowthGains life coach",
+  priority = true,
+}: {
+  className?: string;
+  alt?: string;
+  priority?: boolean;
+}) {
   return (
     <Image
       className={className}
@@ -16,7 +24,7 @@ export function Portrait({ className = "", alt = "Michael, GrowthGains life coac
       src={portrait}
       alt={alt}
       fill
-      priority
+      priority={priority}
       sizes="(max-width: 768px) 100vw, 42vw"
       placeholder="blur"
       style={{ objectFit: "cover" }}

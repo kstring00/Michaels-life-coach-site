@@ -1,17 +1,27 @@
 import { MaskedLines, Reveal, RevealItem } from "./motion-kit";
+import { Portrait } from "./Portrait";
 
 export function MichaelIntro() {
   return (
     <section className="section michael-section">
       <div className="container michael-grid">
-        <MaskedLines className="display" lines={["Start with who", "you are becoming."]} />
-        <Reveal className="michael-copy" stagger={0.08}>
-          <RevealItem as="p" className="body-lg">
-            Michael works with identity and life transitions: the moments when an old role or
-            direction no longer fits and the next chapter has not taken shape.
-          </RevealItem>
-          <RevealItem as="p" className="michael-credential">Certified life coach.</RevealItem>
+        <Reveal className="michael-portrait" y={16}>
+          <Portrait priority={false} alt="Michael, GrowthGains life coach" />
         </Reveal>
+
+        <div className="michael-copy">
+          <MaskedLines className="display" lines={["Start with who", "you are becoming."]} />
+          <Reveal className="michael-copy-stack" stagger={0.08}>
+            <RevealItem as="p" className="body-lg">
+              Michael works with identity and life transitions: the moments when an old role or
+              direction no longer fits and the next chapter has not taken shape.
+            </RevealItem>
+            <RevealItem className="credential-block">
+              <span className="credential-label">Credential</span>
+              <h3 className="michael-credential">Certified life coach.</h3>
+            </RevealItem>
+          </Reveal>
+        </div>
       </div>
     </section>
   );

@@ -3,9 +3,9 @@ import { MaskedLines, Reveal } from "./motion-kit";
 export function Situation() {
   return (
     <section className="section situation">
-      <div className="container situation-grid">
+      <div className="container situation-stack">
         <MaskedLines className="display" lines={["Something changed."]} />
-        <Reveal as="p" className="body-lg">
+        <Reveal as="p" className="body-lg situation-copy">
           A life can change before you know what to call it. The hard part is not the ending; it is
           working out who you are without the role or direction that used to organize everything.
         </Reveal>
