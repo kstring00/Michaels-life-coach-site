@@ -54,6 +54,17 @@
   stroke-linecap: round;
 }
 
+.leafLabel {
+  pointer-events: none;
+  user-select: none;
+  fill: rgba(249, 251, 250, 0.9);
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 18px;
+  font-weight: 760;
+  letter-spacing: 0.055em;
+  text-transform: uppercase;
+}
+
 @media (max-width: 980px) {
   .layout {
     grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.2fr);
@@ -62,6 +73,10 @@
 
   .body {
     max-width: 34ch;
+  }
+
+  .leafLabel {
+    font-size: 17px;
   }
 }
 
@@ -91,6 +106,10 @@
   .leaves {
     width: min(112%, 720px);
     margin-left: -5%;
+  }
+
+  .leafLabel {
+    font-size: 19px;
   }
 
   .mobileOptional {
