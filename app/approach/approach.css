@@ -1,0 +1,53 @@
+.approach-page .page-hero {
+  background:
+    radial-gradient(circle at 78% 26%, rgba(42, 137, 255, 0.24), transparent 28%),
+    radial-gradient(circle at 28% 82%, rgba(95, 190, 214, 0.12), transparent 34%),
+    linear-gradient(145deg, #152329 0%, #1A3038 42%, #19344D 72%, #16242C 100%);
+  color: #F1F6F5;
+}
+
+.approach-page .page-hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    linear-gradient(112deg, transparent 0 37%, rgba(154, 203, 255, 0.1) 37.15% 37.3%, transparent 37.45% 100%),
+    linear-gradient(112deg, transparent 0 58%, rgba(112, 185, 255, 0.07) 58.15% 58.3%, transparent 58.45% 100%);
+  background-size: 160% 100%, 190% 100%;
+  animation: approachHeroLines 11s linear infinite;
+}
+
+.approach-page .page-hero .contours {
+  opacity: 0.72;
+}
+
+.approach-page .page-hero .contours path {
+  stroke: rgba(129, 183, 220, 0.44);
+}
+
+.approach-page .page-hero .contours path:nth-child(2n) {
+  stroke: rgba(214, 235, 238, 0.19);
+}
+
+.approach-page .page-hero p {
+  color: rgba(226, 238, 238, 0.74);
+}
+
+.approach-definition {
+  background:
+    radial-gradient(circle at 12% 18%, rgba(27, 92, 255, 0.07), transparent 26%),
+    #EEF2F1;
+}
+
+@keyframes approachHeroLines {
+  from { background-position: 120% 0, 150% 0; }
+  to { background-position: -90% 0, -120% 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .approach-page .page-hero::before {
+    animation: none;
+    background-position: 35% 0, 62% 0;
+  }
+}
