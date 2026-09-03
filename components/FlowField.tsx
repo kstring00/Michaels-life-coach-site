@@ -56,8 +56,10 @@ type Props = {
   speed?: number;
   glyphs?: [string, string, string];
   color?: string;
-  /** base glyph alpha; cursor influence adds up to 0.45 on top */
+  /** resting glyph alpha */
   alpha?: number;
+  /** glyph alpha at the centre of the cursor influence */
+  peak?: number;
   /** frame budget in ms. 25 ≈ 40fps */
   frameMs?: number;
 };
@@ -73,6 +75,7 @@ export default function FlowField({
   glyphs = ["|", "=", "+"],
   color = "255,255,255",
   alpha = 0.5,
+  peak = 0.95,
   frameMs = 25,
 }: Props) {
   const ref = useRef<HTMLCanvasElement>(null);
@@ -177,7 +180,7 @@ export default function FlowField({
             }
           }
 
-          const want = alpha + inf * 0.45;
+          const want = alpha + inf * (peak - alpha);
           if (want > curAlpha + 0.02 || want < curAlpha - 0.02) {
             curAlpha = want;
             ctx.globalAlpha = want;
@@ -244,7 +247,7 @@ export default function FlowField({
       window.removeEventListener("pointermove", onMove);
       document.removeEventListener("pointerleave", onLeave);
     };
-  }, [gradient, spacing, fieldScale, radius, swirl, speed, glyphs, color, alpha, frameMs]);
+  }, [gradient, spacing, fieldScale, radius, swirl, speed, glyphs, color, alpha, peak, frameMs]);
 
   return <canvas ref={ref} className={className} aria-hidden="true" />;
 }
