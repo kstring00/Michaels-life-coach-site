@@ -3,6 +3,7 @@ import { Portrait } from "./Portrait";
 import { Marquee } from "./Marquee";
 import FlowField from "./FlowField";
 import { MaskedLines, ParallaxMedia, Reveal } from "./motion-kit";
+import styles from "./Hero.module.css";
 
 /* module scope: a fresh array each render would retrigger FlowField's effect */
 const FIELD = ["#0A121E", "#123A57", "#0E2233"];
@@ -10,7 +11,7 @@ const GLYPHS: [string, string, string] = ["|", "=", "+"];
 
 export function Hero() {
   return (
-    <section className="hero">
+    <section className={`hero ${styles.compact}`}>
       <FlowField
         className="hero-field"
         gradient={FIELD}
@@ -22,10 +23,24 @@ export function Hero() {
         radius={220}
         swirl={0.7}
       />
+
+      <svg
+        className={`contours hero-contours ${styles.contoursVisible}`}
+        viewBox="0 0 1600 900"
+        preserveAspectRatio="none"
+        aria-hidden="true"
+        focusable="false"
+      >
+        <path d="M-120 610 C190 455 395 525 615 430 C855 325 1090 350 1310 245 C1450 180 1555 165 1710 205" />
+        <path d="M-140 735 C135 605 360 650 585 560 C845 455 1055 505 1280 405 C1450 330 1580 315 1720 340" />
+        <path d="M-90 330 C205 220 420 300 655 220 C885 142 1110 190 1335 120 C1480 75 1590 78 1710 118" />
+        <path d="M20 885 C315 735 510 765 720 690 C945 610 1135 620 1375 520 C1510 465 1615 455 1735 480" />
+      </svg>
+
       <div className="hero-scrim" aria-hidden="true" />
 
-      {/* the content band: one rectangle, both columns start and end on its edges */}
-      <div className="container hero-grid">
+      {/* the content band: one rectangle, both columns start and end on its two edges */}
+      <div className={`container hero-grid ${styles.gridCompact}`}>
         <div className="hero-copy">
           <MaskedLines
             as="h1"
