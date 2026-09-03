@@ -3,6 +3,7 @@ import { Portrait } from "./Portrait";
 import { Marquee } from "./Marquee";
 import FlowField from "./FlowField";
 import { MaskedLines, ParallaxMedia, Reveal } from "./motion-kit";
+import styles from "./Hero.module.css";
 
 /* module scope: a fresh array each render would retrigger FlowField's effect */
 const FIELD = ["#0A121E", "#123A57", "#0E2233"];
@@ -10,7 +11,7 @@ const GLYPHS: [string, string, string] = ["|", "=", "+"];
 
 export function Hero() {
   return (
-    <section className="hero">
+    <section className={`hero ${styles.compact}`}>
       <FlowField
         className="hero-field"
         gradient={FIELD}
@@ -24,7 +25,7 @@ export function Hero() {
       />
 
       <svg
-        className="contours hero-contours"
+        className={`contours hero-contours ${styles.contoursVisible}`}
         viewBox="0 0 1600 900"
         preserveAspectRatio="none"
         aria-hidden="true"
@@ -38,8 +39,8 @@ export function Hero() {
 
       <div className="hero-scrim" aria-hidden="true" />
 
-      {/* the content band: one rectangle, both columns start and end on its edges */}
-      <div className="container hero-grid">
+      {/* the content band: one rectangle, both columns start and end on its two edges */}
+      <div className={`container hero-grid ${styles.gridCompact}`}>
         <div className="hero-copy">
           <MaskedLines
             as="h1"
