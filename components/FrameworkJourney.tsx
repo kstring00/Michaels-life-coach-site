@@ -1,8 +1,15 @@
 "use client";
 
-import { motion, useScroll, useTransform, type MotionValue } from "motion/react";
-import { useRef } from "react";
+import {
+  motion,
+  useMotionValueEvent,
+  useScroll,
+  useTransform,
+  type MotionValue,
+} from "motion/react";
+import { useRef, useState } from "react";
 import styles from "./FrameworkJourney.module.css";
+import navStyles from "./FrameworkJourneyNav.module.css";
 
 const items = [
   {
@@ -84,9 +91,8 @@ function Chapter({
   const end = (index + 1) / items.length;
   const local = useTransform(progress, [start, end], [0, 1], { clamp: true });
 
-  // The middle of each chapter is intentionally long and quiet. Animation is
-  // concentrated at the edges so the page behaves like a reading experience,
-  // not a continuous transition reel.
+  // Most of each chapter is a stable reading window. Motion is concentrated
+  // at the edges so visitors can actually place themselves in the framework.
   const opacity = useTransform(
     local,
     index === 0
@@ -104,8 +110,6 @@ function Chapter({
   const ringScale = useTransform(local, [0, 0.1, 0.78, 0.94, 1], [0.88, 1, 1.08, 1, 0.88]);
   const ringOpacity = useTransform(local, [0, 0.07, 0.9, 1], [0, 1, 1, 0]);
 
-  // Get the information on screen early, then leave it alone for most of the
-  // chapter. This gives visitors time to read and recognize themselves in it.
   const fitOpacity = useTransform(local, [0, 0.07, 0.14, 0.92, 1], [0, 0, 1, 1, 0]);
   const focusOpacity = useTransform(local, [0, 0.12, 0.19, 0.92, 1], [0, 0, 1, 1, 0]);
   const questionOpacity = useTransform(local, [0, 0.17, 0.24, 0.92, 1], [0, 0, 1, 1, 0]);
@@ -121,7 +125,9 @@ function Chapter({
         <div className={styles.phase}>0{index + 1} / {item.phase}</div>
         <h3 id={`approach-phase-${index}`}>{item.title}</h3>
         <p className={styles.summary}>{item.summary}</p>
-        <p className={styles.readPrompt}>Stay with this phase for a moment. Does it sound like where you are?</p>
+        <p className={navStyles.readPrompt}>
+          Stay with this phase for a moment. Does it sound like where you are?
+        </p>
       </motion.div>
 
       <div className={styles.center} aria-hidden="true">
@@ -130,9 +136,9 @@ function Chapter({
       </div>
 
       <motion.div className={styles.right} style={{ x: rightX }}>
-        <motion.div className={`${styles.detail} ${styles.fitDetail}`} style={{ opacity: fitOpacity }}>
+        <motion.div className={`${styles.detail} ${navStyles.fitDetail}`} style={{ opacity: fitOpacity }}>
           <span className={styles.detailLabel}>You may be here if</span>
-          <p className={styles.fitCopy}>{item.fit}</p>
+          <p className={navStyles.fitCopy}>{item.fit}</p>
         </motion.div>
 
         <motion.div className={styles.detail} style={{ opacity: focusOpacity }}>
@@ -156,12 +162,74 @@ function Chapter({
   );
 }
 
+function PhaseNavigator({
+  active,
+  onSelect,
+}: {
+  active: number;
+  onSelect: (index: number) => void;
+}) {
+  return (
+    <nav className={navStyles.phaseNavigator} aria-label="Jump to an approach phase">
+      <div className={navStyles.navLabel}>Jump to phase</div>
+      <ul>
+        {items.map((item, index) => {
+          const selected = active === index;
+          return (
+            <li key={item.phase}>
+              <button
+                type="button"
+                className={selected ? navStyles.selected : ""}
+                onClick={() => onSelect(index)}
+                aria-current={selected ? "step" : undefined}
+                aria-label={`Jump to phase ${index + 1}: ${item.phase}`}
+              >
+                {selected && (
+                  <motion.span
+                    className={navStyles.selectionHalo}
+                    layoutId="approach-phase-selection"
+                    transition={{ type: "spring", stiffness: 360, damping: 30 }}
+                  />
+                )}
+                <span className={navStyles.phaseNumber}>0{index + 1}</span>
+                <span className={navStyles.phaseName}>{item.phase}</span>
+              </button>
+            </li>
+          );
+        })}
+      </ul>
+    </nav>
+  );
+}
+
 export function FrameworkJourney() {
   const trackRef = useRef<HTMLDivElement>(null);
+  const [activePhase, setActivePhase] = useState(0);
   const { scrollYProgress } = useScroll({
     target: trackRef,
     offset: ["start start", "end end"],
   });
+
+  useMotionValueEvent(scrollYProgress, "change", (value) => {
+    const next = Math.min(items.length - 1, Math.floor(value * items.length));
+    setActivePhase(next);
+  });
+
+  const jumpToPhase = (index: number) => {
+    const track = trackRef.current;
+    if (!track) return;
+
+    const trackTop = window.scrollY + track.getBoundingClientRect().top;
+    const scrollable = Math.max(0, track.offsetHeight - window.innerHeight);
+    // Land after the chapter's entrance sequence, inside its long reading hold.
+    const progress = (index + 0.38) / items.length;
+    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    window.scrollTo({
+      top: trackTop + scrollable * progress,
+      behavior: reduceMotion ? "auto" : "smooth",
+    });
+  };
 
   return (
     <section className={`framework ${styles.frameworkStory}`}>
@@ -182,7 +250,7 @@ export function FrameworkJourney() {
         </div>
       </div>
 
-      <div ref={trackRef} className={styles.track}>
+      <div ref={trackRef} className={`${styles.track} ${navStyles.readableTrack}`}>
         <div className={styles.stage}>
           <div className={styles.rail} aria-hidden="true">
             <div className={styles.railBase} />
@@ -195,6 +263,8 @@ export function FrameworkJourney() {
               <Chapter key={item.phase} item={item} index={index} progress={scrollYProgress} />
             ))}
           </div>
+
+          <PhaseNavigator active={activePhase} onSelect={jumpToPhase} />
 
           <div className={styles.scrollCue} aria-hidden="true">
             <span>Read each phase · scroll when ready</span>
