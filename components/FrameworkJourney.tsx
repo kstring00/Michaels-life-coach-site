@@ -295,6 +295,8 @@ export function FrameworkJourney() {
     });
   };
 
+  const trackHidden = sessionMode !== "full";
+
   return (
     <section className={`framework ${styles.frameworkStory}`}>
       <div className={styles.ambientLines} aria-hidden="true">
@@ -304,28 +306,29 @@ export function FrameworkJourney() {
       <JourneyIntro />
 
       {sessionMode === "checking" && <div className={sessionStyles.pending} aria-hidden="true" />}
-
       {sessionMode === "compact" && <CompactJourney onReplay={replayJourney} />}
 
-      {sessionMode === "full" && (
-        <div ref={trackRef} className={`${styles.track} ${navStyles.readableTrack}`}>
-          <div className={`${styles.stage} ${navStyles.readableStage}`}>
-            <div className={styles.rail} aria-hidden="true">
-              <div className={styles.railBase} />
-              <motion.div className={styles.railFill} style={{ scaleY: scrollYProgress }} />
-              <div className={styles.depthLabel}>DEEPER</div>
-            </div>
-
-            <div className={`container ${styles.sceneContainer}`}>
-              {items.map((item, index) => (
-                <Chapter key={item.phase} item={item} index={index} progress={scrollYProgress} />
-              ))}
-            </div>
-
-            <PhaseNavigator active={activePhase} onSelect={jumpToPhase} />
+      <div
+        ref={trackRef}
+        className={`${styles.track} ${navStyles.readableTrack} ${trackHidden ? sessionStyles.trackInactive : ""}`}
+        aria-hidden={trackHidden ? true : undefined}
+      >
+        <div className={`${styles.stage} ${navStyles.readableStage}`}>
+          <div className={styles.rail} aria-hidden="true">
+            <div className={styles.railBase} />
+            <motion.div className={styles.railFill} style={{ scaleY: scrollYProgress }} />
+            <div className={styles.depthLabel}>DEEPER</div>
           </div>
+
+          <div className={`container ${styles.sceneContainer}`}>
+            {items.map((item, index) => (
+              <Chapter key={item.phase} item={item} index={index} progress={scrollYProgress} />
+            ))}
+          </div>
+
+          <PhaseNavigator active={activePhase} onSelect={jumpToPhase} />
         </div>
-      )}
+      </div>
     </section>
   );
 }
