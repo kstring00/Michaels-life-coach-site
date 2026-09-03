@@ -1,6 +1,11 @@
+import { VelocityMarquee, MarqueeItem } from "./motion-kit";
+
 const domains = ["Divorce", "Empty nest", "Career change"];
 
 export function Marquee() {
-  const all = [...domains, ...domains, ...domains, ...domains];
-  return <div className="marquee"><div className="marquee-track">{all.map((d, i) => <span key={i}>{d}</span>)}</div></div>;
+  return (
+    <VelocityMarquee className="marquee" baseVelocity={-3} copies={6}>
+      {domains.map((d) => <MarqueeItem key={d}>{d}</MarqueeItem>)}
+    </VelocityMarquee>
+  );
 }
