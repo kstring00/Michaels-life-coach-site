@@ -6,7 +6,7 @@ const coaching = [
   ["Primary focus", "Identity, direction, decisions and forward movement"],
   ["Best fit", "You are functioning day to day but feel stuck, unclear or in transition"],
   ["The work", "Questions, reflection, goals, choices and accountability"],
-  ["Provider", "A certified life coach"],
+  ["Provider", "A certified life coach focused on identity and life transitions"],
 ] as const;
 
 const clinical = [
@@ -29,15 +29,36 @@ function Panel({
   fitLine: string;
   rows: readonly (readonly [string, string])[];
 }) {
+  const coachingPanel = kind === "coaching";
+
   return (
-    <div className={`${styles.panel} ${kind === "coaching" ? styles.coaching : styles.clinical}`}>
+    <div className={`${styles.panel} ${coachingPanel ? styles.coaching : styles.clinical}`}>
       <div className={styles.panelTop}>
         <div className={styles.kickerRow}>
-          <span className={styles.index}>{kind === "coaching" ? "01" : "02"}</span>
+          <span className={styles.index}>{coachingPanel ? "01" : "02"}</span>
           <span className={styles.eyebrow}>{eyebrow}</span>
+          {coachingPanel && <span className={styles.recommended}>Likely fit for this site</span>}
         </div>
+
         <MaskedLines as="h2" className={`display ${styles.heading}`} lines={[heading]} />
         <Reveal as="p" className={styles.fitLine}>{fitLine}</Reveal>
+
+        {coachingPanel ? (
+          <Reveal className={styles.confirmation}>
+            <span className={styles.confirmationLabel}>Coaching probably fits if</span>
+            <p>
+              You are not looking for diagnosis or treatment. You are trying to understand a major
+              life transition, reconnect with who you are, and make thoughtful decisions about what comes next.
+            </p>
+          </Reveal>
+        ) : (
+          <Reveal className={styles.clinicalCallout}>
+            <span>Choose clinical care instead when</span>
+            <p>
+              Symptoms, safety, trauma, diagnosis or mental-health treatment are the primary concern.
+            </p>
+          </Reveal>
+        )}
       </div>
 
       <Reveal className={styles.rows} stagger={0.07}>
@@ -48,6 +69,18 @@ function Panel({
           </RevealItem>
         ))}
       </Reveal>
+
+      {coachingPanel && (
+        <Reveal className={styles.coachingAction}>
+          <div>
+            <span>Built for this kind of transition</span>
+            <strong>GrowthGains centers on the space between who you were and what comes next.</strong>
+          </div>
+          <Link className={styles.primaryAction} href="/book">
+            Talk with Michael <span aria-hidden="true">→</span>
+          </Link>
+        </Reveal>
+      )}
     </div>
   );
 }
@@ -57,12 +90,12 @@ export function CompareSection() {
     <section className={styles.section} aria-label="Coaching versus counseling">
       <div className={styles.intro}>
         <div>
-          <span className={styles.introEyebrow}>Choosing the right support</span>
-          <h2>Two useful services. Different jobs.</h2>
+          <span className={styles.introEyebrow}>Confirming your fit</span>
+          <h2>If you are here for a life transition, coaching may already be the lane you are looking for.</h2>
         </div>
         <p>
-          The simplest distinction: coaching helps you navigate a non-clinical transition and move
-          forward. Counseling or therapy provides licensed mental-health care when treatment is needed.
+          This section is less about convincing you to choose coaching and more about making sure the fit is honest.
+          If your need is non-clinical and centered on identity, direction, change and forward movement, GrowthGains was built for that work.
         </p>
       </div>
 
@@ -71,11 +104,11 @@ export function CompareSection() {
           kind="coaching"
           eyebrow="GrowthGains coaching"
           heading="Coaching"
-          fitLine="Use coaching when the question is: How do I understand this season and choose what comes next?"
+          fitLine="Use coaching when the question is: How do I understand this season, reconnect with myself and choose what comes next?"
           rows={coaching}
         />
 
-        <div className={styles.vs} aria-hidden="true">VS</div>
+        <div className={styles.vs} aria-hidden="true">OR</div>
 
         <Panel
           kind="clinical"
