@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import "./globals.css";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
-import { PageReveal } from "@/components/PageReveal";
 import { site } from "@/lib/site";
 
 export const metadata: Metadata = {
@@ -13,4 +12,4 @@ export const metadata: Metadata = {
   openGraph: { title: "GrowthGains", description: site.description, type: "website" },
 };
 
-export default function RootLayout({children}:{children:React.ReactNode}) { return <html lang="en"><body><div className="site-shell"><Header/><PageReveal>{children}</PageReveal><Footer/></div></body></html>; }
+export default function RootLayout({children}:{children:React.ReactNode}) { return <html lang="en"><body><div className="site-shell"><Header/>{children}<Footer/></div></body></html>; }

@@ -1,9 +1,25 @@
-import { michael1 } from "@/lib/michael-1";
-import { michael2 } from "@/lib/michael-2";
-import { michael3 } from "@/lib/michael-3";
+import Image from "next/image";
+import portrait from "@/public/michael.webp";
 
-const src = `data:image/webp;base64,${michael1}${michael2}${michael3}`;
-
+/**
+ * The container sets the shape; the image fills it. A replacement portrait at
+ * any aspect ratio drops in without touching layout.
+ *
+ * object-position lives in globals.css (keyed off data-portrait) so the hero
+ * can reframe the crop per breakpoint without a second component.
+ */
 export function Portrait({ className = "", alt = "Michael, GrowthGains life coach" }: { className?: string; alt?: string }) {
-  return <img className={className} src={src} alt={alt} loading="eager" decoding="async" />;
+  return (
+    <Image
+      className={className}
+      data-portrait=""
+      src={portrait}
+      alt={alt}
+      fill
+      priority
+      sizes="(max-width: 768px) 100vw, 42vw"
+      placeholder="blur"
+      style={{ objectFit: "cover" }}
+    />
+  );
 }

@@ -13,8 +13,7 @@ export function Footer() {
           </div>
           <div className="footer-nav">
             <Link href="/about">About Michael</Link><Link href="/identity-in-transition">Coaching</Link>
-            <Link href="/approach">Approach</Link><Link href="/coaching-vs-counseling">Coaching vs. counseling</Link>
-            <Link href="/stories">Client stories</Link><Link href="/consultation">Free consultation</Link>
+            <Link href="/approach">Approach</Link><Link href="/coaching-vs-counseling">Coaching vs. counseling</Link><Link href="/consultation">Free consultation</Link>
             <Link href="/contact">Contact</Link><Link href="/start">Start coaching</Link>
             {socials.map(([label, href]) => <a key={label} href={href} target="_blank" rel="noreferrer">{label[0].toUpperCase()+label.slice(1)}</a>)}
           </div>
