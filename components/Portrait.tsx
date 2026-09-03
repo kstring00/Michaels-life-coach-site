@@ -1,9 +1,21 @@
-import { michael1 } from "@/lib/michael-1";
-import { michael2 } from "@/lib/michael-2";
-import { michael3 } from "@/lib/michael-3";
+import Image from "next/image";
+import portrait from "@/public/michael.webp";
 
-const src = `data:image/webp;base64,${michael1}${michael2}${michael3}`;
-
+/**
+ * The container sets the shape; the image fills it. A replacement portrait at
+ * any aspect ratio drops in without touching layout.
+ */
 export function Portrait({ className = "", alt = "Michael, GrowthGains life coach" }: { className?: string; alt?: string }) {
-  return <img className={className} src={src} alt={alt} loading="eager" decoding="async" />;
+  return (
+    <Image
+      className={className}
+      src={portrait}
+      alt={alt}
+      fill
+      priority
+      sizes="(max-width: 680px) 100vw, (max-width: 1020px) 88vw, 45vw"
+      placeholder="blur"
+      style={{ objectFit: "cover", objectPosition: "center 27%" }}
+    />
+  );
 }

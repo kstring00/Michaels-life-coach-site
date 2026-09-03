@@ -1,4 +1,16 @@
-import Link from "next/link";
-import { site } from "@/lib/site";
-import { Portrait } from "./Portrait";
-export function MichaelIntro(){return <section className="section michael-section"><div className="container michael-grid"><div className="michael-image"><Portrait alt="Michael of GrowthGains" /></div><div className="michael-copy"><div className="eyebrow">Meet Michael</div><h2 className="display">The work starts with who you are becoming.</h2><p className="michael-quote">“{site.statement}”</p><p className="body-md">His work is designed for the part of change that rarely fits on a checklist: identity, direction, roles, decisions and the meaning you make while life is shifting.</p><Link className="button secondary-dark" href="/about">Read Michael&apos;s perspective <span className="arrow">→</span></Link></div></div></section>}
+export function MichaelIntro() {
+  return (
+    <section className="section michael-section">
+      <div className="container michael-grid">
+        <h2 className="display">Start with who you are becoming.</h2>
+        <div className="michael-copy">
+          <p className="body-lg">
+            Michael works with identity and life transitions: the moments when an old role or
+            direction no longer fits and the next chapter has not taken shape.
+          </p>
+          <p className="michael-credential">Certified life coach.</p>
+        </div>
+      </div>
+    </section>
+  );
+}

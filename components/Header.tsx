@@ -8,7 +8,6 @@ const links = [
   ["About", "/about"],
   ["Coaching", "/identity-in-transition"],
   ["Approach", "/approach"],
-  ["Stories", "/stories"],
   ["Contact", "/contact"],
 ] as const;
 
@@ -29,7 +28,7 @@ export function Header() {
         <Brand />
         <nav className="nav" aria-label="Main navigation">
           {links.map(([label, href]) => <Link className="nav-link" key={href} href={href}>{label}</Link>)}
-          <Link className="nav-cta" href="/consultation">Book a consultation</Link>
+          <Link className="nav-cta" href="/consultation">Book a free consultation</Link>
         </nav>
         <button className="mobile-toggle" aria-expanded={open} aria-controls="mobile-menu" onClick={() => setOpen(!open)}>
           {open ? "Close" : "Menu"}
@@ -37,8 +36,8 @@ export function Header() {
       </div>
       <nav id="mobile-menu" className={`mobile-menu ${open ? "open" : ""}`} aria-label="Mobile navigation">
         {links.map(([label, href]) => <Link key={href} href={href} onClick={() => setOpen(false)}>{label}</Link>)}
-        <Link href="/consultation" onClick={() => setOpen(false)}>Book a consultation →</Link>
-        <Link href="/start" onClick={() => setOpen(false)}>Start coaching →</Link>
+        <Link href="/consultation" onClick={() => setOpen(false)}>Book a free consultation</Link>
+        <Link href="/contact" onClick={() => setOpen(false)}>Contact</Link>
       </nav>
     </header>
   );
