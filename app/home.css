@@ -207,3 +207,13 @@
     grid-template-columns: 1fr;
   }
 }
+
+/* motion-kit still reads useReducedMotion in ParallaxMedia/MagneticButton.
+   These selectors make the server/client style difference visually inert at
+   first paint, matching the reveal-path CSS fix already in globals.css. */
+@media (prefers-reduced-motion: reduce) {
+  .hero-portrait > div,
+  .final-cta .cta-primary {
+    transform: none !important;
+  }
+}
