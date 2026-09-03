@@ -1,3 +1,12 @@
+.trackInactive {
+  height: 0 !important;
+  min-height: 0 !important;
+  margin: 0 !important;
+  overflow: hidden !important;
+  visibility: hidden;
+  pointer-events: none;
+}
+
 .pending {
   height: 18rem;
 }
