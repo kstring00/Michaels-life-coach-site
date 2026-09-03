@@ -1,0 +1,40 @@
+.compact {
+  min-height: clamp(660px, 82svh, 790px) !important;
+}
+
+.gridCompact {
+  z-index: 3 !important;
+  padding-top: calc(86px + clamp(0.5rem, 1.6vh, 1rem)) !important;
+  padding-bottom: clamp(0.65rem, 1.6vh, 1rem) !important;
+}
+
+.contoursVisible {
+  inset: -6% -3% !important;
+  z-index: 2 !important;
+  opacity: 0.52 !important;
+  mix-blend-mode: screen;
+}
+
+.contoursVisible path {
+  stroke: rgba(42, 137, 255, 0.26);
+}
+
+.contoursVisible path:nth-child(2n) {
+  stroke: rgba(193, 209, 207, 0.18);
+}
+
+@media (max-width: 768px) {
+  .compact {
+    min-height: auto !important;
+  }
+
+  .gridCompact {
+    padding-top: calc(74px + 1.25rem) !important;
+    padding-bottom: 0.9rem !important;
+  }
+
+  .contoursVisible {
+    inset: -2% -20% !important;
+    opacity: 0.36 !important;
+  }
+}
