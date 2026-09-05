@@ -1,6 +1,10 @@
+/* The page closes on the cleanest surface it has. --brand-blue is the
+   secondary here and nowhere else on the page; --accent is tertiary and
+   carries the rule rather than any text — it is 2.97:1 on this ground and
+   would fail AA as type. */
 .footer {
   background: var(--surface-footer);
-  color: var(--paper);
+  color: var(--ink);
   padding: 2.25rem 0 1.35rem;
 }
 
@@ -25,13 +29,13 @@
 }
 
 .brand span {
-  color: var(--accent);
+  color: var(--brand-blue);
 }
 
 .copy {
   max-width: 38rem;
   margin: .55rem 0 0;
-  color: var(--paper-secondary);
+  color: var(--ink-secondary);
   font-size: .84rem;
   line-height: 1.55;
 }
@@ -45,13 +49,13 @@
 }
 
 .links a {
-  color: var(--paper-secondary);
+  color: var(--ink-secondary);
   font-size: .76rem;
   transition: color .2s ease;
 }
 
 .links a:hover {
-  color: var(--paper);
+  color: var(--brand-blue);
 }
 
 .bottom {
@@ -59,8 +63,8 @@
   justify-content: space-between;
   gap: 1.5rem;
   padding-top: 1rem;
-  border-top: 1px solid var(--paper-secondary);
-  color: var(--paper-secondary);
+  border-top: 1px solid var(--accent);
+  color: var(--ink-secondary);
   font-size: .68rem;
 }
 
