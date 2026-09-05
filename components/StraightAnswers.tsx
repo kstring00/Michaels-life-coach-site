@@ -47,7 +47,7 @@ export function StraightAnswers() {
               lines={["Straight", "answers."]}
             />
             <blockquote className={styles.lede}>
-              “I can help guide the journey, but I cannot take the journey for them.”
+              “I can help guide your journey, but I can’t take the journey for you.”
             </blockquote>
             <span className={styles.ledeRule} aria-hidden="true" />
           </div>
