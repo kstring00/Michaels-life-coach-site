@@ -9,7 +9,6 @@ import styles from "./HeaderActions.module.css";
 export function Header() {
   const [scrolled, setScrolled] = useState(false);
   const pathname = usePathname();
-  const bookHref = `/book?utm_source=growthgains&utm_medium=website&utm_campaign=consultation&utm_content=${encodeURIComponent(`${pathname}:header`)}`;
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 24);
@@ -30,7 +29,7 @@ export function Header() {
           >
             About
           </Link>
-          <Link className="nav-cta" href={bookHref}>Book a free consultation</Link>
+          <Link className="nav-cta" href="/#consultation">Book a free consultation</Link>
         </div>
       </div>
     </header>
