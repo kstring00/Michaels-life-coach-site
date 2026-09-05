@@ -1,55 +1,80 @@
-/* Homepage-only composition pass. The hero remains visually unchanged. */
+/* Homepage-only composition pass. Seven sections, dark → light → dark → light
+   → dark → blue. No cards, no shadows, no icons: rules, type and space. */
 
-/* 1 — recognition beat */
-.situation {
-  background: #0F1A1E;
+/* The page carries far more information than it used to, so the band rhythm is
+   tighter than the site default — otherwise seven sections of real content
+   sprawl past a readable page length. */
+main > .section {
+  padding-block: clamp(3rem, 4.6vw, 4rem);
+}
+
+/* 3 — who this is for: the recognition beat */
+.doorways {
+  background: #0B1620;
   color: #E9ECEB;
-  padding: clamp(5rem, 9vw, 8rem) 0;
 }
-.situation .situation-stack {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: clamp(1.25rem, 2.5vw, 2rem);
+.doorway-row {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(1.75rem, 3.5vw, 3.5rem);
 }
-.situation .display {
-  max-width: 22ch;
-  white-space: normal;
+.doorway {
+  padding-top: clamp(1rem, 1.6vw, 1.4rem);
+  border-top: 1px solid rgba(233, 236, 235, 0.24);
 }
-.situation .situation-copy {
-  max-width: 52ch;
+.doorway h3 {
   margin: 0;
-  color: rgba(233, 236, 235, 0.72);
+  color: #F1F4F3;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: var(--step-h3);
+  font-weight: 400;
+  letter-spacing: -0.02em;
+  line-height: 1.16;
+}
+.doorway p {
+  max-width: 36ch;
+  margin: 0.9rem 0 0;
+  color: rgba(233, 236, 235, 0.66);
+  font-size: var(--step-body);
+  line-height: 1.6;
+}
+/* the resolution, not the heading: it lands after the reader has recognised themselves */
+.doorway-umbrella {
+  max-width: 26ch;
+  margin: clamp(2rem, 3.6vw, 2.85rem) 0 0;
+  color: #F1F4F3;
 }
 
-/* 2 — Michael / credibility */
+/* 4 — Michael */
 .michael-section {
   background: #E9ECEB;
 }
 .michael-section .michael-grid {
-  display: block;
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+  gap: clamp(2rem, 5vw, 5rem);
+  align-items: center;
 }
 .michael-section .michael-copy {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  max-width: 960px;
+  min-width: 0;
 }
 .michael-section .michael-copy > .display {
   max-width: 18ch;
   white-space: normal;
 }
 .michael-section .michael-copy-stack {
-  margin-top: clamp(1.5rem, 3vw, 2.5rem);
+  margin-top: clamp(1.25rem, 2.4vw, 1.9rem);
 }
 .michael-section .michael-copy-stack .body-lg {
   max-width: 58ch;
   margin: 0;
 }
 .michael-section .credential-block {
-  max-width: 58rem;
-  margin-top: clamp(1.5rem, 3vw, 2.25rem);
-  padding-top: clamp(1rem, 2vw, 1.5rem);
+  margin-top: clamp(1.2rem, 2.2vw, 1.7rem);
+  padding-top: clamp(0.9rem, 1.6vw, 1.2rem);
   border-top: 1px solid rgba(15, 26, 30, 0.18);
 }
 .michael-section .credential-label {
@@ -69,98 +94,175 @@
   font-weight: 400;
   letter-spacing: -0.02em;
 }
+/* stands where the second portrait used to; the page has one photograph now */
+.michael-section .michael-quote {
+  min-width: 0;
+  max-width: 26ch;
+  margin: 0;
+  padding: 0 0 0 clamp(1.25rem, 2.5vw, 2rem);
+  border-left: 1px solid #1B5CFF;
+}
+.michael-section .michael-quote p {
+  margin: 0;
+  color: #0F1A1E;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: var(--step-h3);
+  line-height: 1.36;
+}
 
-/* 3 — process grid */
-.sequence {
+/* 5 — the program */
+.program {
   background: #0F1A1E;
   color: #E9ECEB;
 }
-.sequence .display {
+.program .display {
   color: #E9ECEB;
 }
-.sequence .sequence-grid {
+.program-format {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem clamp(1.5rem, 3vw, 2.75rem);
+  margin-top: clamp(1.2rem, 2.2vw, 1.7rem);
+  color: #2A89FF;
+  font-size: var(--step-small);
+  font-weight: 760;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+.program-arc {
+  margin-top: clamp(1.4rem, 2.5vw, 2rem);
+  border-top: 1px solid rgba(255, 255, 255, 0.14);
+}
+.program-step {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 1px;
-  margin-top: clamp(2rem, 4vw, 3.25rem);
-  border: 1px solid rgba(255, 255, 255, 0.14);
-  background: rgba(255, 255, 255, 0.14);
+  grid-template-columns: 56px minmax(0, 14rem) minmax(0, 1fr);
+  gap: clamp(18px, 3vw, 44px);
+  align-items: baseline;
+  padding: clamp(1rem, 1.7vw, 1.3rem) 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.14);
 }
-.sequence .sequence-grid .sequence-step {
-  display: block;
-  padding: clamp(1.5rem, 3vw, 2.5rem);
-  border: 0;
-  background: #0F1A1E;
-}
-.sequence .sequence-step .n {
-  display: block;
-  margin-bottom: clamp(1.75rem, 3vw, 2.5rem);
+.program-step .n {
   color: #2A89FF;
   font-size: var(--step-small);
   letter-spacing: 0.12em;
 }
-.sequence .sequence-step h3 {
-  margin: 0 0 0.8rem;
+.program-step h3 {
+  margin: 0;
   color: #E9ECEB;
   font-family: Georgia, "Times New Roman", serif;
   font-size: var(--step-h3);
   font-weight: 400;
   letter-spacing: -0.02em;
+  line-height: 1.2;
 }
-.sequence .sequence-step p {
-  max-width: 38ch;
+.program-step p {
+  max-width: var(--measure);
   margin: 0;
   color: rgba(233, 236, 235, 0.68);
   font-size: var(--step-body);
   line-height: 1.6;
 }
+.program-deliverables {
+  margin-top: clamp(1.7rem, 2.9vw, 2.3rem);
+}
+.program-subhead {
+  margin: 0;
+  color: rgba(233, 236, 235, 0.55);
+  font-size: var(--step-small);
+  font-weight: 760;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+.deliverable-list {
+  margin: clamp(0.9rem, 1.8vw, 1.25rem) 0 0;
+  padding: 0;
+  list-style: none;
+  border-top: 1px solid rgba(255, 255, 255, 0.14);
+}
+.deliverable-list li {
+  display: grid;
+  grid-template-columns: minmax(0, 21rem) minmax(0, 1fr);
+  gap: clamp(14px, 3vw, 44px);
+  align-items: baseline;
+  padding: clamp(0.75rem, 1.3vw, 1rem) 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.14);
+}
+.deliverable-list strong {
+  color: #F1F4F3;
+  font-size: var(--step-body);
+  font-weight: 620;
+  line-height: 1.45;
+}
+.deliverable-list span {
+  color: rgba(233, 236, 235, 0.62);
+  font-size: var(--step-body);
+  line-height: 1.6;
+}
+/* the blueprint is his name for it and the thing a client walks away holding */
+.deliverable-list li:nth-child(3) strong {
+  color: #7FB4FF;
+}
 
-/* 4 — coaching / counseling */
-.split-compare {
-  align-items: stretch;
+/* 7 — straight answers: the objection stage, nothing hidden behind a toggle */
+.straight-answers {
+  background: #0B1620;
+  color: #E9ECEB;
 }
-.split-compare .compare-side {
-  display: flex;
-  flex-direction: column;
-  gap: 24px;
-  align-self: stretch;
+.straight-answers .display {
+  color: #F1F4F3;
 }
-.split-compare .compare-side.coaching {
-  background: #1B5CFF;
-  color: #fff;
+.answers-lede {
+  max-width: 30ch;
+  margin: clamp(1.1rem, 2.2vw, 1.7rem) 0 0;
+  color: rgba(241, 244, 243, 0.86);
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: var(--step-h3);
+  line-height: 1.36;
 }
-.split-compare .compare-side.counseling {
-  background: #E4E8E8;
-  color: #0F1A1E;
+.answer-list {
+  margin-top: clamp(1.4rem, 2.5vw, 2rem);
+  border-top: 1px solid rgba(255, 255, 255, 0.14);
 }
-.split-compare .compare-side ul {
-  display: flex;
-  flex: 1;
-  flex-direction: column;
-  justify-content: flex-start;
+.answer-row {
+  display: grid;
+  grid-template-columns: minmax(0, 21rem) minmax(0, 1fr);
+  gap: clamp(14px, 3vw, 44px);
+  padding: clamp(1rem, 1.8vw, 1.35rem) 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.14);
 }
-.split-compare .compare-side li {
-  display: flex;
-  flex: 1;
-  align-items: center;
-  opacity: 1;
+.answer-row h3 {
+  margin: 0;
+  color: #F1F4F3;
+  font-size: var(--step-body);
+  font-weight: 620;
+  line-height: 1.45;
 }
-.split-compare .compare-side.coaching ul,
-.split-compare .compare-side.coaching li {
-  border-color: rgba(255, 255, 255, 0.42);
-}
-.split-compare .compare-side.counseling ul,
-.split-compare .compare-side.counseling li {
-  border-color: rgba(15, 26, 30, 0.28);
+.answer-row p {
+  max-width: var(--measure);
+  margin: 0;
+  color: rgba(233, 236, 235, 0.68);
+  font-size: var(--step-body);
+  line-height: 1.62;
 }
 
-/* 5 — final conversion band */
+/* 8 — final conversion band */
 .final-cta {
   background: #1B5CFF;
   color: #fff;
 }
 .final-cta p {
   color: rgba(255, 255, 255, 0.82);
+}
+.final-cta .cta-actions {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0.9rem;
+}
+/* the button never stands on its own: this says what the call actually is */
+.final-cta .cta-note {
+  color: rgba(255, 255, 255, 0.74);
+  font-size: var(--step-small);
 }
 .final-cta .cta-primary {
   background: #fff;
@@ -178,16 +280,47 @@
 }
 
 @media (max-width: 680px) {
-  .sequence .sequence-grid {
-    grid-template-columns: 1fr;
+  main > .section {
+    padding-block: clamp(2.5rem, 6.6vw, 3rem);
   }
 }
 
-/* motion-kit still reads useReducedMotion in ParallaxMedia/MagneticButton.
-   These selectors make the server/client style difference visually inert at
-   first paint, matching the reveal-path CSS fix already in globals.css. */
+@media (max-width: 900px) {
+  .michael-section .michael-grid {
+    grid-template-columns: 1fr;
+    gap: clamp(1.75rem, 4vw, 2.5rem);
+  }
+  .michael-section .michael-quote {
+    max-width: 40ch;
+  }
+  .doorway-row {
+    grid-template-columns: 1fr;
+    gap: clamp(1.5rem, 4vw, 2.25rem);
+  }
+  .doorway p {
+    max-width: 52ch;
+  }
+  .program-step {
+    grid-template-columns: 44px minmax(0, 1fr);
+    row-gap: 0.5rem;
+  }
+  .program-step p {
+    grid-column: 2 / -1;
+  }
+  .deliverable-list li,
+  .answer-row {
+    grid-template-columns: 1fr;
+    row-gap: 0.45rem;
+  }
+  .final-cta .cta-actions {
+    align-items: flex-start;
+  }
+}
+
+/* motion-kit still reads useReducedMotion in MagneticButton. This selector
+   makes the server/client style difference visually inert at first paint,
+   matching the reveal-path CSS fix already in globals.css. */
 @media (prefers-reduced-motion: reduce) {
-  .hero-portrait > div,
   .final-cta .cta-primary {
     transform: none !important;
   }

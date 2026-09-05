@@ -4,7 +4,8 @@
     radial-gradient(circle at 50% 0%, rgba(27, 92, 255, 0.045), transparent 24%),
     #F4F6F5;
   color: #0F1A1E;
-  padding-top: clamp(3rem, 5vw, 4.75rem);
+  padding-top: clamp(2.5rem, 4vw, 3.5rem);
+  padding-bottom: 0;
 }
 
 .intro {
@@ -43,7 +44,7 @@
 
 .contentGrid {
   width: min(1380px, calc(100% - 48px));
-  margin: clamp(2.25rem, 4vw, 3.75rem) auto 0;
+  margin: clamp(1.4rem, 2.4vw, 2.1rem) auto 0;
   display: grid;
   grid-template-columns: minmax(0, 2.05fr) minmax(300px, 0.95fr);
   gap: clamp(1rem, 1.6vw, 1.5rem);
@@ -61,7 +62,7 @@
 .coachingPanel {
   display: flex;
   flex-direction: column;
-  padding: clamp(2rem, 3.5vw, 3.5rem);
+  padding: clamp(1.75rem, 3vw, 2.9rem);
   color: #F8FBFF;
   background:
     radial-gradient(circle at 14% 8%, rgba(56, 128, 255, 0.24), transparent 26%),
@@ -134,62 +135,6 @@
   line-height: 1.62;
 }
 
-.outcomes {
-  position: relative;
-  z-index: 1;
-  display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 0;
-  margin-top: clamp(2rem, 3.2vw, 3rem);
-  border-top: 1px solid rgba(255,255,255,0.14);
-  border-bottom: 1px solid rgba(255,255,255,0.14);
-}
-
-.outcome {
-  min-width: 0;
-  padding: clamp(1.25rem, 2vw, 1.8rem) clamp(0.8rem, 1.6vw, 1.25rem);
-  border-right: 1px solid rgba(255,255,255,0.11);
-}
-
-.outcome:first-child {
-  padding-left: 0;
-}
-
-.outcome:last-child {
-  padding-right: 0;
-  border-right: 0;
-}
-
-.outcomeIndex {
-  display: inline-grid;
-  width: 30px;
-  height: 30px;
-  place-items: center;
-  margin-bottom: 0.85rem;
-  border: 1px solid rgba(105, 165, 255, 0.48);
-  border-radius: 50%;
-  color: #78AEFF;
-  font-size: 0.61rem;
-  font-weight: 780;
-  letter-spacing: 0.05em;
-}
-
-.outcome strong {
-  display: block;
-  color: #71A9FF;
-  font-size: 0.72rem;
-  font-weight: 790;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-}
-
-.outcome p {
-  margin: 0.55rem 0 0;
-  color: rgba(239, 246, 255, 0.82);
-  font-size: 0.9rem;
-  line-height: 1.5;
-}
-
 .coachingBottom {
   position: relative;
   z-index: 1;
@@ -197,7 +142,7 @@
   grid-template-columns: minmax(0, 1fr) auto;
   gap: clamp(1.5rem, 3vw, 3rem);
   align-items: center;
-  margin-top: clamp(1.5rem, 2.8vw, 2.4rem);
+  margin-top: clamp(1.4rem, 2.4vw, 2rem);
 }
 
 .credential {
@@ -271,7 +216,7 @@
 .clinicalPanel {
   display: flex;
   flex-direction: column;
-  padding: clamp(2rem, 3.2vw, 3rem);
+  padding: clamp(1.75rem, 2.8vw, 2.5rem);
   border: 1px solid rgba(15, 26, 30, 0.11);
   background:
     radial-gradient(circle at 90% 8%, rgba(255,255,255,0.96), transparent 30%),
@@ -312,14 +257,14 @@
 
 .clinicalList {
   list-style: none;
-  margin: clamp(1.5rem, 2.5vw, 2.25rem) 0 0;
+  margin: clamp(1.2rem, 2vw, 1.75rem) 0 0;
   padding: 0;
   border-top: 1px solid rgba(15,26,30,0.13);
 }
 
 .clinicalList li {
   position: relative;
-  padding: 1rem 0 1rem 1.2rem;
+  padding: 0.85rem 0 0.85rem 1.2rem;
   border-bottom: 1px solid rgba(15,26,30,0.11);
   color: #33464B;
   font-size: 0.93rem;
@@ -330,7 +275,7 @@
   content: "";
   position: absolute;
   left: 0;
-  top: 1.47rem;
+  top: 1.3rem;
   width: 5px;
   height: 5px;
   border-radius: 50%;
@@ -339,7 +284,7 @@
 
 .clinicalAside {
   margin-top: auto;
-  padding-top: clamp(1.5rem, 2.5vw, 2.25rem);
+  padding-top: clamp(1.2rem, 2vw, 1.75rem);
 }
 
 .clinicalAside p {
@@ -363,8 +308,8 @@
   align-items: center;
   justify-content: space-between;
   gap: 2rem;
-  margin-top: clamp(1.4rem, 2.5vw, 2rem);
-  padding: 1.15rem clamp(1.5rem, 5vw, 4rem);
+  margin-top: clamp(0.9rem, 1.6vw, 1.25rem);
+  padding: 1rem clamp(1.5rem, 5vw, 4rem);
   background: #0F1A1E;
   color: #A8B8BA;
   font-size: var(--step-small);
@@ -387,23 +332,7 @@
     grid-template-columns: minmax(0, 1.45fr) minmax(280px, 0.85fr);
   }
 
-  .outcomes {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-
-  .outcome:nth-child(2) {
-    border-right: 0;
-  }
-
-  .outcome:nth-child(-n+2) {
-    border-bottom: 1px solid rgba(255,255,255,0.11);
-  }
-
-  .outcome:nth-child(3) {
-    padding-left: 0;
-  }
-
-  .coachingBottom {
+    .coachingBottom {
     grid-template-columns: 1fr;
   }
 
@@ -438,7 +367,7 @@
   }
 
   .intro h2 {
-    font-size: clamp(1.8rem, 9vw, 2.45rem);
+    font-size: clamp(1.6rem, 7.4vw, 2.1rem);
   }
 
   .coachingPanel,
@@ -448,28 +377,11 @@
 
   .coachingPanel,
   .clinicalPanel {
-    padding: 1.5rem;
+    padding: 1.25rem;
   }
 
   .coachingIntro h3 {
-    font-size: clamp(1.9rem, 10vw, 2.7rem);
-  }
-
-  .outcomes {
-    grid-template-columns: 1fr;
-  }
-
-  .outcome,
-  .outcome:first-child,
-  .outcome:last-child,
-  .outcome:nth-child(3) {
-    padding: 1.1rem 0;
-    border-right: 0;
-    border-bottom: 1px solid rgba(255,255,255,0.11);
-  }
-
-  .outcome:last-child {
-    border-bottom: 0;
+    font-size: clamp(1.6rem, 7.4vw, 2.2rem);
   }
 
   .credential {

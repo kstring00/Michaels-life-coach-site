@@ -2,7 +2,7 @@
 import { useState } from "react";
 import Link from "next/link";
 
-const options=["Relationship transition","Divorce / separation","Marriage","Empty nest","Career transition","Identity / direction","Something else"];
+const options=["Identity and a major decision","Life after sport","Foster care or adoption","Grief or loss","A pattern I want to change","Something else"];
 export function StartFlow(){
   const [step,setStep]=useState(0); const [choice,setChoice]=useState(""); const [goal,setGoal]=useState("");
   return <main className="start-shell"><div className="start-card"><div className="eyebrow" style={{color:"#75b7ff"}}>Start coaching</div><div className="progress">{[0,1,2].map(i=><span key={i} className={i<=step?"active":""}/>)}</div>

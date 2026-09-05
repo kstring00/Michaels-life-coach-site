@@ -1,17 +1,22 @@
 import "./home.css";
 import { Hero } from "@/components/Hero";
+import { Doorways } from "@/components/Doorways";
 import { MichaelIntro } from "@/components/MichaelIntro";
-import { WorkSequence } from "@/components/WorkSequence";
+import { Program } from "@/components/Program";
 import { CompareSection } from "@/components/CompareSection";
+import { StraightAnswers } from "@/components/StraightAnswers";
 import { FinalCTA } from "@/components/FinalCTA";
 
 export default function Home() {
   return (
     <main>
+      {/* the ticker is the foot of the hero band, not a section of its own */}
       <Hero />
+      <Doorways />
       <MichaelIntro />
-      <WorkSequence />
+      <Program />
       <CompareSection />
+      <StraightAnswers />
       <FinalCTA />
     </main>
   );

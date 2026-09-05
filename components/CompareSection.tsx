@@ -1,29 +1,6 @@
 import Link from "next/link";
-import { Reveal, RevealItem } from "./motion-kit";
+import { Reveal } from "./motion-kit";
 import styles from "./CompareSection.module.css";
-
-const outcomes = [
-  {
-    index: "01",
-    label: "Clarity",
-    copy: "Name what changed and what still matters now.",
-  },
-  {
-    index: "02",
-    label: "Direction",
-    copy: "Sort through choices without rushing the next chapter.",
-  },
-  {
-    index: "03",
-    label: "Momentum",
-    copy: "Turn reflection into practical next steps you choose.",
-  },
-  {
-    index: "04",
-    label: "Ownership",
-    copy: "Make decisions from your values, not only the role you left.",
-  },
-] as const;
 
 const clinicalSignals = [
   "Mental-health symptoms are interfering with day-to-day functioning.",
@@ -55,18 +32,9 @@ export function CompareSection() {
             <p>
               Coaching with Michael creates space to understand the season you are in,
               reconnect with what matters to you and decide how you want to move forward.
+              He screens for that fit at the consultation, before anyone signs a contract.
             </p>
           </div>
-
-          <Reveal className={styles.outcomes} stagger={0.07}>
-            {outcomes.map((item) => (
-              <RevealItem className={styles.outcome} key={item.label}>
-                <span className={styles.outcomeIndex}>{item.index}</span>
-                <strong>{item.label}</strong>
-                <p>{item.copy}</p>
-              </RevealItem>
-            ))}
-          </Reveal>
 
           <div className={styles.coachingBottom}>
             <div className={styles.credential}>
@@ -81,7 +49,7 @@ export function CompareSection() {
               <Link className={styles.primaryAction} href="/book">
                 Book a free consultation <span aria-hidden="true">→</span>
               </Link>
-              <span className={styles.actionNote}>No pressure. Just a conversation.</span>
+              <span className={styles.actionNote}>Fit is decided on the call, before any contract.</span>
             </div>
           </div>
         </Reveal>
@@ -102,8 +70,9 @@ export function CompareSection() {
 
           <div className={styles.clinicalAside}>
             <p>
-              You deserve the right kind of care. If clinical support is what you need,
-              connecting with an appropriately licensed mental-health professional is the better next step.
+              Michael screens for fit at the consultation for exactly this reason: so he can
+              refer you to a licensed clinician before anyone signs a contract. You deserve the
+              right kind of care more than he needs the client.
             </p>
             <Link href="/coaching-vs-counseling">Read the full coaching vs. counseling guide →</Link>
           </div>

@@ -9,7 +9,7 @@ export function Footer() {
         <div className="footer-top">
           <div>
             <div className="footer-brand">Growth<span>Gains</span></div>
-            <p className="body-md" style={{maxWidth: 560, color: "#8495a6"}}>Identity and life-transition coaching for the space between who you were and what comes next.</p>
+            <p className="body-md" style={{maxWidth: 560, color: "#8495a6"}}>Coaching for people who know something needs to change and want support figuring out where they are going next.</p>
           </div>
           <div className="footer-nav">
             <Link href="/about">About Michael</Link><Link href="/identity-in-transition">Coaching</Link>
