@@ -27,6 +27,14 @@
   --accent:#B8894A;
   --accent-hover:#A0763D;
 
+  /* Gold text on a light ground. --accent is 2.80:1 on --surface-light and
+     cannot be used as type there; the windows for one gold across both
+     grounds provably do not overlap (a gold must be under L 0.159 to pass
+     on the cream and over L 0.230 to pass on the ink). This is the second
+     tint that gap forces: 5.11 / 4.67 / 5.42 on light, light-2, footer.
+     Fills and dark-surface text still use --accent. */
+  --accent-ink:#836030;
+
   /* brand blue — the mark's own colour, and the footer's secondary.
      4.97:1 on --surface-footer, so it carries text there. It does not
      appear on --surface-light or --surface-dark: 2.68:1 and 3.03:1. */

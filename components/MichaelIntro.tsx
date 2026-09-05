@@ -1,31 +1,37 @@
 import { MaskedLines, Reveal, RevealItem } from "./motion-kit";
+import styles from "./MichaelIntro.module.css";
 
 export function MichaelIntro() {
   return (
-    <section className="section michael-section">
-      <div className="container michael-grid">
-        <div className="michael-copy">
-          <MaskedLines className="display" lines={["Who you would be", "working with."]} />
-          <Reveal className="michael-copy-stack" stagger={0.08}>
-            <RevealItem as="p" className="body-lg">
-              I am a certified life coach with a background in ministry, leadership and mentoring.
-              I first found coaching in undergrad while studying ministry — the idea that instead
-              of telling people what to do, you can help them discover what is already within them
-              and move forward. That is still how I work.
+    <section className={styles.section} aria-labelledby="about-heading">
+      <div className={styles.inner}>
+        <div className={styles.copy}>
+          <Reveal as="p" className={styles.eyebrow} y={10}>About</Reveal>
+          <MaskedLines
+            className={styles.title}
+            lines={["Who you would be", "working with."]}
+          />
+          <Reveal className={styles.stack} stagger={0.08} delay={0.1}>
+            <RevealItem as="p" className={styles.bio}>
+              I am a certified life coach with a background in ministry, leadership, and
+              mentoring. I help people in seasons of transition gain clarity, process what
+              they’re facing, and take practical steps toward a life that feels aligned and
+              purposeful.
             </RevealItem>
-            <RevealItem className="credential-block">
-              <span className="credential-label">Credential</span>
-              <h3 className="michael-credential">Certified life coach.</h3>
+            <RevealItem className={styles.credential}>
+              <span className={styles.eyebrow}>Credential</span>
+              <p className={styles.credentialValue}>Certified life coach.</p>
             </RevealItem>
           </Reveal>
         </div>
 
-        {/* holds the column the second portrait used to */}
-        <Reveal as="blockquote" className="michael-quote" delay={0.15}>
+        <Reveal as="blockquote" className={styles.quote} delay={0.18}>
+          <span className={styles.mark} aria-hidden="true">&ldquo;</span>
           <p>
             “I want to understand the person, not just the problem they are bringing into
             the session.”
           </p>
+          <footer className={styles.signature}>&ndash; Michael</footer>
         </Reveal>
       </div>
     </section>

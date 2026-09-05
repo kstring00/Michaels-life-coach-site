@@ -49,116 +49,12 @@ main > .section {
 /* 3 — who this is for: the recognition beat */
 /* the resolution, not the heading: it lands after the reader has recognised themselves */
 /* 4 — Michael */
-.michael-section {
-  background: var(--surface-light);
-}
-.michael-section .michael-grid {
-  display: grid;
-  grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
-  gap: clamp(2rem, 5vw, 5rem);
-  align-items: center;
-}
-.michael-section .michael-copy {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  min-width: 0;
-}
-.michael-section .michael-copy > .display {
-  max-width: 18ch;
-  white-space: normal;
-}
-.michael-section .michael-copy-stack {
-  margin-top: clamp(1.25rem, 2.4vw, 1.9rem);
-}
-.michael-section .michael-copy-stack .body-lg {
-  max-width: 58ch;
-  margin: 0;
-}
-.michael-section .credential-block {
-  margin-top: clamp(1.2rem, 2.2vw, 1.7rem);
-  padding-top: clamp(0.9rem, 1.6vw, 1.2rem);
-  border-top: 1px solid var(--rule-light);
-}
-.michael-section .credential-label {
-  display: block;
-  margin-bottom: 0.55rem;
-  color: var(--ink-secondary);
-  font-size: var(--step-small);
-  font-weight: 760;
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
-}
-.michael-section .michael-credential {
-  margin: 0;
-  color: var(--ink);
-  font-family: Georgia, "Times New Roman", serif;
-  font-size: var(--step-h3);
-  font-weight: 400;
-  letter-spacing: -0.02em;
-}
 /* stands where the second portrait used to; the page has one photograph now */
-.michael-section .michael-quote {
-  min-width: 0;
-  max-width: 26ch;
-  margin: 0;
-  padding: 0 0 0 clamp(1.25rem, 2.5vw, 2rem);
-  border-left: 1px solid var(--accent);
-}
-.michael-section .michael-quote p {
-  margin: 0;
-  color: var(--ink);
-  font-family: Georgia, "Times New Roman", serif;
-  font-size: var(--step-h3);
-  line-height: 1.36;
-}
-
 /* 5 — the program */
 /* the blueprint is his name for it and the thing a client walks away holding */
 /* 7 — straight answers: the objection stage, nothing hidden behind a toggle.
    Light band between the two dark ones, so the honest answers read as the
    plainest surface on the page. */
-.straight-answers {
-  background: var(--surface-light);
-  color: var(--ink);
-}
-.straight-answers .display {
-  color: var(--ink);
-}
-.answers-lede {
-  max-width: 30ch;
-  margin: clamp(1.1rem, 2.2vw, 1.7rem) 0 0;
-  color: var(--ink);
-  font-family: Georgia, "Times New Roman", serif;
-  font-size: var(--step-h3);
-  line-height: 1.36;
-}
-.answer-list {
-  margin-top: clamp(1.4rem, 2.5vw, 2rem);
-  border-top: 1px solid var(--rule-light);
-}
-.answer-row {
-  display: grid;
-  grid-template-columns: minmax(0, 21rem) minmax(0, 1fr);
-  gap: clamp(14px, 3vw, 44px);
-  padding: clamp(1rem, 1.8vw, 1.35rem) 0;
-  border-bottom: 1px solid var(--rule-light);
-}
-.answer-row h3 {
-  margin: 0;
-  color: var(--ink);
-  font-size: var(--step-body);
-  font-weight: 620;
-  line-height: 1.45;
-}
-.answer-row p {
-  max-width: var(--measure);
-  margin: 0;
-  color: var(--ink-secondary);
-  font-size: var(--step-body);
-  line-height: 1.62;
-}
-
 /* 8 — final conversion band */
 /* the button never stands on its own: this says what the call actually is */
 @media (max-width: 680px) {

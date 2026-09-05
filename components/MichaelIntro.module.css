@@ -1,0 +1,111 @@
+/* Copy on the left, the pull quote on the right, one hairline between them. */
+.section {
+  position: relative;
+  padding: clamp(3.25rem, 5.5vw, 5.5rem) 0;
+  background: var(--surface-light);
+  color: var(--ink);
+}
+
+.inner {
+  width: min(calc(100% - 48px), var(--max));
+  margin-inline: auto;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 0.92fr);
+  gap: clamp(2.5rem, 6vw, 6rem);
+  align-items: start;
+}
+
+/* --accent-ink, not --accent: gold type on this ground needs the darker tint */
+.eyebrow {
+  display: block;
+  margin: 0 0 0.9rem;
+  color: var(--accent-ink);
+  font-size: 0.68rem;
+  font-weight: 760;
+  letter-spacing: 0.19em;
+  text-transform: uppercase;
+}
+
+.title {
+  margin: 0;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(2.1rem, 3.4vw, 3.4rem);
+  font-weight: 400;
+  line-height: 1.02;
+  letter-spacing: -.03em;
+}
+
+.stack { margin-top: clamp(1.1rem, 2vw, 1.6rem); }
+
+.bio {
+  max-width: 46ch;
+  margin: 0;
+  color: var(--ink-secondary);
+  font-size: var(--step-body);
+  line-height: 1.66;
+}
+
+.credential {
+  max-width: 46ch;
+  margin-top: clamp(1.4rem, 2.6vw, 2.1rem);
+  padding-top: clamp(1.1rem, 2vw, 1.6rem);
+  border-top: 1px solid var(--rule-light);
+}
+
+.credentialValue {
+  margin: 0;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(1.15rem, 1.6vw, 1.5rem);
+  font-weight: 400;
+  letter-spacing: -.02em;
+}
+
+/* the hairline is the quote column's own left border */
+.quote {
+  min-width: 0;
+  margin: 0;
+  padding: 0 0 0 clamp(1.75rem, 4vw, 4rem);
+  border-left: 1px solid var(--rule-light);
+}
+
+/* decorative, aria-hidden — carries no text contrast requirement */
+.mark {
+  display: block;
+  color: var(--accent);
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(3.4rem, 5vw, 5rem);
+  line-height: .6;
+}
+
+.quote p {
+  max-width: 22ch;
+  margin: clamp(1rem, 1.8vw, 1.5rem) 0 0;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(1.3rem, 1.95vw, 1.85rem);
+  font-style: italic;
+  font-weight: 400;
+  line-height: 1.38;
+  letter-spacing: -.01em;
+}
+
+.signature {
+  margin-top: clamp(1.1rem, 2.2vw, 1.9rem);
+  color: var(--ink);
+  font-family: var(--font-signature), "Snell Roundhand", "Brush Script MT", cursive;
+  font-size: clamp(1.9rem, 2.8vw, 2.7rem);
+  line-height: 1;
+}
+
+@media (max-width: 900px) {
+  .inner {
+    grid-template-columns: 1fr;
+    gap: clamp(1.75rem, 5vw, 2.5rem);
+  }
+  .quote {
+    padding: clamp(1.25rem, 4vw, 1.75rem) 0 0;
+    border-left: 0;
+    border-top: 1px solid var(--rule-light);
+  }
+  .quote p { max-width: 32ch; }
+  .inner { width: min(calc(100% - 28px), var(--max)); }
+}

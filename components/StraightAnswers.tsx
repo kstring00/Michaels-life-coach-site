@@ -1,8 +1,9 @@
 import { MaskedLines, Reveal, RevealItem } from "./motion-kit";
+import styles from "./StraightAnswers.module.css";
 
 /**
- * The objection stage. Everything visible — no accordion. Most coaching sites
- * hide the policies; publishing them plainly is the point of the section.
+ * Native <details> rather than a scripted accordion: the answers stay in the
+ * DOM for search and for readers with JS off, and open on keyboard alone.
  */
 const answers = [
   {
@@ -15,33 +16,56 @@ const answers = [
   },
   {
     q: "What are the policies?",
-    a: "No refunds. Twenty-four hours' notice to cancel or reschedule. No-shows and late cancellations are charged.",
+    a: "No refunds. Twenty-four hours’ notice to cancel or reschedule. No-shows and late cancellations are charged.",
   },
   {
-    q: "How do we know if it is a fit?",
+    q: "How do we know if it’s a fit?",
     a: "That is what the consultation is for. We decide together, before any contract is signed.",
   },
 ] as const;
 
 export function StraightAnswers() {
   return (
-    <section className="section straight-answers">
-      <div className="container">
-        <MaskedLines className="display" lines={["Straight answers."]} />
-
-        <Reveal as="p" className="answers-lede" delay={0.1}>
-          “I can help guide the journey, but I cannot take the journey for them.”
+    <section className={styles.section} aria-labelledby="faq-heading">
+      <div className={styles.inner}>
+        <Reveal className={styles.topBar} y={10}>
+          <p className={styles.tag}>
+            Real conversations.
+            <br />
+            A more grounded tomorrow.
+          </p>
+          <span className={styles.topRule} aria-hidden="true" />
+          <p className={styles.tagEnd}>Guidance for what’s next</p>
         </Reveal>
 
-        <Reveal className="answer-list" stagger={0.08}>
-          {answers.map((row) => (
-            <RevealItem className="answer-row" key={row.q}>
-              <h3>{row.q}</h3>
-              <p>{row.a}</p>
-            </RevealItem>
-          ))}
-        </Reveal>
+        <div className={styles.panel}>
+          <div className={styles.head}>
+            <p className={styles.eyebrow}>FAQ</p>
+            <MaskedLines
+              as="h2"
+              className={styles.title}
+              lines={["Straight", "answers."]}
+            />
+            <blockquote className={styles.lede}>
+              “I can help guide the journey, but I cannot take the journey for them.”
+            </blockquote>
+            <span className={styles.ledeRule} aria-hidden="true" />
+          </div>
+
+          <Reveal className={styles.list} stagger={0.07}>
+            {answers.map((row) => (
+              <RevealItem as="details" className={styles.row} key={row.q}>
+                <summary>
+                  <span>{row.q}</span>
+                  <span className={styles.plus} aria-hidden="true" />
+                </summary>
+                <p>{row.a}</p>
+              </RevealItem>
+            ))}
+          </Reveal>
+        </div>
       </div>
+      <h2 className="sr-only" id="faq-heading">Straight answers</h2>
     </section>
   );
 }
