@@ -115,36 +115,38 @@ main > .section {
 
 /* 5 — the program */
 /* the blueprint is his name for it and the thing a client walks away holding */
-/* 7 — straight answers: the objection stage, nothing hidden behind a toggle */
+/* 7 — straight answers: the objection stage, nothing hidden behind a toggle.
+   Light band between the two dark ones, so the honest answers read as the
+   plainest surface on the page. */
 .straight-answers {
-  background: var(--surface-dark);
-  color: var(--paper);
+  background: var(--surface-light);
+  color: var(--ink);
 }
 .straight-answers .display {
-  color: var(--paper);
+  color: var(--ink);
 }
 .answers-lede {
   max-width: 30ch;
   margin: clamp(1.1rem, 2.2vw, 1.7rem) 0 0;
-  color: var(--paper);
+  color: var(--ink);
   font-family: Georgia, "Times New Roman", serif;
   font-size: var(--step-h3);
   line-height: 1.36;
 }
 .answer-list {
   margin-top: clamp(1.4rem, 2.5vw, 2rem);
-  border-top: 1px solid var(--rule-dark);
+  border-top: 1px solid var(--rule-light);
 }
 .answer-row {
   display: grid;
   grid-template-columns: minmax(0, 21rem) minmax(0, 1fr);
   gap: clamp(14px, 3vw, 44px);
   padding: clamp(1rem, 1.8vw, 1.35rem) 0;
-  border-bottom: 1px solid var(--rule-dark);
+  border-bottom: 1px solid var(--rule-light);
 }
 .answer-row h3 {
   margin: 0;
-  color: var(--paper);
+  color: var(--ink);
   font-size: var(--step-body);
   font-weight: 620;
   line-height: 1.45;
@@ -152,7 +154,7 @@ main > .section {
 .answer-row p {
   max-width: var(--measure);
   margin: 0;
-  color: var(--paper-secondary);
+  color: var(--ink-secondary);
   font-size: var(--step-body);
   line-height: 1.62;
 }
