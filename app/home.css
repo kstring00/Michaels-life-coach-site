@@ -1,5 +1,31 @@
-/* Homepage-only composition pass. Seven sections, dark → light → dark → light
-   → dark → blue. No cards, no shadows, no icons: rules, type and space. */
+/* Homepage-only composition pass. Light hero, then dark → light → dark → blue.
+   Everything in this file loads on "/" alone, which is why the header override
+   below is safe: the subpage heroes are still dark and still need white nav. */
+
+/* the light hero owns the top of the page, so the overscroll ground follows it */
+html { background: #F8F6F1; }
+
+/* header over the light hero */
+.header { color: #132436; }
+.header .brand-name {
+  background: none;
+  background-clip: initial;
+  -webkit-background-clip: initial;
+  -webkit-text-fill-color: currentColor;
+  color: #132436;
+}
+.header .nav-link { opacity: 0.76; }
+.header .nav-cta { background: #85703A; border-color: #85703A; }
+.header .nav-cta:hover { background: #132436; border-color: #132436; color: #fff; }
+.header.scrolled {
+  background: rgba(248, 246, 241, 0.9);
+  box-shadow: 0 1px 0 rgba(19, 36, 54, 0.1);
+}
+.header .mobile-toggle { color: #132436; }
+.mobile-menu.open {
+  background: rgba(248, 246, 241, 0.98);
+  border-top-color: rgba(19, 36, 54, 0.1);
+}
 
 /* The page carries far more information than it used to, so the band rhythm is
    tighter than the site default — otherwise seven sections of real content
@@ -281,7 +307,7 @@ main > .section {
 
 @media (max-width: 680px) {
   main > .section {
-    padding-block: clamp(2.5rem, 6.6vw, 3rem);
+    padding-block: clamp(2.25rem, 6vw, 2.75rem);
   }
 }
 
