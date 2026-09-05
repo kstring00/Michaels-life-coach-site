@@ -3,7 +3,6 @@ import { Hero } from "@/components/Hero";
 import { Doorways } from "@/components/Doorways";
 import { MichaelIntro } from "@/components/MichaelIntro";
 import { Program } from "@/components/Program";
-import { CompareSection } from "@/components/CompareSection";
 import { StraightAnswers } from "@/components/StraightAnswers";
 import { FinalCTA } from "@/components/FinalCTA";
 
@@ -15,7 +14,6 @@ export default function Home() {
       <Doorways />
       <MichaelIntro />
       <Program />
-      <CompareSection />
       <StraightAnswers />
       <FinalCTA />
     </main>
