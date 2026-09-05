@@ -1,26 +1,27 @@
 import Link from "next/link";
-import { site } from "@/lib/site";
+import styles from "./Footer.module.css";
 
 export function Footer() {
-  const socials = Object.entries(site.socials).filter(([, href]) => href);
   return (
-    <footer className="footer">
-      <div className="container">
-        <div className="footer-top">
+    <footer className={styles.footer}>
+      <div className={styles.inner}>
+        <div className={styles.top}>
           <div>
-            <div className="footer-brand">Growth<span>Gains</span></div>
-            <p className="body-md" style={{maxWidth: 560, color: "#8495a6"}}>Coaching for people who know something needs to change and want support figuring out where they are going next.</p>
+            <p className={styles.brand}>Growth<span>Gains</span></p>
+            <p className={styles.copy}>
+              Coaching for people who know something needs to change and want a thoughtful place to figure out what comes next.
+            </p>
           </div>
-          <div className="footer-nav">
-            <Link href="/about">About me</Link><Link href="/identity-in-transition">Coaching</Link>
-            <Link href="/approach">Approach</Link><Link href="/coaching-vs-counseling">Coaching vs. counseling</Link><Link href="/book?utm_source=growthgains&utm_medium=website&utm_campaign=consultation&utm_content=footer">Free consultation</Link>
-            <Link href="/contact">Contact</Link><Link href="/start">Start coaching</Link>
-            {socials.map(([label, href]) => <a key={label} href={href} target="_blank" rel="noreferrer">{label[0].toUpperCase()+label.slice(1)}</a>)}
-          </div>
+          <nav className={styles.links} aria-label="Footer navigation">
+            <Link href="/about">About</Link>
+            <Link href="/privacy">Privacy</Link>
+            <Link href="/disclaimer">Coaching disclaimer</Link>
+          </nav>
         </div>
-        <div className="footer-bottom">
+
+        <div className={styles.bottom}>
           <span>© {new Date().getFullYear()} GrowthGains. All rights reserved.</span>
-          <span><Link href="/privacy">Privacy</Link> · <Link href="/disclaimer">Coaching disclaimer</Link></span>
+          <span>Clarity · Perspective · Progress</span>
         </div>
       </div>
     </footer>
