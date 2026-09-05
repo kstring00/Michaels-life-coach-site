@@ -2,12 +2,12 @@
   position: relative;
   isolation: isolate;
   overflow: hidden;
-  padding: clamp(3.4rem, 5.4vw, 5rem) 1.25rem clamp(2.5rem, 4.2vw, 3.6rem);
+  padding: clamp(2.55rem, 4vw, 3.65rem) 1.15rem clamp(2rem, 3.2vw, 2.85rem);
   color: #142433;
   background:
-    radial-gradient(circle at 18% 26%, rgba(255,255,255,.94), transparent 30%),
-    radial-gradient(circle at 84% 22%, rgba(196,176,143,.18), transparent 26%),
-    linear-gradient(180deg, #f5f1ea 0%, #eee8de 100%);
+    radial-gradient(circle at 18% 26%, rgba(255,255,255,.9), transparent 28%),
+    radial-gradient(circle at 84% 22%, rgba(196,176,143,.14), transparent 24%),
+    linear-gradient(180deg, #f6f3ed 0%, #efe9df 100%);
 }
 
 .section::before {
@@ -16,64 +16,64 @@
   inset: 0;
   z-index: -2;
   pointer-events: none;
-  opacity: .22;
+  opacity: .14;
   background-image:
-    radial-gradient(rgba(86,72,51,.16) .55px, transparent .8px),
-    radial-gradient(rgba(255,255,255,.8) .5px, transparent .75px);
-  background-size: 7px 7px, 10px 10px;
+    radial-gradient(rgba(86,72,51,.14) .5px, transparent .75px),
+    radial-gradient(rgba(255,255,255,.72) .45px, transparent .7px);
+  background-size: 8px 8px, 11px 11px;
   background-position: 0 0, 4px 5px;
 }
 
 .section::after {
   content: "";
   position: absolute;
-  inset: -12% -4%;
+  inset: -10% -4%;
   z-index: -1;
   pointer-events: none;
   background:
-    radial-gradient(ellipse at 6% 30%, rgba(59,70,52,.13), transparent 16%),
-    radial-gradient(ellipse at 97% 64%, rgba(45,50,48,.12), transparent 18%);
-  filter: blur(18px);
+    radial-gradient(ellipse at 5% 32%, rgba(59,70,52,.09), transparent 14%),
+    radial-gradient(ellipse at 98% 66%, rgba(45,50,48,.08), transparent 16%);
+  filter: blur(20px);
 }
 
 .inner {
-  width: min(100%, 93rem);
+  width: min(100%, 84rem);
   margin: 0 auto;
 }
 
 .heading {
-  max-width: 58rem;
-  margin: 0 auto clamp(1.9rem, 3vw, 2.6rem);
+  max-width: 50rem;
+  margin: 0 auto clamp(1.35rem, 2.2vw, 1.9rem);
   text-align: center;
 }
 
 .kicker {
   display: inline-flex;
   align-items: center;
-  gap: 1rem;
+  gap: .8rem;
   color: #8c7245;
-  font-size: .7rem;
+  font-size: .62rem;
   font-weight: 720;
-  letter-spacing: .24em;
+  letter-spacing: .22em;
   text-transform: uppercase;
 }
 
 .kicker::before,
 .kicker::after {
   content: "";
-  width: 3.6rem;
+  width: 2.8rem;
   height: 1px;
-  background: rgba(140,114,69,.48);
+  background: rgba(140,114,69,.42);
 }
 
 .heading h2 {
-  margin: .9rem 0 0;
+  margin: .62rem 0 0;
   color: #142433;
   font-family: Georgia, "Times New Roman", serif;
-  font-size: clamp(2.9rem, 5vw, 5rem);
+  font-size: clamp(2.35rem, 4.1vw, 4.15rem);
   font-weight: 400;
   line-height: .98;
-  letter-spacing: -.045em;
+  letter-spacing: -.04em;
 }
 
 .heading h2 em {
@@ -82,45 +82,45 @@
 }
 
 .heading p {
-  max-width: 46rem;
-  margin: 1rem auto 0;
+  max-width: 40rem;
+  margin: .72rem auto 0;
   color: #6c6d68;
-  font-size: clamp(.98rem, 1.2vw, 1.12rem);
-  line-height: 1.5;
+  font-size: clamp(.9rem, 1vw, 1rem);
+  line-height: 1.45;
 }
 
 .grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 1rem;
+  gap: .8rem;
 }
 
 .card {
   position: relative;
-  min-height: 12.2rem;
+  min-height: 9.7rem;
   overflow: hidden;
   display: grid;
-  grid-template-columns: 3rem 1px minmax(0, 1fr);
-  gap: 1.25rem;
+  grid-template-columns: 2.45rem 1px minmax(0, 1fr);
+  gap: .92rem;
   align-items: start;
-  padding: 1.7rem 1.65rem;
-  border: 1px solid rgba(255,255,255,.76);
-  border-radius: 1.15rem;
-  background: linear-gradient(135deg, rgba(255,255,255,.64), rgba(235,228,217,.52));
+  padding: 1.22rem 1.15rem;
+  border: 1px solid rgba(255,255,255,.72);
+  border-radius: .95rem;
+  background: linear-gradient(135deg, rgba(255,255,255,.58), rgba(235,228,217,.46));
   box-shadow:
-    inset 0 1px 0 rgba(255,255,255,.9),
-    0 16px 34px rgba(57,49,37,.08);
-  backdrop-filter: blur(14px) saturate(108%);
-  -webkit-backdrop-filter: blur(14px) saturate(108%);
+    inset 0 1px 0 rgba(255,255,255,.86),
+    0 10px 24px rgba(57,49,37,.06);
+  backdrop-filter: blur(12px) saturate(104%);
+  -webkit-backdrop-filter: blur(12px) saturate(104%);
 }
 
 .card::before {
   content: "";
   position: absolute;
-  inset: 42% 0 0;
+  inset: 47% 0 0;
   pointer-events: none;
-  opacity: .9;
-  filter: saturate(.7);
+  opacity: .62;
+  filter: saturate(.62);
 }
 
 .card::after {
@@ -128,66 +128,66 @@
   position: absolute;
   inset: 0;
   pointer-events: none;
-  background: linear-gradient(120deg, rgba(255,255,255,.46), transparent 30%, transparent 78%, rgba(255,255,255,.15));
+  background: linear-gradient(120deg, rgba(255,255,255,.34), transparent 28%, transparent 80%, rgba(255,255,255,.1));
 }
 
 .mist::before {
   background:
-    radial-gradient(100% 90% at 8% 100%, rgba(106,119,111,.26), transparent 48%),
-    radial-gradient(100% 100% at 78% 100%, rgba(129,136,127,.22), transparent 55%);
+    radial-gradient(100% 90% at 8% 100%, rgba(106,119,111,.22), transparent 48%),
+    radial-gradient(100% 100% at 78% 100%, rgba(129,136,127,.18), transparent 55%);
 }
 
 .stone::before {
   background:
-    linear-gradient(132deg, transparent 0 41%, rgba(170,156,136,.24) 42% 47%, transparent 48%),
-    linear-gradient(180deg, transparent, rgba(132,121,105,.16));
+    linear-gradient(132deg, transparent 0 41%, rgba(170,156,136,.20) 42% 47%, transparent 48%),
+    linear-gradient(180deg, transparent, rgba(132,121,105,.12));
 }
 
 .leaf::before {
   background:
-    radial-gradient(ellipse at 88% 52%, rgba(76,92,71,.20) 0 9%, transparent 10%),
-    radial-gradient(ellipse at 94% 74%, rgba(76,92,71,.16) 0 8%, transparent 9%),
-    linear-gradient(180deg, transparent, rgba(118,129,113,.12));
+    radial-gradient(ellipse at 88% 52%, rgba(76,92,71,.16) 0 9%, transparent 10%),
+    radial-gradient(ellipse at 94% 74%, rgba(76,92,71,.12) 0 8%, transparent 9%),
+    linear-gradient(180deg, transparent, rgba(118,129,113,.09));
 }
 
 .dawn::before {
   background:
-    linear-gradient(180deg, transparent, rgba(181,149,117,.26)),
-    radial-gradient(100% 100% at 20% 100%, rgba(142,126,110,.24), transparent 50%);
+    linear-gradient(180deg, transparent, rgba(181,149,117,.20)),
+    radial-gradient(100% 100% at 20% 100%, rgba(142,126,110,.18), transparent 50%);
 }
 
 .water::before {
   background:
-    repeating-radial-gradient(ellipse at 46% 150%, rgba(115,131,133,.14) 0 2px, transparent 3px 12px),
-    linear-gradient(180deg, transparent, rgba(150,161,162,.14));
+    repeating-radial-gradient(ellipse at 46% 150%, rgba(115,131,133,.11) 0 2px, transparent 3px 12px),
+    linear-gradient(180deg, transparent, rgba(150,161,162,.10));
 }
 
 .ridge::before {
   background:
-    linear-gradient(145deg, transparent 0 52%, rgba(84,86,81,.28) 53% 60%, transparent 61%),
-    linear-gradient(155deg, transparent 0 64%, rgba(109,110,103,.22) 65% 70%, transparent 71%),
-    linear-gradient(180deg, transparent, rgba(191,165,136,.15));
+    linear-gradient(145deg, transparent 0 52%, rgba(84,86,81,.22) 53% 60%, transparent 61%),
+    linear-gradient(155deg, transparent 0 64%, rgba(109,110,103,.16) 65% 70%, transparent 71%),
+    linear-gradient(180deg, transparent, rgba(191,165,136,.11));
 }
 
 .icon {
   position: relative;
   z-index: 1;
-  width: 3rem;
-  height: 3rem;
+  width: 2.45rem;
+  height: 2.45rem;
   display: grid;
   place-items: center;
   color: #6e5a38;
   border-radius: 999px;
-  background: rgba(236,228,214,.8);
-  box-shadow: inset 0 1px 0 rgba(255,255,255,.88);
+  background: rgba(236,228,214,.72);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.82);
 }
 
 .icon svg {
-  width: 1.5rem;
-  height: 1.5rem;
+  width: 1.2rem;
+  height: 1.2rem;
   fill: none;
   stroke: currentColor;
-  stroke-width: 1.8;
+  stroke-width: 1.75;
   stroke-linecap: round;
   stroke-linejoin: round;
 }
@@ -196,8 +196,8 @@
   position: relative;
   z-index: 1;
   width: 1px;
-  height: 3.2rem;
-  background: rgba(132,108,73,.3);
+  height: 2.55rem;
+  background: rgba(132,108,73,.26);
 }
 
 .copy {
@@ -210,36 +210,36 @@
   margin: 0;
   color: #1c252a;
   font-family: Georgia, "Times New Roman", serif;
-  font-size: clamp(1.35rem, 1.75vw, 1.85rem);
+  font-size: clamp(1.12rem, 1.42vw, 1.5rem);
   font-weight: 400;
-  line-height: 1.03;
-  letter-spacing: -.025em;
+  line-height: 1.05;
+  letter-spacing: -.02em;
 }
 
 .copy p {
-  max-width: 26rem;
-  margin: .9rem 0 0;
+  max-width: 25rem;
+  margin: .58rem 0 0;
   color: #666966;
-  font-size: .94rem;
-  line-height: 1.5;
+  font-size: .84rem;
+  line-height: 1.45;
 }
 
 .otherAreas {
-  margin-top: 1rem;
-  padding: .9rem 1.2rem;
+  margin-top: .7rem;
+  padding: .66rem .85rem;
   display: flex;
   align-items: center;
-  gap: 1rem;
-  border-top: 1px solid rgba(129,105,71,.22);
-  border-bottom: 1px solid rgba(129,105,71,.16);
+  gap: .8rem;
+  border-top: 1px solid rgba(129,105,71,.18);
+  border-bottom: 1px solid rgba(129,105,71,.12);
 }
 
 .otherLabel {
   flex: 0 0 auto;
   color: #8c7245;
-  font-size: .65rem;
+  font-size: .58rem;
   font-weight: 720;
-  letter-spacing: .19em;
+  letter-spacing: .17em;
   text-transform: uppercase;
 }
 
@@ -247,9 +247,9 @@
   min-width: 0;
   display: flex;
   flex-wrap: wrap;
-  gap: .45rem 0;
+  gap: .35rem 0;
   color: #434a4d;
-  font-size: .84rem;
+  font-size: .76rem;
 }
 
 .areaItem {
@@ -261,25 +261,35 @@
 .areaItem:not(:last-child)::after {
   content: "";
   width: 1px;
-  height: 1rem;
-  margin: 0 .9rem;
-  background: rgba(129,105,71,.35);
+  height: .8rem;
+  margin: 0 .72rem;
+  background: rgba(129,105,71,.28);
 }
 
 @media (max-width: 980px) {
+  .inner { width: min(100%, 64rem); }
   .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-  .otherAreas { align-items: flex-start; flex-direction: column; gap: .65rem; }
+  .otherAreas { align-items: flex-start; flex-direction: column; gap: .5rem; }
 }
 
 @media (max-width: 650px) {
-  .section { padding: 2.7rem .9rem 2.3rem; }
-  .heading { margin-bottom: 1.5rem; }
-  .kicker::before, .kicker::after { width: 2rem; }
-  .heading h2 { font-size: clamp(2.55rem, 12vw, 3.8rem); }
-  .grid { grid-template-columns: 1fr; gap: .8rem; }
-  .card { min-height: 0; padding: 1.35rem 1.25rem; grid-template-columns: 2.7rem 1px minmax(0, 1fr); gap: 1rem; }
-  .icon { width: 2.7rem; height: 2.7rem; }
-  .copy p { margin-top: .65rem; }
-  .otherAreas { margin-top: .85rem; padding-inline: .2rem; }
-  .areaList { row-gap: .55rem; }
+  .section { padding: 2.15rem .8rem 1.9rem; }
+  .heading { margin-bottom: 1.15rem; }
+  .kicker::before, .kicker::after { width: 1.7rem; }
+  .heading h2 { font-size: clamp(2.15rem, 10.5vw, 3.15rem); }
+  .heading p { font-size: .9rem; }
+  .grid { grid-template-columns: 1fr; gap: .62rem; }
+  .card {
+    min-height: 0;
+    padding: 1.05rem;
+    grid-template-columns: 2.25rem 1px minmax(0, 1fr);
+    gap: .82rem;
+  }
+  .icon { width: 2.25rem; height: 2.25rem; }
+  .icon svg { width: 1.08rem; height: 1.08rem; }
+  .divider { height: 2.25rem; }
+  .copy h3 { font-size: 1.12rem; }
+  .copy p { margin-top: .48rem; font-size: .8rem; }
+  .otherAreas { margin-top: .65rem; padding-inline: .15rem; }
+  .areaList { row-gap: .45rem; }
 }
