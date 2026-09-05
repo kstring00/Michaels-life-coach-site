@@ -71,7 +71,7 @@ export function Program() {
           </div>
 
           <Reveal className={styles.quote}>
-            <p>“I can help guide the journey, but I cannot take the journey for them.”</p>
+            <p>“I can help guide your journey, but I can’t take the journey for you.”</p>
             <span>My coaching philosophy</span>
           </Reveal>
         </div>
