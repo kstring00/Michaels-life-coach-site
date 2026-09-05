@@ -4,44 +4,44 @@ import styles from "./Program.module.css";
 type IconName = "laptop" | "clock" | "calendar" | "chat" | "video" | "target" | "steps" | "journal" | "map" | "people";
 
 const format = [
-  ["laptop", "Fully virtual", "Meet from anywhere"],
-  ["clock", "60-minute sessions", "Focused, intentional time"],
-  ["calendar", "12-week program", "A steady rhythm for change"],
+  ["laptop", "Fully virtual", "We can meet wherever you are."],
+  ["clock", "60-minute sessions", "An hour to slow down and do the work."],
+  ["calendar", "12-week program", "Enough time to build real momentum."],
 ] as const;
 
 const arc = [
   {
     icon: "chat" as IconName,
     label: "Consultation & intake",
-    copy: "Before any commitment, we talk. I get to know the whole person, understand where you are now, and decide with you whether coaching is the right fit.",
-    tag: "No pressure. Just a conversation.",
+    copy: "We start with a conversation. I want to understand what is going on in your life, what you want help with, and whether I am the right coach for you.",
+    tag: "No pressure. We will see if it fits.",
   },
   {
     icon: "video" as IconName,
     label: "Pre-session clarity",
-    copy: "You receive short explainer videos before session one, so your first session is spent on your story, your questions, and your work rather than logistics.",
-    tag: "Come prepared. Start strong.",
+    copy: "Before our first session, I will send you a few short videos so you know what to expect and we can spend our time talking about you, not logistics.",
+    tag: "You will know what to expect.",
   },
   {
     icon: "target" as IconName,
     label: "Session one",
-    copy: "Together we define the focus for the twelve weeks: what you want to understand, what you want to change, and what meaningful progress would look like.",
-    tag: "Clarity creates momentum.",
+    copy: "In our first session, we will get clear on what you want to understand, what you want to change, and what meaningful progress would look like for you.",
+    tag: "We leave with a direction.",
   },
   {
     icon: "steps" as IconName,
     label: "Weeks 2–12",
-    copy: "Each weekly session builds on the last. We listen, reflect, look at patterns, review goals, challenge thinking when needed, and turn insight into practical action.",
-    tag: "A steady rhythm for lasting change.",
+    copy: "From there, we keep building. I will ask questions, help you notice patterns, challenge your thinking when needed, and help you turn insight into practical action.",
+    tag: "We keep the work moving.",
   },
 ] as const;
 
 const tools = [
-  ["journal", "Reflection questions & exercises", "Go deeper between sessions."],
-  ["target", "Written SMART goals", "Stay focused and revise as needed."],
-  ["map", "A personal blueprint", "See the bigger picture of your journey."],
-  ["journal", "Journaling", "Process what is changing."],
-  ["people", "Between-session access", "Reach out when something comes up."],
+  ["journal", "Reflection questions & exercises", "I will give you prompts to keep thinking between sessions."],
+  ["target", "Written SMART goals", "We will put your next steps in writing."],
+  ["map", "A personal blueprint", "We will map what you are learning about yourself."],
+  ["journal", "Journaling", "A place to process what is changing."],
+  ["people", "Between-session access", "You can reach out when something comes up."],
 ] as const;
 
 function Icon({ name }: { name: IconName }) {
@@ -66,7 +66,7 @@ export function Program() {
             <p className={styles.eyebrow}>The coaching journey</p>
             <h2 className={styles.title} id="program-heading">A clear path <em>forward.</em></h2>
             <p className={styles.lede}>
-              A structured 12-week coaching journey built around my approach: understand the whole person, gain perspective, define what matters, and keep moving with intention.
+              I built this 12-week process around the way I coach: understand the whole person, get clear on what matters, and turn that clarity into practical movement.
             </p>
           </div>
 
