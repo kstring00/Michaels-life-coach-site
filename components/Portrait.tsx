@@ -1,5 +1,5 @@
 import Image from "next/image";
-import portrait from "@/public/michael.webp";
+import portrait from "@/public/michael.jpg";
 
 /**
  * The container sets the shape; the image fills it. A replacement portrait at
@@ -25,7 +25,7 @@ export function Portrait({
       alt={alt}
       fill
       priority={priority}
-      sizes="(max-width: 768px) 100vw, 42vw"
+      sizes="(max-width: 768px) 100vw, 50vw"
       placeholder="blur"
       style={{ objectFit: "cover" }}
     />
