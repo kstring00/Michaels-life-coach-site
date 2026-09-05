@@ -12,7 +12,7 @@ export function FinalCTA() {
         />
         <Reveal className="cta-row" delay={0.1}>
           <p className="body-lg">
-            It starts with a consultation. That call is how the two of you work out whether this
+            It starts with a consultation. That call is how we work out whether this
             program fits what you are carrying — before anything is signed.
           </p>
           <div className="cta-actions">
