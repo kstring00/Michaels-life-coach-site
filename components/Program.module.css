@@ -331,6 +331,7 @@
   min-width: 0;
   padding: .85rem .8rem;
   border-left: 1px solid rgba(221,232,231,.12);
+  text-align: center;
 }
 
 .tool:first-child { border-left: 0; }
@@ -340,7 +341,7 @@
   height: 2.2rem;
   display: grid;
   place-items: center;
-  margin-bottom: .6rem;
+  margin: 0 auto .65rem;
   border-radius: 50%;
   color: #d8e3e2;
   background: rgba(91,139,166,.15);
@@ -352,14 +353,16 @@
   font-size: .76rem;
   font-weight: 680;
   line-height: 1.32;
+  text-align: center;
 }
 
-.tool span {
+.tool > span:not(.toolIcon) {
   display: block;
   margin-top: .35rem;
   color: rgba(221,231,230,.45);
   font-size: .66rem;
   line-height: 1.35;
+  text-align: center;
 }
 
 @media (max-width: 1050px) {
