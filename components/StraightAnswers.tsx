@@ -30,7 +30,7 @@ export function StraightAnswers() {
         <MaskedLines className="display" lines={["Straight answers."]} />
 
         <Reveal as="p" className="answers-lede" delay={0.1}>
-          “I can help guide the journey, but I cannot take the journey for them.”
+          “I can help guide your journey, but I can’t take the journey for you.”
         </Reveal>
 
         <Reveal className="answer-list" stagger={0.08}>
