@@ -3,7 +3,6 @@ import { Hero } from "@/components/Hero";
 import { Doorways } from "@/components/Doorways";
 import { MichaelIntro } from "@/components/MichaelIntro";
 import { Program } from "@/components/Program";
-import { StraightAnswers } from "@/components/StraightAnswers";
 import { FinalCTA } from "@/components/FinalCTA";
 
 export default function Home() {
@@ -14,7 +13,6 @@ export default function Home() {
       <Doorways />
       <MichaelIntro />
       <Program />
-      <StraightAnswers />
       <FinalCTA />
     </main>
   );
