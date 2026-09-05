@@ -4,7 +4,9 @@ export const site = {
     "Coaching for people who know something needs to change and want support figuring out where they are going next: identity and major decisions, life after collegiate sport, foster care and adoption, grief and loss, and the patterns you want to understand.",
   statement:
     "I work with people who know something needs to change and want support figuring out where they are going next. That covers identity and major decisions, athletes navigating life beyond sport, foster care and adoption, grief and loss, and the patterns someone sees in their own life and wants to change.",
-  calendarUrl: process.env.NEXT_PUBLIC_CALENDAR_URL ?? "",
+  calendarUrl:
+    process.env.NEXT_PUBLIC_CALENDAR_URL ??
+    "https://cal.com/growthgains-rj1rib/consultation?user=growthgains-rj1rib&overlayCalendar=true",
   email: process.env.NEXT_PUBLIC_CONTACT_EMAIL ?? "",
   socials: {
     instagram: process.env.NEXT_PUBLIC_INSTAGRAM_URL ?? "",
