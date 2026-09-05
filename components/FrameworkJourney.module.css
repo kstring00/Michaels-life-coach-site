@@ -1,12 +1,8 @@
 .frameworkStory {
   position: relative;
   overflow: clip;
-  background:
-    radial-gradient(circle at 50% 18%, rgba(42, 137, 255, 0.18), transparent 28%),
-    radial-gradient(circle at 18% 62%, rgba(73, 164, 188, 0.10), transparent 34%),
-    radial-gradient(circle at 84% 72%, rgba(73, 111, 200, 0.13), transparent 34%),
-    linear-gradient(180deg, #172A31 0%, #18313A 22%, #14262F 58%, #101C23 100%);
-  color: #E9ECEB;
+  background: var(--surface-dark);
+  color: var(--surface-light);
   padding: clamp(5rem, 8vw, 7.5rem) 0 0;
 }
 
@@ -15,14 +11,7 @@
   position: absolute;
   inset: 0;
   pointer-events: none;
-  background: linear-gradient(
-    90deg,
-    rgba(255,255,255,0.018),
-    transparent 18%,
-    rgba(99, 178, 218, 0.035) 48%,
-    transparent 78%,
-    rgba(255,255,255,0.012)
-  );
+  background: var(--rule-dark);
 }
 
 .ambientLines {
@@ -38,14 +27,7 @@
   left: -35%;
   width: 165%;
   height: 1px;
-  background: linear-gradient(
-    90deg,
-    transparent 0%,
-    rgba(102, 193, 230, 0.08) 24%,
-    rgba(103, 161, 255, 0.46) 48%,
-    rgba(181, 221, 239, 0.18) 64%,
-    transparent 100%
-  );
+  background: var(--surface-dark);
   filter: drop-shadow(0 0 7px rgba(65, 142, 255, 0.28));
   transform: rotate(-8deg) translateX(-18%);
   animation: lineDrift 12s linear infinite;
@@ -74,7 +56,7 @@
 .intro h2 {
   max-width: 18ch;
   margin: 1rem 0 0;
-  color: #F3F7F6;
+  color: var(--surface-light);
 }
 
 .intro p {
@@ -127,9 +109,7 @@
   height: 44vw;
   max-width: 620px;
   max-height: 620px;
-  background:
-    radial-gradient(circle at 45% 42%, rgba(56, 139, 255, 0.17), transparent 44%),
-    radial-gradient(circle at 58% 62%, rgba(82, 195, 208, 0.10), transparent 52%);
+  background: var(--surface-dark);
   filter: blur(60px);
   left: 50%;
   top: 50%;
@@ -162,7 +142,7 @@
 
 .phase {
   margin-bottom: 0.9rem;
-  color: #7CB7FF;
+  color: var(--accent);
   font-size: var(--step-small);
   font-weight: 760;
   letter-spacing: 0.16em;
@@ -171,7 +151,7 @@
 
 .left h3 {
   margin: 0;
-  color: #F8FAFA;
+  color: var(--surface-light);
   font-family: Georgia, "Times New Roman", serif;
   font-size: clamp(2rem, 4vw, 4.25rem);
   font-weight: 400;
@@ -204,7 +184,7 @@
   place-items: center;
   border: 1px solid rgba(154, 207, 255, 0.9);
   border-radius: 50%;
-  background: rgba(17, 31, 39, 0.92);
+  background: var(--rule-light);
   box-shadow:
     0 0 0 8px rgba(27, 92, 255, 0.11),
     0 0 34px rgba(42, 137, 255, 0.28),
@@ -212,7 +192,7 @@
 }
 
 .node span {
-  color: #E7F1FF;
+  color: var(--surface-light);
   font-size: 0.68rem;
   font-weight: 760;
   letter-spacing: 0.08em;
@@ -266,7 +246,7 @@
 }
 
 .detail .question {
-  color: #F8FAFA;
+  color: var(--surface-light);
   font-family: Georgia, "Times New Roman", serif;
   font-size: clamp(1.05rem, 1.4vw, 1.28rem);
   line-height: 1.45;
@@ -294,7 +274,7 @@
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #63A8FF;
+  background: var(--accent);
   box-shadow: 0 0 10px rgba(79, 177, 255, 0.72);
 }
 
@@ -317,17 +297,11 @@
 }
 
 .railBase {
-  background: linear-gradient(
-    to bottom,
-    transparent,
-    rgba(233, 242, 241, 0.18) 8%,
-    rgba(233, 242, 241, 0.18) 92%,
-    transparent
-  );
+  background: var(--surface-dark);
 }
 
 .railFill {
-  background: linear-gradient(to bottom, #7DC0FF 0%, #2A89FF 45%, #54BFC6 100%);
+  background: var(--accent);
   box-shadow: 0 0 15px rgba(42, 137, 255, 0.36);
 }
 
@@ -370,7 +344,7 @@
   content: "";
   position: absolute;
   inset: 0;
-  background: linear-gradient(90deg, #6DB7FF, #69CAD3);
+  background: var(--accent);
   transform: translateX(-100%);
   animation: cueSweep 2.6s cubic-bezier(0.16, 1, 0.3, 1) infinite;
 }

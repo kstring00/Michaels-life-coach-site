@@ -47,7 +47,7 @@ export function Hero() {
       <div className="hero-grid">
         <div className="hero-copy">
           <Reveal as="p" className="hero-eyebrow" y={10} delay={0.15}>
-            Clarity <span aria-hidden="true">/</span> Perspective <span aria-hidden="true">/</span> Progress
+            Clarity / Perspective / Progress
           </Reveal>
 
           <MaskedLines

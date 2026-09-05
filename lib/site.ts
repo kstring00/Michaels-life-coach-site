@@ -1,3 +1,11 @@
+/**
+ * The Cal.com widget renders cross-origin, so it cannot read --accent from
+ * globals.css — its brand colour has to be handed over as a literal. This is
+ * the one place a colour lives outside the stylesheet, and it must be kept
+ * equal to --accent in app/globals.css.
+ */
+export const ACCENT = "#B8894A";
+
 export const site = {
   name: "GrowthGains",
   description:

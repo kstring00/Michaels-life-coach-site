@@ -1,11 +1,15 @@
-import { site } from "@/lib/site";
+import { ACCENT, site } from "@/lib/site";
 import styles from "./FinalCTA.module.css";
 
 function buildEmbedUrl(base: string) {
   try {
     const url = new URL(base);
     url.searchParams.set("embed", "true");
-    url.searchParams.set("theme", "light");
+    // theme the widget to the section it sits in rather than letting it land
+    // as a white rectangle in a dark band.
+    url.searchParams.set("theme", "dark");
+    url.searchParams.set("brandColor", ACCENT);
+    url.searchParams.set("darkBrandColor", ACCENT);
     return url.toString();
   } catch {
     return base;

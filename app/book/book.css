@@ -1,5 +1,5 @@
 .booking-section {
-  background: #E9ECEB;
+  background: var(--surface-light);
 }
 
 .booking-grid {
@@ -26,7 +26,7 @@
 
 .booking-steps {
   margin-top: clamp(2rem, 4vw, 3rem);
-  border-top: 1px solid rgba(15, 26, 30, 0.16);
+  border-top: 1px solid var(--rule-light);
 }
 
 .booking-steps > div {
@@ -34,26 +34,26 @@
   grid-template-columns: 44px 1fr;
   gap: 1rem;
   padding: 1rem 0;
-  border-bottom: 1px solid rgba(15, 26, 30, 0.16);
+  border-bottom: 1px solid var(--rule-light);
 }
 
 .booking-steps span {
-  color: #1B5CFF;
+  color: var(--accent);
   font-size: var(--step-small);
   letter-spacing: 0.12em;
 }
 
 .booking-steps p {
   margin: 0;
-  color: #5C6A6D;
+  color: var(--ink-secondary);
   font-size: var(--step-body);
   line-height: 1.55;
 }
 
 .booking-calendar {
   overflow: hidden;
-  border: 1px solid rgba(15, 26, 30, 0.14);
-  background: #fff;
+  border: 1px solid var(--rule-light);
+  background: var(--surface-light);
 }
 
 .calendly-inline-widget {

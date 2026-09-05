@@ -35,7 +35,7 @@
 .sessionNotice span {
   display: block;
   margin-bottom: 0.35rem;
-  color: #9FC8FF;
+  color: var(--accent);
   font-size: 0.68rem;
   font-weight: 780;
   letter-spacing: 0.14em;
@@ -56,7 +56,7 @@
   border: 1px solid rgba(159, 200, 255, 0.36);
   border-radius: 999px;
   background: rgba(27, 92, 255, 0.08);
-  color: #EAF3FF;
+  color: var(--surface-light);
   font: inherit;
   font-size: 0.7rem;
   font-weight: 760;
@@ -71,7 +71,7 @@
 }
 
 .sessionNotice button:focus-visible {
-  outline: 2px solid #82C5FF;
+  outline: 2px solid var(--accent);
   outline-offset: 3px;
 }
 
@@ -89,7 +89,7 @@
   grid-template-columns: 46px minmax(0, 1fr);
   gap: 1.1rem;
   padding: clamp(1.4rem, 2.5vw, 2rem);
-  background: rgba(15, 29, 36, 0.72);
+  background: var(--rule-light);
 }
 
 .compactIndex {
@@ -99,7 +99,7 @@
   place-items: center;
   border: 1px solid rgba(130, 197, 255, 0.34);
   border-radius: 50%;
-  color: #91C8FF;
+  color: var(--accent);
   font-size: 0.64rem;
   font-weight: 800;
   letter-spacing: 0.06em;
@@ -108,7 +108,7 @@
 .compactPhase span {
   display: block;
   margin-bottom: 0.4rem;
-  color: #7CB7FF;
+  color: var(--accent);
   font-size: 0.64rem;
   font-weight: 780;
   letter-spacing: 0.14em;
@@ -117,7 +117,7 @@
 
 .compactPhase h3 {
   margin: 0;
-  color: #F7FAF9;
+  color: var(--surface-light);
   font-family: Georgia, "Times New Roman", serif;
   font-size: clamp(1.25rem, 2vw, 1.8rem);
   font-weight: 400;

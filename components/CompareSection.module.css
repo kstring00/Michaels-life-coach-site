@@ -1,9 +1,7 @@
 .section {
   position: relative;
-  background:
-    radial-gradient(circle at 50% 0%, rgba(27, 92, 255, 0.045), transparent 24%),
-    #F4F6F5;
-  color: #0F1A1E;
+  background: var(--surface-light);
+  color: var(--surface-dark);
   padding-top: clamp(2.5rem, 4vw, 3.5rem);
   padding-bottom: 0;
 }
@@ -17,10 +15,10 @@
 .introEyebrow {
   display: block;
   margin-bottom: 0.75rem;
-  color: #1B5CFF;
+  color: var(--ink-secondary);
   font-size: var(--step-small);
-  font-weight: 780;
-  letter-spacing: 0.16em;
+  font-weight: 760;
+  letter-spacing: 0.19em;
   text-transform: uppercase;
 }
 
@@ -37,7 +35,7 @@
 .intro p {
   max-width: 58ch;
   margin: 1rem auto 0;
-  color: #5B696D;
+  color: var(--ink-secondary);
   font-size: var(--step-body);
   line-height: 1.62;
 }
@@ -63,27 +61,13 @@
   display: flex;
   flex-direction: column;
   padding: clamp(1.75rem, 3vw, 2.9rem);
-  color: #F8FBFF;
-  background:
-    radial-gradient(circle at 14% 8%, rgba(56, 128, 255, 0.24), transparent 26%),
-    radial-gradient(circle at 90% 88%, rgba(27, 92, 255, 0.18), transparent 34%),
-    linear-gradient(145deg, #123B69 0%, #0B2A4D 48%, #081D35 100%);
+  color: var(--surface-light);
+  background: var(--surface-dark);
   box-shadow:
-    0 24px 70px rgba(10, 31, 51, 0.14),
-    inset 0 0 0 1px rgba(255,255,255,0.08);
+    0 24px 70px var(--rule-light),
+    inset 0 0 0 1px var(--rule-dark);
 }
 
-.coachingPanel::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  background-image:
-    linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px);
-  background-size: 48px 48px;
-  mask-image: linear-gradient(to bottom, rgba(0,0,0,0.42), transparent 70%);
-}
 
 .brandRow {
   position: relative;
@@ -91,7 +75,7 @@
   display: flex;
   align-items: center;
   gap: 0.8rem;
-  color: #72A9FF;
+  color: var(--ink-secondary);
   font-size: var(--step-small);
   font-weight: 780;
   letter-spacing: 0.15em;
@@ -106,7 +90,7 @@
   border: 1px solid rgba(113, 170, 255, 0.55);
   border-radius: 10px;
   background: rgba(27, 92, 255, 0.18);
-  color: #86B8FF;
+  color: var(--accent);
   font-size: 0.76rem;
   box-shadow: 0 0 26px rgba(27, 92, 255, 0.18);
 }
@@ -159,12 +143,12 @@
   place-items: center;
   border: 1px solid rgba(111, 171, 255, 0.5);
   border-radius: 50%;
-  color: #7BAFFF;
+  color: var(--accent);
   font-size: 0.9rem;
 }
 
 .credential strong {
-  color: #86B8FF;
+  color: var(--accent);
   font-size: 0.78rem;
   font-weight: 780;
   letter-spacing: 0.04em;
@@ -192,10 +176,10 @@
   justify-content: center;
   gap: 0.75rem;
   padding: 0 1.35rem;
-  border: 1px solid rgba(255,255,255,0.28);
+  border: 1px solid var(--rule-dark);
   border-radius: 12px;
-  background: linear-gradient(180deg, #2D74FF 0%, #1B5CFF 100%);
-  color: #fff;
+  background: var(--accent);
+  color: var(--surface-light);
   box-shadow: 0 12px 28px rgba(27, 92, 255, 0.26);
   font-size: 0.78rem;
   font-weight: 780;
@@ -217,10 +201,8 @@
   display: flex;
   flex-direction: column;
   padding: clamp(1.75rem, 2.8vw, 2.5rem);
-  border: 1px solid rgba(15, 26, 30, 0.11);
-  background:
-    radial-gradient(circle at 90% 8%, rgba(255,255,255,0.96), transparent 30%),
-    linear-gradient(145deg, #F4F7F6 0%, #E5ECEB 100%);
+  border: 1px solid var(--rule-light);
+  background: var(--surface-light);
   box-shadow: 0 20px 60px rgba(31, 54, 63, 0.08);
 }
 
@@ -228,10 +210,10 @@
   display: flex;
   align-items: center;
   gap: 0.7rem;
-  color: #596B70;
+  color: var(--ink-secondary);
   font-size: var(--step-small);
-  font-weight: 780;
-  letter-spacing: 0.14em;
+  font-weight: 760;
+  letter-spacing: 0.19em;
   text-transform: uppercase;
 }
 
@@ -242,7 +224,7 @@
   place-items: center;
   border: 1px solid rgba(74, 94, 100, 0.22);
   border-radius: 50%;
-  color: #667B81;
+  color: var(--ink-secondary);
 }
 
 .clinicalPanel h3 {
@@ -259,14 +241,14 @@
   list-style: none;
   margin: clamp(1.2rem, 2vw, 1.75rem) 0 0;
   padding: 0;
-  border-top: 1px solid rgba(15,26,30,0.13);
+  border-top: 1px solid var(--rule-light);
 }
 
 .clinicalList li {
   position: relative;
   padding: 0.85rem 0 0.85rem 1.2rem;
-  border-bottom: 1px solid rgba(15,26,30,0.11);
-  color: #33464B;
+  border-bottom: 1px solid var(--rule-light);
+  color: var(--ink-secondary);
   font-size: 0.93rem;
   line-height: 1.5;
 }
@@ -279,7 +261,7 @@
   width: 5px;
   height: 5px;
   border-radius: 50%;
-  background: #7EA5FF;
+  background: var(--accent);
 }
 
 .clinicalAside {
@@ -289,7 +271,7 @@
 
 .clinicalAside p {
   margin: 0;
-  color: #65767A;
+  color: var(--ink-secondary);
   font-size: 0.9rem;
   line-height: 1.6;
 }
@@ -297,7 +279,7 @@
 .clinicalAside a {
   display: inline-block;
   margin-top: 1.15rem;
-  color: #1B5CFF;
+  color: var(--accent);
   font-size: 0.82rem;
   font-weight: 680;
   line-height: 1.45;
@@ -310,8 +292,8 @@
   gap: 2rem;
   margin-top: clamp(0.9rem, 1.6vw, 1.25rem);
   padding: 1rem clamp(1.5rem, 5vw, 4rem);
-  background: #0F1A1E;
-  color: #A8B8BA;
+  background: var(--surface-dark);
+  color: var(--paper-secondary);
   font-size: var(--step-small);
   line-height: 1.5;
 }
@@ -322,8 +304,8 @@
 
 .note a {
   flex: 0 0 auto;
-  color: #fff;
-  border-bottom: 1px solid rgba(255,255,255,0.35);
+  color: var(--surface-light);
+  border-bottom: 1px solid var(--rule-dark);
   padding-bottom: 0.2rem;
 }
 

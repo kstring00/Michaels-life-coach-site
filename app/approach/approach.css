@@ -1,9 +1,6 @@
 .approach-page .page-hero {
-  background:
-    radial-gradient(circle at 78% 26%, rgba(42, 137, 255, 0.24), transparent 28%),
-    radial-gradient(circle at 28% 82%, rgba(95, 190, 214, 0.12), transparent 34%),
-    linear-gradient(145deg, #152329 0%, #1A3038 42%, #19344D 72%, #16242C 100%);
-  color: #F1F6F5;
+  background: var(--surface-dark);
+  color: var(--surface-light);
 }
 
 .approach-page .page-hero::before {
@@ -11,9 +8,7 @@
   position: absolute;
   inset: 0;
   pointer-events: none;
-  background:
-    linear-gradient(112deg, transparent 0 37%, rgba(154, 203, 255, 0.1) 37.15% 37.3%, transparent 37.45% 100%),
-    linear-gradient(112deg, transparent 0 58%, rgba(112, 185, 255, 0.07) 58.15% 58.3%, transparent 58.45% 100%);
+  background: var(--surface-dark);
   background-size: 160% 100%, 190% 100%;
   animation: approachHeroLines 11s linear infinite;
 }
@@ -35,9 +30,7 @@
 }
 
 .approach-definition {
-  background:
-    radial-gradient(circle at 12% 18%, rgba(27, 92, 255, 0.07), transparent 26%),
-    #EEF2F1;
+  background: var(--surface-light);
 }
 
 @keyframes approachHeroLines {

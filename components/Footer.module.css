@@ -1,6 +1,6 @@
 .footer {
-  background: #0d181d;
-  color: #f1f4f3;
+  background: var(--surface-footer);
+  color: var(--paper);
   padding: 2.25rem 0 1.35rem;
 }
 
@@ -25,13 +25,13 @@
 }
 
 .brand span {
-  color: #d1a468;
+  color: var(--accent);
 }
 
 .copy {
   max-width: 38rem;
   margin: .55rem 0 0;
-  color: rgba(229,236,235,.58);
+  color: var(--paper-secondary);
   font-size: .84rem;
   line-height: 1.55;
 }
@@ -45,13 +45,13 @@
 }
 
 .links a {
-  color: rgba(241,244,243,.68);
+  color: var(--paper-secondary);
   font-size: .76rem;
   transition: color .2s ease;
 }
 
 .links a:hover {
-  color: #fff;
+  color: var(--paper);
 }
 
 .bottom {
@@ -59,8 +59,8 @@
   justify-content: space-between;
   gap: 1.5rem;
   padding-top: 1rem;
-  border-top: 1px solid rgba(255,255,255,.1);
-  color: rgba(225,232,231,.4);
+  border-top: 1px solid var(--paper-secondary);
+  color: var(--paper-secondary);
   font-size: .68rem;
 }
 

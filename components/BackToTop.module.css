@@ -10,11 +10,11 @@
   justify-content: center;
   gap: 0.45rem;
   padding: 0 0.9rem;
-  border: 1px solid rgba(170, 211, 230, 0.22);
+  border: 1px solid var(--rule-dark);
   border-radius: 999px;
-  background: rgba(10, 23, 30, 0.82);
-  color: #F5F8F7;
-  box-shadow: 0 14px 34px rgba(4, 13, 18, 0.22);
+  background: var(--surface-dark);
+  color: var(--paper);
+  box-shadow: 0 14px 34px var(--surface-dark);
   backdrop-filter: blur(16px);
   opacity: 0;
   pointer-events: none;
@@ -29,11 +29,11 @@
 }
 
 .button:hover {
-  background: #1B5CFF;
+  background: var(--accent);
 }
 
 .button:focus-visible {
-  outline: 2px solid #82C5FF;
+  outline: 2px solid var(--accent);
   outline-offset: 3px;
 }
 

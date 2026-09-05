@@ -202,7 +202,7 @@ function JourneyIntro() {
     <div className="container">
       <div className={styles.intro}>
         <div>
-          <div className="eyebrow" style={{ color: "#9fc8ff" }}>The GrowthGains approach</div>
+          <div className="eyebrow" style={{ color: "var(--accent)" }}>The GrowthGains approach</div>
           <h2 className="display">Clarity is not a lightning bolt. It is built through better questions.</h2>
         </div>
         <p className="body-lg">

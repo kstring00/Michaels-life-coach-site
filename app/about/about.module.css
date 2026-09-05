@@ -1,16 +1,14 @@
 .about {
-  background: #f1eee7;
-  color: #14232c;
+  background: var(--surface-light);
+  color: var(--surface-dark);
 }
 
 .hero {
   position: relative;
   overflow: hidden;
   padding: clamp(8.5rem, 13vw, 11rem) 0 clamp(4.5rem, 7vw, 6.5rem);
-  background:
-    radial-gradient(circle at 75% 12%, rgba(203,160,109,.16), transparent 27rem),
-    linear-gradient(145deg, #10232c 0%, #142d39 56%, #10212a 100%);
-  color: #f4f5f2;
+  background: var(--surface-dark);
+  color: var(--surface-light);
 }
 
 .hero::before {
@@ -19,7 +17,7 @@
   inset: 0;
   opacity: .12;
   pointer-events: none;
-  background-image: radial-gradient(rgba(255,255,255,.34) .45px, transparent .65px);
+  background-image: var(--rule-dark);
   background-size: 7px 7px;
 }
 
@@ -39,10 +37,10 @@
 .eyebrow,
 .sectionLabel {
   margin: 0 0 .9rem;
-  color: #cda36c;
-  font-size: .68rem;
+  color: var(--ink-secondary);
+  font-size: var(--step-small);
   font-weight: 760;
-  letter-spacing: .2em;
+  letter-spacing: 0.19em;
   text-transform: uppercase;
 }
 
@@ -91,8 +89,8 @@
   aspect-ratio: 4 / 5;
   overflow: hidden;
   border-radius: 1.35rem;
-  border: 1px solid rgba(255,255,255,.14);
-  background: #20333d;
+  border: 1px solid var(--rule-dark);
+  background: var(--surface-dark);
   box-shadow: 0 34px 90px rgba(3,12,17,.28);
 }
 
@@ -101,7 +99,7 @@
   position: absolute;
   inset: 0;
   pointer-events: none;
-  background: linear-gradient(180deg, transparent 52%, rgba(7,18,23,.42) 100%);
+  background: var(--surface-dark);
 }
 
 .portraitCard img {
@@ -114,15 +112,15 @@
   bottom: 1.5rem;
   width: min(23rem, 82%);
   padding: 1.15rem 1.25rem;
-  border: 1px solid rgba(255,255,255,.14);
+  border: 1px solid var(--rule-dark);
   border-radius: 1rem;
-  background: rgba(12,27,34,.78);
+  background: var(--rule-light);
   backdrop-filter: blur(16px);
   box-shadow: 0 20px 45px rgba(3,12,17,.22);
 }
 
 .portraitNote span {
-  color: #cfa56e;
+  color: var(--accent);
   font-size: .62rem;
   font-weight: 760;
   letter-spacing: .18em;
@@ -131,7 +129,7 @@
 
 .portraitNote p {
   margin: .55rem 0 0;
-  color: #f3f5f2;
+  color: var(--surface-light);
   font-family: Georgia, "Times New Roman", serif;
   font-size: clamp(1rem, 1.5vw, 1.28rem);
   font-style: italic;
@@ -140,7 +138,7 @@
 
 .statementSection {
   padding: clamp(4rem, 7vw, 6.5rem) 0;
-  background: #f1eee7;
+  background: var(--surface-light);
 }
 
 .statementGrid {
@@ -169,7 +167,7 @@
 .statementGrid > div > p {
   max-width: 48rem;
   margin: 1.25rem 0 0;
-  color: #5b6769;
+  color: var(--ink-secondary);
   font-size: 1rem;
   line-height: 1.72;
 }
@@ -192,7 +190,7 @@
 .focusItem span,
 .principleCard > span,
 .rhythmItem > span {
-  color: #a57943;
+  color: var(--accent);
   font-size: .66rem;
   font-weight: 800;
   letter-spacing: .16em;
@@ -201,7 +199,7 @@
 .focusItem p {
   max-width: 17rem;
   margin: 1.55rem 0 0;
-  color: #24363e;
+  color: var(--surface-dark);
   font-family: Georgia, "Times New Roman", serif;
   font-size: clamp(1rem, 1.6vw, 1.28rem);
   line-height: 1.25;
@@ -209,8 +207,8 @@
 
 .principlesSection {
   padding: clamp(4rem, 7vw, 6.5rem) 0;
-  background: #132a35;
-  color: #f2f4f2;
+  background: var(--surface-dark);
+  color: var(--surface-light);
 }
 
 .sectionHead {
@@ -245,8 +243,8 @@
   padding: 1.35rem;
   border: 1px solid rgba(224,232,231,.12);
   border-radius: 1rem;
-  background: linear-gradient(155deg, rgba(255,255,255,.055), rgba(255,255,255,.025));
-  box-shadow: inset 0 1px 0 rgba(255,255,255,.04);
+  background: var(--rule-dark);
+  box-shadow: inset 0 1px 0 var(--rule-dark);
 }
 
 .principleCard h3 {
@@ -266,7 +264,7 @@
 
 .rhythmSection {
   padding: clamp(4rem, 7vw, 6.5rem) 0;
-  background: #e6e2d9;
+  background: var(--surface-light-2);
 }
 
 .rhythmGrid {
@@ -290,7 +288,7 @@
 .rhythmIntro > p:last-child {
   max-width: 31rem;
   margin: 1.2rem 0 0;
-  color: #5b6769;
+  color: var(--ink-secondary);
   line-height: 1.65;
 }
 
@@ -316,14 +314,14 @@
 .rhythmItem p {
   max-width: 40rem;
   margin: .45rem 0 0;
-  color: #5b6769;
+  color: var(--ink-secondary);
   font-size: .92rem;
   line-height: 1.6;
 }
 
 .ctaSection {
   padding: clamp(4rem, 6vw, 5.5rem) 0;
-  background: #efece5;
+  background: var(--surface-light);
   border-top: 1px solid rgba(20,35,44,.1);
 }
 
@@ -343,7 +341,7 @@
 .ctaAction p {
   max-width: 31rem;
   margin: 0 0 1.25rem;
-  color: #5b6769;
+  color: var(--ink-secondary);
   line-height: 1.65;
 }
 
