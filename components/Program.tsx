@@ -13,7 +13,7 @@ const arc = [
   {
     icon: "chat" as IconName,
     label: "Consultation & intake",
-    copy: "Before any commitment, you talk. Michael gets to know the whole person, understand where you are now, and decide with you whether coaching is the right fit.",
+    copy: "Before any commitment, we talk. I get to know the whole person, understand where you are now, and decide with you whether coaching is the right fit.",
     tag: "No pressure. Just a conversation.",
   },
   {
@@ -25,13 +25,13 @@ const arc = [
   {
     icon: "target" as IconName,
     label: "Session one",
-    copy: "Together you define the focus for the twelve weeks: what you want to understand, what you want to change, and what meaningful progress would look like.",
+    copy: "Together we define the focus for the twelve weeks: what you want to understand, what you want to change, and what meaningful progress would look like.",
     tag: "Clarity creates momentum.",
   },
   {
     icon: "steps" as IconName,
     label: "Weeks 2–12",
-    copy: "Each weekly session builds on the last. You listen, reflect, look at patterns, review goals, challenge thinking when needed, and turn insight into practical action.",
+    copy: "Each weekly session builds on the last. We listen, reflect, look at patterns, review goals, challenge thinking when needed, and turn insight into practical action.",
     tag: "A steady rhythm for lasting change.",
   },
 ] as const;
@@ -66,13 +66,13 @@ export function Program() {
             <p className={styles.eyebrow}>The coaching journey</p>
             <h2 className={styles.title} id="program-heading">A clear path <em>forward.</em></h2>
             <p className={styles.lede}>
-              A structured 12-week coaching journey built around Michael’s approach: understand the whole person, gain perspective, define what matters, and keep moving with intention.
+              A structured 12-week coaching journey built around my approach: understand the whole person, gain perspective, define what matters, and keep moving with intention.
             </p>
           </div>
 
           <Reveal className={styles.quote}>
             <p>“I can help guide the journey, but I cannot take the journey for them.”</p>
-            <span>Michael’s coaching philosophy</span>
+            <span>My coaching philosophy</span>
           </Reveal>
         </div>
 
