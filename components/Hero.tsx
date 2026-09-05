@@ -50,7 +50,6 @@ export function Hero() {
             Clarity <span aria-hidden="true">/</span> Perspective <span aria-hidden="true">/</span> Progress
           </Reveal>
 
-          {/* rag is hand-set; the closing line carries the italic */}
           <MaskedLines
             as="h1"
             immediate
@@ -64,13 +63,9 @@ export function Hero() {
           </Reveal>
 
           <Reveal className="hero-actions" delay={0.58}>
-            <Link
-              className="button"
-              href="/book?utm_source=growthgains&utm_medium=website&utm_campaign=consultation&utm_content=homepage-hero"
-            >
+            <Link className="button" href="#consultation">
               Book a free consultation <span className="arrow" aria-hidden="true">→</span>
             </Link>
-            <Link className="button secondary" href="/contact">Contact</Link>
           </Reveal>
 
           <Reveal as="ul" className="hero-pillars" delay={0.68}>
