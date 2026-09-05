@@ -55,10 +55,7 @@ export default function About() {
             </p>
 
             <div className={styles.heroActions}>
-              <Link
-                className="button"
-                href="/book?utm_source=growthgains&utm_medium=website&utm_campaign=consultation&utm_content=about-hero"
-              >
+              <Link className="button" href="/#consultation">
                 Book a free consultation
               </Link>
               <span className={styles.credential}>Certified life coach · GrowthGains</span>
@@ -154,10 +151,7 @@ export default function About() {
           </div>
           <div className={styles.ctaAction}>
             <p>Bring the real situation. We can decide together whether coaching is the right next step.</p>
-            <Link
-              className="button"
-              href="/book?utm_source=growthgains&utm_medium=website&utm_campaign=consultation&utm_content=about-footer"
-            >
+            <Link className="button" href="/#consultation">
               Book a free consultation
             </Link>
           </div>
