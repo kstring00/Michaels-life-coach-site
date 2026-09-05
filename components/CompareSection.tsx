@@ -30,9 +30,9 @@ export function CompareSection() {
           <div className={styles.coachingIntro}>
             <h3>For life transitions and what comes next.</h3>
             <p>
-              Coaching with Michael creates space to understand the season you are in,
+              Coaching with me creates space to understand the season you are in,
               reconnect with what matters to you and decide how you want to move forward.
-              He screens for that fit at the consultation, before anyone signs a contract.
+              I screen for that fit at the consultation, before anyone signs a contract.
             </p>
           </div>
 
@@ -70,9 +70,9 @@ export function CompareSection() {
 
           <div className={styles.clinicalAside}>
             <p>
-              Michael screens for fit at the consultation for exactly this reason: so he can
+              I screen for fit at the consultation for exactly this reason, so I can
               refer you to a licensed clinician before anyone signs a contract. You deserve the
-              right kind of care more than he needs the client.
+              right kind of care more than I need you as a client.
             </p>
             <Link href="/coaching-vs-counseling">Read the full coaching vs. counseling guide →</Link>
           </div>
