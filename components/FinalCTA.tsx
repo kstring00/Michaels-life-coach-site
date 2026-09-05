@@ -1,28 +1,51 @@
-import Link from "next/link";
-import { ConsultButton } from "./ConsultButton";
-import { MaskedLines, Reveal } from "./motion-kit";
+import { site } from "@/lib/site";
+import styles from "./FinalCTA.module.css";
+
+function buildEmbedUrl(base: string) {
+  try {
+    const url = new URL(base);
+    url.searchParams.set("embed", "true");
+    url.searchParams.set("theme", "light");
+    return url.toString();
+  } catch {
+    return base;
+  }
+}
 
 export function FinalCTA() {
+  const calendarUrl = buildEmbedUrl(site.calendarUrl);
+
   return (
-    <section className="section final-cta">
-      <div className="container">
-        <MaskedLines
-          className="display"
-          lines={["You look in the mirror and know", "you did the work to create", "the change you wanted."]}
-        />
-        <Reveal className="cta-row" delay={0.1}>
-          <p className="body-lg">
-            It starts with a consultation. That call is how we work out whether this
-            program fits what you are carrying — before anything is signed.
-          </p>
-          <div className="cta-actions">
-            <div className="cta-buttons">
-              <ConsultButton className="cta-primary" source="final-cta" />
-              <Link className="button secondary" href="/contact">Contact</Link>
-            </div>
-            <span className="cta-note">Free. Nothing is signed on the call.</span>
+    <section className={styles.section} id="consultation" aria-labelledby="consultation-heading">
+      <div className={styles.inner}>
+        <div className={styles.head}>
+          <div>
+            <p className={styles.eyebrow}>Start with a conversation</p>
+            <h2 className={styles.title} id="consultation-heading">
+              Ready to see what comes <em>next?</em>
+            </h2>
           </div>
-        </Reveal>
+          <p className={styles.copy}>
+            You do not need to have everything figured out before we talk. Choose a time below,
+            bring the real situation, and we will use the consultation to decide whether coaching
+            is the right next step.
+          </p>
+        </div>
+
+        <div className={styles.calendarShell}>
+          <div className={styles.calendarBar}>
+            <strong>Book a free consultation with me</strong>
+            <span>Choose a time without leaving GrowthGains.</span>
+          </div>
+          <iframe
+            className={styles.calendar}
+            src={calendarUrl}
+            title="Book a free GrowthGains consultation"
+            loading="lazy"
+            allow="payment"
+          />
+        </div>
+        <p className={styles.note}>Free consultation. Nothing is signed on the call.</p>
       </div>
     </section>
   );

@@ -1,315 +1,406 @@
 .about {
-  background: #e9eceb;
-  color: #0f1a1e;
+  background: #f1eee7;
+  color: #14232c;
 }
 
 .hero {
   position: relative;
   overflow: hidden;
-  background: #0f1a1e;
-  color: #f4f7f6;
-  padding: clamp(9rem, 15vw, 12rem) 0 clamp(4.5rem, 8vw, 7rem);
-}
-
-.hero::before,
-.hero::after {
-  content: "";
-  position: absolute;
-  pointer-events: none;
-  border-radius: 50%;
-  border: 1px solid rgba(42, 137, 255, 0.16);
+  padding: clamp(8.5rem, 13vw, 11rem) 0 clamp(4.5rem, 7vw, 6.5rem);
+  background:
+    radial-gradient(circle at 75% 12%, rgba(203,160,109,.16), transparent 27rem),
+    linear-gradient(145deg, #10232c 0%, #142d39 56%, #10212a 100%);
+  color: #f4f5f2;
 }
 
 .hero::before {
-  width: min(72vw, 980px);
-  aspect-ratio: 1;
-  right: -26vw;
-  top: -42%;
+  content: "";
+  position: absolute;
+  inset: 0;
+  opacity: .12;
+  pointer-events: none;
+  background-image: radial-gradient(rgba(255,255,255,.34) .45px, transparent .65px);
+  background-size: 7px 7px;
 }
 
-.hero::after {
-  width: min(52vw, 700px);
-  aspect-ratio: 1;
-  right: -12vw;
-  top: -22%;
-  box-shadow: 0 0 0 90px rgba(42, 137, 255, 0.025);
-}
-
-.heroInner {
+.heroGrid {
   position: relative;
-  z-index: 2;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: minmax(0, 1.04fr) minmax(22rem, .96fr);
+  gap: clamp(3rem, 7vw, 7rem);
+  align-items: center;
 }
 
-.heroMeta {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.75rem 1.5rem;
-  margin-bottom: clamp(2rem, 5vw, 3.75rem);
-  color: rgba(244, 247, 246, 0.58);
-  font-size: 0.72rem;
+.heroCopy {
+  max-width: 47rem;
+}
+
+.eyebrow,
+.sectionLabel {
+  margin: 0 0 .9rem;
+  color: #cda36c;
+  font-size: .68rem;
   font-weight: 760;
-  letter-spacing: 0.16em;
+  letter-spacing: .2em;
   text-transform: uppercase;
 }
 
-.heroMeta span + span::before {
-  content: "/";
-  margin-right: 1.5rem;
-  color: #2a89ff;
-}
-
 .hero h1 {
-  max-width: 12ch;
   margin: 0;
+  max-width: 12ch;
   font-family: Georgia, "Times New Roman", serif;
-  font-size: clamp(3rem, 7vw, 5.75rem);
+  font-size: clamp(3.25rem, 6.4vw, 6.35rem);
   font-weight: 400;
-  line-height: 0.94;
-  letter-spacing: -0.045em;
+  line-height: .92;
+  letter-spacing: -.048em;
   text-wrap: balance;
 }
 
 .heroLead {
-  max-width: 49ch;
-  margin: clamp(1.75rem, 4vw, 2.75rem) 0 0;
-  color: rgba(244, 247, 246, 0.68);
-  font-size: clamp(1rem, 1.45vw, 1.18rem);
+  max-width: 46rem;
+  margin: 1.6rem 0 0;
+  color: rgba(238,242,240,.7);
+  font-size: clamp(1rem, 1.35vw, 1.12rem);
   line-height: 1.7;
 }
 
-.profileStrip {
-  display: grid;
-  grid-template-columns: auto minmax(0, 1fr) auto;
+.heroActions {
+  display: flex;
   align-items: center;
-  gap: 1rem 1.35rem;
-  max-width: 820px;
-  margin-top: clamp(3rem, 6vw, 5rem);
-  padding-top: 1.25rem;
-  border-top: 1px solid rgba(255, 255, 255, 0.14);
+  gap: 1rem 1.4rem;
+  flex-wrap: wrap;
+  margin-top: 2rem;
 }
 
-.portraitStamp {
-  position: relative;
-  width: 54px;
-  height: 54px;
-  overflow: hidden;
-  border-radius: 50%;
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  background: #1b2529;
-}
-
-.portraitStamp img {
-  object-position: center 25% !important;
-}
-
-.profileName {
-  display: block;
-  font-weight: 760;
-  letter-spacing: -0.02em;
-}
-
-.profileRole {
-  display: block;
-  margin-top: 0.22rem;
-  color: rgba(244, 247, 246, 0.5);
-  font-size: 0.78rem;
-}
-
-.textLink {
-  color: #fff;
-  font-size: 0.82rem;
-  font-weight: 720;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.35);
-  padding-bottom: 0.2rem;
-}
-
-.interview {
-  background: #e9eceb;
-  padding: clamp(4rem, 8vw, 7rem) 0;
-}
-
-.interviewIntro {
-  display: grid;
-  grid-template-columns: 0.72fr 1.28fr;
-  gap: clamp(2rem, 8vw, 8rem);
-  align-items: end;
-  padding-bottom: clamp(2.5rem, 5vw, 4rem);
-  border-bottom: 1px solid rgba(15, 26, 30, 0.16);
-}
-
-.interviewEyebrow {
-  color: #1b5cff;
-  font-size: 0.72rem;
-  font-weight: 800;
-  letter-spacing: 0.17em;
+.credential {
+  color: rgba(238,242,240,.48);
+  font-size: .74rem;
+  letter-spacing: .08em;
   text-transform: uppercase;
 }
 
-.interviewIntro h2 {
-  max-width: 15ch;
-  margin: 0;
+.portraitWrap {
+  position: relative;
+  width: min(100%, 34rem);
+  justify-self: end;
+}
+
+.portraitCard {
+  position: relative;
+  aspect-ratio: 4 / 5;
+  overflow: hidden;
+  border-radius: 1.35rem;
+  border: 1px solid rgba(255,255,255,.14);
+  background: #20333d;
+  box-shadow: 0 34px 90px rgba(3,12,17,.28);
+}
+
+.portraitCard::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(180deg, transparent 52%, rgba(7,18,23,.42) 100%);
+}
+
+.portraitCard img {
+  object-position: center 24% !important;
+}
+
+.portraitNote {
+  position: absolute;
+  left: clamp(-2.4rem, -3vw, -1rem);
+  bottom: 1.5rem;
+  width: min(23rem, 82%);
+  padding: 1.15rem 1.25rem;
+  border: 1px solid rgba(255,255,255,.14);
+  border-radius: 1rem;
+  background: rgba(12,27,34,.78);
+  backdrop-filter: blur(16px);
+  box-shadow: 0 20px 45px rgba(3,12,17,.22);
+}
+
+.portraitNote span {
+  color: #cfa56e;
+  font-size: .62rem;
+  font-weight: 760;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+}
+
+.portraitNote p {
+  margin: .55rem 0 0;
+  color: #f3f5f2;
   font-family: Georgia, "Times New Roman", serif;
-  font-size: var(--step-h2);
-  font-weight: 400;
-  line-height: 1.04;
-  letter-spacing: -0.035em;
+  font-size: clamp(1rem, 1.5vw, 1.28rem);
+  font-style: italic;
+  line-height: 1.35;
 }
 
-.qaList {
-  border-bottom: 1px solid rgba(15, 26, 30, 0.16);
+.statementSection {
+  padding: clamp(4rem, 7vw, 6.5rem) 0;
+  background: #f1eee7;
 }
 
-.qa {
+.statementGrid {
   display: grid;
-  grid-template-columns: minmax(90px, 0.32fr) minmax(0, 0.86fr) minmax(0, 1.05fr);
-  gap: clamp(1.5rem, 5vw, 4.5rem);
-  padding: clamp(2.5rem, 5vw, 4.25rem) 0;
-  border-top: 1px solid rgba(15, 26, 30, 0.16);
+  grid-template-columns: .58fr 1.42fr;
+  gap: clamp(2rem, 7vw, 7rem);
+  align-items: start;
 }
 
-.qa:first-child {
-  border-top: 0;
-}
-
-.qaNumber {
-  color: #1b5cff;
-  font-size: 0.76rem;
-  font-weight: 800;
-  letter-spacing: 0.14em;
-}
-
-.qa h3 {
+.statementGrid h2,
+.sectionHead h2,
+.rhythmIntro h2,
+.ctaInner h2 {
   margin: 0;
   font-family: Georgia, "Times New Roman", serif;
-  font-size: clamp(1.45rem, 2.5vw, 2.3rem);
   font-weight: 400;
-  line-height: 1.08;
-  letter-spacing: -0.03em;
+  letter-spacing: -.035em;
 }
 
-.qa p {
-  max-width: 58ch;
-  margin: 0;
-  color: #536265;
-  font-size: var(--step-body);
+.statementGrid h2 {
+  max-width: 15ch;
+  font-size: clamp(2.25rem, 4vw, 4rem);
+  line-height: 1;
+}
+
+.statementGrid > div > p {
+  max-width: 48rem;
+  margin: 1.25rem 0 0;
+  color: #5b6769;
+  font-size: 1rem;
   line-height: 1.72;
 }
 
-.principles {
-  background: #0f1a1e;
-  color: #f4f7f6;
-  padding: clamp(4rem, 8vw, 7rem) 0;
-}
-
-.principlesHead {
+.focusGrid {
   display: grid;
-  grid-template-columns: 0.7fr 1.3fr;
-  gap: clamp(2rem, 8vw, 8rem);
-  align-items: end;
-  margin-bottom: clamp(2.5rem, 5vw, 4rem);
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  margin-top: clamp(2.5rem, 5vw, 4rem);
+  border-top: 1px solid rgba(20,35,44,.14);
+  border-left: 1px solid rgba(20,35,44,.14);
 }
 
-.principlesHead span {
-  color: #2a89ff;
-  font-size: 0.72rem;
+.focusItem {
+  min-height: 7.6rem;
+  padding: 1.15rem 1.2rem 1.25rem;
+  border-right: 1px solid rgba(20,35,44,.14);
+  border-bottom: 1px solid rgba(20,35,44,.14);
+}
+
+.focusItem span,
+.principleCard > span,
+.rhythmItem > span {
+  color: #a57943;
+  font-size: .66rem;
   font-weight: 800;
-  letter-spacing: 0.17em;
-  text-transform: uppercase;
+  letter-spacing: .16em;
 }
 
-.principlesHead h2 {
-  max-width: 17ch;
-  margin: 0;
+.focusItem p {
+  max-width: 17rem;
+  margin: 1.55rem 0 0;
+  color: #24363e;
   font-family: Georgia, "Times New Roman", serif;
-  font-size: var(--step-h2);
-  font-weight: 400;
-  line-height: 1.05;
+  font-size: clamp(1rem, 1.6vw, 1.28rem);
+  line-height: 1.25;
+}
+
+.principlesSection {
+  padding: clamp(4rem, 7vw, 6.5rem) 0;
+  background: #132a35;
+  color: #f2f4f2;
+}
+
+.sectionHead {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(18rem, .78fr);
+  gap: clamp(2rem, 6vw, 5rem);
+  align-items: end;
+  margin-bottom: clamp(2.4rem, 4.5vw, 3.8rem);
+}
+
+.sectionHead h2 {
+  max-width: 12ch;
+  font-size: clamp(2.5rem, 4.6vw, 4.6rem);
+  line-height: .96;
+}
+
+.sectionHead > p {
+  max-width: 34rem;
+  margin: 0;
+  color: rgba(235,240,239,.62);
+  line-height: 1.65;
 }
 
 .principleGrid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  border-top: 1px solid rgba(255, 255, 255, 0.14);
-  border-left: 1px solid rgba(255, 255, 255, 0.14);
+  gap: .9rem;
 }
 
-.principle {
-  min-height: 250px;
-  padding: clamp(1.5rem, 3vw, 2.5rem);
-  border-right: 1px solid rgba(255, 255, 255, 0.14);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.14);
+.principleCard {
+  min-height: 19rem;
+  padding: 1.35rem;
+  border: 1px solid rgba(224,232,231,.12);
+  border-radius: 1rem;
+  background: linear-gradient(155deg, rgba(255,255,255,.055), rgba(255,255,255,.025));
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.04);
 }
 
-.principleNumber {
-  color: #2a89ff;
-  font-size: 0.74rem;
-  font-weight: 800;
-  letter-spacing: 0.14em;
-}
-
-.principle h3 {
-  margin: 3.5rem 0 0.8rem;
+.principleCard h3 {
+  margin: 4rem 0 .8rem;
   font-family: Georgia, "Times New Roman", serif;
-  font-size: var(--step-h3);
+  font-size: clamp(1.35rem, 2vw, 1.75rem);
   font-weight: 400;
+  line-height: 1.08;
 }
 
-.principle p {
+.principleCard p {
   margin: 0;
-  color: rgba(244, 247, 246, 0.58);
-  font-size: 0.94rem;
+  color: rgba(233,239,238,.58);
+  font-size: .9rem;
+  line-height: 1.6;
+}
+
+.rhythmSection {
+  padding: clamp(4rem, 7vw, 6.5rem) 0;
+  background: #e6e2d9;
+}
+
+.rhythmGrid {
+  display: grid;
+  grid-template-columns: minmax(0, .8fr) minmax(0, 1.2fr);
+  gap: clamp(2.5rem, 7vw, 7rem);
+}
+
+.rhythmIntro {
+  position: sticky;
+  top: 8rem;
+  align-self: start;
+}
+
+.rhythmIntro h2 {
+  max-width: 10ch;
+  font-size: clamp(2.4rem, 4.5vw, 4.5rem);
+  line-height: .97;
+}
+
+.rhythmIntro > p:last-child {
+  max-width: 31rem;
+  margin: 1.2rem 0 0;
+  color: #5b6769;
   line-height: 1.65;
 }
 
-.principleAction {
-  margin-top: 2.25rem;
+.rhythmList {
+  border-top: 1px solid rgba(20,35,44,.15);
 }
 
-@media (max-width: 900px) {
-  .interviewIntro,
-  .principlesHead {
+.rhythmItem {
+  display: grid;
+  grid-template-columns: 3.8rem minmax(0, 1fr);
+  gap: 1rem;
+  padding: 1.65rem 0;
+  border-bottom: 1px solid rgba(20,35,44,.15);
+}
+
+.rhythmItem h3 {
+  margin: 0;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(1.35rem, 2vw, 1.7rem);
+  font-weight: 400;
+}
+
+.rhythmItem p {
+  max-width: 40rem;
+  margin: .45rem 0 0;
+  color: #5b6769;
+  font-size: .92rem;
+  line-height: 1.6;
+}
+
+.ctaSection {
+  padding: clamp(4rem, 6vw, 5.5rem) 0;
+  background: #efece5;
+  border-top: 1px solid rgba(20,35,44,.1);
+}
+
+.ctaInner {
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(18rem, .9fr);
+  gap: clamp(2rem, 6vw, 5rem);
+  align-items: end;
+}
+
+.ctaInner h2 {
+  max-width: 12ch;
+  font-size: clamp(2.35rem, 4.2vw, 4.25rem);
+  line-height: .98;
+}
+
+.ctaAction p {
+  max-width: 31rem;
+  margin: 0 0 1.25rem;
+  color: #5b6769;
+  line-height: 1.65;
+}
+
+@media (max-width: 980px) {
+  .heroGrid,
+  .statementGrid,
+  .sectionHead,
+  .rhythmGrid,
+  .ctaInner {
     grid-template-columns: 1fr;
-    gap: 1.35rem;
   }
 
-  .qa {
-    grid-template-columns: 54px minmax(0, 0.85fr) minmax(0, 1.15fr);
-    gap: 1.25rem;
+  .portraitWrap {
+    justify-self: start;
   }
 
+  .focusGrid,
   .principleGrid {
-    grid-template-columns: 1fr;
+    grid-template-columns: 1fr 1fr;
   }
 
-  .principle {
-    min-height: 0;
+  .rhythmIntro {
+    position: static;
   }
 }
 
 @media (max-width: 680px) {
   .hero {
-    padding-top: 7.5rem;
+    padding-top: 7.4rem;
   }
 
   .hero h1 {
-    font-size: clamp(2.75rem, 14vw, 4.25rem);
+    font-size: clamp(2.85rem, 13.5vw, 4.5rem);
   }
 
-  .profileStrip {
-    grid-template-columns: auto 1fr;
+  .portraitWrap {
+    width: 100%;
   }
 
-  .profileStrip .textLink {
-    grid-column: 2;
-    justify-self: start;
+  .portraitNote {
+    position: relative;
+    left: auto;
+    bottom: auto;
+    width: calc(100% - 1.2rem);
+    margin: -.9rem auto 0;
   }
 
-  .qa {
+  .focusGrid,
+  .principleGrid {
     grid-template-columns: 1fr;
-    gap: 0.9rem;
   }
 
-  .qaNumber {
-    margin-bottom: 0.5rem;
+  .principleCard {
+    min-height: 0;
+  }
+
+  .principleCard h3 {
+    margin-top: 2.7rem;
   }
 }

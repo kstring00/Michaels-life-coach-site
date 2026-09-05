@@ -1,119 +1,162 @@
 import Link from "next/link";
-import { FinalCTA } from "@/components/FinalCTA";
 import { Portrait } from "@/components/Portrait";
 import { site } from "@/lib/site";
 import styles from "./about.module.css";
 
 export const metadata = { title: "About Michael" };
 
-const interview = [
-  {
-    question: "What is GrowthGains really about?",
-    answer: site.statement,
-  },
-  {
-    question: "What happens when the old role no longer fits?",
-    answer:
-      "The work creates a structured place to examine what changed, what still belongs to you, what no longer does and what deliberate movement could look like from here.",
-  },
-  {
-    question: "What is my role in the room?",
-    answer:
-      "I do not decide your next chapter for you. Coaching is designed to help you slow the situation down, see it more clearly and make choices you can actually own.",
-  },
+const focusAreas = [
+  "Identity and major decisions",
+  "Life after sport",
+  "Foster care and adoption",
+  "Grief and loss",
+  "Patterns that keep repeating",
+  "Seasons where something simply has to change",
 ] as const;
 
 const principles = [
   {
-    title: "Identity before performance",
-    copy: "The question is not only ‘What should I do next?’ but also ‘Who am I becoming as I decide?’",
+    number: "01",
+    title: "See the whole person",
+    copy: "A transition rarely lives in one box. I want to understand the roles, values, relationships and experiences around the decision, not just the decision itself.",
   },
   {
-    title: "Clarity without pretending",
-    copy: "Good coaching does not require certainty on day one. It gives uncertainty somewhere useful to go.",
+    number: "02",
+    title: "Ask better questions",
+    copy: "I am not here to hand you a prefabricated answer. My job is to create enough clarity and perspective for you to hear your own thinking more clearly.",
   },
   {
-    title: "Movement with ownership",
-    copy: "The goal is not a prescribed answer. It is a next step that still feels like yours when the conversation ends.",
+    number: "03",
+    title: "Build movement you own",
+    copy: "Insight matters, but it should lead somewhere. We turn what you are learning into goals, conversations and practical next steps that still feel like yours.",
   },
+] as const;
+
+const rhythm = [
+  ["Listen", "Start with what is actually happening, not what you think you are supposed to say."],
+  ["Reflect", "Slow the situation down enough to notice the patterns, assumptions and values underneath it."],
+  ["Challenge", "When it is useful, I will question the story, belief or pattern that may be keeping you stuck."],
+  ["Move", "Leave with something concrete to think about, practice, decide or do before we meet again."],
 ] as const;
 
 export default function About() {
   return (
     <main className={styles.about}>
       <section className={styles.hero}>
-        <div className={`container ${styles.heroInner}`}>
-          <div className={styles.heroMeta}>
-            <span>About me</span>
-            <span>Identity &amp; life transitions</span>
+        <div className={`container ${styles.heroGrid}`}>
+          <div className={styles.heroCopy}>
+            <p className={styles.eyebrow}>About me</p>
+            <h1>I believe people move better when they can see themselves clearly.</h1>
+            <p className={styles.heroLead}>
+              I built GrowthGains for people who know something needs to change and want a thoughtful
+              place to figure out what comes next. My role is not to choose your next chapter for you.
+              It is to help you understand the season you are in, reconnect with what matters and move
+              forward with intention.
+            </p>
+
+            <div className={styles.heroActions}>
+              <Link className="button" href="/#consultation">
+                Book a free consultation
+              </Link>
+              <span className={styles.credential}>Certified life coach · GrowthGains</span>
+            </div>
           </div>
 
-          <h1>Know who is walking with you.</h1>
-          <p className={styles.heroLead}>
-            GrowthGains centers the human part of transition: identity, direction, values and the
-            space where the old answer no longer fits.
-          </p>
-
-          <div className={styles.profileStrip}>
-            <div className={styles.portraitStamp}>
-              <Portrait alt="Michael, GrowthGains coach" />
+          <div className={styles.portraitWrap}>
+            <div className={styles.portraitCard}>
+              <Portrait alt="Michael, founder and life coach at GrowthGains" />
             </div>
+            <div className={styles.portraitNote}>
+              <span>My coaching philosophy</span>
+              <p>“I can help guide the journey, but I cannot take the journey for them.”</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className={styles.statementSection}>
+        <div className={`container ${styles.statementGrid}`}>
+          <p className={styles.sectionLabel}>What GrowthGains is about</p>
+          <div>
+            <h2>There is no single kind of person who arrives at a turning point.</h2>
+            <p>{site.statement}</p>
+          </div>
+        </div>
+
+        <div className={`container ${styles.focusGrid}`}>
+          {focusAreas.map((area, index) => (
+            <div className={styles.focusItem} key={area}>
+              <span>0{index + 1}</span>
+              <p>{area}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <section className={styles.principlesSection}>
+        <div className="container">
+          <div className={styles.sectionHead}>
             <div>
-              <span className={styles.profileName}>Michael</span>
-              <span className={styles.profileRole}>Certified life coach · GrowthGains</span>
+              <p className={styles.eyebrow}>How I think about the work</p>
+              <h2>Clarity first. Ownership always.</h2>
             </div>
-            <Link className={styles.textLink} href="/approach">
-              See the approach →
-            </Link>
-          </div>
-        </div>
-      </section>
-
-      <section className={styles.interview}>
-        <div className="container">
-          <div className={styles.interviewIntro}>
-            <span className={styles.interviewEyebrow}>In my own words</span>
-            <h2>Less biography. More of how I actually think about the work.</h2>
-          </div>
-
-          <div className={styles.qaList}>
-            {interview.map((item, index) => (
-              <article className={styles.qa} key={item.question}>
-                <span className={styles.qaNumber}>0{index + 1}</span>
-                <h3>{item.question}</h3>
-                <p>{item.answer}</p>
-              </article>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section className={styles.principles}>
-        <div className="container">
-          <div className={styles.principlesHead}>
-            <span>The posture behind the process</span>
-            <h2>Coaching should make your own thinking more visible to you.</h2>
+            <p>
+              Coaching should make you more able to see, choose and act for yourself, not more dependent
+              on the coach.
+            </p>
           </div>
 
           <div className={styles.principleGrid}>
-            {principles.map((item, index) => (
-              <article className={styles.principle} key={item.title}>
-                <span className={styles.principleNumber}>0{index + 1}</span>
+            {principles.map((item) => (
+              <article className={styles.principleCard} key={item.title}>
+                <span>{item.number}</span>
                 <h3>{item.title}</h3>
                 <p>{item.copy}</p>
               </article>
             ))}
           </div>
+        </div>
+      </section>
 
-          <div className={styles.principleAction}>
-            <Link className="button" href="/book?utm_source=growthgains&utm_medium=website&utm_campaign=consultation&utm_content=about">
+      <section className={styles.rhythmSection}>
+        <div className={`container ${styles.rhythmGrid}`}>
+          <div className={styles.rhythmIntro}>
+            <p className={styles.eyebrow}>What working with me feels like</p>
+            <h2>A real conversation with somewhere to go.</h2>
+            <p>
+              I listen, reflect, challenge when needed and keep the conversation connected to the life
+              you are actually trying to build.
+            </p>
+          </div>
+
+          <div className={styles.rhythmList}>
+            {rhythm.map(([title, copy], index) => (
+              <div className={styles.rhythmItem} key={title}>
+                <span>0{index + 1}</span>
+                <div>
+                  <h3>{title}</h3>
+                  <p>{copy}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className={styles.ctaSection}>
+        <div className={`container ${styles.ctaInner}`}>
+          <div>
+            <p className={styles.eyebrow}>Start with a conversation</p>
+            <h2>You do not need to have the answer before we talk.</h2>
+          </div>
+          <div className={styles.ctaAction}>
+            <p>Bring the real situation. We can decide together whether coaching is the right next step.</p>
+            <Link className="button" href="/#consultation">
               Book a free consultation
             </Link>
           </div>
         </div>
       </section>
-
-      <FinalCTA />
     </main>
   );
 }

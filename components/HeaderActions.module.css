@@ -1,0 +1,52 @@
+.actions {
+  display: flex;
+  align-items: center;
+  gap: clamp(1rem, 2.6vw, 1.8rem);
+}
+
+.aboutLink {
+  position: relative;
+  color: inherit;
+  font-size: .82rem;
+  font-weight: 620;
+  opacity: .72;
+  transition: opacity .2s ease;
+}
+
+.aboutLink::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -.45rem;
+  height: 1px;
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform .25s ease;
+}
+
+.aboutLink:hover,
+.aboutLink[aria-current="page"] {
+  opacity: 1;
+}
+
+.aboutLink:hover::after,
+.aboutLink[aria-current="page"]::after {
+  transform: scaleX(1);
+}
+
+@media (max-width: 560px) {
+  .actions {
+    gap: .75rem;
+  }
+
+  .aboutLink {
+    display: none;
+  }
+
+  .actions :global(.nav-cta) {
+    padding: 10px 14px;
+    font-size: .75rem;
+  }
+}
