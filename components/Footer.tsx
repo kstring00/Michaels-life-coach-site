@@ -12,7 +12,7 @@ export function Footer() {
             <p className="body-md" style={{maxWidth: 560, color: "#8495a6"}}>Coaching for people who know something needs to change and want support figuring out where they are going next.</p>
           </div>
           <div className="footer-nav">
-            <Link href="/about">About Michael</Link><Link href="/identity-in-transition">Coaching</Link>
+            <Link href="/about">About me</Link><Link href="/identity-in-transition">Coaching</Link>
             <Link href="/approach">Approach</Link><Link href="/coaching-vs-counseling">Coaching vs. counseling</Link><Link href="/book?utm_source=growthgains&utm_medium=website&utm_campaign=consultation&utm_content=footer">Free consultation</Link>
             <Link href="/contact">Contact</Link><Link href="/start">Start coaching</Link>
             {socials.map(([label, href]) => <a key={label} href={href} target="_blank" rel="noreferrer">{label[0].toUpperCase()+label.slice(1)}</a>)}

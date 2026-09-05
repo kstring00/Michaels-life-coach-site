@@ -17,9 +17,9 @@ const interview = [
       "The work creates a structured place to examine what changed, what still belongs to you, what no longer does and what deliberate movement could look like from here.",
   },
   {
-    question: "What is Michael's role in the room?",
+    question: "What is my role in the room?",
     answer:
-      "Michael does not decide your next chapter for you. Coaching is designed to help you slow the situation down, see it more clearly and make choices you can actually own.",
+      "I do not decide your next chapter for you. Coaching is designed to help you slow the situation down, see it more clearly and make choices you can actually own.",
   },
 ] as const;
 
@@ -44,7 +44,7 @@ export default function About() {
       <section className={styles.hero}>
         <div className={`container ${styles.heroInner}`}>
           <div className={styles.heroMeta}>
-            <span>About Michael</span>
+            <span>About me</span>
             <span>Identity &amp; life transitions</span>
           </div>
 
@@ -72,8 +72,8 @@ export default function About() {
       <section className={styles.interview}>
         <div className="container">
           <div className={styles.interviewIntro}>
-            <span className={styles.interviewEyebrow}>In Michael&apos;s words</span>
-            <h2>Less biography. More of how he actually thinks about the work.</h2>
+            <span className={styles.interviewEyebrow}>In my own words</span>
+            <h2>Less biography. More of how I actually think about the work.</h2>
           </div>
 
           <div className={styles.qaList}>

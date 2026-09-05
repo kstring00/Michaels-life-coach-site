@@ -7,11 +7,11 @@ import { MaskedLines, Reveal, RevealItem } from "./motion-kit";
 const answers = [
   {
     q: "Do you guarantee results?",
-    a: "No. This is a partnership. Michael's responsibility is structure, questions, tools, perspective, accountability and support. Yours is engaging honestly, doing the work between sessions and taking action.",
+    a: "No. This is a partnership. My responsibility is structure, questions, tools, perspective, accountability and support. Yours is engaging honestly, doing the work between sessions and taking action.",
   },
   {
     q: "What if I am not making progress?",
-    a: "You revisit the goal, look at what is getting in the way and examine the patterns or beliefs creating resistance. Then you adjust the timeline or the action steps — and have an honest conversation about whether coaching is still the right fit.",
+    a: "We revisit the goal, look at what is getting in the way and examine the patterns or beliefs creating resistance. Then we adjust the timeline or the action steps — and have an honest conversation about whether coaching is still the right fit.",
   },
   {
     q: "What are the policies?",
@@ -19,7 +19,7 @@ const answers = [
   },
   {
     q: "How do we know if it is a fit?",
-    a: "That is what the consultation is for. You decide together, before any contract is signed.",
+    a: "That is what the consultation is for. We decide together, before any contract is signed.",
   },
 ] as const;
 

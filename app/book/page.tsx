@@ -63,7 +63,7 @@ export default async function Book({
             <div className="eyebrow">What to expect</div>
             <h2 className="display">A first conversation, not a commitment.</h2>
             <p className="body-lg">
-              Michael will use the consultation to understand what you are navigating, what kind of
+              I will use the consultation to understand what you are navigating, what kind of
               support you are looking for and whether coaching is the right fit.
             </p>
             <div className="booking-steps">
@@ -91,10 +91,10 @@ export default async function Book({
               <div className="booking-fallback">
                 <div>
                   <div className="eyebrow">Calendar connection</div>
-                  <h3>Scheduling is ready for Michael&apos;s live Calendly link.</h3>
+                  <h3>Scheduling is ready for my live Calendly link.</h3>
                   <p className="body-md">
                     Until the calendar URL is connected, send a consultation request directly and
-                    Michael can follow up with scheduling.
+                    I can follow up with scheduling.
                   </p>
                   <Link className="button" href="/contact">Request a consultation</Link>
                 </div>
