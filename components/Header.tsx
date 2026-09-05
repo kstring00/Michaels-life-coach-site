@@ -4,6 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { Brand } from "./Brand";
+import styles from "./HeaderActions.module.css";
 
 export function Header() {
   const [scrolled, setScrolled] = useState(false);
@@ -21,7 +22,16 @@ export function Header() {
     <header className={`header ${scrolled ? "scrolled" : ""}`}>
       <div className="container header-inner">
         <Brand />
-        <Link className="nav-cta" href={bookHref}>Book a free consultation</Link>
+        <div className={styles.actions}>
+          <Link
+            className={styles.aboutLink}
+            href="/about"
+            aria-current={pathname === "/about" ? "page" : undefined}
+          >
+            About
+          </Link>
+          <Link className="nav-cta" href={bookHref}>Book a free consultation</Link>
+        </div>
       </div>
     </header>
   );
