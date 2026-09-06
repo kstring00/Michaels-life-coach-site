@@ -2,9 +2,8 @@
   position: relative;
   overflow: hidden;
   padding: clamp(4.5rem, 7vw, 7rem) 0 clamp(3.5rem, 5.5vw, 5.5rem);
-  background:
-    var(--surface-dark);
-  color: var(--paper);
+  background: var(--surface-light);
+  color: var(--ink);
   scroll-margin-top: 5.5rem;
 }
 
@@ -25,7 +24,7 @@
 
 .eyebrow {
   margin: 0 0 .9rem;
-  color: var(--accent);
+  color: var(--accent-ink);
   font-size: var(--step-small);
   font-weight: 760;
   letter-spacing: 0.19em;
@@ -35,6 +34,7 @@
 .title {
   margin: 0;
   max-width: 10ch;
+  color: var(--ink);
   font-family: Georgia, "Times New Roman", serif;
   font-size: clamp(3rem, 5.6vw, 5.6rem);
   font-weight: 400;
@@ -43,23 +43,24 @@
 }
 
 .title em {
-  color: var(--accent);
+  color: var(--accent-ink);
   font-weight: 400;
 }
 
 .copy {
   max-width: 40rem;
   margin: 0;
-  color: var(--paper-secondary);
+  color: var(--ink-secondary);
   font-size: clamp(1rem, 1.35vw, 1.12rem);
   line-height: 1.65;
 }
 
 .calendarShell {
   overflow: hidden;
-  border: 1px solid var(--rule-dark);
+  border: 1px solid rgba(14, 31, 39, .16);
   border-radius: 1.35rem;
   background: var(--surface-dark);
+  box-shadow: 0 24px 60px rgba(20, 35, 44, .10);
 }
 
 .calendarBar {
@@ -95,7 +96,7 @@
 
 .note {
   margin: .85rem 0 0;
-  color: var(--paper-secondary);
+  color: var(--ink-secondary);
   font-size: .72rem;
   text-align: right;
 }
