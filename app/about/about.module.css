@@ -1,66 +1,58 @@
 .about {
   background: var(--surface-light);
-  color: var(--surface-dark);
+  color: var(--ink);
 }
 
 .hero {
   position: relative;
   overflow: hidden;
-  padding: clamp(8.5rem, 13vw, 11rem) 0 clamp(4.5rem, 7vw, 6.5rem);
-  background: var(--surface-dark);
-  color: var(--surface-light);
-}
-
-.hero::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  opacity: .12;
-  pointer-events: none;
-  background-image: var(--rule-dark);
-  background-size: 7px 7px;
+  padding: clamp(8.5rem, 12vw, 10.5rem) 0 clamp(4.5rem, 7vw, 6.25rem);
+  background: var(--surface-light);
+  color: var(--ink);
+  border-bottom: 1px solid var(--rule-light);
 }
 
 .heroGrid {
   position: relative;
   z-index: 1;
   display: grid;
-  grid-template-columns: minmax(0, 1.04fr) minmax(22rem, .96fr);
-  gap: clamp(3rem, 7vw, 7rem);
+  grid-template-columns: minmax(0, 1.08fr) minmax(22rem, .92fr);
+  gap: clamp(3rem, 7vw, 6.5rem);
   align-items: center;
 }
 
 .heroCopy {
-  max-width: 47rem;
+  max-width: 48rem;
 }
 
 .eyebrow,
 .sectionLabel {
-  margin: 0 0 .9rem;
-  color: var(--ink-secondary);
+  margin: 0 0 .95rem;
+  color: var(--accent-ink);
   font-size: var(--step-small);
   font-weight: 760;
-  letter-spacing: 0.19em;
+  letter-spacing: .19em;
   text-transform: uppercase;
 }
 
 .hero h1 {
   margin: 0;
-  max-width: 12ch;
+  max-width: 11.5ch;
+  color: var(--ink);
   font-family: Georgia, "Times New Roman", serif;
-  font-size: clamp(3.25rem, 6.4vw, 6.35rem);
+  font-size: clamp(3.15rem, 5.8vw, 5.75rem);
   font-weight: 400;
-  line-height: .92;
-  letter-spacing: -.048em;
+  line-height: .94;
+  letter-spacing: -.047em;
   text-wrap: balance;
 }
 
 .heroLead {
-  max-width: 46rem;
-  margin: 1.6rem 0 0;
-  color: rgba(238,242,240,.7);
-  font-size: clamp(1rem, 1.35vw, 1.12rem);
-  line-height: 1.7;
+  max-width: 43rem;
+  margin: 1.65rem 0 0;
+  color: var(--ink-secondary);
+  font-size: clamp(1rem, 1.3vw, 1.12rem);
+  line-height: 1.72;
 }
 
 .heroActions {
@@ -72,7 +64,7 @@
 }
 
 .credential {
-  color: rgba(238,242,240,.48);
+  color: var(--ink-secondary);
   font-size: .74rem;
   letter-spacing: .08em;
   text-transform: uppercase;
@@ -80,26 +72,32 @@
 
 .portraitWrap {
   position: relative;
-  width: min(100%, 34rem);
+  width: min(100%, 32rem);
   justify-self: end;
+  padding: 0 0 2.25rem 1.5rem;
+}
+
+.portraitWrap::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 72%;
+  height: 62%;
+  border: 1px solid var(--rule-light);
+  border-radius: 1.5rem;
+  background: var(--surface-light-2);
 }
 
 .portraitCard {
   position: relative;
+  z-index: 1;
   aspect-ratio: 4 / 5;
   overflow: hidden;
-  border-radius: 1.35rem;
-  border: 1px solid var(--rule-dark);
-  background: var(--surface-dark);
-  box-shadow: 0 34px 90px rgba(3,12,17,.28);
-}
-
-.portraitCard::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  background: var(--surface-dark);
+  border-radius: 1.45rem;
+  border: 1px solid var(--rule-light);
+  background: var(--surface-light-2);
+  box-shadow: 0 30px 70px rgba(20, 35, 44, .12);
 }
 
 .portraitCard img {
@@ -108,19 +106,19 @@
 
 .portraitNote {
   position: absolute;
-  left: clamp(-2.4rem, -3vw, -1rem);
-  bottom: 1.5rem;
-  width: min(23rem, 82%);
-  padding: 1.15rem 1.25rem;
-  border: 1px solid var(--rule-dark);
+  z-index: 2;
+  left: -1rem;
+  bottom: 0;
+  width: min(24rem, 88%);
+  padding: 1.2rem 1.3rem;
+  border: 1px solid var(--rule-light);
   border-radius: 1rem;
-  background: var(--rule-light);
-  backdrop-filter: blur(16px);
-  box-shadow: 0 20px 45px rgba(3,12,17,.22);
+  background: var(--surface-footer);
+  box-shadow: 0 18px 42px rgba(20, 35, 44, .13);
 }
 
 .portraitNote span {
-  color: var(--accent);
+  color: var(--accent-ink);
   font-size: .62rem;
   font-weight: 760;
   letter-spacing: .18em;
@@ -129,16 +127,16 @@
 
 .portraitNote p {
   margin: .55rem 0 0;
-  color: var(--surface-light);
+  color: var(--ink);
   font-family: Georgia, "Times New Roman", serif;
-  font-size: clamp(1rem, 1.5vw, 1.28rem);
+  font-size: clamp(1rem, 1.45vw, 1.24rem);
   font-style: italic;
-  line-height: 1.35;
+  line-height: 1.38;
 }
 
 .statementSection {
   padding: clamp(4rem, 7vw, 6.5rem) 0;
-  background: var(--surface-light);
+  background: var(--surface-light-2);
 }
 
 .statementGrid {
@@ -153,6 +151,7 @@
 .rhythmIntro h2,
 .ctaInner h2 {
   margin: 0;
+  color: var(--ink);
   font-family: Georgia, "Times New Roman", serif;
   font-weight: 400;
   letter-spacing: -.035em;
@@ -175,22 +174,22 @@
 .focusGrid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: .85rem;
   margin-top: clamp(2.5rem, 5vw, 4rem);
-  border-top: 1px solid rgba(20,35,44,.14);
-  border-left: 1px solid rgba(20,35,44,.14);
 }
 
 .focusItem {
   min-height: 7.6rem;
-  padding: 1.15rem 1.2rem 1.25rem;
-  border-right: 1px solid rgba(20,35,44,.14);
-  border-bottom: 1px solid rgba(20,35,44,.14);
+  padding: 1.2rem 1.25rem 1.3rem;
+  border: 1px solid var(--rule-light);
+  border-radius: .9rem;
+  background: var(--surface-light);
 }
 
 .focusItem span,
 .principleCard > span,
 .rhythmItem > span {
-  color: var(--accent);
+  color: var(--accent-ink);
   font-size: .66rem;
   font-weight: 800;
   letter-spacing: .16em;
@@ -198,17 +197,17 @@
 
 .focusItem p {
   max-width: 17rem;
-  margin: 1.55rem 0 0;
-  color: var(--surface-dark);
+  margin: 1.5rem 0 0;
+  color: var(--ink);
   font-family: Georgia, "Times New Roman", serif;
-  font-size: clamp(1rem, 1.6vw, 1.28rem);
+  font-size: clamp(1rem, 1.6vw, 1.26rem);
   line-height: 1.25;
 }
 
 .principlesSection {
   padding: clamp(4rem, 7vw, 6.5rem) 0;
-  background: var(--surface-dark);
-  color: var(--surface-light);
+  background: var(--surface-light);
+  color: var(--ink);
 }
 
 .sectionHead {
@@ -228,7 +227,7 @@
 .sectionHead > p {
   max-width: 34rem;
   margin: 0;
-  color: rgba(235,240,239,.62);
+  color: var(--ink-secondary);
   line-height: 1.65;
 }
 
@@ -239,16 +238,17 @@
 }
 
 .principleCard {
-  min-height: 19rem;
-  padding: 1.35rem;
-  border: 1px solid rgba(224,232,231,.12);
+  min-height: 17rem;
+  padding: 1.4rem;
+  border: 1px solid var(--rule-light);
   border-radius: 1rem;
-  background: var(--rule-dark);
-  box-shadow: inset 0 1px 0 var(--rule-dark);
+  background: var(--surface-footer);
+  box-shadow: 0 14px 34px rgba(20, 35, 44, .055);
 }
 
 .principleCard h3 {
-  margin: 4rem 0 .8rem;
+  margin: 3.4rem 0 .8rem;
+  color: var(--ink);
   font-family: Georgia, "Times New Roman", serif;
   font-size: clamp(1.35rem, 2vw, 1.75rem);
   font-weight: 400;
@@ -257,9 +257,9 @@
 
 .principleCard p {
   margin: 0;
-  color: rgba(233,239,238,.58);
+  color: var(--ink-secondary);
   font-size: .9rem;
-  line-height: 1.6;
+  line-height: 1.62;
 }
 
 .rhythmSection {
@@ -293,7 +293,7 @@
 }
 
 .rhythmList {
-  border-top: 1px solid rgba(20,35,44,.15);
+  border-top: 1px solid var(--rule-light);
 }
 
 .rhythmItem {
@@ -301,11 +301,12 @@
   grid-template-columns: 3.8rem minmax(0, 1fr);
   gap: 1rem;
   padding: 1.65rem 0;
-  border-bottom: 1px solid rgba(20,35,44,.15);
+  border-bottom: 1px solid var(--rule-light);
 }
 
 .rhythmItem h3 {
   margin: 0;
+  color: var(--ink);
   font-family: Georgia, "Times New Roman", serif;
   font-size: clamp(1.35rem, 2vw, 1.7rem);
   font-weight: 400;
@@ -322,7 +323,7 @@
 .ctaSection {
   padding: clamp(4rem, 6vw, 5.5rem) 0;
   background: var(--surface-light);
-  border-top: 1px solid rgba(20,35,44,.1);
+  border-top: 1px solid var(--rule-light);
 }
 
 .ctaInner {
@@ -330,6 +331,10 @@
   grid-template-columns: minmax(0, 1.1fr) minmax(18rem, .9fr);
   gap: clamp(2rem, 6vw, 5rem);
   align-items: end;
+  padding: clamp(2rem, 4vw, 3.25rem);
+  border: 1px solid var(--rule-light);
+  border-radius: 1.25rem;
+  background: var(--surface-footer);
 }
 
 .ctaInner h2 {
@@ -355,7 +360,17 @@
   }
 
   .portraitWrap {
+    width: min(100%, 34rem);
     justify-self: start;
+    padding-left: 0;
+  }
+
+  .portraitWrap::before {
+    left: 1.25rem;
+  }
+
+  .portraitNote {
+    left: 1rem;
   }
 
   .focusGrid,
@@ -374,11 +389,16 @@
   }
 
   .hero h1 {
-    font-size: clamp(2.85rem, 13.5vw, 4.5rem);
+    font-size: clamp(2.75rem, 12.5vw, 4.25rem);
   }
 
   .portraitWrap {
     width: 100%;
+    padding-bottom: 0;
+  }
+
+  .portraitWrap::before {
+    display: none;
   }
 
   .portraitNote {
