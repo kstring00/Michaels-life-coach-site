@@ -1,5 +1,5 @@
 import Image from "next/image";
-import portrait from "@/public/michael.jpg";
+import portrait from "@/public/michael.webp";
 
 /**
  * The container sets the shape; the image fills it. A replacement portrait at
