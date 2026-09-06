@@ -9,6 +9,7 @@ import styles from "./HeaderActions.module.css";
 export function Header() {
   const [scrolled, setScrolled] = useState(false);
   const pathname = usePathname();
+  const lightHeader = pathname === "/about" && !scrolled;
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 24);
@@ -18,7 +19,10 @@ export function Header() {
   }, []);
 
   return (
-    <header className={`header ${scrolled ? "scrolled" : ""}`}>
+    <header
+      className={`header ${scrolled ? "scrolled" : ""}`}
+      style={lightHeader ? { color: "var(--ink)" } : undefined}
+    >
       <div className="container header-inner">
         <Brand />
         <div className={styles.actions}>
