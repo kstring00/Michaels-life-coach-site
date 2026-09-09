@@ -1,4 +1,5 @@
 import Image from "next/image";
+import michaelCutout from "../mikenobacgrnd.png";
 
 export function Portrait({
   className = "",
@@ -13,7 +14,7 @@ export function Portrait({
     <Image
       className={className}
       data-portrait=""
-      src="/michael-cutout.webp"
+      src={michaelCutout}
       alt={alt}
       fill
       priority={priority}
