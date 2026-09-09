@@ -13,12 +13,12 @@ export function Portrait({
     <Image
       className={className}
       data-portrait=""
-      src="/michael.webp"
+      src="/michael-cutout.webp"
       alt={alt}
       fill
       priority={priority}
       sizes="(max-width: 768px) 100vw, 50vw"
-      style={{ objectFit: "cover", objectPosition: "center" }}
+      style={{ objectFit: "contain", objectPosition: "center bottom" }}
     />
   );
 }
