@@ -2,10 +2,8 @@
    Everything in this file loads on "/" alone, which is why the header override
    below is safe: the subpage heroes are still dark and still need white nav. */
 
-/* the light hero owns the top of the page, so the overscroll ground follows it */
 html { background: var(--surface-light); }
 
-/* header over the light hero */
 .header { color: var(--ink); }
 .header .brand-name {
   background: none;
@@ -15,9 +13,6 @@ html { background: var(--surface-light); }
   color: var(--ink);
 }
 .header .nav-link { opacity: 0.76; }
-/* Rule 1: the hero's own CTA is the one gold element in this viewport, so the
-   header's duplicate of that action stays an outline until the hero scrolls
-   past and the gold is free again. */
 .header .nav-cta {
   background: transparent;
   border-color: var(--rule-light);
@@ -39,24 +34,236 @@ html { background: var(--surface-light); }
   border-top-color: var(--rule-light);
 }
 
-/* The page carries far more information than it used to, so the band rhythm is
-   tighter than the site default — otherwise seven sections of real content
-   sprawl past a readable page length. */
 main > .section {
   padding-block: clamp(3rem, 4.6vw, 4rem);
 }
 
-/* 3 — who this is for: the recognition beat */
-/* the resolution, not the heading: it lands after the reader has recognised themselves */
-/* 4 — Michael */
-/* stands where the second portrait used to; the page has one photograph now */
-/* 5 — the program */
-/* the blueprint is his name for it and the thing a client walks away holding */
-/* 7 — straight answers: the objection stage, nothing hidden behind a toggle.
-   Light band between the two dark ones, so the honest answers read as the
-   plainest surface on the page. */
-/* 8 — final conversion band */
-/* the button never stands on its own: this says what the call actually is */
+/* --------------------------------------------------------------------------
+   HERO — editorial transition composition
+   -------------------------------------------------------------------------- */
+.hero-portrait--cutout {
+  position: relative;
+  overflow: hidden;
+  border-radius: 20px 0 0 20px;
+  border: 1px solid rgba(26, 26, 23, 0.10);
+  background: #f1ebdf;
+  min-height: 100%;
+}
+
+/* disable the old photo scrim; this is no longer a full-bleed photo */
+.hero-portrait--cutout::after { display: none; }
+
+.hero-stage {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  min-height: clamp(520px, 63vh, 670px);
+  overflow: hidden;
+  isolation: isolate;
+  background:
+    radial-gradient(circle at 61% 59%, rgba(184, 137, 74, .12) 0 32%, transparent 32.5%),
+    linear-gradient(135deg, rgba(255,255,255,.34), rgba(246,242,233,.05));
+}
+
+.hero-stage::before,
+.hero-stage::after {
+  content: "";
+  position: absolute;
+  border-radius: 999px;
+  pointer-events: none;
+  z-index: 0;
+}
+.hero-stage::before {
+  width: min(72%, 560px);
+  aspect-ratio: 1;
+  right: -7%;
+  top: -7%;
+  border: 1px solid rgba(26, 26, 23, .12);
+}
+.hero-stage::after {
+  width: min(57%, 440px);
+  aspect-ratio: 1;
+  right: 3%;
+  top: 12%;
+  border: 1px solid rgba(184, 137, 74, .34);
+}
+
+.hero-stage-kicker {
+  position: absolute;
+  z-index: 5;
+  top: clamp(30px, 4vw, 52px);
+  left: clamp(28px, 4vw, 54px);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: var(--ink-secondary);
+  font-size: 10px;
+  font-weight: 760;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+}
+.hero-stage-kicker i {
+  position: relative;
+  display: block;
+  width: 56px;
+  height: 1px;
+  background: var(--accent);
+}
+.hero-stage-kicker i::after {
+  content: "";
+  position: absolute;
+  right: 0;
+  top: 50%;
+  width: 7px;
+  height: 7px;
+  border-top: 1px solid var(--accent);
+  border-right: 1px solid var(--accent);
+  transform: translateY(-50%) rotate(45deg);
+}
+.hero-stage-kicker b { color: var(--ink); font-weight: 780; }
+
+.hero-orbit {
+  position: absolute;
+  z-index: 4;
+  inset: 0;
+  pointer-events: none;
+}
+.hero-orbit-word {
+  position: absolute;
+  color: var(--ink-secondary);
+  font-size: 9px;
+  font-weight: 760;
+  letter-spacing: .22em;
+  text-transform: uppercase;
+}
+.hero-orbit-word::before {
+  content: "";
+  position: absolute;
+  left: -19px;
+  top: 50%;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--accent);
+  box-shadow: 0 0 0 4px #f1ebdf;
+  transform: translateY(-50%);
+}
+.hero-orbit-word--one { top: 16%; right: 9%; }
+.hero-orbit-word--two { top: 43%; right: 2.5%; }
+.hero-orbit-word--three { top: 70%; right: 6%; }
+
+.hero-media--cutout {
+  position: absolute;
+  z-index: 2;
+  left: 10%;
+  right: -3%;
+  top: 11%;
+  bottom: -1%;
+  width: auto;
+  height: auto;
+}
+.hero-media--cutout [data-portrait] {
+  object-fit: contain !important;
+  object-position: center bottom !important;
+  filter: drop-shadow(0 22px 28px rgba(33, 27, 20, .13));
+}
+
+.hero-hook-card {
+  position: absolute;
+  z-index: 6;
+  left: clamp(28px, 5vw, 58px);
+  bottom: clamp(34px, 5vw, 58px);
+  display: grid;
+  grid-template-columns: 48px 1fr;
+  align-items: start;
+  gap: 16px;
+  width: min(66%, 465px);
+  padding: 20px 22px;
+  background: rgba(250, 247, 241, .96);
+  border: 1px solid rgba(26, 26, 23, .10);
+  border-radius: 12px;
+  box-shadow: 0 18px 42px rgba(37, 30, 22, .12);
+  backdrop-filter: blur(10px);
+}
+.hero-hook-index {
+  display: inline-grid;
+  place-items: center;
+  width: 42px;
+  height: 42px;
+  border: 1px solid var(--accent);
+  border-radius: 50%;
+  color: var(--accent-ink);
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: .08em;
+}
+.hero-hook-card p { margin: 0; }
+.hero-hook-card strong {
+  display: block;
+  max-width: 18ch;
+  color: var(--ink);
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(1.05rem, 1.35vw, 1.28rem);
+  font-weight: 400;
+  line-height: 1.08;
+  letter-spacing: -.018em;
+}
+.hero-hook-card p > span {
+  display: block;
+  margin-top: 8px;
+  color: var(--ink-secondary);
+  font-size: .78rem;
+  line-height: 1.45;
+}
+
+.hero-stage-signature {
+  position: absolute;
+  z-index: 5;
+  right: clamp(24px, 3vw, 42px);
+  bottom: clamp(24px, 3vw, 38px);
+  color: var(--paper);
+  font-size: 9px;
+  font-weight: 760;
+  letter-spacing: .22em;
+  line-height: 1.65;
+  text-align: right;
+  text-transform: uppercase;
+  text-shadow: 0 1px 12px rgba(0,0,0,.28);
+}
+
+@media (max-width: 1100px) {
+  .hero-media--cutout { left: 2%; right: -10%; top: 15%; }
+  .hero-hook-card { width: 72%; }
+  .hero-stage-signature { display: none; }
+  .hero-orbit-word--two { right: 4%; }
+}
+
+@media (max-width: 768px) {
+  .hero-portrait--cutout {
+    width: 100%;
+    margin-left: 0;
+    border-radius: 18px;
+  }
+  .hero-stage { min-height: 500px; }
+  .hero-media--cutout { left: 4%; right: -18%; top: 12%; bottom: 0; }
+  .hero-stage-kicker { top: 24px; left: 24px; }
+  .hero-stage-kicker i { width: 38px; }
+  .hero-hook-card {
+    left: 20px;
+    right: 20px;
+    bottom: 20px;
+    width: auto;
+    grid-template-columns: 40px 1fr;
+    gap: 12px;
+    padding: 16px;
+  }
+  .hero-hook-index { width: 36px; height: 36px; }
+  .hero-orbit-word { font-size: 8px; }
+  .hero-orbit-word--one { top: 15%; right: 7%; }
+  .hero-orbit-word--two { top: 38%; right: 2%; }
+  .hero-orbit-word--three { top: 61%; right: 4%; }
+}
+
 @media (max-width: 680px) {
   main > .section {
     padding-block: clamp(2.25rem, 6vw, 2.75rem);
@@ -95,9 +302,6 @@ main > .section {
   }
 }
 
-/* motion-kit still reads useReducedMotion in MagneticButton. This selector
-   makes the server/client style difference visually inert at first paint,
-   matching the reveal-path CSS fix already in globals.css. */
 @media (prefers-reduced-motion: reduce) {
   .final-cta .cta-primary {
     transform: none !important;
