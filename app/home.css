@@ -38,84 +38,79 @@ main > .section {
   padding-block: clamp(3rem, 4.6vw, 4rem);
 }
 
-/* --------------------------------------------------------------------------
-   HERO — editorial transition composition
-   -------------------------------------------------------------------------- */
+/* HERO — explicit stacking so the portrait can never disappear behind the stage art. */
 .hero-portrait--cutout {
   position: relative;
-  overflow: hidden;
-  border-radius: 20px 0 0 20px;
-  border: 1px solid rgba(26, 26, 23, 0.10);
-  background: #f1ebdf;
   min-height: 100%;
+  overflow: hidden;
+  border: 1px solid var(--rule-light);
+  border-radius: 20px 0 0 20px;
+  background: var(--surface-light-2);
+  isolation: isolate;
 }
 
-/* disable the old photo scrim; this is no longer a full-bleed photo */
-.hero-portrait--cutout::after { display: none; }
+.hero-portrait--cutout::after { display: none !important; }
 
 .hero-stage {
-  position: relative;
-  width: 100%;
-  height: 100%;
-  min-height: clamp(520px, 63vh, 670px);
+  position: absolute;
+  inset: 0;
   overflow: hidden;
-  isolation: isolate;
-  background:
-    radial-gradient(circle at 61% 59%, rgba(184, 137, 74, .12) 0 32%, transparent 32.5%),
-    linear-gradient(135deg, rgba(255,255,255,.34), rgba(246,242,233,.05));
 }
 
 .hero-stage::before,
 .hero-stage::after {
   content: "";
   position: absolute;
-  border-radius: 999px;
+  border-radius: 50%;
   pointer-events: none;
   z-index: 0;
 }
+
 .hero-stage::before {
-  width: min(72%, 560px);
+  width: min(72%, 620px);
   aspect-ratio: 1;
-  right: -7%;
-  top: -7%;
-  border: 1px solid rgba(26, 26, 23, .12);
+  right: -4%;
+  top: 10%;
+  border: 1px solid rgba(184, 137, 74, .42);
+  box-shadow: 0 0 0 74px rgba(184, 137, 74, .045), 0 0 0 148px rgba(26, 26, 23, .06);
 }
+
 .hero-stage::after {
-  width: min(57%, 440px);
+  width: min(46%, 420px);
   aspect-ratio: 1;
-  right: 3%;
-  top: 12%;
-  border: 1px solid rgba(184, 137, 74, .34);
+  right: 10%;
+  top: 30%;
+  background: rgba(184, 137, 74, .11);
 }
 
 .hero-stage-kicker {
   position: absolute;
-  z-index: 5;
-  top: clamp(30px, 4vw, 52px);
-  left: clamp(28px, 4vw, 54px);
+  z-index: 4;
+  top: clamp(28px, 4vw, 46px);
+  left: clamp(28px, 4vw, 46px);
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 10px;
   color: var(--ink-secondary);
-  font-size: 10px;
+  font-size: .66rem;
   font-weight: 760;
-  letter-spacing: .2em;
+  letter-spacing: .19em;
   text-transform: uppercase;
 }
 .hero-stage-kicker i {
-  position: relative;
   display: block;
-  width: 56px;
+  width: 54px;
   height: 1px;
   background: var(--accent);
+  position: relative;
 }
 .hero-stage-kicker i::after {
   content: "";
   position: absolute;
-  right: 0;
-  top: 50%;
   width: 7px;
   height: 7px;
+  right: 0;
+  top: 50%;
   border-top: 1px solid var(--accent);
   border-right: 1px solid var(--accent);
   transform: translateY(-50%) rotate(45deg);
@@ -124,144 +119,145 @@ main > .section {
 
 .hero-orbit {
   position: absolute;
-  z-index: 4;
-  inset: 0;
+  z-index: 3;
+  width: min(58%, 500px);
+  aspect-ratio: 1;
+  right: 2%;
+  top: 14%;
+  border: 1px solid rgba(184, 137, 74, .35);
+  border-radius: 50%;
   pointer-events: none;
 }
 .hero-orbit-word {
   position: absolute;
+  padding-left: 15px;
   color: var(--ink-secondary);
-  font-size: 9px;
+  font-size: .58rem;
   font-weight: 760;
-  letter-spacing: .22em;
+  letter-spacing: .18em;
   text-transform: uppercase;
+  white-space: nowrap;
 }
 .hero-orbit-word::before {
   content: "";
   position: absolute;
-  left: -19px;
+  left: 0;
   top: 50%;
   width: 8px;
   height: 8px;
+  border: 3px solid var(--surface-light-2);
   border-radius: 50%;
   background: var(--accent);
-  box-shadow: 0 0 0 4px #f1ebdf;
   transform: translateY(-50%);
 }
-.hero-orbit-word--one { top: 16%; right: 9%; }
-.hero-orbit-word--two { top: 43%; right: 2.5%; }
-.hero-orbit-word--three { top: 70%; right: 6%; }
+.hero-orbit-word--one { left: 41%; top: -2%; }
+.hero-orbit-word--two { right: -1%; top: 42%; transform: rotate(90deg); transform-origin: right center; }
+.hero-orbit-word--three { left: 42%; bottom: 8%; }
 
+/* Michael is a real foreground layer, not a background image. */
 .hero-media--cutout {
-  position: absolute;
+  position: absolute !important;
   z-index: 2;
-  left: 10%;
-  right: -3%;
-  top: 11%;
+  left: 12%;
+  right: 0;
   bottom: -1%;
-  width: auto;
-  height: auto;
+  top: 10%;
+  width: auto !important;
+  height: auto !important;
+  pointer-events: none;
 }
 .hero-media--cutout [data-portrait] {
   object-fit: contain !important;
   object-position: center bottom !important;
-  filter: drop-shadow(0 22px 28px rgba(33, 27, 20, .13));
+  filter: drop-shadow(0 22px 24px rgba(26, 26, 23, .12));
 }
 
 .hero-hook-card {
   position: absolute;
-  z-index: 6;
-  left: clamp(28px, 5vw, 58px);
-  bottom: clamp(34px, 5vw, 58px);
+  z-index: 5;
+  left: 7%;
+  bottom: 8%;
+  width: min(58%, 430px);
   display: grid;
-  grid-template-columns: 48px 1fr;
+  grid-template-columns: 40px 1fr;
+  gap: 14px;
   align-items: start;
-  gap: 16px;
-  width: min(66%, 465px);
-  padding: 20px 22px;
-  background: rgba(250, 247, 241, .96);
-  border: 1px solid rgba(26, 26, 23, .10);
-  border-radius: 12px;
-  box-shadow: 0 18px 42px rgba(37, 30, 22, .12);
+  padding: 18px 20px;
+  border: 1px solid var(--rule-light);
+  border-radius: 10px;
+  background: rgba(246, 242, 233, .96);
+  box-shadow: 0 18px 50px rgba(26, 26, 23, .10);
   backdrop-filter: blur(10px);
 }
 .hero-hook-index {
-  display: inline-grid;
+  display: grid;
   place-items: center;
-  width: 42px;
-  height: 42px;
+  width: 36px;
+  height: 36px;
   border: 1px solid var(--accent);
   border-radius: 50%;
   color: var(--accent-ink);
-  font-size: 11px;
-  font-weight: 800;
-  letter-spacing: .08em;
+  font-size: .65rem;
+  font-weight: 760;
 }
 .hero-hook-card p { margin: 0; }
 .hero-hook-card strong {
   display: block;
-  max-width: 18ch;
-  color: var(--ink);
   font-family: Georgia, "Times New Roman", serif;
-  font-size: clamp(1.05rem, 1.35vw, 1.28rem);
+  font-size: clamp(1rem, 1.4vw, 1.25rem);
   font-weight: 400;
   line-height: 1.08;
-  letter-spacing: -.018em;
 }
-.hero-hook-card p > span {
+.hero-hook-card p span {
   display: block;
-  margin-top: 8px;
+  margin-top: 7px;
   color: var(--ink-secondary);
-  font-size: .78rem;
-  line-height: 1.45;
+  font-size: .8rem;
+  line-height: 1.4;
 }
 
 .hero-stage-signature {
   position: absolute;
-  z-index: 5;
-  right: clamp(24px, 3vw, 42px);
-  bottom: clamp(24px, 3vw, 38px);
+  z-index: 4;
+  right: 5%;
+  bottom: 7%;
   color: var(--paper);
-  font-size: 9px;
+  font-size: .59rem;
   font-weight: 760;
-  letter-spacing: .22em;
-  line-height: 1.65;
+  letter-spacing: .21em;
+  line-height: 1.55;
   text-align: right;
   text-transform: uppercase;
-  text-shadow: 0 1px 12px rgba(0,0,0,.28);
+  text-shadow: 0 1px 10px rgba(26, 26, 23, .2);
 }
 
 @media (max-width: 1100px) {
-  .hero-media--cutout { left: 2%; right: -10%; top: 15%; }
-  .hero-hook-card { width: 72%; }
-  .hero-stage-signature { display: none; }
-  .hero-orbit-word--two { right: 4%; }
+  .hero-media--cutout { left: 3%; top: 15%; }
+  .hero-hook-card { width: min(72%, 410px); }
 }
 
 @media (max-width: 768px) {
   .hero-portrait--cutout {
-    width: 100%;
-    margin-left: 0;
-    border-radius: 18px;
+    min-height: 500px;
+    width: 100vw;
+    margin-left: -24px;
+    border-radius: 0;
   }
-  .hero-stage { min-height: 500px; }
-  .hero-media--cutout { left: 4%; right: -18%; top: 12%; bottom: 0; }
   .hero-stage-kicker { top: 24px; left: 24px; }
-  .hero-stage-kicker i { width: 38px; }
-  .hero-hook-card {
-    left: 20px;
-    right: 20px;
-    bottom: 20px;
-    width: auto;
-    grid-template-columns: 40px 1fr;
-    gap: 12px;
-    padding: 16px;
+  .hero-media--cutout {
+    left: 0;
+    right: -12%;
+    top: 13%;
+    bottom: 0;
   }
-  .hero-hook-index { width: 36px; height: 36px; }
-  .hero-orbit-word { font-size: 8px; }
-  .hero-orbit-word--one { top: 15%; right: 7%; }
-  .hero-orbit-word--two { top: 38%; right: 2%; }
-  .hero-orbit-word--three { top: 61%; right: 4%; }
+  .hero-orbit { width: 70%; right: -5%; top: 14%; }
+  .hero-hook-card {
+    left: 24px;
+    right: 24px;
+    bottom: 24px;
+    width: auto;
+  }
+  .hero-stage-signature { display: none; }
 }
 
 @media (max-width: 680px) {
