@@ -1,7 +1,6 @@
 /* Homepage portrait art direction -------------------------------------------------
-   Michael is now a transparent cutout, so this panel behaves like an editorial
-   composition instead of a rectangular photograph. The warm radial is the hero's
-   one allowed gradient and deliberately matches the cutout edge tone. */
+   Michael is visually cut away from the old room photo and placed into a branded
+   editorial stage. The warm radial is the hero's one allowed gradient. */
 
 .hero-portrait--cutout {
   min-height: 548px;
@@ -21,8 +20,6 @@
   background: radial-gradient(circle at 72% 38%, rgba(184, 137, 74, .22) 0 18%, rgba(184, 137, 74, .08) 38%, transparent 67%);
   pointer-events: none;
 }
-
-/* disable the old image-legibility scrim; there is no photo background anymore */
 .hero-portrait--cutout::after { display: none; }
 
 .hero-stage {
@@ -33,7 +30,6 @@
   overflow: hidden;
 }
 
-/* oversized threshold rings: a visual "before → after" without another paragraph */
 .hero-stage::before,
 .hero-stage::after {
   content: "";
@@ -90,19 +86,35 @@
 }
 .hero-stage-kicker b { color: var(--ink); font-weight: 800; }
 
+/* The original portrait is still the source image, but this shape clips away the
+   room so the person reads as a cutout. The percentages trace the photographed
+   silhouette and preserve the existing low-res asset instead of enlarging it. */
 .hero-media--cutout {
   position: absolute;
-  inset: 7% -3% 0 13%;
   z-index: 3;
-  width: auto;
+  right: -2%;
+  bottom: 0;
+  width: min(106%, 760px);
   height: auto;
-  transform: translateX(4%) scale(1.03);
-  transform-origin: right bottom;
+  aspect-ratio: 957 / 745;
   pointer-events: none;
 }
 .hero-media--cutout [data-portrait] {
-  object-fit: contain !important;
-  object-position: right bottom !important;
+  object-fit: cover !important;
+  object-position: center !important;
+  clip-path: polygon(
+    20.1% 99.9%, 21.4% 96.2%, 24% 93.4%, 27.7% 91%, 31.9% 88.9%,
+    36.1% 86.4%, 39.2% 83.2%, 41% 79.9%, 41.4% 76%, 39.5% 72.8%,
+    37.6% 69.1%, 36.6% 65.1%, 36.1% 60.7%, 35.9% 55.7%, 36.1% 49.7%,
+    36.4% 43.8%, 37% 38.4%, 38.2% 33.6%, 40% 29.4%, 42.3% 25.6%,
+    45.5% 22.3%, 48.9% 19.7%, 52.2% 18.4%, 55.7% 18.3%, 59% 19.1%,
+    62.2% 20.7%, 65% 23%, 67.4% 25.8%, 69.5% 29.4%, 71.2% 33.3%,
+    72.3% 37.6%, 73% 42.1%, 73.5% 47%, 73.8% 51.8%, 74.6% 55.8%,
+    75.8% 59.2%, 76.9% 62%, 77.4% 64.8%, 77.1% 67.4%, 76.2% 69.5%,
+    74.8% 71.4%, 73.8% 73%, 74.6% 74.8%, 76.6% 76.8%, 79.2% 78.8%,
+    82.5% 80.8%, 86.4% 82.8%, 90.5% 84.6%, 94.6% 86.4%, 98.3% 88.5%,
+    100% 89.7%, 100% 100%
+  );
   filter: drop-shadow(0 30px 34px rgba(26, 26, 23, .14));
 }
 
@@ -187,6 +199,7 @@
 @media (max-width: 1100px) {
   .hero-hook-card { width: min(345px, 70%); }
   .hero-stage-signature { display: none; }
+  .hero-media--cutout { width: 112%; right: -8%; }
 }
 
 @media (max-width: 768px) {
@@ -201,10 +214,7 @@
   .hero-stage::before { width: 380px; right: -18%; top: -4%; }
   .hero-stage::after { width: 285px; right: -2%; top: 14%; }
   .hero-stage-kicker { left: 24px; top: 24px; }
-  .hero-media--cutout {
-    inset: 6% -6% 0 6%;
-    transform: translateX(3%) scale(1.04);
-  }
+  .hero-media--cutout { width: 108%; right: -11%; }
   .hero-hook-card {
     left: 24px;
     bottom: 22px;
@@ -218,7 +228,7 @@
 @media (max-width: 480px) {
   .hero-portrait--cutout,
   .hero-stage { min-height: 390px; }
-  .hero-media--cutout { inset: 8% -12% 0 0; }
+  .hero-media--cutout { width: 116%; right: -18%; }
   .hero-hook-card { padding: 14px; gap: 10px; }
   .hero-hook-index { width: 30px; height: 30px; }
   .hero-hook-card strong { font-size: 15px; }
