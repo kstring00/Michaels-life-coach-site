@@ -1,236 +1,368 @@
-/* Homepage portrait art direction -------------------------------------------------
-   Michael is visually cut away from the old room photo and placed into a branded
-   editorial stage. The warm radial is the hero's one allowed gradient. */
+/* ==========================================================================
+   HERO PORTRAIT PANEL — homepage only
+   --------------------------------------------------------------------------
+   Michael is a transparent PNG (1024x1536, head starts 1.9% down, body runs
+   off the right edge of the frame). He is anchored to the bottom of the panel
+   at 92% of its height, so the top of his head lands ~10% below the top edge
+   and nothing crops the hairline. No box, border or shadow behind him — he
+   stands directly on the cream field.
+
+   Layer order, back to front:
+     0  cream field + warm brass halo behind his head   .hero-stage
+     1  ripple arcs + the brass "path forward" line     .hero-lines
+     2  diagram labels                                  .hero-stage-kicker, .hero-orbit
+     3  the portrait                                    .hero-figure
+     4  the floating "01" card                          .hero-hook-card
+
+   This file loads after home.css and owns the panel outright; nothing about
+   the hero lives in two places any more.
+   ========================================================================== */
 
 .hero-portrait--cutout {
-  min-height: 548px;
+  --hp-cream: #F5F1E8;
+  --hp-brass: #A8905C;
+  --hp-ink: #1F1D18;
+  --hp-ink-soft: #625C50;
+  /* vertical room the floating card needs once it stops overlapping him */
+  --hp-card-reserve: 132px;
+
+  position: relative;
+  min-height: 640px;
   overflow: hidden;
   isolation: isolate;
-  border: 1px solid var(--rule-light);
+  border: 1px solid rgba(31, 29, 24, .10);
   border-right: 0;
-  border-radius: 22px 0 0 22px;
-  background: var(--surface-light-2);
+  border-radius: 28px 0 0 28px;
+  background: var(--hp-cream);
 }
 
-.hero-portrait--cutout::before {
-  content: "";
+/* globals.css lays a dark scrim over the old photograph; the cutout has no
+   photograph to scrim. */
+.hero-portrait--cutout::before,
+.hero-portrait--cutout::after { content: none; }
+
+/* ---- 0. field + halo ---------------------------------------------------- */
+/* The halo is the hero's one gradient: warm light sitting behind and just
+   above his head, not a shape. */
+.hero-stage {
   position: absolute;
   inset: 0;
   z-index: 0;
-  background: radial-gradient(circle at 72% 38%, rgba(184, 137, 74, .22) 0 18%, rgba(184, 137, 74, .08) 38%, transparent 67%);
-  pointer-events: none;
-}
-.hero-portrait--cutout::after { display: none; }
-
-.hero-stage {
-  position: relative;
-  width: 100%;
-  height: 100%;
-  min-height: 548px;
-  overflow: hidden;
+  background:
+    radial-gradient(circle at 73% 20%,
+      rgba(168, 144, 92, .18) 0 13%,
+      rgba(168, 144, 92, .07) 30%,
+      transparent 58%),
+    var(--hp-cream);
 }
 
-.hero-stage::before,
-.hero-stage::after {
-  content: "";
+/* ---- 1. line art -------------------------------------------------------- */
+/* Square element centred on the ripple origin, which sits behind his near
+   shoulder at 54%/52% of the panel. A square box keeps the arcs circular at
+   any panel proportion. */
+.hero-lines {
   position: absolute;
   z-index: 1;
-  border: 1px solid rgba(26, 26, 23, .12);
-  border-radius: 50%;
+  left: 54%;
+  top: 52%;
+  width: min(96%, 620px);
+  height: auto;
+  aspect-ratio: 1;
+  overflow: visible;
+  transform: translate(-50%, -50%);
   pointer-events: none;
 }
-.hero-stage::before {
-  width: min(34vw, 520px);
-  aspect-ratio: 1;
-  right: -9%;
-  top: -6%;
-}
-.hero-stage::after {
-  width: min(25vw, 370px);
-  aspect-ratio: 1;
-  right: 7%;
-  top: 14%;
-  border-color: rgba(184, 137, 74, .34);
+/* stroke colour comes from the fade gradient in the markup; opacity separates
+   the rings so they read as depth rather than four identical circles */
+.hero-ripple { stroke-width: 1; }
+.hero-ripple--1 { opacity: .95; }
+.hero-ripple--2 { opacity: .62; }
+.hero-ripple--3 { opacity: .78; }
+.hero-ripple--4 { opacity: .5; }
+
+/* the narrow brass accent that carries the diagram into him and out of frame */
+.hero-lines-path {
+  stroke: rgba(168, 144, 92, .62);
+  stroke-width: 2;
+  stroke-linecap: round;
 }
 
+/* ---- 2. diagram labels -------------------------------------------------- */
+/* Everything here lives in the open left band of the panel. It is also painted
+   under the portrait, so it can never sit on top of his face. */
 .hero-stage-kicker {
   position: absolute;
-  z-index: 5;
-  left: clamp(24px, 3.2vw, 48px);
-  top: clamp(26px, 3.2vw, 44px);
+  z-index: 2;
+  top: 50px;
+  left: 48px;
   display: flex;
   align-items: center;
   gap: 10px;
-  color: var(--ink-secondary);
-  font-size: 10px;
+  margin: 0;
+  color: var(--hp-ink-soft);
+  font-size: .66rem;
   font-weight: 760;
-  letter-spacing: .18em;
+  letter-spacing: .19em;
   text-transform: uppercase;
 }
 .hero-stage-kicker i {
-  width: clamp(28px, 4vw, 56px);
-  height: 1px;
-  background: var(--accent);
   position: relative;
+  display: block;
+  width: 58px;
+  height: 1px;
+  background: var(--hp-brass);
 }
 .hero-stage-kicker i::after {
   content: "";
   position: absolute;
-  right: -1px;
-  top: -3px;
+  right: 0;
+  top: 50%;
   width: 7px;
   height: 7px;
-  border-top: 1px solid var(--accent);
-  border-right: 1px solid var(--accent);
-  transform: rotate(45deg);
+  border-top: 1px solid var(--hp-brass);
+  border-right: 1px solid var(--hp-brass);
+  transform: translateY(-50%) rotate(45deg);
 }
-.hero-stage-kicker b { color: var(--ink); font-weight: 800; }
-
-/* The original portrait is still the source image, but this shape clips away the
-   room so the person reads as a cutout. The percentages trace the photographed
-   silhouette and preserve the existing low-res asset instead of enlarging it. */
-.hero-media--cutout {
-  position: absolute;
-  z-index: 3;
-  right: -2%;
-  bottom: 0;
-  width: min(106%, 760px);
-  height: auto;
-  aspect-ratio: 957 / 745;
-  pointer-events: none;
-}
-.hero-media--cutout [data-portrait] {
-  object-fit: cover !important;
-  object-position: center !important;
-  clip-path: polygon(
-    20.1% 99.9%, 21.4% 96.2%, 24% 93.4%, 27.7% 91%, 31.9% 88.9%,
-    36.1% 86.4%, 39.2% 83.2%, 41% 79.9%, 41.4% 76%, 39.5% 72.8%,
-    37.6% 69.1%, 36.6% 65.1%, 36.1% 60.7%, 35.9% 55.7%, 36.1% 49.7%,
-    36.4% 43.8%, 37% 38.4%, 38.2% 33.6%, 40% 29.4%, 42.3% 25.6%,
-    45.5% 22.3%, 48.9% 19.7%, 52.2% 18.4%, 55.7% 18.3%, 59% 19.1%,
-    62.2% 20.7%, 65% 23%, 67.4% 25.8%, 69.5% 29.4%, 71.2% 33.3%,
-    72.3% 37.6%, 73% 42.1%, 73.5% 47%, 73.8% 51.8%, 74.6% 55.8%,
-    75.8% 59.2%, 76.9% 62%, 77.4% 64.8%, 77.1% 67.4%, 76.2% 69.5%,
-    74.8% 71.4%, 73.8% 73%, 74.6% 74.8%, 76.6% 76.8%, 79.2% 78.8%,
-    82.5% 80.8%, 86.4% 82.8%, 90.5% 84.6%, 94.6% 86.4%, 98.3% 88.5%,
-    100% 89.7%, 100% 100%
-  );
-  filter: drop-shadow(0 30px 34px rgba(26, 26, 23, .14));
-}
+.hero-stage-kicker b { color: var(--hp-ink); font-weight: 780; }
 
 .hero-orbit {
   position: absolute;
   z-index: 2;
   inset: 0;
+  margin: 0;
+  padding: 0;
+  list-style: none;
   pointer-events: none;
 }
-.hero-orbit-word {
+.hero-orbit-node {
   position: absolute;
-  color: var(--ink-secondary);
-  font-size: 9px;
+  padding-left: 16px;
+  color: var(--hp-ink-soft);
+  font-size: .58rem;
   font-weight: 760;
-  letter-spacing: .22em;
+  letter-spacing: .18em;
   text-transform: uppercase;
+  white-space: nowrap;
 }
-.hero-orbit-word--one { right: 30%; top: 16%; }
-.hero-orbit-word--two { right: 11%; top: 39%; transform: rotate(90deg); transform-origin: center; }
-.hero-orbit-word--three { right: 31%; top: 61%; }
+/* the node itself — a brass dot knocked out of the field so the arc it sits
+   on appears to pass through it */
+.hero-orbit-node::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 50%;
+  width: 8px;
+  height: 8px;
+  border: 3px solid var(--hp-cream);
+  border-radius: 50%;
+  background: var(--hp-brass);
+  transform: translateY(-50%);
+}
+.hero-orbit-node--one   { left: 34%; top: 26%; }
+.hero-orbit-node--two   { left: 22%; top: 52%; }
+.hero-orbit-node--three { left: 26%; top: 67%; }
 
+/* ---- 3. the portrait ---------------------------------------------------- */
+/* Bottom-anchored, 92% of panel height, bleeding 3% past the right edge so he
+   steps out of the frame instead of sitting inside it. max-width lets a narrow
+   panel shrink him by width; object-fit keeps him bottom-anchored when it does.
+   The mask dissolves the jacket into the field instead of cutting it off. */
+.hero-figure {
+  position: absolute;
+  z-index: 3;
+  right: -3%;
+  bottom: 0;
+  height: 92%;
+  width: auto;
+  max-width: 68%;
+  object-fit: contain;
+  object-position: bottom center;
+  pointer-events: none;
+  user-select: none;
+
+  /* light warm grade so he belongs to the palette, skin left true */
+  filter: contrast(1.04) saturate(.92) sepia(.06);
+
+  -webkit-mask-image: linear-gradient(to bottom, #000 82%, transparent 100%);
+  mask-image: linear-gradient(to bottom, #000 82%, transparent 100%);
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-size: 100% 100%;
+  mask-size: 100% 100%;
+}
+
+/* ---- 4. the floating card ----------------------------------------------- */
 .hero-hook-card {
   position: absolute;
-  z-index: 6;
-  left: clamp(24px, 3.2vw, 48px);
-  bottom: clamp(24px, 3.2vw, 42px);
+  z-index: 4;
+  left: 7%;
+  bottom: 7%;
   display: grid;
-  grid-template-columns: auto 1fr;
-  gap: 14px;
-  width: min(390px, 58%);
-  padding: 17px 18px 17px 16px;
-  border: 1px solid rgba(26, 26, 23, .12);
-  background: rgba(246, 242, 233, .9);
-  box-shadow: 0 18px 40px rgba(26, 26, 23, .09);
+  grid-template-columns: 38px 1fr;
+  gap: 15px;
+  align-items: start;
+  width: min(57%, 435px);
+  padding: 20px 22px;
+  border: 1px solid rgba(31, 29, 24, .12);
+  border-radius: 18px;
+  background: rgba(245, 241, 232, .85);
+  box-shadow: 0 20px 50px rgba(31, 29, 24, .10);
+  -webkit-backdrop-filter: blur(12px);
   backdrop-filter: blur(12px);
 }
 .hero-hook-index {
   display: grid;
   place-items: center;
-  width: 34px;
-  height: 34px;
-  border: 1px solid var(--accent);
+  width: 38px;
+  height: 38px;
+  border: 1px solid var(--hp-brass);
   border-radius: 50%;
-  color: var(--accent-ink);
-  font-size: 9px;
-  font-weight: 800;
-  letter-spacing: .12em;
+  color: #806B40;
+  font-size: .65rem;
+  font-weight: 760;
+  letter-spacing: .04em;
 }
-.hero-hook-card p {
-  margin: 0;
-  color: var(--ink-secondary);
-  font-size: 12px;
-  line-height: 1.45;
-}
+.hero-hook-card p { margin: 0; }
 .hero-hook-card strong {
   display: block;
-  margin-bottom: 3px;
-  color: var(--ink);
+  color: var(--hp-ink);
   font-family: Georgia, "Times New Roman", serif;
-  font-size: clamp(15px, 1.25vw, 18px);
+  font-size: clamp(1rem, 1.35vw, 1.25rem);
   font-weight: 400;
   line-height: 1.15;
   letter-spacing: -.01em;
 }
-.hero-hook-card p span { display: block; }
-
-.hero-stage-signature {
-  position: absolute;
-  z-index: 5;
-  right: clamp(24px, 3vw, 42px);
-  bottom: clamp(27px, 3.4vw, 48px);
-  color: var(--paper);
-  font-size: 9px;
-  font-weight: 780;
-  line-height: 1.65;
-  letter-spacing: .2em;
-  text-align: right;
-  text-transform: uppercase;
-  text-shadow: 0 1px 12px rgba(14, 31, 39, .34);
+.hero-hook-card p span {
+  display: block;
+  margin-top: 7px;
+  color: var(--hp-ink-soft);
+  font-size: .8rem;
+  line-height: 1.4;
 }
 
-@media (max-width: 1100px) {
-  .hero-hook-card { width: min(345px, 70%); }
-  .hero-stage-signature { display: none; }
-  .hero-media--cutout { width: 112%; right: -8%; }
+/* ---- narrow desktop ----------------------------------------------------- */
+/* The right column gets meaningfully narrower before it stacks; give him more
+   bleed so he keeps his scale instead of shrinking into the middle. */
+@media (max-width: 1200px) {
+  .hero-figure { right: -10%; height: 88%; max-width: 80%; }
+  /* the open field narrows faster than he does; the labels move with it so his
+     silhouette never clips one */
+  .hero-orbit-node { font-size: .54rem; letter-spacing: .16em; }
+  .hero-orbit-node--one { left: 28%; top: 24%; }
+  .hero-orbit-node--two { left: 12%; }
+  .hero-orbit-node--three { left: 14%; top: 66%; }
 }
 
-@media (max-width: 768px) {
-  .hero-portrait--cutout {
-    min-height: 440px;
-    width: 100vw;
-    margin-left: -24px;
-    border-left: 0;
-    border-radius: 0;
+/* ---- stacked: tablet ---------------------------------------------------- */
+/* Hero stacks, he becomes a head-and-shoulders crop, and the card drops below
+   him rather than across him. Headroom now comes from the box inset (a cover
+   crop cannot invent space above his head). */
+@media (max-width: 1023px) {
+  .hero-grid {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    padding-right: clamp(24px, 4.4vw, 76px);
   }
-  .hero-stage { min-height: 440px; }
-  .hero-stage::before { width: 380px; right: -18%; top: -4%; }
-  .hero-stage::after { width: 285px; right: -2%; top: 14%; }
-  .hero-stage-kicker { left: 24px; top: 24px; }
-  .hero-media--cutout { width: 108%; right: -11%; }
+
+  /* globals.css full-bleeds the photo panel to 100vw on small screens and
+     drives its height from a 16/10 crop. The cutout is a rounded card with a
+     figure standing in it, so both are unwound here. */
+  .hero-portrait--cutout {
+    align-self: stretch;
+    aspect-ratio: auto;
+    width: auto;
+    margin-left: 0;
+    min-height: 540px;
+    border-right: 1px solid rgba(31, 29, 24, .10);
+    border-radius: 24px;
+  }
+
+  .hero-stage {
+    background:
+      radial-gradient(circle at 72% 24%,
+        rgba(168, 144, 92, .18) 0 15%,
+        rgba(168, 144, 92, .07) 32%,
+        transparent 60%),
+      var(--hp-cream);
+  }
+
+  /* An <img> is a replaced element: with height:auto it takes its intrinsic
+     height and ignores `bottom`, so the height is stated outright and the
+     space the card needs below him is subtracted from it. */
+  .hero-figure {
+    top: 10%;
+    right: -2%;
+    bottom: auto;
+    height: calc(90% - var(--hp-card-reserve));
+    width: 48%;
+    max-width: none;
+    object-fit: cover;
+    object-position: center top;
+  }
+
+  .hero-lines { left: 50%; top: 46%; width: min(104%, 560px); }
+
+  .hero-orbit-node--one   { left: 8%;  top: 22%; }
+  .hero-orbit-node--two   { left: 4%;  top: 46%; }
+  .hero-orbit-node--three { left: 10%; top: 64%; }
+
   .hero-hook-card {
     left: 24px;
+    right: 24px;
     bottom: 22px;
-    width: min(330px, calc(100% - 48px));
+    width: auto;
   }
-  .hero-orbit-word--one { right: 25%; }
-  .hero-orbit-word--two { right: 6%; }
-  .hero-orbit-word--three { display: none; }
 }
 
-@media (max-width: 480px) {
-  .hero-portrait--cutout,
-  .hero-stage { min-height: 390px; }
-  .hero-media--cutout { width: 116%; right: -18%; }
-  .hero-hook-card { padding: 14px; gap: 10px; }
-  .hero-hook-index { width: 30px; height: 30px; }
-  .hero-hook-card strong { font-size: 15px; }
-  .hero-hook-card p { font-size: 11px; }
+/* ---- stacked: phone ----------------------------------------------------- */
+/* ~380px of portrait, still bottom-anchored above the card. Labels go; one
+   faint ripple stays so the field is not empty. */
+@media (max-width: 640px) {
+  .hero-grid { padding-inline: 24px; }
+
+  .hero-portrait--cutout {
+    --hp-card-reserve: 124px;
+    min-height: 560px;
+    border-radius: 22px;
+  }
+
+  .hero-stage-kicker {
+    top: 24px;
+    left: 22px;
+    gap: 8px;
+    font-size: .58rem;
+  }
+  .hero-stage-kicker i { width: 34px; }
+
+  .hero-figure {
+    top: auto;
+    right: -4%;
+    bottom: var(--hp-card-reserve);
+    height: 380px;
+    width: 88%;
+  }
+
+  .hero-orbit,
+  .hero-lines-path,
+  .hero-ripple--1,
+  .hero-ripple--2,
+  .hero-ripple--4 { display: none; }
+
+  .hero-lines {
+    left: 58%;
+    top: 44%;
+    width: min(128%, 460px);
+  }
+  .hero-ripple--3 { stroke: rgba(168, 144, 92, .3); }
+
+  .hero-hook-card {
+    left: 16px;
+    right: 16px;
+    bottom: 16px;
+    padding: 16px 17px;
+    border-radius: 16px;
+    gap: 12px;
+    grid-template-columns: 34px 1fr;
+  }
+  .hero-hook-index { width: 34px; height: 34px; }
 }
