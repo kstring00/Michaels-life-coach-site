@@ -38,100 +38,121 @@ main > .section {
   padding-block: clamp(3rem, 4.6vw, 4rem);
 }
 
-/* HERO — explicit stacking so the portrait can never disappear behind the stage art. */
+/* --------------------------------------------------------------------------
+   HERO PORTRAIT PANEL
+   Layer order: field / halo → line art → portrait → floating card.
+   -------------------------------------------------------------------------- */
 .hero-portrait--cutout {
   position: relative;
-  min-height: 100%;
+  min-height: 640px;
   overflow: hidden;
-  border: 1px solid var(--rule-light);
-  border-radius: 20px 0 0 20px;
-  background: var(--surface-light-2);
   isolation: isolate;
+  border: 1px solid rgba(31, 29, 24, 0.10);
+  border-radius: 28px 0 0 28px;
+  background: #F5F1E8;
 }
-
 .hero-portrait--cutout::after { display: none !important; }
 
 .hero-stage {
   position: absolute;
   inset: 0;
   overflow: hidden;
+  background:
+    radial-gradient(circle at 72% 28%, rgba(168, 144, 92, .18) 0 16%, rgba(168, 144, 92, .08) 31%, transparent 55%),
+    #F5F1E8;
 }
 
-.hero-stage::before,
+/* wide pale ripple behind Michael's shoulder */
+.hero-stage::before {
+  content: "";
+  position: absolute;
+  z-index: 1;
+  width: 620px;
+  height: 620px;
+  right: -190px;
+  bottom: -68px;
+  border: 1px solid rgba(168, 144, 92, .34);
+  border-radius: 50%;
+  box-shadow:
+    0 0 0 82px rgba(237, 230, 216, .76),
+    0 0 0 164px rgba(168, 144, 92, .08);
+  pointer-events: none;
+}
+
+/* narrow brass path-forward arc; it exits the panel at right */
 .hero-stage::after {
   content: "";
   position: absolute;
+  z-index: 1;
+  width: 760px;
+  height: 760px;
+  right: -365px;
+  bottom: -118px;
+  border: 2px solid rgba(168, 144, 92, .72);
+  border-left-color: transparent;
+  border-bottom-color: transparent;
   border-radius: 50%;
+  transform: rotate(18deg);
   pointer-events: none;
-  z-index: 0;
-}
-
-.hero-stage::before {
-  width: min(72%, 620px);
-  aspect-ratio: 1;
-  right: -4%;
-  top: 10%;
-  border: 1px solid rgba(184, 137, 74, .42);
-  box-shadow: 0 0 0 74px rgba(184, 137, 74, .045), 0 0 0 148px rgba(26, 26, 23, .06);
-}
-
-.hero-stage::after {
-  width: min(46%, 420px);
-  aspect-ratio: 1;
-  right: 10%;
-  top: 30%;
-  background: rgba(184, 137, 74, .11);
 }
 
 .hero-stage-kicker {
   position: absolute;
-  z-index: 4;
-  top: clamp(28px, 4vw, 46px);
-  left: clamp(28px, 4vw, 46px);
+  z-index: 2;
+  top: 50px;
+  left: 48px;
   display: flex;
   align-items: center;
   gap: 10px;
-  color: var(--ink-secondary);
+  color: #5f594c;
   font-size: .66rem;
   font-weight: 760;
   letter-spacing: .19em;
   text-transform: uppercase;
 }
 .hero-stage-kicker i {
-  display: block;
-  width: 54px;
-  height: 1px;
-  background: var(--accent);
   position: relative;
+  display: block;
+  width: 58px;
+  height: 1px;
+  background: #A8905C;
 }
 .hero-stage-kicker i::after {
   content: "";
   position: absolute;
-  width: 7px;
-  height: 7px;
   right: 0;
   top: 50%;
-  border-top: 1px solid var(--accent);
-  border-right: 1px solid var(--accent);
+  width: 7px;
+  height: 7px;
+  border-top: 1px solid #A8905C;
+  border-right: 1px solid #A8905C;
   transform: translateY(-50%) rotate(45deg);
 }
-.hero-stage-kicker b { color: var(--ink); font-weight: 780; }
+.hero-stage-kicker b { color: #1F1D18; font-weight: 780; }
 
+/* diagram intentionally lives in the open left/center area and behind portrait */
 .hero-orbit {
   position: absolute;
-  z-index: 3;
-  width: min(58%, 500px);
+  z-index: 2;
+  left: 5%;
+  top: 22%;
+  width: min(54%, 410px);
   aspect-ratio: 1;
-  right: 2%;
-  top: 14%;
-  border: 1px solid rgba(184, 137, 74, .35);
+  border: 1px solid rgba(168, 144, 92, .42);
   border-radius: 50%;
   pointer-events: none;
+}
+.hero-orbit::after {
+  content: "";
+  position: absolute;
+  inset: 17%;
+  border: 1px solid rgba(168, 144, 92, .24);
+  border-radius: 50%;
 }
 .hero-orbit-word {
   position: absolute;
   padding-left: 15px;
-  color: var(--ink-secondary);
+  color: #625c50;
   font-size: .58rem;
   font-weight: 760;
   letter-spacing: .18em;
@@ -145,73 +166,83 @@ main > .section {
   top: 50%;
   width: 8px;
   height: 8px;
-  border: 3px solid var(--surface-light-2);
+  border: 3px solid #F5F1E8;
   border-radius: 50%;
-  background: var(--accent);
+  background: #A8905C;
   transform: translateY(-50%);
 }
-.hero-orbit-word--one { left: 41%; top: -2%; }
-.hero-orbit-word--two { right: -1%; top: 42%; transform: rotate(90deg); transform-origin: right center; }
-.hero-orbit-word--three { left: 42%; bottom: 8%; }
+.hero-orbit-word--one { left: 8%; top: 15%; }
+.hero-orbit-word--two { left: 0; top: 52%; transform: translateX(-10%); }
+.hero-orbit-word--three { left: 18%; bottom: 13%; }
 
-/* Michael is a real foreground layer, not a background image. */
+/* Portrait: real transparent PNG, anchored to panel bottom/right.
+   The wrapper is deliberately taller than the visible body so Next/Image's
+   fill mode cannot crop the hairline. */
 .hero-media--cutout {
   position: absolute !important;
-  z-index: 2;
-  left: 12%;
-  right: 0;
-  bottom: -1%;
-  top: 10%;
-  width: auto !important;
-  height: auto !important;
+  z-index: 3;
+  top: 8%;
+  right: -3.5%;
+  bottom: 0;
+  left: auto !important;
+  width: 66% !important;
+  height: 92% !important;
   pointer-events: none;
 }
 .hero-media--cutout [data-portrait] {
   object-fit: contain !important;
-  object-position: center bottom !important;
-  filter: drop-shadow(0 22px 24px rgba(26, 26, 23, .12));
+  object-position: bottom right !important;
+  filter: contrast(1.04) saturate(.92) sepia(.06);
+  -webkit-mask-image: linear-gradient(to bottom, #000 0%, #000 82%, transparent 100%);
+  mask-image: linear-gradient(to bottom, #000 0%, #000 82%, transparent 100%);
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-size: 100% 100%;
+  mask-size: 100% 100%;
 }
 
 .hero-hook-card {
   position: absolute;
-  z-index: 5;
+  z-index: 4;
   left: 7%;
-  bottom: 8%;
-  width: min(58%, 430px);
+  bottom: 7%;
+  width: min(57%, 435px);
   display: grid;
-  grid-template-columns: 40px 1fr;
-  gap: 14px;
+  grid-template-columns: 42px 1fr;
+  gap: 15px;
   align-items: start;
-  padding: 18px 20px;
-  border: 1px solid var(--rule-light);
-  border-radius: 10px;
-  background: rgba(246, 242, 233, .96);
-  box-shadow: 0 18px 50px rgba(26, 26, 23, .10);
-  backdrop-filter: blur(10px);
+  padding: 20px 22px;
+  border: 1px solid rgba(31, 29, 24, .12);
+  border-radius: 16px;
+  background: rgba(245, 241, 232, .85);
+  box-shadow: 0 20px 50px rgba(31, 29, 24, .10);
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
 }
 .hero-hook-index {
   display: grid;
   place-items: center;
-  width: 36px;
-  height: 36px;
-  border: 1px solid var(--accent);
+  width: 38px;
+  height: 38px;
+  border: 1px solid #A8905C;
   border-radius: 50%;
-  color: var(--accent-ink);
+  color: #806b40;
   font-size: .65rem;
   font-weight: 760;
 }
 .hero-hook-card p { margin: 0; }
 .hero-hook-card strong {
   display: block;
+  color: #1F1D18;
   font-family: Georgia, "Times New Roman", serif;
-  font-size: clamp(1rem, 1.4vw, 1.25rem);
+  font-size: clamp(1rem, 1.35vw, 1.25rem);
   font-weight: 400;
-  line-height: 1.08;
+  line-height: 1.1;
 }
 .hero-hook-card p span {
   display: block;
   margin-top: 7px;
-  color: var(--ink-secondary);
+  color: #625c50;
   font-size: .8rem;
   line-height: 1.4;
 }
@@ -219,45 +250,123 @@ main > .section {
 .hero-stage-signature {
   position: absolute;
   z-index: 4;
-  right: 5%;
-  bottom: 7%;
-  color: var(--paper);
-  font-size: .59rem;
+  right: 4.5%;
+  bottom: 5%;
+  color: #F5F1E8;
+  font-size: .57rem;
   font-weight: 760;
   letter-spacing: .21em;
   line-height: 1.55;
   text-align: right;
   text-transform: uppercase;
-  text-shadow: 0 1px 10px rgba(26, 26, 23, .2);
+  text-shadow: 0 1px 12px rgba(31, 29, 24, .25);
 }
 
-@media (max-width: 1100px) {
-  .hero-media--cutout { left: 3%; top: 15%; }
-  .hero-hook-card { width: min(72%, 410px); }
-}
+/* Stack the hero before the portrait becomes too cramped. */
+@media (max-width: 1023px) {
+  .hero-grid {
+    grid-template-columns: 1fr !important;
+    gap: 2rem !important;
+    padding-right: 24px;
+  }
 
-@media (max-width: 768px) {
   .hero-portrait--cutout {
-    min-height: 500px;
-    width: 100vw;
-    margin-left: -24px;
-    border-radius: 0;
+    width: 100%;
+    min-height: 540px;
+    border-radius: 24px;
+    overflow: hidden;
   }
-  .hero-stage-kicker { top: 24px; left: 24px; }
+
+  .hero-stage {
+    position: relative;
+    min-height: 540px;
+    padding-bottom: 112px;
+    overflow: hidden;
+  }
+
   .hero-media--cutout {
-    left: 0;
-    right: -12%;
-    top: 13%;
-    bottom: 0;
+    top: 9%;
+    right: 1%;
+    bottom: 112px;
+    width: 58% !important;
+    height: auto !important;
   }
-  .hero-orbit { width: 70%; right: -5%; top: 14%; }
+  .hero-media--cutout [data-portrait] {
+    object-position: center top !important;
+  }
+
+  .hero-orbit {
+    left: 5%;
+    top: 19%;
+    width: 42%;
+  }
+
   .hero-hook-card {
     left: 24px;
     right: 24px;
-    bottom: 24px;
+    bottom: 22px;
     width: auto;
   }
+
   .hero-stage-signature { display: none; }
+}
+
+@media (max-width: 640px) {
+  .hero-grid { padding-inline: 24px !important; }
+
+  .hero-portrait--cutout {
+    min-height: 520px;
+    width: 100%;
+    margin-left: 0;
+    border-radius: 22px;
+  }
+  .hero-stage {
+    min-height: 520px;
+    padding-bottom: 126px;
+  }
+
+  .hero-stage-kicker {
+    top: 24px;
+    left: 22px;
+    gap: 8px;
+    font-size: .58rem;
+  }
+  .hero-stage-kicker i { width: 34px; }
+
+  .hero-media--cutout {
+    top: 64px;
+    right: -3%;
+    bottom: 126px;
+    width: 82% !important;
+    height: 380px !important;
+  }
+
+  .hero-orbit {
+    left: 8%;
+    top: 22%;
+    width: 66%;
+    opacity: .34;
+  }
+  .hero-orbit::after,
+  .hero-orbit-word { display: none; }
+
+  .hero-stage::before {
+    width: 430px;
+    height: 430px;
+    right: -220px;
+    bottom: 36px;
+    box-shadow: none;
+    opacity: .45;
+  }
+  .hero-stage::after { display: none; }
+
+  .hero-hook-card {
+    left: 16px;
+    right: 16px;
+    bottom: 16px;
+    padding: 16px 17px;
+    border-radius: 14px;
+  }
 }
 
 @media (max-width: 680px) {
@@ -271,35 +380,25 @@ main > .section {
     grid-template-columns: 1fr;
     gap: clamp(1.75rem, 4vw, 2.5rem);
   }
-  .michael-section .michael-quote {
-    max-width: 40ch;
-  }
+  .michael-section .michael-quote { max-width: 40ch; }
   .doorway-row {
     grid-template-columns: 1fr;
     gap: clamp(1.5rem, 4vw, 2.25rem);
   }
-  .doorway p {
-    max-width: 52ch;
-  }
+  .doorway p { max-width: 52ch; }
   .program-step {
     grid-template-columns: 44px minmax(0, 1fr);
     row-gap: 0.5rem;
   }
-  .program-step p {
-    grid-column: 2 / -1;
-  }
+  .program-step p { grid-column: 2 / -1; }
   .deliverable-list li,
   .answer-row {
     grid-template-columns: 1fr;
     row-gap: 0.45rem;
   }
-  .final-cta .cta-actions {
-    align-items: flex-start;
-  }
+  .final-cta .cta-actions { align-items: flex-start; }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .final-cta .cta-primary {
-    transform: none !important;
-  }
+  .final-cta .cta-primary { transform: none !important; }
 }
