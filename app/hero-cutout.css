@@ -1,0 +1,226 @@
+/* Homepage portrait art direction -------------------------------------------------
+   Michael is now a transparent cutout, so this panel behaves like an editorial
+   composition instead of a rectangular photograph. The warm radial is the hero's
+   one allowed gradient and deliberately matches the cutout edge tone. */
+
+.hero-portrait--cutout {
+  min-height: 548px;
+  overflow: hidden;
+  isolation: isolate;
+  border: 1px solid var(--rule-light);
+  border-right: 0;
+  border-radius: 22px 0 0 22px;
+  background: var(--surface-light-2);
+}
+
+.hero-portrait--cutout::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background: radial-gradient(circle at 72% 38%, rgba(184, 137, 74, .22) 0 18%, rgba(184, 137, 74, .08) 38%, transparent 67%);
+  pointer-events: none;
+}
+
+/* disable the old image-legibility scrim; there is no photo background anymore */
+.hero-portrait--cutout::after { display: none; }
+
+.hero-stage {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  min-height: 548px;
+  overflow: hidden;
+}
+
+/* oversized threshold rings: a visual "before → after" without another paragraph */
+.hero-stage::before,
+.hero-stage::after {
+  content: "";
+  position: absolute;
+  z-index: 1;
+  border: 1px solid rgba(26, 26, 23, .12);
+  border-radius: 50%;
+  pointer-events: none;
+}
+.hero-stage::before {
+  width: min(34vw, 520px);
+  aspect-ratio: 1;
+  right: -9%;
+  top: -6%;
+}
+.hero-stage::after {
+  width: min(25vw, 370px);
+  aspect-ratio: 1;
+  right: 7%;
+  top: 14%;
+  border-color: rgba(184, 137, 74, .34);
+}
+
+.hero-stage-kicker {
+  position: absolute;
+  z-index: 5;
+  left: clamp(24px, 3.2vw, 48px);
+  top: clamp(26px, 3.2vw, 44px);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--ink-secondary);
+  font-size: 10px;
+  font-weight: 760;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+}
+.hero-stage-kicker i {
+  width: clamp(28px, 4vw, 56px);
+  height: 1px;
+  background: var(--accent);
+  position: relative;
+}
+.hero-stage-kicker i::after {
+  content: "";
+  position: absolute;
+  right: -1px;
+  top: -3px;
+  width: 7px;
+  height: 7px;
+  border-top: 1px solid var(--accent);
+  border-right: 1px solid var(--accent);
+  transform: rotate(45deg);
+}
+.hero-stage-kicker b { color: var(--ink); font-weight: 800; }
+
+.hero-media--cutout {
+  position: absolute;
+  inset: 7% -3% 0 13%;
+  z-index: 3;
+  width: auto;
+  height: auto;
+  transform: translateX(4%) scale(1.03);
+  transform-origin: right bottom;
+  pointer-events: none;
+}
+.hero-media--cutout [data-portrait] {
+  object-fit: contain !important;
+  object-position: right bottom !important;
+  filter: drop-shadow(0 30px 34px rgba(26, 26, 23, .14));
+}
+
+.hero-orbit {
+  position: absolute;
+  z-index: 2;
+  inset: 0;
+  pointer-events: none;
+}
+.hero-orbit-word {
+  position: absolute;
+  color: var(--ink-secondary);
+  font-size: 9px;
+  font-weight: 760;
+  letter-spacing: .22em;
+  text-transform: uppercase;
+}
+.hero-orbit-word--one { right: 30%; top: 16%; }
+.hero-orbit-word--two { right: 11%; top: 39%; transform: rotate(90deg); transform-origin: center; }
+.hero-orbit-word--three { right: 31%; top: 61%; }
+
+.hero-hook-card {
+  position: absolute;
+  z-index: 6;
+  left: clamp(24px, 3.2vw, 48px);
+  bottom: clamp(24px, 3.2vw, 42px);
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 14px;
+  width: min(390px, 58%);
+  padding: 17px 18px 17px 16px;
+  border: 1px solid rgba(26, 26, 23, .12);
+  background: rgba(246, 242, 233, .9);
+  box-shadow: 0 18px 40px rgba(26, 26, 23, .09);
+  backdrop-filter: blur(12px);
+}
+.hero-hook-index {
+  display: grid;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  border: 1px solid var(--accent);
+  border-radius: 50%;
+  color: var(--accent-ink);
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: .12em;
+}
+.hero-hook-card p {
+  margin: 0;
+  color: var(--ink-secondary);
+  font-size: 12px;
+  line-height: 1.45;
+}
+.hero-hook-card strong {
+  display: block;
+  margin-bottom: 3px;
+  color: var(--ink);
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(15px, 1.25vw, 18px);
+  font-weight: 400;
+  line-height: 1.15;
+  letter-spacing: -.01em;
+}
+.hero-hook-card p span { display: block; }
+
+.hero-stage-signature {
+  position: absolute;
+  z-index: 5;
+  right: clamp(24px, 3vw, 42px);
+  bottom: clamp(27px, 3.4vw, 48px);
+  color: var(--paper);
+  font-size: 9px;
+  font-weight: 780;
+  line-height: 1.65;
+  letter-spacing: .2em;
+  text-align: right;
+  text-transform: uppercase;
+  text-shadow: 0 1px 12px rgba(14, 31, 39, .34);
+}
+
+@media (max-width: 1100px) {
+  .hero-hook-card { width: min(345px, 70%); }
+  .hero-stage-signature { display: none; }
+}
+
+@media (max-width: 768px) {
+  .hero-portrait--cutout {
+    min-height: 440px;
+    width: 100vw;
+    margin-left: -24px;
+    border-left: 0;
+    border-radius: 0;
+  }
+  .hero-stage { min-height: 440px; }
+  .hero-stage::before { width: 380px; right: -18%; top: -4%; }
+  .hero-stage::after { width: 285px; right: -2%; top: 14%; }
+  .hero-stage-kicker { left: 24px; top: 24px; }
+  .hero-media--cutout {
+    inset: 6% -6% 0 6%;
+    transform: translateX(3%) scale(1.04);
+  }
+  .hero-hook-card {
+    left: 24px;
+    bottom: 22px;
+    width: min(330px, calc(100% - 48px));
+  }
+  .hero-orbit-word--one { right: 25%; }
+  .hero-orbit-word--two { right: 6%; }
+  .hero-orbit-word--three { display: none; }
+}
+
+@media (max-width: 480px) {
+  .hero-portrait--cutout,
+  .hero-stage { min-height: 390px; }
+  .hero-media--cutout { inset: 8% -12% 0 0; }
+  .hero-hook-card { padding: 14px; gap: 10px; }
+  .hero-hook-index { width: 30px; height: 30px; }
+  .hero-hook-card strong { font-size: 15px; }
+  .hero-hook-card p { font-size: 11px; }
+}

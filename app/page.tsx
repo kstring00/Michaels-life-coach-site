@@ -1,4 +1,5 @@
 import "./home.css";
+import "./hero-cutout.css";
 import { Hero } from "@/components/Hero";
 import { Doorways } from "@/components/Doorways";
 import { MichaelIntro } from "@/components/MichaelIntro";

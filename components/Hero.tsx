@@ -3,12 +3,6 @@ import { Portrait } from "./Portrait";
 import { Marquee } from "./Marquee";
 import { MaskedLines, Reveal } from "./motion-kit";
 
-/**
- * Light hero. Flat warm ground, brass accent, portrait bleeding to the right
- * edge of the viewport. No canvas, no pattern, no background animation — the
- * MaskedLines headline and the staggered reveal below it are the only motion.
- */
-
 /* thin line icons, drawn inline so the page pulls in no icon library */
 const icons = {
   clarity: (
@@ -81,12 +75,32 @@ export function Hero() {
           </Reveal>
         </div>
 
-        <div className="hero-portrait">
-          <div className="hero-media"><Portrait /></div>
-          <p className="hero-badge">Better<br />perspective<br />brighter<br />tomorrows</p>
-          <p className="hero-tags">
-            Life transitions<br />Identity<br />Purpose<br />Real progress
-          </p>
+        <div className="hero-portrait hero-portrait--cutout">
+          <div className="hero-stage">
+            <div className="hero-stage-kicker" aria-hidden="true">
+              <span>Current</span><i /> <b>Next chapter</b>
+            </div>
+
+            <div className="hero-orbit" aria-hidden="true">
+              <span className="hero-orbit-word hero-orbit-word--one">Clarity</span>
+              <span className="hero-orbit-word hero-orbit-word--two">Direction</span>
+              <span className="hero-orbit-word hero-orbit-word--three">Action</span>
+            </div>
+
+            <div className="hero-media hero-media--cutout"><Portrait /></div>
+
+            <div className="hero-hook-card">
+              <span className="hero-hook-index">01</span>
+              <p>
+                <strong>The next chapter doesn’t need every answer.</strong>
+                <span>It needs the next clear move.</span>
+              </p>
+            </div>
+
+            <div className="hero-stage-signature" aria-hidden="true">
+              Better perspective<br />Brighter tomorrows
+            </div>
+          </div>
         </div>
       </div>
 
