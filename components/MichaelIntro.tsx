@@ -43,35 +43,35 @@ export function MichaelIntro() {
             think through what you are experiencing, and support you as you decide what to do
             next.
           </p>
-
-          <dl className={styles.facts}>
-            <div className={styles.fact}>
-              <dt>Certified life coach</dt>
-              <dd>Certifying body</dd>
-              {/* TODO: awaiting answer from Michael */}
-              <TodoNote heading="Ask Michael">
-                Which certification, and from whom? ICF, a named program,
-                ministry-affiliated? This is the most load-bearing unverified claim on the
-                site — right now it sits alone and the thinness shows.
-              </TodoNote>
-            </div>
-
-            <div className={styles.fact}>
-              <dt>Ministry background</dt>
-              <dd>Undergraduate study in ministry; years of leadership and mentoring work</dd>
-              {/* TODO: awaiting answer from Michael */}
-              <TodoNote heading="Ask Michael">
-                How many years, and doing what specifically? A number here is worth more
-                than the whole sentence.
-              </TodoNote>
-            </div>
-
-            <div className={styles.fact}>
-              <dt>Fully virtual</dt>
-              <dd>Weekly 60-minute sessions, structured over 12 weeks</dd>
-            </div>
-          </dl>
         </div>
+
+        <dl className={styles.facts}>
+          <div className={styles.fact}>
+            <dt>Certified life coach</dt>
+            <dd>Certifying body</dd>
+            {/* TODO: awaiting answer from Michael */}
+            <TodoNote heading="Ask Michael">
+              Which certification, and from whom? ICF, a named program,
+              ministry-affiliated? This is the most load-bearing unverified claim on the
+              site — right now it sits alone and the thinness shows.
+            </TodoNote>
+          </div>
+
+          <div className={styles.fact}>
+            <dt>Ministry background</dt>
+            <dd>Undergraduate study in ministry; years of leadership and mentoring work</dd>
+            {/* TODO: awaiting answer from Michael */}
+            <TodoNote heading="Ask Michael">
+              How many years, and doing what specifically? A number here is worth more
+              than the whole sentence.
+            </TodoNote>
+          </div>
+
+          <div className={styles.fact}>
+            <dt>Fully virtual</dt>
+            <dd>Weekly 60-minute sessions, structured over 12 weeks</dd>
+          </div>
+        </dl>
       </div>
     </section>
   );
