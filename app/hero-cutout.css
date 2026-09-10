@@ -19,10 +19,11 @@
    ========================================================================== */
 
 .hero-portrait--cutout {
-  --hp-cream: #F5F1E8;
-  --hp-brass: #A8905C;
-  --hp-ink: #1F1D18;
-  --hp-ink-soft: #625C50;
+  --hp-cream: var(--cream);
+  --hp-blue: var(--blue);
+  --hp-blue-text: var(--blue-text);
+  --hp-ink: var(--ink);
+  --hp-ink-soft: var(--ink-70);
   /* vertical room the floating card needs once it stops overlapping him */
   --hp-card-reserve: 132px;
 
@@ -30,7 +31,7 @@
   min-height: 640px;
   overflow: hidden;
   isolation: isolate;
-  border: 1px solid rgba(31, 29, 24, .10);
+  border: 1px solid rgba(25, 31, 34, .10);
   border-right: 0;
   border-radius: 28px 0 0 28px;
   background: var(--hp-cream);
@@ -50,8 +51,8 @@
   z-index: 0;
   background:
     radial-gradient(circle at 73% 20%,
-      rgba(168, 144, 92, .18) 0 13%,
-      rgba(168, 144, 92, .07) 30%,
+      rgba(53, 104, 246, .16) 0 13%,
+      rgba(53, 104, 246, .06) 30%,
       transparent 58%),
     var(--hp-cream);
 }
@@ -80,9 +81,9 @@
 .hero-ripple--3 { opacity: .78; }
 .hero-ripple--4 { opacity: .5; }
 
-/* the narrow brass accent that carries the diagram into him and out of frame */
+/* the narrow blue accent that carries the diagram into him and out of frame */
 .hero-lines-path {
-  stroke: rgba(168, 144, 92, .62);
+  stroke: rgba(53, 104, 246, .58);
   stroke-width: 2;
   stroke-linecap: round;
 }
@@ -110,7 +111,7 @@
   display: block;
   width: 58px;
   height: 1px;
-  background: var(--hp-brass);
+  background: var(--hp-blue);
 }
 .hero-stage-kicker i::after {
   content: "";
@@ -119,8 +120,8 @@
   top: 50%;
   width: 7px;
   height: 7px;
-  border-top: 1px solid var(--hp-brass);
-  border-right: 1px solid var(--hp-brass);
+  border-top: 1px solid var(--hp-blue-text);
+  border-right: 1px solid var(--hp-blue-text);
   transform: translateY(-50%) rotate(45deg);
 }
 .hero-stage-kicker b { color: var(--hp-ink); font-weight: 780; }
@@ -155,7 +156,7 @@
   height: 8px;
   border: 3px solid var(--hp-cream);
   border-radius: 50%;
-  background: var(--hp-brass);
+  background: var(--hp-blue);
   transform: translateY(-50%);
 }
 .hero-orbit-node--one   { left: 34%; top: 26%; }
@@ -203,10 +204,10 @@
   align-items: start;
   width: min(57%, 435px);
   padding: 20px 22px;
-  border: 1px solid rgba(31, 29, 24, .12);
+  border: 1px solid rgba(25, 31, 34, .12);
   border-radius: 18px;
   background: rgba(245, 241, 232, .85);
-  box-shadow: 0 20px 50px rgba(31, 29, 24, .10);
+  box-shadow: 0 20px 50px rgba(25, 31, 34, .10);
   -webkit-backdrop-filter: blur(12px);
   backdrop-filter: blur(12px);
 }
@@ -215,9 +216,9 @@
   place-items: center;
   width: 38px;
   height: 38px;
-  border: 1px solid var(--hp-brass);
+  border: 1px solid var(--hp-blue-soft, rgba(53,104,246,.26));
   border-radius: 50%;
-  color: #806B40;
+  color: var(--hp-blue-text);
   font-size: .65rem;
   font-weight: 760;
   letter-spacing: .04em;
@@ -273,15 +274,15 @@
     width: auto;
     margin-left: 0;
     min-height: 540px;
-    border-right: 1px solid rgba(31, 29, 24, .10);
+    border-right: 1px solid rgba(25, 31, 34, .10);
     border-radius: 24px;
   }
 
   .hero-stage {
     background:
       radial-gradient(circle at 72% 24%,
-        rgba(168, 144, 92, .18) 0 15%,
-        rgba(168, 144, 92, .07) 32%,
+        rgba(53, 104, 246, .16) 0 15%,
+        rgba(53, 104, 246, .06) 32%,
         transparent 60%),
       var(--hp-cream);
   }
@@ -353,7 +354,7 @@
     top: 44%;
     width: min(128%, 460px);
   }
-  .hero-ripple--3 { stroke: rgba(168, 144, 92, .3); }
+  .hero-ripple--3 { stroke: rgba(53, 104, 246, .28); }
 
   .hero-hook-card {
     left: 16px;

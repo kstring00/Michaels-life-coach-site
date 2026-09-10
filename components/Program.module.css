@@ -13,15 +13,17 @@
    =========================================================================== */
 
 .section {
-  --p-cream: #F5F1E8;
-  --p-card: #FBF9F3;
-  --p-sand: #EDE6D8;
-  --p-brass: #A8905C;
-  --p-ink: #1F1D18;
-  --p-ink-70: rgba(31, 29, 24, .70);
-  --p-ink-45: rgba(31, 29, 24, .45);
-  --p-brass-soft: rgba(168, 144, 92, .22);
-  --p-hairline: rgba(31, 29, 24, .10);
+  --p-cream: var(--cream);
+  --p-card: var(--card);
+  --p-mist: var(--mist);
+  /* the split: --p-blue fills, --p-blue-text is anything at body size or under */
+  --p-blue: var(--blue);
+  --p-blue-text: var(--blue-text);
+  --p-ink: var(--ink);
+  --p-ink-70: var(--ink-70);
+  --p-ink-45: var(--ink-45);
+  --p-blue-soft: var(--blue-soft);
+  --p-hairline: var(--hair);
   --p-node: 2.6rem;
   --p-node-col: 5rem;
   --p-ease: cubic-bezier(.22, .61, .36, 1);
@@ -49,7 +51,7 @@
 
 .kicker {
   margin: 0 0 1rem;
-  color: var(--p-brass);
+  color: var(--p-blue-text);
   font-size: .7rem;
   font-weight: 760;
   letter-spacing: .2em;
@@ -131,9 +133,9 @@
   /* the leading edge softens instead of stopping hard */
   background: linear-gradient(
     to bottom,
-    var(--p-brass) 0%,
-    var(--p-brass) 78%,
-    var(--p-brass-soft) 100%
+    var(--p-blue) 0%,
+    var(--p-blue) 78%,
+    var(--p-blue-soft) 100%
   );
 }
 
@@ -182,8 +184,8 @@
 .node svg { width: 1rem; height: 1rem; }
 
 .isLit .node {
-  border-color: var(--p-brass);
-  background: var(--p-brass);
+  border-color: var(--p-blue);
+  background: var(--p-blue);
   color: #fff;
   transform: scale(1.07);
 }
@@ -207,7 +209,7 @@
 .isLit .panel {
   opacity: 1;
   transform: translateX(0);
-  box-shadow: 0 16px 40px -28px rgba(31, 29, 24, .3);
+  box-shadow: 0 16px 40px -28px rgba(25, 31, 34, .3);
 }
 
 .panel h3 {
@@ -227,8 +229,8 @@
 .outcome {
   margin-top: 1.2rem !important;
   padding-top: .95rem;
-  border-top: 1px solid var(--p-brass-soft);
-  color: var(--p-brass) !important;
+  border-top: 1px solid var(--p-blue-soft);
+  color: var(--p-blue-text) !important;
   font-size: .63rem !important;
   font-weight: 760;
   letter-spacing: .17em;
@@ -256,7 +258,7 @@
 
 .markerTime {
   margin: 0;
-  color: var(--p-brass);
+  color: var(--p-blue-text);
   font-family: Georgia, "Times New Roman", serif;
   font-size: 1.95rem;
   font-weight: 400;
@@ -278,7 +280,7 @@
   display: grid;
   grid-template-columns: 1fr var(--p-node-col) 1fr;
 }
-.nodeEnd { color: var(--p-brass); }
+.nodeEnd { color: var(--p-blue-text); }
 .terminus.isLit .nodeEnd { color: #fff; }
 
 /* --- what you walk away with -------------------------------------------- */
@@ -288,7 +290,7 @@
   padding: 2rem 2.25rem 2.1rem;
   border: 1px solid var(--p-hairline);
   border-radius: 17px;
-  background: var(--p-sand);
+  background: var(--p-mist);
   opacity: .32;
   transform: translateY(14px);
   transition: opacity .65s var(--p-ease), transform .65s var(--p-ease);
@@ -326,7 +328,7 @@
   width: 5px;
   height: 5px;
   border-radius: 50%;
-  background: var(--p-brass);
+  background: var(--p-blue-text);
   transform: translateY(-2px);
 }
 /* label and description are separate blocks — same glued-together bug as the

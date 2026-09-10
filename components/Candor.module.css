@@ -4,14 +4,14 @@
    =========================================================================== */
 
 .section {
-  --c-cream: #F5F1E8;
-  --c-sand: #EDE6D8;
-  --c-brass: #A8905C;
-  --c-ink: #1F1D18;
-  --c-ink-70: rgba(31, 29, 24, .70);
+  --c-cream: var(--cream);
+  --c-mist: var(--mist);
+  --c-blue-text: var(--blue-text);
+  --c-ink: var(--ink);
+  --c-ink-70: var(--ink-70);
 
   padding-block: clamp(3.5rem, 6vw, 5.5rem);
-  background: var(--c-sand);
+  background: var(--c-mist);
   color: var(--c-ink);
 }
 
@@ -28,7 +28,7 @@
 
 .kicker {
   margin: 0 0 1rem;
-  color: var(--c-brass);
+  color: var(--c-blue-text);
   font-size: .7rem;
   font-weight: 760;
   letter-spacing: .2em;
@@ -53,7 +53,7 @@
 
 .card {
   padding: 2rem 1.9rem 2.1rem;
-  border: 1px solid rgba(31, 29, 24, .07);
+  border: 1px solid rgba(25, 31, 34, .07);
   border-radius: 16px;
   background: var(--c-cream);
 }

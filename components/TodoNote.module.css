@@ -3,14 +3,14 @@
 .note {
   margin-top: .85rem;
   padding: .8rem .95rem;
-  border: 1px dashed rgba(168, 144, 92, .75);
+  border: 1px dashed var(--blue-soft);
   border-radius: 9px;
-  background: rgba(168, 144, 92, .08);
+  background: var(--blue-wash);
 }
 
 .heading {
   margin: 0 0 .35rem;
-  color: #A8905C;
+  color: var(--blue-text);
   font-family: inherit;
   font-size: .63rem;
   font-style: normal;
@@ -21,7 +21,7 @@
 
 .body {
   margin: 0;
-  color: rgba(31, 29, 24, .6);
+  color: var(--ink-70);
   font-size: .8rem;
   font-style: italic;
   line-height: 1.55;

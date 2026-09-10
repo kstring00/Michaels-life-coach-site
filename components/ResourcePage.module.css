@@ -5,14 +5,15 @@
    =========================================================================== */
 
 .page {
-  --r-cream: #F5F1E8;
-  --r-sand: #EDE6D8;
-  --r-brass: #A8905C;
-  --r-ink: #1F1D18;
-  --r-ink-70: rgba(31, 29, 24, .70);
-  --r-ink-45: rgba(31, 29, 24, .45);
-  --r-brass-soft: rgba(168, 144, 92, .28);
-  --r-hairline: rgba(31, 29, 24, .10);
+  --r-cream: var(--cream);
+  --r-mist: var(--mist);
+  --r-blue: var(--blue);
+  --r-blue-text: var(--blue-text);
+  --r-ink: var(--ink);
+  --r-ink-70: var(--ink-70);
+  --r-ink-45: var(--ink-45);
+  --r-blue-soft: var(--blue-soft);
+  --r-hairline: var(--hair);
 
   padding: 5.5rem 1.5rem 6rem;
   background: var(--r-cream);
@@ -24,13 +25,13 @@
   max-width: 680px;
   margin: 0 auto 2.5rem;
   padding: 1rem 1.15rem;
-  border: 1px dashed rgba(168, 144, 92, .75);
+  border: 1px dashed var(--r-blue-soft);
   border-radius: 10px;
-  background: rgba(168, 144, 92, .09);
+  background: var(--blue-wash);
 }
 .draftHeading {
   margin: 0 0 .4rem;
-  color: var(--r-brass);
+  color: var(--r-blue-text);
   font-size: .65rem;
   font-style: normal;
   font-weight: 600;
@@ -39,7 +40,7 @@
 }
 .draftBody {
   margin: 0;
-  color: rgba(31, 29, 24, .62);
+  color: var(--r-ink-70);
   font-size: .85rem;
   font-style: italic;
   line-height: 1.6;
@@ -56,7 +57,7 @@
 
 .kicker {
   margin: 0 0 .9rem;
-  color: var(--r-brass);
+  color: var(--r-blue-text);
   font-size: .7rem;
   font-weight: 760;
   letter-spacing: .2em;
@@ -84,11 +85,11 @@
   margin-top: 2.5rem;
   padding: 1.5rem 1.65rem;
   border-radius: 14px;
-  background: var(--r-sand);
+  background: var(--r-mist);
 }
 .howToLabel {
   margin: 0 0 .6rem;
-  color: var(--r-brass);
+  color: var(--r-blue-text);
   font-size: .65rem;
   font-weight: 760;
   letter-spacing: .16em;
@@ -120,7 +121,7 @@
   position: absolute;
   left: 0;
   top: .35rem;
-  color: var(--r-brass);
+  color: var(--r-blue-text);
   font-size: .75rem;
   font-weight: 600;
   letter-spacing: .08em;
@@ -132,7 +133,7 @@
   bottom: 1.1rem;
   width: 1.6rem;
   height: 1px;
-  background: var(--r-brass-soft);
+  background: var(--r-blue-soft);
 }
 .questions li:last-child { padding-bottom: 0; }
 .questions li:last-child::after { content: none; }
@@ -169,11 +170,11 @@
   display: inline-block;
   margin-top: 1.25rem;
   padding-bottom: .2rem;
-  border-bottom: 1px solid var(--r-brass-soft);
-  color: var(--r-brass);
+  border-bottom: 1px solid var(--r-blue-soft);
+  color: var(--r-blue-text);
   font-size: .92rem;
 }
-.closeLink:hover { border-bottom-color: var(--r-brass); }
+.closeLink:hover { color: var(--r-blue); border-bottom-color: var(--r-blue); }
 
 .footerLine {
   margin-top: 4rem;
@@ -184,7 +185,7 @@
   line-height: 1.7;
 }
 .footerLine a {
-  color: var(--r-brass);
+  color: var(--r-blue-text);
   text-decoration: underline;
   text-underline-offset: 3px;
 }

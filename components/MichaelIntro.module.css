@@ -5,14 +5,15 @@
    =========================================================================== */
 
 .section {
-  --a-cream: #F5F1E8;
-  --a-sand: #EDE6D8;
-  --a-brass: #A8905C;
-  --a-ink: #1F1D18;
-  --a-ink-70: rgba(31, 29, 24, .70);
-  --a-ink-45: rgba(31, 29, 24, .45);
-  --a-brass-soft: rgba(168, 144, 92, .22);
-  --a-hairline: rgba(31, 29, 24, .10);
+  --a-cream: var(--cream);
+  /* the portrait sits on mist, not a warm neutral */
+  --a-mist: var(--mist);
+  --a-blue-text: var(--blue-text);
+  --a-ink: var(--ink);
+  --a-ink-70: var(--ink-70);
+  --a-ink-45: var(--ink-45);
+  --a-blue-soft: var(--blue-soft);
+  --a-hairline: var(--hair);
 
   padding-block: clamp(4rem, 7vw, 6.5rem);
   background: var(--a-cream);
@@ -35,7 +36,7 @@
   aspect-ratio: 4 / 5;
   margin: 0;
   border-radius: 18px;
-  background: var(--a-sand);
+  background: var(--a-mist);
 }
 
 /* offset outline: a thin brass rectangle sitting down and to the right */
@@ -44,7 +45,7 @@
   position: absolute;
   inset: 14px -14px -14px 14px;
   z-index: -1;
-  border: 1px solid var(--a-brass-soft);
+  border: 1px solid var(--a-blue-soft);
   border-radius: 18px;
   pointer-events: none;
 }
@@ -64,7 +65,7 @@
 /* --- copy --------------------------------------------------------------- */
 .kicker {
   margin: 0 0 1rem;
-  color: var(--a-brass);
+  color: var(--a-blue-text);
   font-size: .7rem;
   font-weight: 760;
   letter-spacing: .2em;

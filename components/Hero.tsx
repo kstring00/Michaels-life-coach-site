@@ -100,8 +100,8 @@ export function Hero() {
                     that finish in open field instead of behind him */}
                 <linearGradient id="hero-ripple-fade" gradientUnits="userSpaceOnUse"
                   x1="0" y1="-46" x2="0" y2="-8">
-                  <stop offset="0" stopColor="#A8905C" stopOpacity="0" />
-                  <stop offset="1" stopColor="#A8905C" stopOpacity=".45" />
+                  <stop offset="0" stopColor="#3568F6" stopOpacity="0" />
+                  <stop offset="1" stopColor="#3568F6" stopOpacity=".45" />
                 </linearGradient>
               </defs>
               {ripples.map(({ r, d }, i) => (

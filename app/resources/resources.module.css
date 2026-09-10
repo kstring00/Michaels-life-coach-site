@@ -1,12 +1,13 @@
 /* Index for the free question sets. Light on purpose — a parent, not a stop. */
 .page {
-  --r-cream: #F5F1E8;
-  --r-brass: #A8905C;
-  --r-ink: #1F1D18;
-  --r-ink-70: rgba(31, 29, 24, .70);
-  --r-ink-45: rgba(31, 29, 24, .45);
-  --r-brass-soft: rgba(168, 144, 92, .28);
-  --r-hairline: rgba(31, 29, 24, .10);
+  --r-cream: var(--cream);
+  --r-blue: var(--blue);
+  --r-blue-text: var(--blue-text);
+  --r-ink: var(--ink);
+  --r-ink-70: var(--ink-70);
+  --r-ink-45: var(--ink-45);
+  --r-blue-soft: var(--blue-soft);
+  --r-hairline: var(--hair);
 
   padding: 5.5rem 1.5rem 6rem;
   background: var(--r-cream);
@@ -20,7 +21,7 @@
 }
 .kicker {
   margin: 0 0 .9rem;
-  color: var(--r-brass);
+  color: var(--r-blue-text);
   font-size: .7rem;
   font-weight: 760;
   letter-spacing: .2em;
@@ -63,7 +64,7 @@
 
 .rowKicker {
   display: block;
-  color: var(--r-brass);
+  color: var(--r-blue-text);
   font-size: .7rem;
   font-weight: 760;
   letter-spacing: .17em;
@@ -82,7 +83,7 @@
 .list a:hover .rowTitle,
 .list a:focus-visible .rowTitle {
   transform: translateX(4px);
-  border-bottom-color: var(--r-brass);
+  border-bottom-color: var(--r-blue-text);
 }
 .rowTeaser {
   display: block;
@@ -110,11 +111,11 @@
   display: inline-block;
   margin-top: 1.25rem;
   padding-bottom: .2rem;
-  border-bottom: 1px solid var(--r-brass-soft);
-  color: var(--r-brass);
+  border-bottom: 1px solid var(--r-blue-soft);
+  color: var(--r-blue-text);
   font-size: .92rem;
 }
-.closeLink:hover { border-bottom-color: var(--r-brass); }
+.closeLink:hover { color: var(--r-blue); border-bottom-color: var(--r-blue); }
 .closeLink:focus-visible {
   outline: 2px solid var(--r-ink);
   outline-offset: 3px;
