@@ -7,47 +7,41 @@ import styles from "./Program.module.css";
 const format = [
   ["Fully virtual", "We meet wherever you are"],
   ["60-minute sessions", "Weekly, an hour at a time"],
-  ["12-week program", "Enough time to build real momentum"],
+  ["12-week program", "Enough time to build momentum"],
 ] as const;
 
-/* marker is split so the line break is content, not a CSS guess */
+/* Three stages, not four: the old consultation and pre-session steps are one
+   station now. marker is split so the line break is content, not a CSS guess. */
 const arc = [
   {
     marker: ["Before", "week one"],
-    markerDetail: "A free consultation, plus intake so I know who I am meeting.",
-    label: "Consultation and intake",
-    copy: "We start with a conversation. I want to understand what is going on in your life, what you want help with, and whether GrowthGains is the right program for you — before anyone signs anything.",
+    markerDetail: "Free consultation, intake, and prep.",
+    label: "Before we begin",
+    copy: "We talk first. I want to understand what’s going on and whether GrowthGains is right for you — before anyone signs anything. You’ll get short videos beforehand, so our first hour is spent on you and not on logistics.",
     outcome: "No pressure — we’ll see if it fits",
   },
   {
-    marker: ["The week", "before"],
-    markerDetail: "Short videos, sent ahead of time.",
-    label: "Pre-session clarity",
-    copy: "Before our first session I will send you videos explaining how the process works — so we do not spend our hour going over things that could have been explained beforehand. Our time gets spent on you.",
-    outcome: "You’ll know what to expect",
-  },
-  {
     marker: ["Week one"],
-    markerDetail: "Sixty minutes to set the focus for everything after it.",
-    label: "Session one",
-    copy: "This session is about establishing what we are focusing the twelve weeks on. What you want to understand, what you want to change, and what meaningful progress would actually look like for you.",
+    markerDetail: "Sixty minutes to set the focus.",
+    label: "Setting the focus",
+    copy: "We establish what the twelve weeks are for. What you want to understand, what you want to change, and what progress would actually look like for you.",
     outcome: "You leave with a direction",
   },
   {
     marker: ["Weeks", "two to twelve"],
-    markerDetail: "Ten sessions. Goals reviewed and revised as we go.",
-    label: "The work itself",
-    copy: "We listen, ask questions, reflect on what is happening, challenge thinking when it needs challenging, look at patterns, review goals, and build action steps together. Every week is different because every week of your life is different.",
+    markerDetail: "Ten sessions, building on each other.",
+    label: "The work",
+    copy: "Ten sessions. Questions, patterns, goals reviewed and revised. Every week is different because every week of your life is different.",
     outcome: "The work keeps moving",
   },
 ] as const;
 
 const tools = [
-  ["Reflection questions and exercises", "Prompts to keep thinking between sessions"],
-  ["Written SMART goals", "Weekly and for the whole journey, revised as needed"],
+  ["Reflection questions and exercises", "Prompts between sessions"],
+  ["Written SMART goals", "Weekly and overall, revised as needed"],
   ["A personal blueprint", "A map of your journey, built as you go"],
   ["Journaling", "During sessions and between them"],
-  ["Between-session access", "Reach out when something comes up day to day"],
+  ["Between-session access", "Reach out when something comes up"],
 ] as const;
 
 /* The read line: a station lights when its node crosses this fraction of the
@@ -133,18 +127,11 @@ export function Program() {
       <div className={styles.inner}>
         <header className={styles.head}>
           <p className={styles.kicker}>The coaching journey</p>
-          <h2 className={styles.title} id="program-heading">Twelve weeks, four stations.</h2>
+          <h2 className={styles.title} id="program-heading">Twelve weeks, three stages.</h2>
           <p className={styles.lede}>
-            Each session builds on the one before it. The structure exists so that we stay
-            connected to where you are trying to go — not so that every week looks the same.
+            Each session builds on the one before it. The structure keeps us connected to
+            where you’re trying to go.
           </p>
-
-          <figure className={styles.philosophy}>
-            <blockquote>
-              “I can help guide your journey, but I can’t take the journey for you.”
-            </blockquote>
-            <figcaption>Michael’s coaching philosophy</figcaption>
-          </figure>
         </header>
 
         <ul className={styles.meta}>
@@ -176,7 +163,7 @@ export function Program() {
                 </div>
 
                 {/* the gutter opposite the panel — without it half of every row
-                    is empty background, four times over */}
+                    is empty background, which is what read as unfinished */}
                 <div className={styles.marker}>
                   <p className={styles.markerTime}>
                     {step.marker.map((line, n) => (
