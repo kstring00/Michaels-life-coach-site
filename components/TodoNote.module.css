@@ -1,0 +1,28 @@
+/* Placeholder for an unverified fact. Deliberately looks unfinished — dashed,
+   tinted, italic — so it cannot be mistaken for shipped copy in review. */
+.note {
+  margin-top: .85rem;
+  padding: .8rem .95rem;
+  border: 1px dashed rgba(168, 144, 92, .75);
+  border-radius: 9px;
+  background: rgba(168, 144, 92, .08);
+}
+
+.heading {
+  margin: 0 0 .35rem;
+  color: #A8905C;
+  font-family: inherit;
+  font-size: .63rem;
+  font-style: normal;
+  font-weight: 600;
+  letter-spacing: .15em;
+  text-transform: uppercase;
+}
+
+.body {
+  margin: 0;
+  color: rgba(31, 29, 24, .6);
+  font-size: .8rem;
+  font-style: italic;
+  line-height: 1.55;
+}

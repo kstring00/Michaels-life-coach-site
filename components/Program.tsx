@@ -5,45 +5,54 @@ import { useLayoutEffect, useRef, useState } from "react";
 import styles from "./Program.module.css";
 
 const format = [
-  ["Fully virtual", "We meet wherever you are."],
-  ["60-minute sessions", "An hour to slow down and do the work."],
-  ["12-week program", "Enough time to build real momentum."],
+  ["Fully virtual", "We meet wherever you are"],
+  ["60-minute sessions", "Weekly, an hour at a time"],
+  ["12-week program", "Enough time to build real momentum"],
 ] as const;
 
+/* marker is split so the line break is content, not a CSS guess */
 const arc = [
   {
-    label: "Consultation & intake",
-    copy: "We start with a conversation. I want to understand what is going on in your life, what you want help with, and whether I am the right coach for you.",
-    outcome: "No pressure — we see if it fits",
+    marker: ["Before", "week one"],
+    markerDetail: "A free consultation, plus intake so I know who I am meeting.",
+    label: "Consultation and intake",
+    copy: "We start with a conversation. I want to understand what is going on in your life, what you want help with, and whether GrowthGains is the right program for you — before anyone signs anything.",
+    outcome: "No pressure — we’ll see if it fits",
   },
   {
+    marker: ["The week", "before"],
+    markerDetail: "Short videos, sent ahead of time.",
     label: "Pre-session clarity",
-    copy: "Before our first session, I will send you a few short videos so you know what to expect and we can spend our time talking about you, not logistics.",
-    outcome: "You will know what to expect",
+    copy: "Before our first session I will send you videos explaining how the process works — so we do not spend our hour going over things that could have been explained beforehand. Our time gets spent on you.",
+    outcome: "You’ll know what to expect",
   },
   {
+    marker: ["Week one"],
+    markerDetail: "Sixty minutes to set the focus for everything after it.",
     label: "Session one",
-    copy: "In our first session, we will get clear on what you want to understand, what you want to change, and what meaningful progress would look like for you.",
+    copy: "This session is about establishing what we are focusing the twelve weeks on. What you want to understand, what you want to change, and what meaningful progress would actually look like for you.",
     outcome: "You leave with a direction",
   },
   {
-    label: "Weeks two through twelve",
-    copy: "From there, we keep building. I will ask questions, help you notice patterns, challenge your thinking when needed, and help you turn insight into practical action.",
+    marker: ["Weeks", "two to twelve"],
+    markerDetail: "Ten sessions. Goals reviewed and revised as we go.",
+    label: "The work itself",
+    copy: "We listen, ask questions, reflect on what is happening, challenge thinking when it needs challenging, look at patterns, review goals, and build action steps together. Every week is different because every week of your life is different.",
     outcome: "The work keeps moving",
   },
 ] as const;
 
 const tools = [
-  ["Reflection questions & exercises", "Prompts to keep thinking between sessions."],
-  ["Written SMART goals", "Your next steps, put in writing."],
-  ["A personal blueprint", "A map of what you are learning about yourself."],
-  ["Journaling", "A place to process what is changing."],
-  ["Between-session access", "You can reach out when something comes up."],
+  ["Reflection questions and exercises", "Prompts to keep thinking between sessions"],
+  ["Written SMART goals", "Weekly and for the whole journey, revised as needed"],
+  ["A personal blueprint", "A map of your journey, built as you go"],
+  ["Journaling", "During sessions and between them"],
+  ["Between-session access", "Reach out when something comes up day to day"],
 ] as const;
 
 /* The read line: a station lights when its node crosses this fraction of the
-   viewport. Everything below derives from it, so the fill line and the lit
-   stations can never disagree about where the reader is. */
+   viewport. The rail fill height comes off the same number, so the line and the
+   lit stations can never disagree about where the reader is. */
 const READ_LINE = 0.66;
 
 export function Program() {
@@ -77,14 +86,14 @@ export function Program() {
 
       const readLine = window.innerHeight * READ_LINE;
       const rect = spine.getBoundingClientRect();
-      const height = Math.max(0, Math.min(readLine - rect.top, rect.height));
-      fill.style.height = `${height}px`;
+      fill.style.height = `${Math.max(0, Math.min(readLine - rect.top, rect.height))}px`;
 
       let changed = false;
       for (let i = 0; i < next.length; i++) {
         const node = nodesRef.current[i];
         // recomputed from the live position every time, so scrolling back up
-        // un-lights rather than latching at max-scroll-reached
+        // un-lights. An IntersectionObserver with once:true would make the rail
+        // a progress bar you cannot rewind, which is the wrong metaphor here.
         const on = node ? node.getBoundingClientRect().top <= readLine : false;
         next[i] = on;
         if (on !== litRef.current[i]) changed = true;
@@ -118,7 +127,7 @@ export function Program() {
     <section className={styles.section} aria-labelledby="program-heading">
       {/* Without JS nothing ever lights, so the whole section is forced on. */}
       <noscript>
-        <style>{`.${styles.panel},.${styles.stub},.${styles.node},.${styles.deliverables}{opacity:1!important;transform:none!important}`}</style>
+        <style>{`.${styles.panel},.${styles.marker},.${styles.node},.${styles.deliverables}{opacity:1!important;transform:none!important}`}</style>
       </noscript>
 
       <div className={styles.inner}>
@@ -126,15 +135,15 @@ export function Program() {
           <p className={styles.kicker}>The coaching journey</p>
           <h2 className={styles.title} id="program-heading">Twelve weeks, four stations.</h2>
           <p className={styles.lede}>
-            I built this 12-week process around the way I coach: understand the whole person,
-            get clear on what matters, and turn that clarity into practical movement.
+            Each session builds on the one before it. The structure exists so that we stay
+            connected to where you are trying to go — not so that every week looks the same.
           </p>
 
           <figure className={styles.philosophy}>
             <blockquote>
               “I can help guide your journey, but I can’t take the journey for you.”
             </blockquote>
-            <figcaption>My coaching philosophy</figcaption>
+            <figcaption>Michael’s coaching philosophy</figcaption>
           </figure>
         </header>
 
@@ -154,16 +163,29 @@ export function Program() {
             <span className={styles.railFill} ref={railFillRef} />
           </div>
 
+          {/* sides come from :nth-of-type in CSS, so the rail and terminus
+              sitting in this track cannot throw the counting off */}
           <ol className={styles.stations}>
             {arc.map((step, i) => (
               <li
                 key={step.label}
-                className={`${styles.station} ${i % 2 === 0 ? styles.left : styles.right} ${lit[i] ? styles.isLit : ""}`}
+                className={`${styles.station} ${lit[i] ? styles.isLit : ""}`}
               >
                 <div className={styles.node} aria-hidden="true" ref={setNode(i)}>
                   <span>{String(i + 1).padStart(2, "0")}</span>
                 </div>
-                <span className={styles.stub} aria-hidden="true" />
+
+                {/* the gutter opposite the panel — without it half of every row
+                    is empty background, four times over */}
+                <div className={styles.marker}>
+                  <p className={styles.markerTime}>
+                    {step.marker.map((line, n) => (
+                      <span key={line}>{n > 0 && <br />}{line}</span>
+                    ))}
+                  </p>
+                  <p className={styles.markerDetail}>{step.markerDetail}</p>
+                </div>
+
                 <article className={styles.panel}>
                   <h3>{step.label}</h3>
                   <p>{step.copy}</p>
@@ -200,11 +222,19 @@ export function Program() {
           </ul>
         </div>
 
-        <div className={styles.closing}>
-          <p>Twelve weeks from now, the question you are sitting with could be a decision you already made.</p>
-          <Link className="button" href="#consultation">
+        <div className={styles.close}>
+          <figure>
+            <blockquote>
+              When I look in the mirror, I can confidently know I did the work to create the
+              change I wanted in my own life.
+            </blockquote>
+            <figcaption>What Michael hopes you can say at week twelve</figcaption>
+          </figure>
+
+          <Link className={`button ${styles.cta}`} href="#consultation">
             Book a free consultation <span className="arrow" aria-hidden="true">→</span>
           </Link>
+          <p className={styles.closeNote}>Free. Nothing is signed on the call.</p>
         </div>
       </div>
     </section>
