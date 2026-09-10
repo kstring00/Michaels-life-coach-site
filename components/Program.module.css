@@ -1,350 +1,406 @@
+/* ===========================================================================
+   THE COACHING JOURNEY — light centre-spine timeline
+   ---------------------------------------------------------------------------
+   Four stations on one vertical line running down the middle of the container,
+   panels alternating left and right. The only motion is the spine filling as
+   you scroll, because the spine is the content: a process you move through.
+   Everything is driven off a single read line at 66% of the viewport, so the
+   fill height and the lit stations can never disagree.
+   =========================================================================== */
+
 .section {
+  --p-cream: #F5F1E8;
+  --p-card: #FBF9F3;
+  --p-sand: #EDE6D8;
+  --p-brass: #A8905C;
+  --p-ink: #1F1D18;
+  --p-ink-soft: #625C50;
+  --p-hairline: rgba(31, 29, 24, .12);
+  --p-node: 2.9rem;
+  --p-ease: cubic-bezier(.22, .61, .36, 1);
+
   position: relative;
-  isolation: isolate;
-  overflow: hidden;
-  padding: clamp(3.4rem, 5vw, 4.8rem) 0 clamp(3rem, 4.8vw, 4.2rem);
-  background:
-    var(--surface-dark);
-  color: var(--paper);
+  /* unlit panels sit 18px further out than their resting position; clip so
+     that offset can never open a horizontal scrollbar */
+  overflow-x: clip;
+  padding-block: clamp(4rem, 7vw, 6.5rem);
+  background: var(--p-cream);
+  color: var(--p-ink);
 }
 
 .inner {
-  width: min(calc(100% - 48px), 1440px);
+  width: min(calc(100% - 48px), 1120px);
   margin-inline: auto;
-  position: relative;
-  z-index: 1;
 }
 
-.top {
-  display: grid;
-  grid-template-columns: minmax(0, 1.15fr) minmax(18rem, .85fr);
-  gap: clamp(2rem, 5vw, 5.5rem);
-  align-items: end;
+/* --- header ------------------------------------------------------------- */
+.head {
+  max-width: 48rem;
+  margin-inline: auto;
+  text-align: center;
 }
 
-.eyebrow {
-  display: inline-flex;
-  align-items: center;
-  gap: .9rem;
-  margin: 0 0 .85rem;
-  color: var(--accent);
-  font-size: var(--step-small);
+.kicker {
+  margin: 0 0 1rem;
+  color: var(--p-brass);
+  font-size: .7rem;
   font-weight: 760;
-  letter-spacing: 0.19em;
+  letter-spacing: .2em;
   text-transform: uppercase;
-}
-
-.eyebrow::after {
-  content: "";
-  width: 3.4rem;
-  height: 1px;
-  background: var(--accent);
 }
 
 .title {
   margin: 0;
-  max-width: 12ch;
-  color: var(--paper);
   font-family: Georgia, "Times New Roman", serif;
-  font-size: clamp(2.8rem, 5vw, 5.1rem);
+  font-size: var(--step-h2);
   font-weight: 400;
-  line-height: .92;
-  letter-spacing: -.045em;
-}
-
-.title em {
-  color: var(--accent);
-  font-weight: 400;
+  letter-spacing: -.02em;
+  line-height: 1.02;
 }
 
 .lede {
-  max-width: 48rem;
-  margin: 1rem 0 0;
-  color: var(--paper-secondary);
-  font-size: clamp(.98rem, 1.18vw, 1.08rem);
-  line-height: 1.6;
+  max-width: 52ch;
+  margin: 1.15rem auto 0;
+  color: var(--p-ink-soft);
+  font-size: var(--step-body);
+  line-height: 1.62;
 }
 
-.quote {
-  justify-self: end;
-  width: min(100%, 29rem);
-  padding: 1.25rem 1.35rem 1.25rem 1.55rem;
-  border-left: 1px solid var(--accent);
-  background: transparent;
+/* the philosophy line used to float in the top-right, unattached to anything */
+.philosophy {
+  max-width: 32ch;
+  margin: clamp(2rem, 4vw, 2.75rem) auto 0;
+  padding-top: clamp(1.5rem, 3vw, 2rem);
+  border-top: 1px solid var(--p-hairline);
 }
-
-.quote p {
+.philosophy blockquote {
   margin: 0;
-  color: var(--paper);
+  color: var(--p-ink);
   font-family: Georgia, "Times New Roman", serif;
-  font-size: clamp(1.12rem, 1.65vw, 1.45rem);
+  font-size: clamp(1.1rem, 1.6vw, 1.35rem);
   font-style: italic;
-  line-height: 1.35;
+  line-height: 1.4;
+  text-wrap: balance;
 }
-
-.quote span {
-  display: block;
-  margin-top: .7rem;
-  color: var(--paper-secondary);
-  font-size: .67rem;
-  font-weight: 700;
-  letter-spacing: .17em;
+.philosophy figcaption {
+  margin-top: .85rem;
+  color: var(--p-ink-soft);
+  font-size: .64rem;
+  font-weight: 760;
+  letter-spacing: .19em;
   text-transform: uppercase;
 }
 
-.format {
+/* --- meta strip --------------------------------------------------------- */
+.meta {
   display: flex;
   flex-wrap: wrap;
-  gap: .7rem;
-  margin-top: clamp(1.6rem, 2.6vw, 2.2rem);
+  justify-content: center;
+  margin: clamp(2.5rem, 5vw, 3.5rem) 0 0;
+  padding: 0;
+  list-style: none;
+  text-align: center;
 }
-
-.fact {
-  display: inline-flex;
-  align-items: center;
-  gap: .65rem;
-  min-height: 2.7rem;
-  padding: .55rem .95rem;
-  border: 1px solid var(--rule-dark);
-  border-radius: 999px;
-  background: transparent;
-  color: var(--paper);
+.meta li {
+  flex: 0 1 15rem;
+  padding-inline: clamp(1rem, 2.4vw, 2rem);
+  border-left: 1px solid var(--p-hairline);
 }
-
-/* icons stay in the secondary tier everywhere — gold is reserved so that
-   only one element per viewport carries it (rule 1) */
-.factIcon {
-  width: 1.6rem;
-  height: 1.6rem;
-  display: grid;
-  place-items: center;
-  color: var(--paper-secondary);
-}
-
-.factIcon svg,
-.stepIcon svg,
-.toolIcon svg {
-  width: 1.15rem;
-  height: 1.15rem;
-  fill: none;
-  stroke: currentColor;
-  stroke-width: 1.7;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-}
-
-.fact strong {
-  color: var(--paper);
-  font-size: .78rem;
-  font-weight: 700;
-}
-
-.fact small {
-  color: var(--paper-secondary);
-  font-size: .72rem;
-}
-
-.journey {
-  position: relative;
-  margin-top: clamp(2.2rem, 4vw, 3.4rem);
-}
-
-.pathLine {
-  position: absolute;
-  z-index: 0;
-  left: 4.25%;
-  right: 4.25%;
-  top: 1.55rem;
-  height: 1px;
-  background: var(--rule-dark);
-}
-
-.pathLine::after {
-  content: "";
-  position: absolute;
-  right: -.1rem;
-  top: 50%;
-  width: .42rem;
-  height: .42rem;
-  border-top: 1px solid var(--accent);
-  border-right: 1px solid var(--accent);
-  transform: translateY(-50%) rotate(45deg);
-}
-
-.steps {
-  position: relative;
-  z-index: 1;
-  display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: .9rem;
-}
-
-.step {
-  position: relative;
-  min-height: 19rem;
-  padding: 3.1rem 1.35rem 1.3rem;
-  border: 1px solid var(--paper-secondary);
-  border-radius: 1rem;
-  background:
-    transparent;
-}
-
-.stepNumber {
-  position: absolute;
-  left: 1.25rem;
-  top: -.02rem;
-  width: 3.15rem;
-  height: 3.15rem;
-  display: grid;
-  place-items: center;
-  border: 1px solid var(--accent);
-  border-radius: 50%;
-  background: var(--surface-dark);
-  color: var(--accent);
-  font-size: .78rem;
-  font-weight: 800;
-  letter-spacing: .08em;
-  box-shadow: 0 0 0 5px var(--surface-dark);
-}
-
-.stepIcon {
-  width: 1.6rem;
-  height: 1.6rem;
-  display: grid;
-  place-items: center;
-  margin-bottom: 1rem;
-  color: var(--paper-secondary);
-}
-
-.step h3 {
-  margin: 0;
-  color: var(--paper);
-  font-family: Georgia, "Times New Roman", serif;
-  font-size: clamp(1.28rem, 1.55vw, 1.62rem);
-  font-weight: 400;
-  line-height: 1.12;
-  letter-spacing: -.025em;
-}
-
-.step p {
-  margin: .8rem 0 0;
-  color: var(--paper-secondary);
-  font-size: .89rem;
-  line-height: 1.58;
-}
-
-.stepTag {
+.meta li:first-child { border-left: 0; }
+/* block, not inline — as two inline elements these rendered glued together
+   ("Fully virtualWe meet wherever you are") */
+.meta strong {
   display: block;
-  margin-top: 1rem;
-  padding-top: .85rem;
-  border-top: 1px solid var(--accent);
-  color: var(--accent);
-  font-size: .61rem;
-  font-weight: 730;
-  letter-spacing: .17em;
-  text-transform: uppercase;
+  font-size: .82rem;
+  font-weight: 750;
+  letter-spacing: .04em;
+}
+.meta span {
+  display: block;
+  margin-top: .4rem;
+  color: var(--p-ink-soft);
+  font-size: .8rem;
+  line-height: 1.5;
 }
 
-.tools {
-  display: grid;
-  grid-template-columns: minmax(15rem, .7fr) minmax(0, 1.3fr);
-  gap: clamp(1.5rem, 4vw, 4rem);
-  align-items: center;
-  margin-top: clamp(1.8rem, 3.1vw, 2.6rem);
-  padding-top: clamp(1.6rem, 2.5vw, 2.1rem);
-  border-top: 1px solid var(--paper-secondary);
+/* --- the spine ---------------------------------------------------------- */
+.spine {
+  position: relative;
+  margin-top: clamp(3.5rem, 6vw, 5rem);
 }
 
-.toolsEyebrow {
-  margin: 0 0 .45rem;
-  color: var(--paper-secondary);
-  font-size: .63rem;
-  font-weight: 760;
-  letter-spacing: .18em;
-  text-transform: uppercase;
+.rail {
+  position: absolute;
+  left: 50%;
+  top: 0;
+  /* stop at the centre of the terminus node so the line ends on the check */
+  bottom: calc(var(--p-node) / 2);
+  width: 1px;
+  transform: translateX(-50%);
+  background: rgba(31, 29, 24, .1);
+  pointer-events: none;
+}
+.railFill {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 1px;
+  height: 0;
+  /* the leading edge softens instead of ending in a hard stop */
+  background: linear-gradient(
+    to bottom,
+    var(--p-brass) 0%,
+    var(--p-brass) 78%,
+    rgba(168, 144, 92, .22) 100%
+  );
 }
 
-.tools h3 {
-  margin: 0;
-  max-width: 10ch;
-  color: var(--paper);
-  font-family: Georgia, "Times New Roman", serif;
-  font-size: clamp(1.75rem, 2.8vw, 2.65rem);
-  font-weight: 400;
-  line-height: .98;
-}
-
-.tools h3 em {
-  color: var(--accent);
-  font-weight: 400;
-}
-
-.toolList {
-  display: grid;
-  grid-template-columns: repeat(5, minmax(0, 1fr));
-  gap: .45rem;
+.stations {
   margin: 0;
   padding: 0;
   list-style: none;
 }
 
-.tool {
-  min-width: 0;
-  padding: .85rem .8rem;
-  border-left: 1px solid var(--paper-secondary);
-  text-align: center;
+.station {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr var(--p-node-col, 5.5rem) 1fr;
+  align-items: center;
+  padding-block: clamp(1.25rem, 2.4vw, 2rem);
 }
 
-.tool:first-child { border-left: 0; }
-
-.toolIcon {
-  width: 1.6rem;
-  height: 1.6rem;
+/* --- node --------------------------------------------------------------- */
+/* above the rail, with an opaque fill, so the line reads as passing behind it */
+.node {
+  position: relative;
+  z-index: 2;
+  grid-column: 2;
+  /* Both node and panel are pinned to row 1. Without this, sparse auto-flow
+     refuses to move the row cursor backwards, so a left panel (column 1)
+     placed after the node (column 2) lands in row 2 and drops below it. */
+  grid-row: 1;
+  justify-self: center;
   display: grid;
   place-items: center;
-  margin: 0 auto .65rem;
-  color: var(--paper-secondary);
+  width: var(--p-node);
+  height: var(--p-node);
+  border: 1px solid var(--p-hairline);
+  border-radius: 50%;
+  background: var(--p-cream);
+  color: var(--p-ink-soft);
+  font-size: .72rem;
+  font-weight: 760;
+  letter-spacing: .04em;
+  transition:
+    background .7s var(--p-ease),
+    border-color .7s var(--p-ease),
+    color .7s var(--p-ease),
+    transform .7s cubic-bezier(.34, 1.4, .5, 1);
+}
+.node svg { width: 1.1rem; height: 1.1rem; }
+
+.isLit .node {
+  border-color: var(--p-brass);
+  background: var(--p-brass);
+  color: #fff;
+  transform: scale(1.07);
 }
 
-.tool strong {
-  display: block;
-  color: var(--paper);
-  font-size: .76rem;
-  font-weight: 680;
-  line-height: 1.32;
-  text-align: center;
+/* --- connector stub ----------------------------------------------------- */
+.stub {
+  position: absolute;
+  top: 50%;
+  z-index: 1;
+  width: 1.6rem;
+  height: 1px;
+  background: var(--p-brass);
+  opacity: 0;
+  transition: opacity .7s var(--p-ease);
+}
+.left .stub { right: calc(50% + var(--p-node) / 2); }
+.right .stub { left: calc(50% + var(--p-node) / 2); }
+.isLit .stub { opacity: .55; }
+
+/* --- panel -------------------------------------------------------------- */
+.panel {
+  grid-row: 1;
+  padding: 2rem;
+  border: 1px solid var(--p-hairline);
+  border-radius: 16px;
+  background: var(--p-card);
+  opacity: .3;
+  transition:
+    opacity .7s var(--p-ease),
+    transform .7s var(--p-ease),
+    box-shadow .7s var(--p-ease);
+}
+.left .panel { grid-column: 1; transform: translateX(-18px); }
+.right .panel { grid-column: 3; transform: translateX(18px); }
+
+.isLit .panel {
+  opacity: 1;
+  transform: translateX(0);
+  box-shadow: 0 18px 44px -28px rgba(31, 29, 24, .32);
 }
 
-.tool > span:not(.toolIcon) {
-  display: block;
-  margin-top: .35rem;
-  color: var(--paper-secondary);
-  font-size: .66rem;
+.panel h3 {
+  margin: 0;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(1.15rem, 1.7vw, 1.4rem);
+  font-weight: 400;
+  letter-spacing: -.01em;
+  line-height: 1.15;
+}
+.panel p {
+  margin: .7rem 0 0;
+  color: var(--p-ink-soft);
+  font-size: .9rem;
+  line-height: 1.6;
+}
+.outcome {
+  margin-top: 1.25rem !important;
+  padding-top: 1rem;
+  border-top: 1px solid var(--p-hairline);
+  color: var(--p-brass) !important;
+  font-size: .64rem !important;
+  font-weight: 760;
+  letter-spacing: .17em;
+  text-transform: uppercase;
+}
+
+/* --- terminus ----------------------------------------------------------- */
+.terminus {
+  display: grid;
+  grid-template-columns: 1fr var(--p-node-col, 5.5rem) 1fr;
+}
+.nodeEnd { color: var(--p-brass); }
+.terminus.isLit .nodeEnd { color: #fff; }
+
+/* --- deliverables ------------------------------------------------------- */
+.deliverables {
+  margin-top: clamp(2rem, 4vw, 3rem);
+  padding: clamp(1.75rem, 3.2vw, 2.5rem);
+  border: 1px solid var(--p-hairline);
+  border-radius: 16px;
+  background: var(--p-sand);
+  opacity: .3;
+  transform: translateY(14px);
+  transition: opacity .7s var(--p-ease), transform .7s var(--p-ease);
+}
+.deliverables.isLit { opacity: 1; transform: translateY(0); }
+
+.deliverables h3 {
+  margin: 0 0 .5rem;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(1.2rem, 1.8vw, 1.5rem);
+  font-weight: 400;
+  letter-spacing: -.01em;
+}
+.deliverables ul {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  column-gap: clamp(1.5rem, 3vw, 3rem);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.deliverables li {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  column-gap: .7rem;
+  align-items: baseline;
+  padding-block: 1rem;
+  border-top: 1px solid rgba(31, 29, 24, .14);
+}
+/* the first row of each column opens the list, so it keeps no rule above it */
+.deliverables li:nth-child(-n + 2) { border-top: 0; padding-top: .75rem; }
+
+.dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--p-brass);
+  transform: translateY(-2px);
+}
+/* label and description are separate blocks — same glued-together bug as the
+   meta strip, which read "JournalingA place to process what is changing." */
+.deliverables strong {
+  font-size: .88rem;
+  font-weight: 750;
   line-height: 1.35;
+}
+.deliverables li > span:last-child {
+  grid-column: 2;
+  margin-top: .25rem;
+  color: var(--p-ink-soft);
+  font-size: .82rem;
+  line-height: 1.5;
+}
+
+/* --- closing ------------------------------------------------------------ */
+.closing {
+  margin-top: clamp(2.5rem, 5vw, 3.5rem);
   text-align: center;
 }
-
-@media (max-width: 1050px) {
-  .top { grid-template-columns: 1fr; }
-  .quote { justify-self: start; }
-  .steps { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; }
-  .pathLine { display: none; }
-  .step { min-height: 17rem; }
-  .tools { grid-template-columns: 1fr; }
-  .toolList { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.closing p {
+  max-width: 46ch;
+  margin: 0 auto 1.5rem;
+  color: var(--p-ink-soft);
+  font-size: var(--step-body);
+  line-height: 1.6;
 }
 
-@media (max-width: 680px) {
-  .section { padding: 2.8rem 0 2.6rem; }
-  .inner { width: min(calc(100% - 28px), 1440px); }
-  .title { font-size: clamp(2.65rem, 12vw, 4rem); }
-  .lede { font-size: .96rem; }
-  .format { display: grid; grid-template-columns: 1fr; }
-  .fact { border-radius: .8rem; }
-  .steps { grid-template-columns: 1fr; }
-  .step { min-height: 0; padding: 2.9rem 1.2rem 1.2rem; }
-  .tools { margin-top: 1.45rem; }
-  .toolList { grid-template-columns: 1fr 1fr; }
-  .tool { border-left: 0; border-top: 1px solid var(--paper-secondary); }
-  .tool:nth-child(-n+2) { border-top: 0; }
+/* --- collapsed: one rail on the left ------------------------------------ */
+/* Alternating panels below this width produce columns too narrow to read, so
+   the spine moves to the edge and every panel lands beside it. */
+@media (max-width: 880px) {
+  .section { --p-node: 2.4rem; --p-node-col: 3.9rem; }
+
+  .rail { left: 1.4rem; transform: none; }
+
+  .station,
+  .terminus { grid-template-columns: var(--p-node-col) minmax(0, 1fr); }
+
+  .node {
+    grid-column: 1;
+    justify-self: start;
+    /* node centre lands on the rail at 1.4rem */
+    margin-left: calc(1.4rem - var(--p-node) / 2);
+  }
+
+  .left .panel,
+  .right .panel { grid-column: 2; transform: translateX(18px); }
+  .isLit .panel { transform: translateX(0); }
+
+  .stub { display: none; }
+
+  .panel { padding: 1.5rem; }
+  .deliverables ul { grid-template-columns: minmax(0, 1fr); }
+  .deliverables li:nth-child(-n + 2) { border-top: 1px solid rgba(31, 29, 24, .14); }
+  .deliverables li:first-child { border-top: 0; }
+}
+
+@media (max-width: 560px) {
+  .meta li {
+    flex: 1 1 100%;
+    padding-block: .9rem;
+    border-left: 0;
+    border-top: 1px solid var(--p-hairline);
+  }
+  .meta li:first-child { border-top: 0; }
+}
+
+/* --- reduced motion ----------------------------------------------------- */
+/* Everything reads at rest: lit, square, no transitions. The rail fill is set
+   to 100% by the component in the same branch. */
+@media (prefers-reduced-motion: reduce) {
+  .panel,
+  .node,
+  .stub,
+  .deliverables {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+  .stub { opacity: .55 !important; }
 }
