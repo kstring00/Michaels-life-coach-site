@@ -34,6 +34,14 @@ html { background: var(--surface-light); }
   border-top-color: var(--rule-light);
 }
 
+/* The dot field paints at z-index -1 inside the hero, which only works if the
+   hero itself is a stacking context — otherwise the field escapes to an
+   ancestor and hides behind the page ground. */
+.hero { isolation: isolate; }
+/* the ticker sits on the hero's ground and has no fill of its own, so the dot
+   field showed through its labels */
+.hero .marquee { background: var(--surface-light); }
+
 main > .section {
   padding-block: clamp(3rem, 4.6vw, 4rem);
 }

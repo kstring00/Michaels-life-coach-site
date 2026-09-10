@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import michaelPortrait from "../mikenobacgrnd.png";
+import { DotField } from "./DotField";
 import { Marquee } from "./Marquee";
 import { MaskedLines, Reveal } from "./motion-kit";
 
@@ -51,6 +52,8 @@ const ripples = [
 export function Hero() {
   return (
     <section className="hero">
+      <DotField />
+
       <div className="hero-grid">
         <div className="hero-copy">
           <Reveal as="p" className="hero-eyebrow" y={10} delay={0.15}>
