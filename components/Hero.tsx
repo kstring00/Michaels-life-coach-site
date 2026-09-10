@@ -1,5 +1,7 @@
+import Image from "next/image";
 import Link from "next/link";
-import { Portrait } from "./Portrait";
+import michaelPortrait from "../mikenobacgrnd.png";
+import { DotField } from "./DotField";
 import { Marquee } from "./Marquee";
 import { MaskedLines, Reveal } from "./motion-kit";
 
@@ -35,9 +37,23 @@ const pillars = [
   ["stronger", "A stronger you", "Build a life that fits who you’re becoming."],
 ] as const;
 
+/* The ripples are concentric arcs struck from a single point that sits behind
+   Michael's near shoulder, so they read as something spreading outward from
+   him. Every arc is kept in the half-plane left of that point — the face and
+   neck are to its right — which is what guarantees no ring can cross him.
+   Strokes are non-scaling so they stay hairlines at any panel width. */
+const ripples = [
+  { r: 17, d: "M -9.75 -13.93 A 17 17 0 0 0 -9.75 13.93" },
+  { r: 25, d: "M -12.5 -21.65 A 25 25 0 0 0 -12.5 21.65" },
+  { r: 34, d: "M -13.83 -31.06 A 34 34 0 0 0 -13.83 31.06" },
+  { r: 44, d: "M -14.33 -41.6 A 44 44 0 0 0 -14.33 41.6" },
+];
+
 export function Hero() {
   return (
     <section className="hero">
+      <DotField />
+
       <div className="hero-grid">
         <div className="hero-copy">
           <Reveal as="p" className="hero-eyebrow" y={10} delay={0.15}>
@@ -75,19 +91,46 @@ export function Hero() {
           </Reveal>
         </div>
 
+        {/* Back to front: cream field + halo, line art, portrait, floating card. */}
         <div className="hero-portrait hero-portrait--cutout">
           <div className="hero-stage">
-            <div className="hero-stage-kicker" aria-hidden="true">
-              <span>Current</span><i /> <b>Next chapter</b>
-            </div>
+            <svg className="hero-lines" viewBox="-50 -50 100 100" fill="none" aria-hidden="true">
+              <defs>
+                {/* the ripples have to end somewhere; this dissolves the ends
+                    that finish in open field instead of behind him */}
+                <linearGradient id="hero-ripple-fade" gradientUnits="userSpaceOnUse"
+                  x1="0" y1="-46" x2="0" y2="-8">
+                  <stop offset="0" stopColor="#A8905C" stopOpacity="0" />
+                  <stop offset="1" stopColor="#A8905C" stopOpacity=".45" />
+                </linearGradient>
+              </defs>
+              {ripples.map(({ r, d }, i) => (
+                <path key={r} className={`hero-ripple hero-ripple--${i + 1}`} d={d}
+                  stroke="url(#hero-ripple-fade)" vectorEffect="non-scaling-stroke" />
+              ))}
+              {/* the path forward: it leaves the diagram, passes behind his
+                  shoulder and runs off the right edge of the panel */}
+              <path className="hero-lines-path" d="M -43.3 25 A 50 50 0 1 1 49.51 -6.96"
+                vectorEffect="non-scaling-stroke" />
+            </svg>
 
-            <div className="hero-orbit" aria-hidden="true">
-              <span className="hero-orbit-word hero-orbit-word--one">Clarity</span>
-              <span className="hero-orbit-word hero-orbit-word--two">Direction</span>
-              <span className="hero-orbit-word hero-orbit-word--three">Action</span>
-            </div>
+            <p className="hero-stage-kicker" aria-hidden="true">
+              <span>Current</span><i /><b>Next chapter</b>
+            </p>
 
-            <div className="hero-media hero-media--cutout"><Portrait /></div>
+            <ul className="hero-orbit" aria-hidden="true">
+              <li className="hero-orbit-node hero-orbit-node--one">Clarity</li>
+              <li className="hero-orbit-node hero-orbit-node--two">Direction</li>
+              <li className="hero-orbit-node hero-orbit-node--three">Action</li>
+            </ul>
+
+            <Image
+              className="hero-figure"
+              src={michaelPortrait}
+              alt="Michael, GrowthGains life coach"
+              priority
+              sizes="(max-width: 640px) 88vw, (max-width: 1023px) 48vw, 34vw"
+            />
 
             <div className="hero-hook-card">
               <span className="hero-hook-index">01</span>
@@ -95,10 +138,6 @@ export function Hero() {
                 <strong>The next chapter doesn’t need every answer.</strong>
                 <span>It needs the next clear move.</span>
               </p>
-            </div>
-
-            <div className="hero-stage-signature" aria-hidden="true">
-              Better perspective<br />Brighter tomorrows
             </div>
           </div>
         </div>
