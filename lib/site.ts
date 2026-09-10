@@ -4,7 +4,7 @@
  * the one place a colour lives outside the stylesheet, and it must be kept
  * equal to --accent in app/globals.css.
  */
-export const ACCENT = "#B8894A";
+export const ACCENT = "#3568F6";
 
 export const site = {
   name: "GrowthGains",

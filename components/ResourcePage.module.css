@@ -1,0 +1,204 @@
+/* ===========================================================================
+   RESOURCE DETAIL — one column at reading width
+   No motion anywhere: these are pages to be read slowly, and the questions are
+   meant to be taken one at a time, which is what the spacing is for.
+   =========================================================================== */
+
+.page {
+  --r-cream: var(--cream);
+  --r-mist: var(--mist);
+  --r-blue: var(--blue);
+  --r-blue-text: var(--blue-text);
+  --r-ink: var(--ink);
+  --r-ink-70: var(--ink-70);
+  --r-ink-45: var(--ink-45);
+  --r-blue-soft: var(--blue-soft);
+  --r-hairline: var(--hair);
+
+  padding: 5.5rem 1.5rem 6rem;
+  background: var(--r-cream);
+  color: var(--r-ink);
+}
+
+/* --- draft notice (strip before launch) --------------------------------- */
+.draft {
+  max-width: 680px;
+  margin: 0 auto 2.5rem;
+  padding: 1rem 1.15rem;
+  border: 1px dashed var(--r-blue-soft);
+  border-radius: 10px;
+  background: var(--blue-wash);
+}
+.draftHeading {
+  margin: 0 0 .4rem;
+  color: var(--r-blue-text);
+  font-size: .65rem;
+  font-style: normal;
+  font-weight: 600;
+  letter-spacing: .15em;
+  text-transform: uppercase;
+}
+.draftBody {
+  margin: 0;
+  color: var(--r-ink-70);
+  font-size: .85rem;
+  font-style: italic;
+  line-height: 1.6;
+}
+
+.column {
+  max-width: 680px;
+  margin-inline: auto;
+}
+
+.back { margin: 0 0 1.75rem; font-size: .8rem; }
+.back a { color: var(--r-ink-45); }
+.back a:hover { color: var(--r-ink); }
+
+.kicker {
+  margin: 0 0 .9rem;
+  color: var(--r-blue-text);
+  font-size: .7rem;
+  font-weight: 760;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+}
+
+.title {
+  margin: 0;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(2.2rem, 5vw, 3.1rem);
+  font-weight: 400;
+  letter-spacing: -.02em;
+  line-height: 1.1;
+}
+
+.framing {
+  margin: 1.4rem 0 0;
+  color: var(--r-ink-70);
+  font-size: 1.05rem;
+  line-height: 1.8;
+}
+
+/* --- how to use --------------------------------------------------------- */
+.howTo {
+  margin-top: 2.5rem;
+  padding: 1.5rem 1.65rem;
+  border-radius: 14px;
+  background: var(--r-mist);
+}
+.howToLabel {
+  margin: 0 0 .6rem;
+  color: var(--r-blue-text);
+  font-size: .65rem;
+  font-weight: 760;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+}
+.howToBody {
+  margin: 0;
+  color: var(--r-ink-70);
+  font-size: .92rem;
+  line-height: 1.7;
+}
+
+/* --- the questions ------------------------------------------------------ */
+.questions {
+  counter-reset: q;
+  margin: 3rem 0 0;
+  padding: 0;
+  list-style: none;
+}
+.questions li {
+  counter-increment: q;
+  position: relative;
+  padding: 0 0 2.25rem 3.25rem;
+}
+/* decimal-leading-zero renders 01, 02 … from the counter, so the markup stays
+   a plain <ol> and assistive tech still gets real list positions */
+.questions li::before {
+  content: counter(q, decimal-leading-zero);
+  position: absolute;
+  left: 0;
+  top: .35rem;
+  color: var(--r-blue-text);
+  font-size: .75rem;
+  font-weight: 600;
+  letter-spacing: .08em;
+}
+.questions li::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 1.1rem;
+  width: 1.6rem;
+  height: 1px;
+  background: var(--r-blue-soft);
+}
+.questions li:last-child { padding-bottom: 0; }
+.questions li:last-child::after { content: none; }
+
+.questions p {
+  margin: 0;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 1.28rem;
+  font-weight: 400;
+  line-height: 1.55;
+}
+.questions small {
+  display: block;
+  margin-top: .7rem;
+  color: var(--r-ink-45);
+  font-size: .88rem;
+  line-height: 1.6;
+}
+
+/* --- close -------------------------------------------------------------- */
+.close {
+  margin-top: 3.5rem;
+  padding-top: 2.5rem;
+  border-top: 1px solid var(--r-hairline);
+}
+.closeLine {
+  margin: 0;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 1.2rem;
+  font-style: italic;
+  line-height: 1.5;
+}
+.closeLink {
+  display: inline-block;
+  margin-top: 1.25rem;
+  padding-bottom: .2rem;
+  border-bottom: 1px solid var(--r-blue-soft);
+  color: var(--r-blue-text);
+  font-size: .92rem;
+}
+.closeLink:hover { color: var(--r-blue); border-bottom-color: var(--r-blue); }
+
+.footerLine {
+  margin-top: 4rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--r-hairline);
+  color: var(--r-ink-45);
+  font-size: .82rem;
+  line-height: 1.7;
+}
+.footerLine a {
+  color: var(--r-blue-text);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+/* every link keeps a visible keyboard focus */
+.page a:focus-visible {
+  outline: 2px solid var(--r-ink);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+@media (max-width: 640px) {
+  .page { padding: 3.5rem 1.25rem 4rem; }
+  .questions li { padding-left: 2.5rem; padding-bottom: 2rem; }
+  .questions p { font-size: 1.15rem; }
+}

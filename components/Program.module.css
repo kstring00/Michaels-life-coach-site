@@ -1,350 +1,456 @@
+/* ===========================================================================
+   THE COACHING JOURNEY — condensed three-stage centre-spine timeline
+   ---------------------------------------------------------------------------
+   Three stations on one vertical line down the middle of the container. Each
+   row is occupied on BOTH sides: the panel on one, the time marker on the
+   other. Sides come from :nth-of-type, not :nth-child — the rail and the
+   terminus are siblings in this track and would throw :nth-child counting off.
+
+   The only motion is the spine filling as you scroll, because there the motion
+   is carrying the content: a process you move through. Everything derives from
+   one read line at 66% of the viewport, so the fill height and the lit stations
+   can never disagree.
+   =========================================================================== */
+
 .section {
+  --p-cream: var(--cream);
+  --p-card: var(--card);
+  --p-mist: var(--mist);
+  /* the split: --p-blue fills, --p-blue-text is anything at body size or under */
+  --p-blue: var(--blue);
+  --p-blue-text: var(--blue-text);
+  --p-ink: var(--ink);
+  --p-ink-70: var(--ink-70);
+  --p-ink-45: var(--ink-45);
+  --p-blue-soft: var(--blue-soft);
+  --p-hairline: var(--hair);
+  --p-node: 2.6rem;
+  --p-node-col: 5rem;
+  --p-ease: cubic-bezier(.22, .61, .36, 1);
+
   position: relative;
-  isolation: isolate;
-  overflow: hidden;
-  padding: clamp(3.4rem, 5vw, 4.8rem) 0 clamp(3rem, 4.8vw, 4.2rem);
-  background:
-    var(--surface-dark);
-  color: var(--paper);
+  /* unlit panels sit 16px further out than their resting position; clip so
+     that offset can never open a horizontal scrollbar */
+  overflow-x: clip;
+  padding: 6rem 2rem 5.5rem;
+  background: var(--p-cream);
+  color: var(--p-ink);
 }
 
 .inner {
-  width: min(calc(100% - 48px), 1440px);
+  max-width: 1080px;
   margin-inline: auto;
-  position: relative;
-  z-index: 1;
 }
 
-.top {
-  display: grid;
-  grid-template-columns: minmax(0, 1.15fr) minmax(18rem, .85fr);
-  gap: clamp(2rem, 5vw, 5.5rem);
-  align-items: end;
+/* --- header ------------------------------------------------------------- */
+.head {
+  max-width: 620px;
+  margin-inline: auto;
+  text-align: center;
 }
 
-.eyebrow {
-  display: inline-flex;
-  align-items: center;
-  gap: .9rem;
-  margin: 0 0 .85rem;
-  color: var(--accent);
-  font-size: var(--step-small);
+.kicker {
+  margin: 0 0 1rem;
+  color: var(--p-blue-text);
+  font-size: .7rem;
   font-weight: 760;
-  letter-spacing: 0.19em;
+  letter-spacing: .2em;
   text-transform: uppercase;
-}
-
-.eyebrow::after {
-  content: "";
-  width: 3.4rem;
-  height: 1px;
-  background: var(--accent);
 }
 
 .title {
   margin: 0;
-  max-width: 12ch;
-  color: var(--paper);
   font-family: Georgia, "Times New Roman", serif;
-  font-size: clamp(2.8rem, 5vw, 5.1rem);
+  font-size: clamp(2.1rem, 4.2vw, 3.2rem);
   font-weight: 400;
-  line-height: .92;
-  letter-spacing: -.045em;
-}
-
-.title em {
-  color: var(--accent);
-  font-weight: 400;
+  letter-spacing: -.02em;
+  line-height: 1.08;
 }
 
 .lede {
-  max-width: 48rem;
-  margin: 1rem 0 0;
-  color: var(--paper-secondary);
-  font-size: clamp(.98rem, 1.18vw, 1.08rem);
-  line-height: 1.6;
+  max-width: 48ch;
+  margin: 1.15rem auto 0;
+  color: var(--p-ink-70);
+  font-size: 1.02rem;
+  line-height: 1.7;
 }
 
-.quote {
-  justify-self: end;
-  width: min(100%, 29rem);
-  padding: 1.25rem 1.35rem 1.25rem 1.55rem;
-  border-left: 1px solid var(--accent);
-  background: transparent;
-}
-
-.quote p {
-  margin: 0;
-  color: var(--paper);
-  font-family: Georgia, "Times New Roman", serif;
-  font-size: clamp(1.12rem, 1.65vw, 1.45rem);
-  font-style: italic;
-  line-height: 1.35;
-}
-
-.quote span {
-  display: block;
-  margin-top: .7rem;
-  color: var(--paper-secondary);
-  font-size: .67rem;
-  font-weight: 700;
-  letter-spacing: .17em;
-  text-transform: uppercase;
-}
-
-.format {
+/* --- meta strip --------------------------------------------------------- */
+.meta {
   display: flex;
   flex-wrap: wrap;
-  gap: .7rem;
-  margin-top: clamp(1.6rem, 2.6vw, 2.2rem);
+  justify-content: center;
+  margin: clamp(2.5rem, 5vw, 3.25rem) 0 0;
+  padding: 0;
+  list-style: none;
+  text-align: center;
 }
-
-.fact {
-  display: inline-flex;
-  align-items: center;
-  gap: .65rem;
-  min-height: 2.7rem;
-  padding: .55rem .95rem;
-  border: 1px solid var(--rule-dark);
-  border-radius: 999px;
-  background: transparent;
-  color: var(--paper);
+.meta li {
+  flex: 0 1 15rem;
+  padding-inline: clamp(1rem, 2.4vw, 2rem);
+  border-left: 1px solid var(--p-hairline);
 }
-
-/* icons stay in the secondary tier everywhere — gold is reserved so that
-   only one element per viewport carries it (rule 1) */
-.factIcon {
-  width: 1.6rem;
-  height: 1.6rem;
-  display: grid;
-  place-items: center;
-  color: var(--paper-secondary);
-}
-
-.factIcon svg,
-.stepIcon svg,
-.toolIcon svg {
-  width: 1.15rem;
-  height: 1.15rem;
-  fill: none;
-  stroke: currentColor;
-  stroke-width: 1.7;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-}
-
-.fact strong {
-  color: var(--paper);
-  font-size: .78rem;
-  font-weight: 700;
-}
-
-.fact small {
-  color: var(--paper-secondary);
-  font-size: .72rem;
-}
-
-.journey {
-  position: relative;
-  margin-top: clamp(2.2rem, 4vw, 3.4rem);
-}
-
-.pathLine {
-  position: absolute;
-  z-index: 0;
-  left: 4.25%;
-  right: 4.25%;
-  top: 1.55rem;
-  height: 1px;
-  background: var(--rule-dark);
-}
-
-.pathLine::after {
-  content: "";
-  position: absolute;
-  right: -.1rem;
-  top: 50%;
-  width: .42rem;
-  height: .42rem;
-  border-top: 1px solid var(--accent);
-  border-right: 1px solid var(--accent);
-  transform: translateY(-50%) rotate(45deg);
-}
-
-.steps {
-  position: relative;
-  z-index: 1;
-  display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: .9rem;
-}
-
-.step {
-  position: relative;
-  min-height: 19rem;
-  padding: 3.1rem 1.35rem 1.3rem;
-  border: 1px solid var(--paper-secondary);
-  border-radius: 1rem;
-  background:
-    transparent;
-}
-
-.stepNumber {
-  position: absolute;
-  left: 1.25rem;
-  top: -.02rem;
-  width: 3.15rem;
-  height: 3.15rem;
-  display: grid;
-  place-items: center;
-  border: 1px solid var(--accent);
-  border-radius: 50%;
-  background: var(--surface-dark);
-  color: var(--accent);
-  font-size: .78rem;
-  font-weight: 800;
-  letter-spacing: .08em;
-  box-shadow: 0 0 0 5px var(--surface-dark);
-}
-
-.stepIcon {
-  width: 1.6rem;
-  height: 1.6rem;
-  display: grid;
-  place-items: center;
-  margin-bottom: 1rem;
-  color: var(--paper-secondary);
-}
-
-.step h3 {
-  margin: 0;
-  color: var(--paper);
-  font-family: Georgia, "Times New Roman", serif;
-  font-size: clamp(1.28rem, 1.55vw, 1.62rem);
-  font-weight: 400;
-  line-height: 1.12;
-  letter-spacing: -.025em;
-}
-
-.step p {
-  margin: .8rem 0 0;
-  color: var(--paper-secondary);
-  font-size: .89rem;
-  line-height: 1.58;
-}
-
-.stepTag {
+.meta li:first-child { border-left: 0; }
+/* block, not inline — as two inline elements these rendered glued together
+   ("Fully virtualWe meet wherever you are") */
+.meta strong {
   display: block;
-  margin-top: 1rem;
-  padding-top: .85rem;
-  border-top: 1px solid var(--accent);
-  color: var(--accent);
-  font-size: .61rem;
-  font-weight: 730;
-  letter-spacing: .17em;
-  text-transform: uppercase;
+  font-size: .82rem;
+  font-weight: 750;
+  letter-spacing: .04em;
+}
+.meta span {
+  display: block;
+  margin-top: .4rem;
+  color: var(--p-ink-70);
+  font-size: .8rem;
+  line-height: 1.5;
 }
 
-.tools {
-  display: grid;
-  grid-template-columns: minmax(15rem, .7fr) minmax(0, 1.3fr);
-  gap: clamp(1.5rem, 4vw, 4rem);
-  align-items: center;
-  margin-top: clamp(1.8rem, 3.1vw, 2.6rem);
-  padding-top: clamp(1.6rem, 2.5vw, 2.1rem);
-  border-top: 1px solid var(--paper-secondary);
+/* --- the spine ---------------------------------------------------------- */
+.spine {
+  position: relative;
+  margin-top: clamp(3rem, 5.5vw, 4.5rem);
 }
 
-.toolsEyebrow {
-  margin: 0 0 .45rem;
-  color: var(--paper-secondary);
-  font-size: .63rem;
-  font-weight: 760;
-  letter-spacing: .18em;
-  text-transform: uppercase;
+.rail {
+  position: absolute;
+  left: 50%;
+  top: 0;
+  /* stop at the centre of the terminus node so the line ends on the check */
+  bottom: calc(var(--p-node) / 2);
+  width: 1px;
+  transform: translateX(-50%);
+  background: var(--p-hairline);
+  pointer-events: none;
+}
+.railFill {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 1px;
+  height: 0;
+  /* the leading edge softens instead of stopping hard */
+  background: linear-gradient(
+    to bottom,
+    var(--p-blue) 0%,
+    var(--p-blue) 78%,
+    var(--p-blue-soft) 100%
+  );
 }
 
-.tools h3 {
-  margin: 0;
-  max-width: 10ch;
-  color: var(--paper);
-  font-family: Georgia, "Times New Roman", serif;
-  font-size: clamp(1.75rem, 2.8vw, 2.65rem);
-  font-weight: 400;
-  line-height: .98;
-}
-
-.tools h3 em {
-  color: var(--accent);
-  font-weight: 400;
-}
-
-.toolList {
-  display: grid;
-  grid-template-columns: repeat(5, minmax(0, 1fr));
-  gap: .45rem;
+.stations {
   margin: 0;
   padding: 0;
   list-style: none;
 }
 
-.tool {
-  min-width: 0;
-  padding: .85rem .8rem;
-  border-left: 1px solid var(--paper-secondary);
-  text-align: center;
+.station {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr var(--p-node-col) 1fr;
+  align-items: center;
+  padding-block: clamp(1.25rem, 2.4vw, 1.9rem);
 }
 
-.tool:first-child { border-left: 0; }
-
-.toolIcon {
-  width: 1.6rem;
-  height: 1.6rem;
+/* --- node --------------------------------------------------------------- */
+/* above the rail, with an opaque fill, so the line reads as passing behind it */
+.node {
+  position: relative;
+  z-index: 2;
+  grid-column: 2;
+  /* Node, marker and panel are all pinned to row 1. Without this, sparse
+     auto-flow refuses to move the row cursor backwards, so anything placed in
+     an earlier column than the item before it drops into row 2. */
+  grid-row: 1;
+  justify-self: center;
   display: grid;
   place-items: center;
-  margin: 0 auto .65rem;
-  color: var(--paper-secondary);
+  width: var(--p-node);
+  height: var(--p-node);
+  border: 1px solid var(--p-hairline);
+  border-radius: 50%;
+  background: var(--p-cream);
+  color: var(--p-ink-45);
+  font-size: .7rem;
+  font-weight: 760;
+  letter-spacing: .04em;
+  transition:
+    background .45s var(--p-ease),
+    border-color .45s var(--p-ease),
+    color .45s var(--p-ease),
+    transform .45s cubic-bezier(.34, 1.4, .64, 1);
+}
+.node svg { width: 1rem; height: 1rem; }
+
+.isLit .node {
+  border-color: var(--p-blue);
+  background: var(--p-blue);
+  color: #fff;
+  transform: scale(1.07);
 }
 
-.tool strong {
-  display: block;
-  color: var(--paper);
-  font-size: .76rem;
-  font-weight: 680;
-  line-height: 1.32;
+/* --- panel -------------------------------------------------------------- */
+.panel {
+  grid-row: 1;
+  padding: 1.75rem 1.9rem 1.85rem;
+  border: 1px solid var(--p-hairline);
+  border-radius: 15px;
+  background: var(--p-card);
+  opacity: .32;
+  transition:
+    opacity .65s var(--p-ease),
+    transform .65s var(--p-ease),
+    box-shadow .65s var(--p-ease);
+}
+.station:nth-of-type(odd) .panel { grid-column: 1; transform: translateX(-16px); }
+.station:nth-of-type(even) .panel { grid-column: 3; transform: translateX(16px); }
+
+.isLit .panel {
+  opacity: 1;
+  transform: translateX(0);
+  box-shadow: 0 16px 40px -28px rgba(25, 31, 34, .3);
+}
+
+.panel h3 {
+  margin: 0;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 1.4rem;
+  font-weight: 400;
+  letter-spacing: -.01em;
+  line-height: 1.18;
+}
+.panel p {
+  margin: .7rem 0 0;
+  color: var(--p-ink-70);
+  font-size: .94rem;
+  line-height: 1.68;
+}
+.outcome {
+  margin-top: 1.2rem !important;
+  padding-top: .95rem;
+  border-top: 1px solid var(--p-blue-soft);
+  color: var(--p-blue-text) !important;
+  font-size: .63rem !important;
+  font-weight: 760;
+  letter-spacing: .17em;
+  text-transform: uppercase;
+}
+
+/* --- time marker: the gutter opposite the panel ------------------------- */
+.marker {
+  grid-row: 1;
+  opacity: .18;
+  transition: opacity .65s var(--p-ease);
+}
+.isLit .marker { opacity: 1; }
+
+.station:nth-of-type(odd) .marker {
+  grid-column: 3;
+  padding-left: 2.4rem;
+  text-align: left;
+}
+.station:nth-of-type(even) .marker {
+  grid-column: 1;
+  padding-right: 2.4rem;
+  text-align: right;
+}
+
+.markerTime {
+  margin: 0;
+  color: var(--p-blue-text);
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 1.95rem;
+  font-weight: 400;
+  letter-spacing: -.02em;
+  line-height: 1.06;
+}
+.markerDetail {
+  max-width: 20ch;
+  margin: .7rem 0 0;
+  color: var(--p-ink-45);
+  font-size: .8rem;
+  line-height: 1.55;
+}
+/* right-aligned column needs the measure pushed over, not just the text */
+.station:nth-of-type(even) .markerDetail { margin-left: auto; }
+
+/* --- terminus ----------------------------------------------------------- */
+.terminus {
+  display: grid;
+  grid-template-columns: 1fr var(--p-node-col) 1fr;
+}
+.nodeEnd { color: var(--p-blue-text); }
+.terminus.isLit .nodeEnd { color: #fff; }
+
+/* --- what you walk away with -------------------------------------------- */
+.deliverables {
+  max-width: 740px;
+  margin: clamp(2rem, 4vw, 2.75rem) auto 0;
+  padding: 2rem 2.25rem 2.1rem;
+  border: 1px solid var(--p-hairline);
+  border-radius: 17px;
+  background: var(--p-mist);
+  opacity: .32;
+  transform: translateY(14px);
+  transition: opacity .65s var(--p-ease), transform .65s var(--p-ease);
+}
+.deliverables.isLit { opacity: 1; transform: translateY(0); }
+
+.deliverables h3 {
+  margin: 0 0 .5rem;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(1.2rem, 1.9vw, 1.5rem);
+  font-weight: 400;
+  letter-spacing: -.01em;
   text-align: center;
 }
+.deliverables ul {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  column-gap: clamp(1.5rem, 3vw, 2.5rem);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.deliverables li {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  column-gap: .7rem;
+  align-items: baseline;
+  padding-block: .95rem;
+  border-top: 1px solid var(--p-hairline);
+}
+/* the first row of each column opens the list, so it keeps no rule above it */
+.deliverables li:nth-child(-n + 2) { border-top: 0; padding-top: .7rem; }
 
-.tool > span:not(.toolIcon) {
-  display: block;
-  margin-top: .35rem;
-  color: var(--paper-secondary);
-  font-size: .66rem;
+.dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--p-blue-text);
+  transform: translateY(-2px);
+}
+/* label and description are separate blocks — same glued-together bug as the
+   meta strip, which read "JournalingDuring sessions and between them" */
+.deliverables strong {
+  font-size: .87rem;
+  font-weight: 750;
   line-height: 1.35;
+}
+.deliverables li > span:last-child {
+  grid-column: 2;
+  margin-top: .25rem;
+  color: var(--p-ink-45);
+  font-size: .81rem;
+  line-height: 1.5;
+}
+
+/* --- close -------------------------------------------------------------- */
+.close {
+  margin-top: 3.5rem;
+  padding-top: clamp(2.25rem, 4vw, 3rem);
+  border-top: 1px solid var(--p-hairline);
   text-align: center;
 }
-
-@media (max-width: 1050px) {
-  .top { grid-template-columns: 1fr; }
-  .quote { justify-self: start; }
-  .steps { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; }
-  .pathLine { display: none; }
-  .step { min-height: 17rem; }
-  .tools { grid-template-columns: 1fr; }
-  .toolList { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.close figure { margin: 0 0 clamp(1.6rem, 2.8vw, 2.25rem); }
+.close blockquote {
+  max-width: 26ch;
+  margin: 0 auto;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(1.3rem, 2.4vw, 1.8rem);
+  font-style: italic;
+  line-height: 1.32;
+  text-wrap: balance;
+}
+.close figcaption {
+  margin-top: 1rem;
+  color: var(--p-ink-45);
+  font-size: .64rem;
+  font-weight: 760;
+  letter-spacing: .19em;
+  text-transform: uppercase;
+}
+.cta:focus-visible {
+  outline: 2px solid var(--p-ink);
+  outline-offset: 3px;
+}
+.closeNote {
+  margin: 1.1rem 0 0;
+  color: var(--p-ink-45);
+  font-size: .8rem;
 }
 
-@media (max-width: 680px) {
-  .section { padding: 2.8rem 0 2.6rem; }
-  .inner { width: min(calc(100% - 28px), 1440px); }
-  .title { font-size: clamp(2.65rem, 12vw, 4rem); }
-  .lede { font-size: .96rem; }
-  .format { display: grid; grid-template-columns: 1fr; }
-  .fact { border-radius: .8rem; }
-  .steps { grid-template-columns: 1fr; }
-  .step { min-height: 0; padding: 2.9rem 1.2rem 1.2rem; }
-  .tools { margin-top: 1.45rem; }
-  .toolList { grid-template-columns: 1fr 1fr; }
-  .tool { border-left: 0; border-top: 1px solid var(--paper-secondary); }
-  .tool:nth-child(-n+2) { border-top: 0; }
+/* --- collapsed: one rail on the left ------------------------------------ */
+/* Alternating sides below this width produce columns too narrow to read, so the
+   spine moves to the edge and the marker stacks above its panel. */
+@media (max-width: 900px) {
+  .section {
+    --p-node: 2.3rem;
+    --p-node-col: 3.7rem;
+    padding: 4.5rem 1.5rem 4rem;
+  }
+
+  .rail { left: 1.35rem; transform: none; }
+
+  .station,
+  .terminus { grid-template-columns: var(--p-node-col) minmax(0, 1fr); }
+
+  .node {
+    grid-column: 1;
+    justify-self: start;
+    /* node centre lands on the rail at 1.35rem */
+    margin-left: calc(1.35rem - var(--p-node) / 2);
+  }
+
+  /* marker above panel, both in column 2, both left-aligned */
+  .station:nth-of-type(odd) .marker,
+  .station:nth-of-type(even) .marker {
+    grid-column: 2;
+    grid-row: 1;
+    padding-inline: 0;
+    margin-bottom: .9rem;
+    text-align: left;
+  }
+  .station:nth-of-type(even) .markerDetail { margin-left: 0; }
+  .markerTime { font-size: 1.25rem; }
+
+  .station:nth-of-type(odd) .panel,
+  .station:nth-of-type(even) .panel {
+    grid-column: 2;
+    grid-row: 2;
+    transform: translateX(16px);
+  }
+  .isLit .panel { transform: translateX(0); }
+
+  .panel { padding: 1.5rem 1.5rem 1.6rem; }
+  .panel h3 { font-size: 1.3rem; }
+
+  .meta li {
+    flex: 1 1 100%;
+    padding-block: .9rem;
+    padding-inline: 0;
+    border-left: 0;
+  }
+
+  .deliverables {
+    padding: 1.75rem 1.5rem 1.6rem;
+  }
+  .deliverables ul { grid-template-columns: minmax(0, 1fr); }
+  .deliverables li:nth-child(-n + 2) { border-top: 1px solid var(--p-hairline); }
+  .deliverables li:first-child { border-top: 0; }
+}
+
+/* --- reduced motion ----------------------------------------------------- */
+/* Everything reads at rest: lit, square, no transitions. The component sets the
+   rail fill to 100% in the same branch. */
+@media (prefers-reduced-motion: reduce) {
+  .panel,
+  .node,
+  .marker,
+  .deliverables {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
 }

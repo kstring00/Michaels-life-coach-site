@@ -1,111 +1,131 @@
-/* Copy on the left, the pull quote on the right, one hairline between them. */
+/* ===========================================================================
+   ABOUT — portrait left, copy right, facts band beneath
+   No reveals here. The only motion on this stretch of page is the timeline's
+   spine, because there the motion is carrying the content.
+   =========================================================================== */
+
 .section {
-  position: relative;
-  padding: clamp(3.25rem, 5.5vw, 5.5rem) 0;
-  background: var(--surface-light);
-  color: var(--ink);
+  --a-cream: var(--cream);
+  /* the portrait sits on mist, not a warm neutral */
+  --a-mist: var(--mist);
+  --a-blue-text: var(--blue-text);
+  --a-ink: var(--ink);
+  --a-ink-70: var(--ink-70);
+  --a-ink-45: var(--ink-45);
+  --a-blue-soft: var(--blue-soft);
+  --a-hairline: var(--hair);
+
+  padding-block: clamp(4rem, 7vw, 6.5rem);
+  background: var(--a-cream);
+  color: var(--a-ink);
 }
 
 .inner {
-  width: min(calc(100% - 48px), var(--max));
-  margin-inline: auto;
   display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(0, 0.92fr);
-  gap: clamp(2.5rem, 6vw, 6rem);
+  grid-template-columns: minmax(280px, 380px) 1fr;
+  gap: 4.5rem;
   align-items: start;
+  width: min(calc(100% - 48px), 1120px);
+  margin-inline: auto;
 }
 
-/* --accent-ink, not --accent: gold type on this ground needs the darker tint */
-.eyebrow {
-  display: block;
-  margin: 0 0 0.9rem;
-  color: var(--accent-ink);
-  font-size: 0.68rem;
+/* --- portrait ----------------------------------------------------------- */
+.portrait {
+  position: relative;
+  z-index: 0;
+  aspect-ratio: 4 / 5;
+  margin: 0;
+  border-radius: 18px;
+  background: var(--a-mist);
+}
+
+/* offset outline: a thin brass rectangle sitting down and to the right */
+.portrait::after {
+  content: "";
+  position: absolute;
+  inset: 14px -14px -14px 14px;
+  z-index: -1;
+  border: 1px solid var(--a-blue-soft);
+  border-radius: 18px;
+  pointer-events: none;
+}
+
+.portrait img {
+  position: absolute;
+  /* inset from the top so the hairline keeps real headroom inside the crop */
+  inset: 8% 0 0 0;
+  width: 100%;
+  height: auto;
+  max-height: 92%;
+  object-fit: contain;
+  object-position: bottom center;
+  border-radius: 18px;
+}
+
+/* --- copy --------------------------------------------------------------- */
+.kicker {
+  margin: 0 0 1rem;
+  color: var(--a-blue-text);
+  font-size: .7rem;
   font-weight: 760;
-  letter-spacing: 0.19em;
+  letter-spacing: .2em;
   text-transform: uppercase;
 }
 
 .title {
-  margin: 0;
+  max-width: 18ch;
+  margin: 0 0 1.75rem;
   font-family: Georgia, "Times New Roman", serif;
-  font-size: clamp(2.1rem, 3.4vw, 3.4rem);
-  font-weight: 400;
-  line-height: 1.02;
-  letter-spacing: -.03em;
-}
-
-.stack { margin-top: clamp(1.1rem, 2vw, 1.6rem); }
-
-.bio {
-  max-width: 46ch;
-  margin: 0;
-  color: var(--ink-secondary);
-  font-size: var(--step-body);
-  line-height: 1.66;
-}
-
-.credential {
-  max-width: 46ch;
-  margin-top: clamp(1.4rem, 2.6vw, 2.1rem);
-  padding-top: clamp(1.1rem, 2vw, 1.6rem);
-  border-top: 1px solid var(--rule-light);
-}
-
-.credentialValue {
-  margin: 0;
-  font-family: Georgia, "Times New Roman", serif;
-  font-size: clamp(1.15rem, 1.6vw, 1.5rem);
+  font-size: clamp(2.1rem, 4vw, 3.1rem);
   font-weight: 400;
   letter-spacing: -.02em;
+  line-height: 1.06;
 }
 
-/* the hairline is the quote column's own left border */
-.quote {
-  min-width: 0;
-  margin: 0;
-  padding: 0 0 0 clamp(1.75rem, 4vw, 4rem);
-  border-left: 1px solid var(--rule-light);
+.bio {
+  max-width: 62ch;
+  margin: 0 0 1.15rem;
+  color: var(--a-ink-70);
+  font-size: 1.03rem;
+  line-height: 1.8;
 }
+.bio:last-of-type { margin-bottom: 0; }
 
-/* decorative, aria-hidden — carries no text contrast requirement */
-.mark {
-  display: block;
-  color: var(--accent);
-  font-family: Georgia, "Times New Roman", serif;
-  font-size: clamp(3.4rem, 5vw, 5rem);
-  line-height: .6;
-}
-
-.quote p {
-  max-width: 22ch;
-  margin: clamp(1rem, 1.8vw, 1.5rem) 0 0;
-  font-family: Georgia, "Times New Roman", serif;
-  font-size: clamp(1.3rem, 1.95vw, 1.85rem);
+/* his own line — italic and at full ink, so it sits forward of the paragraph */
+.bio em {
+  color: var(--a-ink);
   font-style: italic;
-  font-weight: 400;
-  line-height: 1.38;
-  letter-spacing: -.01em;
 }
 
-.signature {
-  margin-top: clamp(1.1rem, 2.2vw, 1.9rem);
-  color: var(--ink);
-  font-family: var(--font-signature), "Snell Roundhand", "Brush Script MT", cursive;
-  font-size: clamp(1.9rem, 2.8vw, 2.7rem);
-  line-height: 1;
+/* --- facts band --------------------------------------------------------- */
+.facts {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 2rem;
+  margin: 2.75rem 0 0;
+  padding-top: 2rem;
+  border-top: 1px solid var(--a-hairline);
+}
+.fact { min-width: 0; }
+.fact dt {
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 1.35rem;
+  font-weight: 400;
+  letter-spacing: -.01em;
+  line-height: 1.2;
+}
+.fact dd {
+  margin: .5rem 0 0;
+  color: var(--a-ink-45);
+  font-size: .84rem;
+  line-height: 1.55;
 }
 
 @media (max-width: 900px) {
   .inner {
-    grid-template-columns: 1fr;
-    gap: clamp(1.75rem, 5vw, 2.5rem);
+    grid-template-columns: minmax(0, 1fr);
+    gap: 2.5rem;
   }
-  .quote {
-    padding: clamp(1.25rem, 4vw, 1.75rem) 0 0;
-    border-left: 0;
-    border-top: 1px solid var(--rule-light);
-  }
-  .quote p { max-width: 32ch; }
-  .inner { width: min(calc(100% - 28px), var(--max)); }
+  .portrait { max-width: 320px; }
+  .facts { grid-template-columns: minmax(0, 1fr); gap: 1.75rem; }
 }

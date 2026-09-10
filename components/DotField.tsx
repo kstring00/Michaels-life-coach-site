@@ -156,7 +156,7 @@ function hexToRgb(hex: string): [number, number, number] {
   let h = hex.trim().replace("#", "");
   if (h.length === 3) h = h[0] + h[0] + h[1] + h[1] + h[2] + h[2];
   const v = parseInt(h, 16);
-  if (h.length !== 6 || Number.isNaN(v)) return [168, 144, 92];
+  if (h.length !== 6 || Number.isNaN(v)) return [143, 165, 216];
   return [(v >> 16) & 255, (v >> 8) & 255, v & 255];
 }
 
@@ -211,8 +211,8 @@ export interface DotFieldProps {
 export function DotField({
   spacing,
   className,
-  baseColor = "#A8905C",
-  activeColor = "#4A7DFF",
+  baseColor = "#8FA5D8",
+  activeColor = "#3568F6",
   rippleIntervalMs = [2500, 6000],
   intensity = 1,
 }: DotFieldProps) {
