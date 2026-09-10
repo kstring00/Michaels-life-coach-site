@@ -20,10 +20,14 @@
   color: var(--a-ink);
 }
 
+/* Three columns: portrait, copy, facts. The facts used to sit as a band under
+   the copy, which made the section roughly 250px taller than it needed to be;
+   stacked beside the copy they use the height the portrait was already
+   occupying. */
 .inner {
   display: grid;
-  grid-template-columns: minmax(280px, 380px) 1fr;
-  gap: 4.5rem;
+  grid-template-columns: minmax(220px, 300px) minmax(0, 1fr) minmax(200px, 232px);
+  gap: 2.75rem;
   align-items: start;
   width: min(calc(100% - 48px), 1120px);
   margin-inline: auto;
@@ -97,19 +101,21 @@
   font-style: italic;
 }
 
-/* --- facts band --------------------------------------------------------- */
+/* --- facts column ------------------------------------------------------- */
+/* The rule that used to run across the top of the band now runs down the side
+   of the column — same separating job, rotated. */
 .facts {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 2rem;
-  margin: 2.75rem 0 0;
-  padding-top: 2rem;
-  border-top: 1px solid var(--a-hairline);
+  display: flex;
+  flex-direction: column;
+  gap: 1.75rem;
+  margin: 0;
+  padding-left: 1.9rem;
+  border-left: 1px solid var(--a-hairline);
 }
 .fact { min-width: 0; }
 .fact dt {
   font-family: Georgia, "Times New Roman", serif;
-  font-size: 1.35rem;
+  font-size: 1.18rem;
   font-weight: 400;
   letter-spacing: -.01em;
   line-height: 1.2;
@@ -119,6 +125,22 @@
   color: var(--a-ink-45);
   font-size: .84rem;
   line-height: 1.55;
+}
+
+/* Not enough room for three columns before the copy measure gets unreadable,
+   so the facts drop back under the copy as a band. */
+@media (max-width: 1080px) {
+  .inner { grid-template-columns: minmax(200px, 300px) minmax(0, 1fr); }
+  .facts {
+    grid-column: 1 / -1;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 2rem;
+    padding-left: 0;
+    padding-top: 2rem;
+    border-left: 0;
+    border-top: 1px solid var(--a-hairline);
+  }
 }
 
 @media (max-width: 900px) {
