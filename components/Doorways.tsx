@@ -10,6 +10,7 @@ const doors = [
     title: "Life after sport",
     desc: "The identity that carried you for years ends on a Tuesday. What replaces it isn’t obvious.",
     go: "Questions for when a season ends",
+    phrase: ["Step into", "what comes next"],
     season: styles.seasonCool,
   },
   {
@@ -17,6 +18,7 @@ const doors = [
     title: "Foster care and adoption",
     desc: "Building a family, or leaving a system, reshapes more than a household.",
     go: "Questions for a changing family",
+    phrase: ["Find steadier", "footing"],
     season: styles.seasonClay,
   },
   {
@@ -24,6 +26,7 @@ const doors = [
     title: "Identity and leadership change",
     desc: "New title, new city, new role. Who you were may not be who stays.",
     go: "Questions for who you’re becoming",
+    phrase: ["Walk toward", "clarity"],
     season: styles.seasonTurn,
   },
 ] as const;
@@ -90,29 +93,39 @@ export function Doorways() {
         <div className={styles.grid} ref={gridRef}>
           {doors.map((door) => (
             <Link className={styles.frame} href={`/resources/${door.slug}`} key={door.slug}>
-              {/* what's through the doorway — sits under the door panel */}
+              {/* The corridor beyond: an arched opening, receding walls and a
+                  lit horizon, all built from gradients. It stays a threshold —
+                  the light keeps drifting and never resolves into a room. */}
               <div className={styles.beyond}>
                 <div className={`${styles.season} ${door.season}`} />
+                <div className={styles.walls} aria-hidden="true" />
+                <div className={styles.arch} aria-hidden="true" />
+                <div className={styles.plant} aria-hidden="true" />
                 <div className={styles.spill} />
+
+                <p className={styles.phrase}>
+                  {door.phrase.map((line, n) => (
+                    <span key={line}>{n > 0 && <br />}{line}</span>
+                  ))}
+                </p>
               </div>
 
-              {/* the door */}
+              {/* The door lifts rather than swings: it rolls up into the head of
+                  the frame, so the opening is the full width of the arch instead
+                  of the cos(42) sliver a hinged door leaves. */}
               <div className={styles.panel}>
                 <h3>{door.title}</h3>
+                {/* The copy rides on the door itself, so the card is scannable
+                    shut and the corridor is what the lift reveals. */}
+                <div className={styles.through}>
+                  <p>{door.desc}</p>
+                  <span className={styles.go}>{door.go}</span>
+                </div>
                 <span className={styles.handle} aria-hidden="true" />
-                <span className={styles.edge} aria-hidden="true" />
+                <span className={styles.lintel} aria-hidden="true" />
               </div>
 
-              {/* At 42 degrees the door's projected width is cos(42) of the frame,
-                  so the opening is a ~25% sliver — too narrow to read a paragraph
-                  in. The copy therefore comes forward PAST the door rather than
-                  sitting inside the gap, which is also what "comes forward through
-                  the opening toward the viewer" describes. Hence it is a sibling
-                  of the panel with a higher z-index, not a child of .beyond. */}
-              <div className={styles.through}>
-                <p>{door.desc}</p>
-                <span className={styles.go}>{door.go}</span>
-              </div>
+              <span className={styles.rise} aria-hidden="true" />
             </Link>
           ))}
         </div>

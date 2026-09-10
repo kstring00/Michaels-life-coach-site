@@ -1,19 +1,21 @@
 import type { Metadata } from "next";
 import { ResourcePage } from "@/components/ResourcePage";
+import { bySlug } from "@/lib/resources";
+
+const resource = bySlug("identity-and-leadership");
+const description = resource.framing[0];
 
 export const metadata: Metadata = {
-  title: "Questions for who you’re becoming | GrowthGains",
-  description:
-    "A free set of questions for a change in title, role, or identity. No signup.",
+  title: resource.title,
+  description,
+  openGraph: {
+    title: resource.title,
+    description,
+    type: "article",
+    url: "/resources/identity-and-leadership",
+  },
 };
 
 export default function IdentityAndLeadership() {
-  return (
-    <ResourcePage
-      kicker="Identity and leadership change"
-      title="Questions for who you’re becoming"
-      framing="New title, new city, new role — and who you were may not be who stays. These are questions to sit with, not to answer quickly. Take what is useful and leave the rest."
-      count={8}
-    />
-  );
+  return <ResourcePage resource={resource} />;
 }

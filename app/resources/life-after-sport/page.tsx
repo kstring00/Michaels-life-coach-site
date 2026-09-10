@@ -1,19 +1,21 @@
 import type { Metadata } from "next";
 import { ResourcePage } from "@/components/ResourcePage";
+import { bySlug } from "@/lib/resources";
+
+const resource = bySlug("life-after-sport");
+const description = resource.framing[0];
 
 export const metadata: Metadata = {
-  title: "Questions for when a season ends | GrowthGains",
-  description:
-    "A free set of questions for athletes working out what comes after the sport. No signup.",
+  title: resource.title,
+  description,
+  openGraph: {
+    title: resource.title,
+    description,
+    type: "article",
+    url: "/resources/life-after-sport",
+  },
 };
 
 export default function LifeAfterSport() {
-  return (
-    <ResourcePage
-      kicker="Life after sport"
-      title="Questions for when a season ends"
-      framing="The identity that carried you for years ends on a Tuesday, and what replaces it isn't obvious. These are questions to sit with, not to answer quickly. Take what is useful and leave the rest."
-      count={8}
-    />
-  );
+  return <ResourcePage resource={resource} />;
 }

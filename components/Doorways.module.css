@@ -1,11 +1,11 @@
 /* ===========================================================================
    DOORWAYS — three doors, each ajar on a different season
    ---------------------------------------------------------------------------
-   The governing constraint is threshold, not arrival. The door stops at 42deg,
-   what is behind it is drifting weather rather than a lit room, and that field
-   never settles. A door swung wide onto a warm interior would read as "come in,
-   here is the finished thing" — the wrong feeling for someone standing at the
-   edge of a season they have not entered.
+   The governing constraint is threshold, not arrival. Each card is a recessed
+   frame holding an arched opening onto a lit corridor, with a door that LIFTS
+   into the head of the frame rather than swinging. Lifting keeps the whole arch
+   clear — a hinged door leaves only a cos(42) sliver — and the corridor beyond
+   recedes toward a horizon that never resolves into a room.
    =========================================================================== */
 
 .section {
@@ -75,12 +75,18 @@
 .frame {
   position: relative;
   display: block;
-  height: 330px;
-  border: 1px solid var(--d-hairline);
-  border-radius: 16px 16px 4px 4px;
-  perspective: 1500px;
-  perspective-origin: 70% 50%;
+  height: 400px;
+  padding: 14px;
+  border-radius: 20px;
+  /* the surround reads as a moulded reveal the opening is set into */
+  background: linear-gradient(160deg, #F6F1E5, #EDE5D4);
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, .9) inset,
+    0 0 0 1px var(--d-hairline),
+    0 18px 40px -30px rgba(31, 29, 24, .45);
   isolation: isolate;
+  /* the door rolls up behind the head of the frame, so it has to be clipped */
+  overflow: hidden;
   color: inherit;
   text-decoration: none;
 }
@@ -93,10 +99,14 @@
 /* --- beyond the door ---------------------------------------------------- */
 .beyond {
   position: absolute;
-  inset: 0;
+  inset: 14px;
   z-index: 1;
   overflow: hidden;
-  border-radius: 15px 15px 3px 3px;
+  border-radius: 10px;
+  /* the reveal: the opening sits below the surround, not on it */
+  box-shadow:
+    0 0 0 1px rgba(31, 29, 24, .14),
+    0 10px 22px -14px rgba(31, 29, 24, .5) inset;
   /* Deeper than the door face on purpose: if the opening matches the panel in
      value there is no depth and the gap reads as a seam, not a doorway. */
   background:
@@ -139,6 +149,113 @@
     radial-gradient(62% 60% at 56% 54%, rgba(228, 222, 208, .30), transparent 80%);
 }
 
+/* --- the corridor ------------------------------------------------------- */
+/* Receding side walls: two angled planes with a soft shadow gradient, so the
+   eye reads depth toward the lit centre. */
+.walls {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(96deg, rgba(31, 29, 24, .16) 0%, rgba(31, 29, 24, .04) 14%, transparent 28%),
+    linear-gradient(264deg, rgba(31, 29, 24, .16) 0%, rgba(31, 29, 24, .04) 14%, transparent 28%),
+    linear-gradient(180deg, rgba(31, 29, 24, .10) 0%, transparent 18%),
+    /* the floor, running away from the viewer */
+    linear-gradient(0deg, rgba(31, 29, 24, .14) 0%, rgba(31, 29, 24, .03) 12%, transparent 26%);
+  pointer-events: none;
+}
+
+/* The arch itself: an opening cut into the near wall. The near wall is drawn as
+   a large inset shadow ring, and the arch is the hole it leaves. */
+.arch {
+  position: absolute;
+  left: 26%;
+  right: 26%;
+  top: 22%;
+  bottom: 0;
+  border-radius: 46% 46% 0 0 / 30% 30% 0 0;
+  box-shadow: 0 0 0 340px rgba(240, 233, 219, .97);
+  pointer-events: none;
+}
+/* the lit horizon at the end of the corridor */
+.arch::after {
+  content: "";
+  position: absolute;
+  inset: 8% 12% 0;
+  border-radius: 46% 46% 0 0 / 34% 34% 0 0;
+  background:
+    radial-gradient(70% 58% at 50% 62%, rgba(255, 250, 236, .95), rgba(255, 248, 232, .35) 58%, transparent 78%);
+}
+
+/* one plant at the threshold, the way the reference has it — pure suggestion,
+   a soft mass rather than an illustration */
+.plant {
+  position: absolute;
+  left: 9%;
+  bottom: 6%;
+  width: 20%;
+  height: 34%;
+  background:
+    /* foliage: one broad soft mass */
+    radial-gradient(58% 46% at 50% 34%, rgba(132, 134, 102, .34), transparent 76%),
+    /* pot */
+    radial-gradient(40% 22% at 50% 90%, rgba(176, 152, 116, .42), transparent 72%);
+  filter: blur(1px);
+  pointer-events: none;
+}
+
+/* the phrase, standing in the light of the opening */
+.phrase {
+  position: absolute;
+  left: 12%;
+  right: 12%;
+  bottom: 16%;
+  z-index: 2;
+  margin: 0;
+  color: #6B5A38;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 1.05rem;
+  line-height: 1.35;
+  text-align: center;
+  opacity: 0;
+  transform: translateY(8px);
+  transition: opacity .6s ease .34s, transform .6s ease .34s;
+}
+.phrase::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: -.85rem;
+  width: 3rem;
+  height: 1px;
+  background: rgba(168, 144, 92, .6);
+  transform: translateX(-50%) scaleX(0);
+  transition: transform .6s ease .5s;
+}
+
+/* the brass arrow at the frame edge: the door's direction of travel */
+.rise {
+  position: absolute;
+  right: 1.5rem;
+  bottom: 2.4rem;
+  z-index: 4;
+  width: 1px;
+  height: 2.4rem;
+  background: linear-gradient(0deg, transparent, var(--d-brass));
+  opacity: 0;
+  transition: opacity .5s ease .3s;
+}
+.rise::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 7px;
+  height: 7px;
+  border-top: 1px solid var(--d-brass);
+  border-right: 1px solid var(--d-brass);
+  transform: translateX(-50%) rotate(-45deg);
+}
+
 /* asymmetric on purpose: equal steps would read as a loop */
 @keyframes drift {
   0%   { transform: translate3d(0, 0, 0) scale(1); }
@@ -160,22 +277,20 @@
 }
 
 /* --- the door ----------------------------------------------------------- */
+/* It lifts. transform-origin at the top means it rolls up into the head of the
+   frame, clearing the whole arch instead of leaving a sliver beside it. */
 .panel {
   position: absolute;
-  inset: 0;
+  inset: 14px;
   z-index: 2;
-  padding: 2.1rem 2rem;
-  border-right: 1px solid rgba(31, 29, 24, .13);
-  border-radius: 15px 15px 3px 3px;
+  padding: 1.9rem 1.75rem;
+  border-radius: 10px;
   /* darker at both edges: the door catching light across its face */
   background: linear-gradient(102deg, #E8DFCB 0%, #F1EADA 26%, #F1EADA 74%, #E8DFCB 100%);
-  transform-origin: left center;
-  transform-style: preserve-3d;
+  box-shadow: 0 1px 0 rgba(255, 255, 255, .8) inset, 0 6px 18px -12px rgba(31, 29, 24, .5);
+  transform-origin: top center;
   /* slow start, quick middle, soft landing — doors have mass */
-  transition:
-    transform .95s var(--d-swing),
-    box-shadow .95s var(--d-swing),
-    filter .95s var(--d-swing);
+  transition: transform .95s var(--d-swing), box-shadow .95s var(--d-swing);
 }
 /* one inset moulding, like a slab door */
 .panel::before {
@@ -183,22 +298,23 @@
   position: absolute;
   inset: 1.15rem 1.05rem;
   border: 1px solid rgba(31, 29, 24, .075);
-  border-radius: 9px;
+  border-radius: 7px;
   pointer-events: none;
 }
-/* the stile */
+/* the bottom rail, which becomes the leading edge as the door rises */
 .panel::after {
   content: "";
   position: absolute;
-  left: .85rem;
-  top: 1.15rem;
-  bottom: 1.15rem;
-  width: 1px;
-  background: rgba(31, 29, 24, .06);
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 10px;
+  border-radius: 0 0 10px 10px;
+  background: linear-gradient(180deg, rgba(31, 29, 24, .10), rgba(31, 29, 24, .18));
 }
 .panel h3 {
   position: relative;
-  max-width: 11ch;
+  max-width: 13ch;
   margin: 0;
   font-family: Georgia, "Times New Roman", serif;
   font-size: 1.42rem;
@@ -207,16 +323,16 @@
   line-height: 1.2;
 }
 
+/* the pull, near the leading edge */
 .handle {
   position: absolute;
-  right: 1.5rem;
-  top: 50%;
+  right: 1.6rem;
+  top: 1.9rem;
   width: 9px;
   height: 26px;
   border-radius: 5px;
   background: linear-gradient(180deg, var(--d-brass-light), var(--d-brass));
   box-shadow: 0 1px 3px rgba(31, 29, 24, .28);
-  transform: translateY(-50%);
 }
 .handle::after {
   content: "";
@@ -229,31 +345,20 @@
   background: rgba(255, 255, 255, .55);
 }
 
-/* the door's thickness — flat on to the viewer when shut, visible as it swings */
-.edge {
+/* the head of the frame the door rolls up behind */
+.lintel {
   position: absolute;
-  right: 0;
-  top: 0;
-  bottom: 0;
-  width: 7px;
-  background: linear-gradient(90deg, rgba(31, 29, 24, .14), rgba(31, 29, 24, .05));
-  transform: rotateY(90deg);
-  transform-origin: right center;
+  left: -14px;
+  right: -14px;
+  top: -14px;
+  height: 14px;
+  background: linear-gradient(180deg, #F6F1E5, #E9E1D0);
 }
 
 /* --- text coming through ------------------------------------------------ */
 .through {
-  position: absolute;
-  z-index: 3;
-  left: 2rem;
-  right: 1.9rem;
-  bottom: 1.9rem;
-  opacity: 0;
-  transform: translate3d(-26px, 0, 0);
-  /* light arrives first, then the copy follows it out */
-  transition:
-    transform .75s cubic-bezier(.22, .61, .36, 1) .16s,
-    opacity .55s ease .2s;
+  position: relative;
+  margin-top: 1.1rem;
 }
 .through p {
   margin: 0;
@@ -278,9 +383,6 @@
   bottom: 0;
   height: 1px;
   background: rgba(168, 144, 92, .55);
-  transform: scaleX(0);
-  transform-origin: left;
-  transition: transform .7s cubic-bezier(.22, .61, .36, 1) .5s;
 }
 
 /* --- open --------------------------------------------------------------- */
@@ -289,26 +391,24 @@
 .frame:hover .panel,
 .frame:focus-visible .panel,
 .isOpen .panel {
-  /* ajar, not open. Do not increase this angle. */
-  transform: rotateY(-42deg);
-  box-shadow: 18px 14px 40px -22px rgba(31, 29, 24, .40);
-  filter: brightness(.97);
+  /* rolls up out of the way, leaving the arch clear */
+  transform: translateY(-58%) scaleY(.42);
+  box-shadow: 0 14px 26px -16px rgba(31, 29, 24, .45);
 }
 .frame:hover .spill,
 .frame:focus-visible .spill,
 .isOpen .spill { opacity: 1; }
 
-.frame:hover .through,
-.frame:focus-visible .through,
-.isOpen .through {
-  opacity: 1;
-  /* the z is the point: the copy comes forward out of the opening */
-  transform: translate3d(0, 0, 42px);
-}
+.frame:hover .phrase,
+.frame:focus-visible .phrase,
+.isOpen .phrase { opacity: 1; transform: translateY(0); }
+.frame:hover .phrase::after,
+.frame:focus-visible .phrase::after,
+.isOpen .phrase::after { transform: translateX(-50%) scaleX(1); }
 
-.frame:hover .go::after,
-.frame:focus-visible .go::after,
-.isOpen .go::after { transform: scaleX(1); }
+.frame:hover .rise,
+.frame:focus-visible .rise,
+.isOpen .rise { opacity: .75; }
 
 /* --- also works with ---------------------------------------------------- */
 .also {
@@ -341,9 +441,9 @@
 @media (max-width: 900px) {
   .section { padding: 4.5rem 1.5rem 4rem; }
   .grid { grid-template-columns: minmax(0, 1fr); gap: 1.25rem; }
-  .frame { height: 270px; perspective: 1100px; }
-  .panel { padding: 1.75rem 1.5rem; }
-  .through { left: 1.6rem; right: 1.5rem; bottom: 1.5rem; }
+  .frame { height: 340px; }
+  .panel { padding: 1.6rem 1.4rem; }
+
 }
 
 /* --- reduced motion ----------------------------------------------------- */
@@ -351,13 +451,13 @@
    with zero animation. */
 @media (prefers-reduced-motion: reduce) {
   .panel {
-    transform: rotateY(-42deg);
-    box-shadow: 18px 14px 40px -22px rgba(31, 29, 24, .40);
-    filter: brightness(.97);
+    transform: translateY(-58%) scaleY(.42);
+    box-shadow: 0 14px 26px -16px rgba(31, 29, 24, .45);
     transition: none;
   }
+  .phrase { opacity: 1; transform: none; transition: none; }
+  .phrase::after { transform: translateX(-50%) scaleX(1); transition: none; }
+  .rise { opacity: .75; transition: none; }
   .season { animation: none; }
   .spill { opacity: 1; transition: none; }
-  .through { opacity: 1; transform: translate3d(0, 0, 42px); transition: none; }
-  .go::after { transform: scaleX(1); transition: none; }
 }

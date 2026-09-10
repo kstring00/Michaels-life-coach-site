@@ -1,19 +1,21 @@
 import type { Metadata } from "next";
 import { ResourcePage } from "@/components/ResourcePage";
+import { bySlug } from "@/lib/resources";
+
+const resource = bySlug("foster-care-and-adoption");
+const description = resource.framing[0];
 
 export const metadata: Metadata = {
-  title: "Questions for a changing family | GrowthGains",
-  description:
-    "A free set of questions for families in foster care and adoption transitions. No signup.",
+  title: resource.title,
+  description,
+  openGraph: {
+    title: resource.title,
+    description,
+    type: "article",
+    url: "/resources/foster-care-and-adoption",
+  },
 };
 
 export default function FosterCareAndAdoption() {
-  return (
-    <ResourcePage
-      kicker="Foster care and adoption"
-      title="Questions for a changing family"
-      framing="Building a family, or leaving a system, reshapes more than a household. These are questions to sit with, not to answer quickly. Take what is useful and leave the rest."
-      count={8}
-    />
-  );
+  return <ResourcePage resource={resource} />;
 }
