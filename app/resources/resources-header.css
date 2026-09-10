@@ -1,0 +1,29 @@
+/* The fixed header defaults to paper-white for the dark subpage heroes. These
+   routes are cream, so it needs the ink treatment — the same override home.css
+   applies on "/". Scoped here by living in the /resources layout, so it loads
+   on these routes only and the nav component itself is untouched. */
+.header { color: var(--ink); }
+.header .brand-name {
+  background: none;
+  background-clip: initial;
+  -webkit-background-clip: initial;
+  -webkit-text-fill-color: currentColor;
+  color: var(--ink);
+}
+.header .nav-link { opacity: .76; }
+.header .nav-cta {
+  background: transparent;
+  border-color: var(--rule-light);
+  color: var(--ink);
+}
+.header.scrolled {
+  background: var(--surface-light);
+  box-shadow: 0 1px 0 var(--rule-light);
+}
+.header.scrolled .nav-cta {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: var(--ink);
+}
+.header .nav-cta:hover { background: var(--ink); border-color: var(--ink); color: var(--paper); }
+.header .mobile-toggle { color: var(--ink); }

@@ -1,161 +1,127 @@
-import { Reveal, RevealItem } from "./motion-kit";
+"use client";
+
+import Link from "next/link";
+import { useEffect, useRef } from "react";
 import styles from "./Doorways.module.css";
 
-type IconName = "compass" | "fork" | "person" | "heart" | "cycle" | "mountain";
-
-type Doorway = {
-  name: string;
-  copy: string;
-  icon: IconName;
-  tone: string;
-};
-
-const doorways: Doorway[] = [
+const doors = [
   {
-    name: "You feel stuck",
-    copy: "You know something needs to move, but you’re not sure where to begin.",
-    icon: "compass",
-    tone: styles.mist,
+    slug: "life-after-sport",
+    title: "Life after sport",
+    desc: "The identity that carried you for years ends on a Tuesday. What replaces it isn’t obvious.",
+    go: "Questions for when a season ends",
+    season: styles.seasonCool,
   },
   {
-    name: "You’re facing a major decision",
-    copy: "The next choice feels like it could change everything.",
-    icon: "fork",
-    tone: styles.stone,
+    slug: "foster-care-and-adoption",
+    title: "Foster care and adoption",
+    desc: "Building a family, or leaving a system, reshapes more than a household.",
+    go: "Questions for a changing family",
+    season: styles.seasonClay,
   },
   {
-    name: "Your identity is shifting",
-    copy: "Who you’ve been doesn’t fully fit where you’re going.",
-    icon: "person",
-    tone: styles.leaf,
+    slug: "identity-and-leadership",
+    title: "Identity and leadership change",
+    desc: "New title, new city, new role. Who you were may not be who stays.",
+    go: "Questions for who you’re becoming",
+    season: styles.seasonTurn,
   },
-  {
-    name: "You’re carrying grief or loss",
-    copy: "Life changed, and you’re learning what comes after.",
-    icon: "heart",
-    tone: styles.dawn,
-  },
-  {
-    name: "You keep seeing the same patterns",
-    copy: "You want to understand why they keep returning and what you can do differently.",
-    icon: "cycle",
-    tone: styles.water,
-  },
-  {
-    name: "You’re entering a new chapter",
-    copy: "Life after sport, foster care or adoption, leadership change, or another major transition can reshape what comes next.",
-    icon: "mountain",
-    tone: styles.ridge,
-  },
-];
-
-const otherAreas = [
-  "Collegiate athletes",
-  "Foster care and adoption",
-  "Leadership transitions",
-  "Grief and loss",
-  "Difficult seasons",
-  "And more",
 ] as const;
 
-function DoorwayIcon({ name }: { name: IconName }) {
-  if (name === "compass") {
-    return (
-      <svg viewBox="0 0 48 48" aria-hidden="true">
-        <circle cx="24" cy="24" r="16" />
-        <path d="M29.7 18.3 26 26l-7.7 3.7L22 22l7.7-3.7Z" />
-      </svg>
-    );
-  }
+const alsoWorksWith = [
+  "Grief and loss",
+  "Major decisions",
+  "Repeating patterns",
+  "Collegiate athletes",
+  "Difficult seasons",
+];
 
-  if (name === "fork") {
-    return (
-      <svg viewBox="0 0 48 48" aria-hidden="true">
-        <path d="M24 36V15" />
-        <path d="m24 15-7 7" />
-        <path d="m24 15 7 7" />
-        <path d="M17 22h-5v-5" />
-        <path d="M31 22h5v-5" />
-      </svg>
-    );
-  }
-
-  if (name === "person") {
-    return (
-      <svg viewBox="0 0 48 48" aria-hidden="true">
-        <circle cx="24" cy="17" r="6" />
-        <path d="M14 36c0-6 4.5-10 10-10s10 4 10 10" />
-      </svg>
-    );
-  }
-
-  if (name === "heart") {
-    return (
-      <svg viewBox="0 0 48 48" aria-hidden="true">
-        <path d="M24 36S10 28.2 10 18.8C10 13.9 13.6 11 17.8 11c2.7 0 5 1.4 6.2 3.5C25.2 12.4 27.5 11 30.2 11c4.2 0 7.8 2.9 7.8 7.8C38 28.2 24 36 24 36Z" />
-      </svg>
-    );
-  }
-
-  if (name === "cycle") {
-    return (
-      <svg viewBox="0 0 48 48" aria-hidden="true">
-        <path d="M35.5 18A13 13 0 0 0 14 15.8" />
-        <path d="m14 15.8 1-6.2" />
-        <path d="m14 15.8 6.2 1" />
-        <path d="M12.5 30A13 13 0 0 0 34 32.2" />
-        <path d="m34 32.2-1 6.2" />
-        <path d="m34 32.2-6.2-1" />
-      </svg>
-    );
-  }
-
-  return (
-    <svg viewBox="0 0 48 48" aria-hidden="true">
-      <path d="m8 35 11-17 7 10 5-7 9 14H8Z" />
-      <path d="m19 18 3 4 4-2" />
-    </svg>
-  );
-}
+const STAGGER_MS = 160;
 
 export function Doorways() {
+  const gridRef = useRef<HTMLDivElement>(null);
+
+  /* Touch has no hover, and leaving the doors simply open would throw away the
+     swing, which is the whole point. On those devices each door opens as it
+     scrolls into view instead, staggered so they read as a sequence. */
+  useEffect(() => {
+    const grid = gridRef.current;
+    if (!grid) return;
+    if (!window.matchMedia("(hover: none)").matches) return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
+    const frames = Array.from(grid.querySelectorAll<HTMLElement>(`.${styles.frame}`));
+    const timers: ReturnType<typeof setTimeout>[] = [];
+
+    const io = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          const el = entry.target as HTMLElement;
+          const i = frames.indexOf(el);
+          if (entry.isIntersecting) {
+            timers.push(setTimeout(() => el.classList.add(styles.isOpen), i * STAGGER_MS));
+          } else {
+            el.classList.remove(styles.isOpen);
+          }
+        }
+      },
+      { threshold: 0.4 },
+    );
+
+    frames.forEach((f) => io.observe(f));
+    return () => {
+      io.disconnect();
+      timers.forEach(clearTimeout);
+    };
+  }, []);
+
   return (
     <section className={styles.section} aria-labelledby="doorways-heading">
       <div className={styles.inner}>
-        <div className={styles.heading}>
-          <span className={styles.kicker}>Life transitions</span>
-          <h2 id="doorways-heading">
-            You may be here <em>because…</em>
-          </h2>
-          <p>
-            Different stories. A common truth — something needs to change.
-            <br />
-            Wherever you are, you don’t have to figure it out alone.
+        <header className={styles.head}>
+          <p className={styles.kicker}>Life transitions</p>
+          <h2 className={styles.title} id="doorways-heading">Start where you already are.</h2>
+          <p className={styles.lede}>
+            A few questions worth sitting with, depending on what’s changing. Free, no
+            signup — take them or leave them.
           </p>
+        </header>
+
+        <div className={styles.grid} ref={gridRef}>
+          {doors.map((door) => (
+            <Link className={styles.frame} href={`/resources/${door.slug}`} key={door.slug}>
+              {/* what's through the doorway — sits under the door panel */}
+              <div className={styles.beyond}>
+                <div className={`${styles.season} ${door.season}`} />
+                <div className={styles.spill} />
+              </div>
+
+              {/* the door */}
+              <div className={styles.panel}>
+                <h3>{door.title}</h3>
+                <span className={styles.handle} aria-hidden="true" />
+                <span className={styles.edge} aria-hidden="true" />
+              </div>
+
+              {/* At 42 degrees the door's projected width is cos(42) of the frame,
+                  so the opening is a ~25% sliver — too narrow to read a paragraph
+                  in. The copy therefore comes forward PAST the door rather than
+                  sitting inside the gap, which is also what "comes forward through
+                  the opening toward the viewer" describes. Hence it is a sibling
+                  of the panel with a higher z-index, not a child of .beyond. */}
+              <div className={styles.through}>
+                <p>{door.desc}</p>
+                <span className={styles.go}>{door.go}</span>
+              </div>
+            </Link>
+          ))}
         </div>
 
-        <Reveal className={styles.grid} stagger={0.06}>
-          {doorways.map((doorway) => (
-            <RevealItem className={`${styles.card} ${doorway.tone}`} key={doorway.name}>
-              <div className={styles.icon}>
-                <DoorwayIcon name={doorway.icon} />
-              </div>
-              <span className={styles.divider} aria-hidden="true" />
-              <div className={styles.copy}>
-                <h3>{doorway.name}</h3>
-                <p>{doorway.copy}</p>
-              </div>
-            </RevealItem>
-          ))}
-        </Reveal>
-
-        <div className={styles.otherAreas}>
-          <span className={styles.otherLabel}>Other areas Michael works with</span>
-          <div className={styles.areaList}>
-            {otherAreas.map((area) => (
-              <span className={styles.areaItem} key={area}>{area}</span>
-            ))}
-          </div>
+        <div className={styles.also}>
+          <p className={styles.alsoLabel}>Michael also works with</p>
+          <ul className={styles.alsoList}>
+            {alsoWorksWith.map((item) => <li key={item}>{item}</li>)}
+          </ul>
         </div>
       </div>
     </section>

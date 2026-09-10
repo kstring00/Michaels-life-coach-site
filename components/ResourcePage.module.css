@@ -1,0 +1,111 @@
+/* Shared shell for the free question sets. One quiet centred column — these are
+   meant to be read slowly, so nothing here competes with the list. */
+.page {
+  --r-cream: #F5F1E8;
+  --r-brass: #A8905C;
+  --r-ink: #1F1D18;
+  --r-ink-70: rgba(31, 29, 24, .70);
+  --r-ink-45: rgba(31, 29, 24, .45);
+  --r-hairline: rgba(31, 29, 24, .10);
+
+  padding: clamp(7rem, 12vw, 9.5rem) 1.5rem clamp(4rem, 7vw, 6rem);
+  background: var(--r-cream);
+  color: var(--r-ink);
+}
+
+.column {
+  max-width: 680px;
+  margin-inline: auto;
+}
+
+.kicker {
+  margin: 0 0 1rem;
+  color: var(--r-brass);
+  font-size: .7rem;
+  font-weight: 760;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+}
+
+.title {
+  margin: 0;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(2.1rem, 4.6vw, 3rem);
+  font-weight: 400;
+  letter-spacing: -.02em;
+  line-height: 1.1;
+}
+
+.framing {
+  margin: 1.35rem 0 0;
+  color: var(--r-ink-70);
+  font-size: 1.03rem;
+  line-height: 1.8;
+}
+
+/* generous spacing: these are meant to be sat with, not scanned */
+.questions {
+  margin: clamp(2.5rem, 5vw, 3.5rem) 0 0;
+  padding-left: 2.25rem;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 1.12rem;
+  line-height: 1.75;
+}
+.questions li { padding-left: .35rem; }
+.questions li + li { margin-top: 2.25rem; }
+.questions li::marker {
+  color: var(--r-brass);
+  font-size: .85rem;
+}
+
+.todo {
+  padding: .8rem .95rem;
+  border: 1px dashed rgba(168, 144, 92, .75);
+  border-radius: 9px;
+  background: rgba(168, 144, 92, .08);
+}
+.todoHeading {
+  margin: 0 0 .35rem;
+  color: var(--r-brass);
+  font-family: inherit;
+  font-size: .63rem;
+  font-style: normal;
+  font-weight: 600;
+  letter-spacing: .15em;
+  text-transform: uppercase;
+}
+.todoBody {
+  margin: 0;
+  color: rgba(31, 29, 24, .6);
+  font-family: inherit;
+  font-size: .8rem;
+  font-style: italic;
+  line-height: 1.55;
+}
+
+/* a quiet line, not a hard close */
+.closing {
+  margin: clamp(2.75rem, 5vw, 3.5rem) 0 0;
+  padding-top: 2rem;
+  border-top: 1px solid var(--r-hairline);
+  color: var(--r-ink-70);
+  font-size: 1rem;
+  line-height: 1.75;
+}
+.closing a {
+  color: var(--r-brass);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.closing a:focus-visible,
+.back a:focus-visible {
+  outline: 2px solid var(--r-ink);
+  outline-offset: 3px;
+}
+
+.back {
+  margin: 2.5rem 0 0;
+  font-size: .85rem;
+}
+.back a { color: var(--r-ink-45); }
+.back a:hover { color: var(--r-ink); }

@@ -1,195 +1,363 @@
+/* ===========================================================================
+   DOORWAYS — three doors, each ajar on a different season
+   ---------------------------------------------------------------------------
+   The governing constraint is threshold, not arrival. The door stops at 42deg,
+   what is behind it is drifting weather rather than a lit room, and that field
+   never settles. A door swung wide onto a warm interior would read as "come in,
+   here is the finished thing" — the wrong feeling for someone standing at the
+   edge of a season they have not entered.
+   =========================================================================== */
+
 .section {
+  --d-cream: #F5F1E8;
+  --d-brass: #A8905C;
+  --d-brass-light: #C4AC77;
+  --d-ink: #1F1D18;
+  --d-ink-70: rgba(31, 29, 24, .70);
+  --d-ink-45: rgba(31, 29, 24, .45);
+  --d-hairline: rgba(31, 29, 24, .10);
+  --d-swing: cubic-bezier(.31, .72, .28, 1);
+
   position: relative;
-  isolation: isolate;
-  overflow: hidden;
-  padding: clamp(2.55rem, 4vw, 3.65rem) 1.15rem clamp(2rem, 3.2vw, 2.85rem);
-  color: var(--ink);
-  background: var(--surface-light-2);
+  /* 3D transforms project outside their box; clip so a swinging door can never
+     open a horizontal scrollbar */
+  overflow-x: clip;
+  padding: 6rem 2rem 5.5rem;
+  background: var(--d-cream);
+  color: var(--d-ink);
 }
 
 .inner {
-  width: min(100%, 84rem);
-  margin: 0 auto;
+  max-width: 1120px;
+  margin-inline: auto;
 }
 
-.heading {
-  max-width: 50rem;
-  margin: 0 auto clamp(1.35rem, 2.2vw, 1.9rem);
+/* --- header ------------------------------------------------------------- */
+.head {
+  max-width: 640px;
+  margin-inline: auto;
   text-align: center;
 }
-
 .kicker {
-  display: inline-flex;
-  align-items: center;
-  gap: .8rem;
-  color: var(--ink-secondary);
-  font-size: var(--step-small);
+  margin: 0 0 1rem;
+  color: var(--d-brass);
+  font-size: .7rem;
   font-weight: 760;
-  letter-spacing: 0.19em;
+  letter-spacing: .2em;
   text-transform: uppercase;
 }
-
-.heading h2 {
-  margin: .62rem 0 0;
-  color: var(--ink);
+.title {
+  margin: 0;
   font-family: Georgia, "Times New Roman", serif;
-  font-size: clamp(2.35rem, 4.1vw, 4.15rem);
+  font-size: clamp(2.1rem, 4.2vw, 3.2rem);
   font-weight: 400;
-  line-height: .98;
-  letter-spacing: -.04em;
+  letter-spacing: -.02em;
+  line-height: 1.08;
+}
+.lede {
+  max-width: 50ch;
+  margin: 1.15rem auto 0;
+  color: var(--d-ink-70);
+  font-size: 1.02rem;
+  line-height: 1.7;
 }
 
-/* ink, not gold — see the note on .hero-eyebrow in globals.css */
-.heading h2 em {
-  color: var(--ink);
-  font-weight: 400;
-}
-
-.heading p {
-  max-width: 40rem;
-  margin: .72rem auto 0;
-  color: var(--ink-secondary);
-  font-size: clamp(.9rem, 1vw, 1rem);
-  line-height: 1.45;
-}
-
+/* --- the grid ----------------------------------------------------------- */
 .grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: .8rem;
+  gap: 1.5rem;
+  margin-top: clamp(2.75rem, 5vw, 3.75rem);
 }
 
-.card {
+/* --- the frame ---------------------------------------------------------- */
+/* Squarer at the bottom because doors meet a floor. */
+.frame {
   position: relative;
-  min-height: 9.7rem;
+  display: block;
+  height: 330px;
+  border: 1px solid var(--d-hairline);
+  border-radius: 16px 16px 4px 4px;
+  perspective: 1500px;
+  perspective-origin: 70% 50%;
+  isolation: isolate;
+  color: inherit;
+  text-decoration: none;
+}
+.frame:focus { outline: none; }
+.frame:focus-visible {
+  outline: 2px solid var(--d-ink);
+  outline-offset: 4px;
+}
+
+/* --- beyond the door ---------------------------------------------------- */
+.beyond {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
   overflow: hidden;
-  display: grid;
-  grid-template-columns: 1.6rem 1px minmax(0, 1fr);
-  gap: .92rem;
-  align-items: start;
-  padding: 1.22rem 1.15rem;
-  border: 1px solid var(--rule-light);
-  border-radius: .95rem;
-  background: var(--surface-light);
+  border-radius: 15px 15px 3px 3px;
+  /* Deeper than the door face on purpose: if the opening matches the panel in
+     value there is no depth and the gap reads as a seam, not a doorway. */
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, .34) 0%, rgba(255, 255, 255, 0) 52%),
+    #DED5C2;
 }
 
-.icon {
-  position: relative;
-  z-index: 1;
-  width: 1.6rem;
-  height: 1.6rem;
-  display: grid;
-  place-items: center;
-  color: var(--ink-secondary);
+/* The field: overlapping soft radials with no hard edge, drifting on a long
+   asymmetric loop so it never settles into a final state. Low saturation and
+   close in value to the page — this is light through a doorway, not a hero
+   gradient. */
+.season {
+  position: absolute;
+  inset: -8%;
+  animation: drift 34s ease-in-out infinite alternate;
 }
 
-.icon svg {
-  width: 1.15rem;
-  height: 1.15rem;
-  fill: none;
-  stroke: currentColor;
-  stroke-width: 1.75;
-  stroke-linecap: round;
-  stroke-linejoin: round;
+/* cool — muted grey-green and pale blue, one warm ember */
+.seasonCool {
+  background:
+    radial-gradient(46% 52% at 22% 24%, rgba(116, 140, 128, .70), transparent 72%),
+    radial-gradient(52% 48% at 78% 58%, rgba(122, 148, 170, .62), transparent 74%),
+    radial-gradient(30% 34% at 56% 86%, rgba(190, 142, 84, .42), transparent 74%),
+    radial-gradient(64% 62% at 48% 46%, rgba(226, 222, 208, .34), transparent 80%);
+}
+/* neutral warming — soft clay, cream, a faint gold */
+.seasonClay {
+  background:
+    radial-gradient(48% 52% at 28% 28%, rgba(186, 148, 120, .68), transparent 72%),
+    radial-gradient(50% 46% at 74% 68%, rgba(226, 212, 186, .70), transparent 74%),
+    radial-gradient(34% 36% at 50% 14%, rgba(190, 158, 92, .46), transparent 74%),
+    radial-gradient(62% 60% at 52% 52%, rgba(232, 224, 206, .30), transparent 80%);
+}
+/* warm turning cool — gold drifting toward slate */
+.seasonTurn {
+  background:
+    radial-gradient(46% 50% at 24% 72%, rgba(196, 162, 92, .66), transparent 72%),
+    radial-gradient(52% 50% at 74% 26%, rgba(112, 122, 138, .62), transparent 74%),
+    radial-gradient(32% 34% at 44% 42%, rgba(206, 184, 138, .48), transparent 74%),
+    radial-gradient(62% 60% at 56% 54%, rgba(228, 222, 208, .30), transparent 80%);
 }
 
-.divider {
-  position: relative;
-  z-index: 1;
+/* asymmetric on purpose: equal steps would read as a loop */
+@keyframes drift {
+  0%   { transform: translate3d(0, 0, 0) scale(1); }
+  38%  { transform: translate3d(3%, -2.4%, 0) scale(1.05); }
+  71%  { transform: translate3d(-2.2%, 3.4%, 0) scale(1.03); }
+  100% { transform: translate3d(3.8%, 1.6%, 0) scale(1.08); }
+}
+
+/* Light landing on the inside of the frame, so the opening reads as somewhere
+   real rather than a coloured rectangle. Fades in with the swing. */
+.spill {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  background:
+    radial-gradient(58% 82% at 96% 50%, rgba(168, 144, 92, .30), transparent 68%),
+    radial-gradient(30% 50% at 100% 46%, rgba(255, 246, 225, .40), transparent 72%);
+  transition: opacity .8s ease;
+}
+
+/* --- the door ----------------------------------------------------------- */
+.panel {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  padding: 2.1rem 2rem;
+  border-right: 1px solid rgba(31, 29, 24, .13);
+  border-radius: 15px 15px 3px 3px;
+  /* darker at both edges: the door catching light across its face */
+  background: linear-gradient(102deg, #E8DFCB 0%, #F1EADA 26%, #F1EADA 74%, #E8DFCB 100%);
+  transform-origin: left center;
+  transform-style: preserve-3d;
+  /* slow start, quick middle, soft landing — doors have mass */
+  transition:
+    transform .95s var(--d-swing),
+    box-shadow .95s var(--d-swing),
+    filter .95s var(--d-swing);
+}
+/* one inset moulding, like a slab door */
+.panel::before {
+  content: "";
+  position: absolute;
+  inset: 1.15rem 1.05rem;
+  border: 1px solid rgba(31, 29, 24, .075);
+  border-radius: 9px;
+  pointer-events: none;
+}
+/* the stile */
+.panel::after {
+  content: "";
+  position: absolute;
+  left: .85rem;
+  top: 1.15rem;
+  bottom: 1.15rem;
   width: 1px;
-  height: 2.55rem;
-  background: var(--rule-light);
+  background: rgba(31, 29, 24, .06);
 }
-
-.copy {
+.panel h3 {
   position: relative;
-  z-index: 1;
-  min-width: 0;
-}
-
-.copy h3 {
+  max-width: 11ch;
   margin: 0;
-  color: var(--ink);
   font-family: Georgia, "Times New Roman", serif;
-  font-size: clamp(1.12rem, 1.42vw, 1.5rem);
+  font-size: 1.42rem;
   font-weight: 400;
-  line-height: 1.05;
-  letter-spacing: -.02em;
+  letter-spacing: -.01em;
+  line-height: 1.2;
 }
 
-.copy p {
-  max-width: 25rem;
-  margin: .58rem 0 0;
-  color: var(--ink-secondary);
-  font-size: .84rem;
-  line-height: 1.45;
+.handle {
+  position: absolute;
+  right: 1.5rem;
+  top: 50%;
+  width: 9px;
+  height: 26px;
+  border-radius: 5px;
+  background: linear-gradient(180deg, var(--d-brass-light), var(--d-brass));
+  box-shadow: 0 1px 3px rgba(31, 29, 24, .28);
+  transform: translateY(-50%);
+}
+.handle::after {
+  content: "";
+  position: absolute;
+  left: 2.5px;
+  top: 5px;
+  width: 2px;
+  height: 5px;
+  border-radius: 1px;
+  background: rgba(255, 255, 255, .55);
 }
 
-.otherAreas {
-  margin-top: .7rem;
-  padding: .66rem .85rem;
-  display: flex;
-  align-items: center;
-  gap: .8rem;
-  border-top: 1px solid var(--rule-light);
-  border-bottom: 1px solid var(--rule-light);
+/* the door's thickness — flat on to the viewer when shut, visible as it swings */
+.edge {
+  position: absolute;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  width: 7px;
+  background: linear-gradient(90deg, rgba(31, 29, 24, .14), rgba(31, 29, 24, .05));
+  transform: rotateY(90deg);
+  transform-origin: right center;
 }
 
-.otherLabel {
-  flex: 0 0 auto;
-  color: var(--ink-secondary);
-  font-size: var(--step-small);
+/* --- text coming through ------------------------------------------------ */
+.through {
+  position: absolute;
+  z-index: 3;
+  left: 2rem;
+  right: 1.9rem;
+  bottom: 1.9rem;
+  opacity: 0;
+  transform: translate3d(-26px, 0, 0);
+  /* light arrives first, then the copy follows it out */
+  transition:
+    transform .75s cubic-bezier(.22, .61, .36, 1) .16s,
+    opacity .55s ease .2s;
+}
+.through p {
+  margin: 0;
+  color: var(--d-ink-70);
+  font-size: .94rem;
+  line-height: 1.68;
+}
+.go {
+  display: inline-block;
+  position: relative;
+  margin-top: .9rem;
+  padding-bottom: .4rem;
+  color: var(--d-brass);
+  font-size: .85rem;
+  font-weight: 600;
+}
+.go::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 1px;
+  background: rgba(168, 144, 92, .55);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform .7s cubic-bezier(.22, .61, .36, 1) .5s;
+}
+
+/* --- open --------------------------------------------------------------- */
+/* Hover and keyboard focus produce the identical state; isOpen is the same
+   state again, applied by the observer on touch. */
+.frame:hover .panel,
+.frame:focus-visible .panel,
+.isOpen .panel {
+  /* ajar, not open. Do not increase this angle. */
+  transform: rotateY(-42deg);
+  box-shadow: 18px 14px 40px -22px rgba(31, 29, 24, .40);
+  filter: brightness(.97);
+}
+.frame:hover .spill,
+.frame:focus-visible .spill,
+.isOpen .spill { opacity: 1; }
+
+.frame:hover .through,
+.frame:focus-visible .through,
+.isOpen .through {
+  opacity: 1;
+  /* the z is the point: the copy comes forward out of the opening */
+  transform: translate3d(0, 0, 42px);
+}
+
+.frame:hover .go::after,
+.frame:focus-visible .go::after,
+.isOpen .go::after { transform: scaleX(1); }
+
+/* --- also works with ---------------------------------------------------- */
+.also {
+  margin-top: clamp(2.5rem, 4.5vw, 3.25rem);
+  padding-top: 1.75rem;
+  border-top: 1px solid var(--d-hairline);
+}
+.alsoLabel {
+  margin: 0 0 .85rem;
+  color: var(--d-ink-45);
+  font-size: .68rem;
   font-weight: 760;
-  letter-spacing: 0.19em;
+  letter-spacing: .17em;
   text-transform: uppercase;
 }
-
-.areaList {
-  min-width: 0;
+/* This carries the most concrete information in the section, so it is set at
+   body size rather than the smallest type on the page. */
+.alsoList {
   display: flex;
   flex-wrap: wrap;
-  gap: .35rem 0;
-  color: var(--ink-secondary);
-  font-size: .76rem;
+  gap: .5rem 2rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  color: var(--d-ink-70);
+  font-size: .98rem;
 }
 
-.areaItem {
-  display: inline-flex;
-  align-items: center;
-  white-space: nowrap;
+/* --- responsive --------------------------------------------------------- */
+@media (max-width: 900px) {
+  .section { padding: 4.5rem 1.5rem 4rem; }
+  .grid { grid-template-columns: minmax(0, 1fr); gap: 1.25rem; }
+  .frame { height: 270px; perspective: 1100px; }
+  .panel { padding: 1.75rem 1.5rem; }
+  .through { left: 1.6rem; right: 1.5rem; bottom: 1.5rem; }
 }
 
-.areaItem:not(:last-child)::after {
-  content: "";
-  width: 1px;
-  height: .8rem;
-  margin: 0 .72rem;
-  background: var(--rule-light);
-}
-
-@media (max-width: 980px) {
-  .inner { width: min(100%, 64rem); }
-  .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-  .otherAreas { align-items: flex-start; flex-direction: column; gap: .5rem; }
-}
-
-@media (max-width: 650px) {
-  .section { padding: 2.15rem .8rem 1.9rem; }
-  .heading { margin-bottom: 1.15rem; }
-  .heading h2 { font-size: clamp(2.15rem, 10.5vw, 3.15rem); }
-  .heading p { font-size: .9rem; }
-  .grid { grid-template-columns: 1fr; gap: .62rem; }
-  .card {
-    min-height: 0;
-    padding: 1.05rem;
-    grid-template-columns: 2.25rem 1px minmax(0, 1fr);
-    gap: .82rem;
+/* --- reduced motion ----------------------------------------------------- */
+/* Held ajar with nothing moving: the section has to be complete and readable
+   with zero animation. */
+@media (prefers-reduced-motion: reduce) {
+  .panel {
+    transform: rotateY(-42deg);
+    box-shadow: 18px 14px 40px -22px rgba(31, 29, 24, .40);
+    filter: brightness(.97);
+    transition: none;
   }
-  .icon { width: 2.25rem; height: 2.25rem; }
-  .icon svg { width: 1.08rem; height: 1.08rem; }
-  .divider { height: 2.25rem; }
-  .copy h3 { font-size: 1.12rem; }
-  .copy p { margin-top: .48rem; font-size: .8rem; }
-  .otherAreas { margin-top: .65rem; padding-inline: .15rem; }
-  .areaList { row-gap: .45rem; }
+  .season { animation: none; }
+  .spill { opacity: 1; transition: none; }
+  .through { opacity: 1; transform: translate3d(0, 0, 42px); transition: none; }
+  .go::after { transform: scaleX(1); transition: none; }
 }
