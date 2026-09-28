@@ -26,13 +26,6 @@ export function Header() {
       <div className="container header-inner">
         <Brand />
         <div className={styles.actions}>
-          <Link
-            className={styles.aboutLink}
-            href="/about"
-            aria-current={pathname === "/about" ? "page" : undefined}
-          >
-            About
-          </Link>
           <Link className="nav-cta" href="/#consultation">Book a free consultation</Link>
         </div>
       </div>
