@@ -1,7 +1,6 @@
 import Image from "next/image";
 import michaelPortrait from "../mikenobacgrnd.png";
 import styles from "./MichaelIntro.module.css";
-import { TodoNote } from "./TodoNote";
 
 export function MichaelIntro() {
   return (
@@ -48,23 +47,18 @@ export function MichaelIntro() {
         <dl className={styles.facts}>
           <div className={styles.fact}>
             <dt>Certified life coach</dt>
-            <dd>Certifying body</dd>
-            {/* TODO: awaiting answer from Michael */}
-            <TodoNote heading="Ask Michael">
-              Which certification, and from whom? ICF, a named program,
-              ministry-affiliated? This is the most load-bearing unverified claim on the
-              site — right now it sits alone and the thinness shows.
-            </TodoNote>
+            <dd>Certified through Lifeforming Leadership Coaching</dd>
           </div>
 
           <div className={styles.fact}>
             <dt>Ministry background</dt>
-            <dd>Undergraduate study in ministry; years of leadership and mentoring work</dd>
-            {/* TODO: awaiting answer from Michael */}
-            <TodoNote heading="Ask Michael">
-              How many years, and doing what specifically? A number here is worth more
-              than the whole sentence.
-            </TodoNote>
+            {/* the number is the point, so it carries full ink against the
+                muted rest of the line */}
+            <dd>
+              <strong>10 years</strong> leading ministries across Texas — running church
+              programs and outreaches for children, youth, and college students.
+              Undergraduate study in ministry.
+            </dd>
           </div>
 
           <div className={styles.fact}>
