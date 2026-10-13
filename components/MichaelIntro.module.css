@@ -126,6 +126,12 @@
   font-size: .84rem;
   line-height: 1.55;
 }
+/* the figure carries full ink so it reads ahead of the line around it —
+   the same emphasis the bio gives Michael's own sentence */
+.fact dd strong {
+  color: var(--a-ink);
+  font-weight: 700;
+}
 
 /* Not enough room for three columns before the copy measure gets unreadable,
    so the facts drop back under the copy as a band. */
